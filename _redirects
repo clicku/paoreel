@@ -1,1 +1,7 @@
+# Redirect www to non-www (force root domain)
 https://www.paoreel.com/*  https://paoreel.com/:splat  301!
+
+# Redirect HTTP to HTTPS
+http://paoreel.com/*       https://paoreel.com/:splat 301!
+http://www.paoreel.com/*   https://paoreel.com/:splat 301!
+
