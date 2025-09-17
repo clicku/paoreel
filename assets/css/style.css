@@ -6,10 +6,12 @@
 }
 
 html, body {
-  font-family: Arial, sans-serif;
-  color: #fff;
-  caret-color: transparent; /* Prevent blinking cursor on click */
+  caret-color: transparent;      /* Hide caret */
+  user-select: none;             /* Prevent text selection */
+  -webkit-user-select: none;     /* Safari/Chrome */
+  -ms-user-select: none;         /* IE/Edge */
 }
+
 
 /* Navbar */
 .navbar {
