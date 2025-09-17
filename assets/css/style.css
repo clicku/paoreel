@@ -9,6 +9,9 @@ body {
   font-family: Arial, sans-serif;
   color: #fff;
 }
+html, body {
+  caret-color: transparent; /* Hide blinking cursor */
+}
 
 /* Navbar */
 .navbar {
