@@ -80,6 +80,11 @@ body {
   font-size: 1.2rem;
   margin-bottom: 2rem;
 }
+.hero-image {
+  flex: 1;
+  background: url('assets/images/paoshot.png') no-repeat center center/cover;
+  min-height: 100vh; /* adjust depending on layout */
+}
 
 .btn {
   display: inline-block;
