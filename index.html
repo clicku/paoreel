@@ -33,6 +33,19 @@
     </div>
   </div>
 </section>
+<script>
+  // Prevent caret browsing or accidental text cursor placement
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "F7") {
+      e.preventDefault(); // Block F7 caret browsing toggle
+    }
+  });
+
+  // Force caret color off on page load
+  document.body.style.caretColor = "transparent";
+  document.body.setAttribute("contenteditable", "false");
+});
+</script>
 
 </body>
 </html>
