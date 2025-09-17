@@ -5,12 +5,10 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   font-family: Arial, sans-serif;
   color: #fff;
-}
-html, body {
-  caret-color: transparent; /* Hide blinking cursor */
+  caret-color: transparent; /* Prevent blinking cursor on click */
 }
 
 /* Navbar */
@@ -50,48 +48,28 @@ html, body {
 
 /* Hero Section */
 .hero {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 3rem;
-  position: relative;
-  background-color: #111; /* fallback color */
-}
-
-.hero-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  max-width: 1200px;
-  flex-wrap: wrap; /* responsive stacking on small screens */
+  height: 100vh;
+  background-color: #000; /* fallback background */
 }
 
 .hero-content {
   flex: 1;
-  min-width: 300px;
-  padding-right: 2rem;
+  padding: 3rem;
+  z-index: 1;
 }
 
-.hero-content h1 {
+.hero h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
 }
 
-.hero-content p {
+.hero p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
 }
-.hero-image {
-  flex: 1;
-  background: url('assets/images/paoshot.png') no-repeat center center/cover;
-  min-height: 100vh;
-
-  user-select: none;      /* Prevents text cursor on click */
-  pointer-events: none;   /* Makes it fully non-interactive */
-}
-
 
 .btn {
   display: inline-block;
@@ -110,14 +88,8 @@ html, body {
 
 .hero-image {
   flex: 1;
-  min-width: 300px;
-  text-align: right;
-}
-
-.hero-image img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
+  background: url('../images/paoshot.png') no-repeat center center/cover;
+  min-height: 100vh;
 }
 
 /* Portfolio */
