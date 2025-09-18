@@ -6,12 +6,14 @@
 }
 
 html, body {
-  caret-color: transparent;      /* Hide caret */
-  user-select: none;             /* Prevent text selection */
-  -webkit-user-select: none;     /* Safari/Chrome */
-  -ms-user-select: none;         /* IE/Edge */
+  caret-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
 }
-
 
 /* Navbar */
 .navbar {
@@ -31,10 +33,10 @@ html, body {
   font-weight: bold;
 }
 .logo a {
-  text-decoration: none;   /* remove underline */
-  color: inherit;          /* use same color as .logo */
-  font-weight: bold;       /* keep it bold */
-  font-size: 1.5rem;       /* same as your .logo */
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
 .nav-links {
@@ -60,7 +62,7 @@ html, body {
   align-items: center;
   justify-content: space-between;
   height: 100vh;
-  background-color: #000; /* fallback background */
+  background-color: #000;
 }
 
 .hero-content {
@@ -99,7 +101,6 @@ html, body {
   background: url('/assets/images/paoreel.png') no-repeat center center/cover;
   min-height: 100vh;
 }
-
 
 /* Portfolio */
 .portfolio {
