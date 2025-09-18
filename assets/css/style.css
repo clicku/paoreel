@@ -96,9 +96,10 @@ html, body {
 
 .hero-image {
   flex: 1;
-  background: url('/paoreel/images/paoreel.png') no-repeat center center/cover;
+  background: url('/assets/images/paoreel.png') no-repeat center center/cover;
   min-height: 100vh;
 }
+
 
 /* Portfolio */
 .portfolio {
