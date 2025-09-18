@@ -6,13 +6,13 @@
 }
 
 html, body {
-  caret-color: transparent;
-  user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  background-color: #000;
-  color: #fff;
   font-family: Arial, sans-serif;
+  color: #fff;
+  background: #000;
+  caret-color: transparent;      /* Hide caret */
+  user-select: none;             /* Prevent text selection */
+  -webkit-user-select: none;     /* Safari/Chrome */
+  -ms-user-select: none;         /* IE/Edge */
 }
 
 /* Navbar */
@@ -32,9 +32,10 @@ html, body {
   font-size: 1.5rem;
   font-weight: bold;
 }
+
 .logo a {
-  text-decoration: none;
-  color: inherit;
+  text-decoration: none;   /* remove underline */
+  color: inherit;          /* use same color as .logo */
   font-weight: bold;
   font-size: 1.5rem;
 }
@@ -58,25 +59,34 @@ html, body {
 
 /* Hero Section */
 .hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   height: 100vh;
-  background-color: #000;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: #000; /* fallback background */
+}
+
+.hero-container {
+  display: flex;
+  flex: 1;
 }
 
 .hero-content {
   flex: 1;
-  padding: 3rem;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
   z-index: 1;
 }
 
-.hero h1 {
+.hero-content h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
 }
 
-.hero p {
+.hero-content p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
 }
