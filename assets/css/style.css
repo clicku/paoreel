@@ -12,7 +12,7 @@ html, body {
   -ms-user-select: none;         /* IE/Edge */
   height: 100%;
   width: 100%;
-  font-family: Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif; /* Default body font */
   background-color: #000;
   color: #fff;
 }
@@ -35,10 +35,10 @@ html, body {
   font-weight: bold;
 }
 .logo a {
-  text-decoration: none;   /* remove underline */
-  color: inherit;          /* use same color as .logo */
-  font-weight: bold;       /* keep it bold */
-  font-size: 1.5rem;       /* same as your .logo */
+  text-decoration: none;   
+  color: inherit;          
+  font-weight: bold;       
+  font-size: 1.5rem;       
 }
 
 .nav-links {
@@ -85,32 +85,42 @@ html, body {
   max-width: 600px;
 }
 
+/* Hero Fonts */
 .hero-content h1 {
+  font-family: 'Playfair Display', serif; /* Elegant title */
+  font-weight: 700;
   font-size: 3rem;
   margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
 .hero-content p {
+  font-family: 'Open Sans', sans-serif; /* Readable description */
+  font-weight: 400;
   font-size: 1.2rem;
+  line-height: 1.6;
   margin-bottom: 2rem;
 }
 
+/* Hero Button */
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
   background-color: #000; /* Black */
   color: #fff;
   text-decoration: none;
-  font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   border-radius: 5px;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .btn:hover {
   background-color: #d3d3d3; /* Light gray */
-  color: #000; /* Optional: change text color for contrast */
+  color: #000; 
 }
-
 
 /* Portfolio */
 .portfolio {
