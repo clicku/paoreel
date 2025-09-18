@@ -6,13 +6,15 @@
 }
 
 html, body {
-  font-family: Arial, sans-serif;
-  color: #fff;
-  background: #000;
   caret-color: transparent;      /* Hide caret */
   user-select: none;             /* Prevent text selection */
   -webkit-user-select: none;     /* Safari/Chrome */
   -ms-user-select: none;         /* IE/Edge */
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
 }
 
 /* Navbar */
@@ -32,12 +34,11 @@ html, body {
   font-size: 1.5rem;
   font-weight: bold;
 }
-
 .logo a {
   text-decoration: none;   /* remove underline */
   color: inherit;          /* use same color as .logo */
-  font-weight: bold;
-  font-size: 1.5rem;
+  font-weight: bold;       /* keep it bold */
+  font-size: 1.5rem;       /* same as your .logo */
 }
 
 .nav-links {
@@ -57,30 +58,30 @@ html, body {
   color: #ffcc00;
 }
 
-/* Hero Section with background image */
+/* Hero Section */
 .hero {
   display: flex;
   align-items: center;
   min-height: 100vh;
   background: url('../images/paoreel.png') no-repeat center center/cover;
   position: relative;
-  color: #fff;
   padding: 3rem;
+  color: #fff;
 }
 
-/* Optional: add a dark overlay so text is readable */
+/* Dark overlay for readability */
 .hero::before {
   content: "";
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* darkens background */
+  background: rgba(0, 0, 0, 0.5); 
   z-index: 0;
 }
 
 .hero-content {
   position: relative;
-  z-index: 1; /* make sure text sits above overlay */
+  z-index: 1;
   max-width: 600px;
 }
 
@@ -93,14 +94,7 @@ html, body {
   font-size: 1.2rem;
   margin-bottom: 2rem;
 }
-.hero-image {
-  flex: 1;
-  background: url('../images/paoreel.png') no-repeat center center/cover;
-  min-height: 100vh;
-  border-radius: 8px;
-}
 
-/* Button */
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -115,23 +109,6 @@ html, body {
   background-color: #e6b800;
 }
 
-/* Responsive: stack on mobile */
-@media (max-width: 768px) {
-  .hero-container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .hero-image {
-    min-height: 300px; /* smaller image height on mobile */
-    width: 100%;
-  }
-
-  .hero-content {
-    max-width: 100%;
-  }
-}
- 
 /* Portfolio */
 .portfolio {
   padding: 6rem 3rem 3rem;
@@ -165,4 +142,16 @@ html, body {
 
 .grid-item img:hover {
   transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    text-align: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .hero-content {
+    max-width: 100%;
+  }
 }
