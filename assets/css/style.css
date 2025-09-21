@@ -167,9 +167,13 @@ html, body {
 
 .about-image img {
   width: 100%;
+  max-width: 500px;   /* Limit max size */
+  height: auto;
   border-radius: 12px;
   box-shadow: 0 6px 25px rgba(0,0,0,0.6);
+  object-fit: cover;
 }
+
 
 
 
