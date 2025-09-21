@@ -54,7 +54,8 @@ html, body {
   transition: color 0.3s;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
   color: #ffcc00;
 }
 
@@ -69,13 +70,12 @@ html, body {
   color: #fff;
 }
 
-/* Dark overlay for readability */
 .hero::before {
   content: "";
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.5); 
+  background: rgba(0, 0, 0, 0.5);
   z-index: 0;
 }
 
@@ -85,9 +85,8 @@ html, body {
   max-width: 600px;
 }
 
-/* Hero Fonts */
 .hero-content h1 {
-  font-family: 'Playfair Display', serif; /* Elegant title */
+  font-family: 'Playfair Display', serif;
   font-weight: 700;
   font-size: 3rem;
   margin-bottom: 1rem;
@@ -95,7 +94,7 @@ html, body {
 }
 
 .hero-content p {
-  font-family: 'Open Sans', sans-serif; /* Readable description */
+  font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 1.2rem;
   line-height: 1.6;
@@ -106,7 +105,7 @@ html, body {
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background-color: #000; /* Black */
+  background-color: #000;
   color: #fff;
   text-decoration: none;
   font-family: 'Open Sans', sans-serif;
@@ -118,8 +117,8 @@ html, body {
 }
 
 .btn:hover {
-  background-color: #d3d3d3; /* Light gray */
-  color: #000; 
+  background-color: #d3d3d3;
+  color: #000;
 }
 
 /* About Alternating Sections */
@@ -136,20 +135,20 @@ html, body {
 
 .about-block {
   display: flex;
-  align-items: center;       /* Center vertically */
-  justify-content: center;   /* Keep balance */
+  align-items: center;
+  justify-content: center;
   gap: 4rem;
   margin: 4rem 0;
 }
 
 .about-block.reverse {
-  flex-direction: row-reverse; /* Flip order for alternating */
+  flex-direction: row-reverse;
 }
 
 .about-text {
   flex: 1;
   max-width: 500px;
-  text-align: center;         /* Center text horizontally */
+  text-align: center;
   color: #eee;
 }
 
@@ -168,51 +167,76 @@ html, body {
 .about-image {
   flex: 1;
   display: flex;
-  justify-content: center;    /* Center image horizontally */
-  align-items: center;        /* Center image vertically */
+  justify-content: center;
+  align-items: center;
 }
 
 .about-image img {
   width: 100%;
-  max-width: 530px;           /* Balanced image size */
+  max-width: 530px;
   border-radius: 12px;
   box-shadow: 0 6px 25px rgba(0,0,0,0.6);
   object-fit: cover;
 }
 
-/* Responsive */
-@media (max-width: 992px) {
-  .about-block,
-  .about-block.reverse {
-    flex-direction: column;
-    text-align: center;
-  }
-  .about-text {
-    max-width: 100%;
-  }
-  .about-image img {
-    max-width: 100%;
-  }
+/* Portfolio Hero */
+.portfolio-hero {
+  position: relative;
+  min-height: 60vh;
+  background: url('../images/portfolio-hero.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
 }
 
-/* Portfolio */
-.portfolio {
+.portfolio-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 0;
+}
+
+.portfolio-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 2rem;
+}
+
+.portfolio-hero-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #ffcc00;
+}
+
+.portfolio-hero-content p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2rem;
+  color: #eee;
+}
+
+/* Portfolio Grid */
+.portfolio-gallery {
   padding: 6rem 3rem 3rem;
   background-color: #111;
   text-align: center;
 }
 
-.portfolio h1 {
+.portfolio-gallery h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
+  font-size: 2.2rem;
+  margin: 3rem 0 1.5rem;
   color: #ffcc00;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .grid-item {
@@ -225,6 +249,7 @@ html, body {
   height: auto;
   display: block;
   transition: transform 0.3s ease;
+  border-radius: 8px;
 }
 
 .grid-item img:hover {
@@ -347,8 +372,21 @@ html, body {
   margin: 0;
 }
 
-
 /* Responsive */
+@media (max-width: 992px) {
+  .about-block,
+  .about-block.reverse {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about-text {
+    max-width: 100%;
+  }
+  .about-image img {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .hero {
     text-align: center;
