@@ -123,58 +123,40 @@ html, body {
 }
 
 /* About Alternating Sections */
-.about {
-  padding: 6rem 3rem;
-  background-color: #0d0d0d;
-}
-
-.about-container {
-  display: flex;
-  flex-direction: column;
-  gap: 6rem;
-}
-
 .about-block {
   display: flex;
-  align-items: center;       /* Center vertically */
-  justify-content: center;   /* Keep balance */
-  gap: 4rem;
+  align-items: center;           /* vertically center text & image */
+  justify-content: center;       /* space evenly */
+  gap: 2rem;
   margin: 4rem 0;
+  min-height: 80vh;              /* force section to take viewport height */
 }
 
 .about-block.reverse {
-  flex-direction: row-reverse; /* Flip order for alternating */
+  flex-direction: row-reverse;   /* alternate left/right */
 }
 
 .about-text {
   flex: 1;
   max-width: 500px;
-  text-align: center;         /* Center text horizontally */
-  color: #eee;
-}
-
-.about-text h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #ffcc00;
-}
-
-.about-text p {
-  font-size: 1.1rem;
-  color: #d1d1d1;
+  text-align: center;            /* center text horizontally */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;       /* center text vertically */
+  margin: 0 auto;
 }
 
 .about-image {
   flex: 1;
   display: flex;
-  justify-content: center;    /* Center image horizontally */
-  align-items: center;        /* Center image vertically */
+  justify-content: center;       /* center image horizontally */
+  align-items: center;           /* center image vertically */
 }
 
 .about-image img {
   width: 100%;
-  max-width: 530px;           /* Balanced image size */
+  max-width: 500px;
+  height: auto;
   border-radius: 12px;
   box-shadow: 0 6px 25px rgba(0,0,0,0.6);
   object-fit: cover;
