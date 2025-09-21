@@ -137,11 +137,12 @@ html, body {
 .about-block {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* push text left, image right */
   gap: 4rem;
 }
 
 .about-block.reverse {
-  flex-direction: row-reverse;
+  flex-direction: row-reverse; /* swap order for alternating */
 }
 
 .about-text {
@@ -163,16 +164,19 @@ html, body {
 
 .about-image {
   flex: 1;
+  display: flex;
+  justify-content: flex-end; /* push image to edge */
 }
 
 .about-image img {
   width: 100%;
-  max-width: 500px;   /* Limit max size */
+  max-width: 500px;
   height: auto;
   border-radius: 12px;
   box-shadow: 0 6px 25px rgba(0,0,0,0.6);
   object-fit: cover;
 }
+
 
 
 
