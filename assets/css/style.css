@@ -122,27 +122,56 @@ html, body {
   color: #000; 
 }
 
-/* About */
+/* About Alternating Sections */
 .about {
+  padding: 6rem 3rem;
+  background-color: #0d0d0d;
+}
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+.about-block {
   display: flex;
   align-items: center;
-  padding: 4rem 3rem;
-  gap: 2rem;
-  background-color: #111;
+  gap: 4rem;
 }
-.about img {
-  width: 300px;
-  border-radius: 10px;
+
+.about-block.reverse {
+  flex-direction: row-reverse;
 }
-.about-content div {
-  max-width: 600px;
+
+.about-text {
+  flex: 1;
+  max-width: 500px;
 }
-.about h2 {
+
+.about-text h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
   color: #ffcc00;
 }
+
+.about-text p {
+  font-size: 1.1rem;
+  color: #d1d1d1;
+}
+
+.about-image {
+  flex: 1;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.6);
+}
+
+
 
 /* Portfolio */
 .portfolio {
@@ -310,5 +339,16 @@ html, body {
   .about {
     flex-direction: column;
     text-align: center;
+  }
+}
+/* Responsive */
+@media (max-width: 992px) {
+  .about-block,
+  .about-block.reverse {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about-text {
+    max-width: 100%;
   }
 }
