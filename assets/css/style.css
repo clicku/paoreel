@@ -182,95 +182,120 @@ html, body {
 
 /* Services */
 .services {
-  padding: 4rem 3rem;
-  text-align: center;
+  padding: 6rem 3rem;
   background-color: #000;
+  text-align: center;
 }
+
 .services h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 2.5rem;
   color: #ffcc00;
+  margin-bottom: 2rem;
 }
+
 .service-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
-  margin-top: 2rem;
 }
+
 .service-cards .card {
-  background-color: #111;
+  background: #111;
   padding: 2rem;
   border-radius: 8px;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 1.2rem;
   color: #fff;
+  transition: transform 0.3s ease, background 0.3s;
+}
+
+.service-cards .card:hover {
+  background: #222;
+  transform: translateY(-5px);
 }
 
 /* Clients */
 .clients {
-  padding: 4rem 3rem;
+  padding: 6rem 3rem;
   background-color: #111;
   text-align: center;
 }
+
 .clients h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 2.5rem;
   color: #ffcc00;
+  margin-bottom: 2rem;
 }
+
 .client-logos {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  flex-wrap: wrap;
-  margin-top: 2rem;
 }
+
 .client-logos img {
-  height: 60px;
-  object-fit: contain;
+  max-height: 60px;
   filter: grayscale(100%);
-  transition: filter 0.3s;
+  opacity: 0.8;
+  transition: filter 0.3s ease, opacity 0.3s ease;
 }
+
 .client-logos img:hover {
   filter: grayscale(0%);
+  opacity: 1;
 }
 
 /* Contact */
 .contact {
-  padding: 4rem 3rem;
+  padding: 6rem 3rem;
   background-color: #000;
   text-align: center;
 }
+
 .contact h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 2.5rem;
   color: #ffcc00;
+  margin-bottom: 2rem;
 }
+
 .contact form {
-  max-width: 500px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+  display: grid;
   gap: 1rem;
 }
-.contact input, .contact textarea {
+
+.contact input,
+.contact textarea {
   padding: 1rem;
   border: none;
   border-radius: 5px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
 }
-.contact button {
-  margin-top: 1rem;
+
+.contact textarea {
+  min-height: 150px;
+  resize: vertical;
 }
 
 /* Footer */
 .footer {
-  text-align: center;
-  padding: 1.5rem;
   background-color: #111;
+  text-align: center;
+  padding: 2rem;
   font-size: 0.9rem;
-  color: #ccc;
+  color: #aaa;
 }
+
+.footer p {
+  margin: 0;
+}
+
 
 /* Responsive */
 @media (max-width: 768px) {
