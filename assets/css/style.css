@@ -44,6 +44,12 @@ html, body {
   margin-bottom: 1rem;    /* Space under the logo */
 }
 
+.logo img {
+  height: 50px;      /* typical navbar logo height */
+  width: auto;       /* maintain aspect ratio */
+  display: block;    /* remove extra inline spacing */
+}
+
 .logo-title img {
   width: 100%;
   max-width: 300px;
