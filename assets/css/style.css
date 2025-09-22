@@ -40,12 +40,17 @@ html, body {
   font-weight: bold;       
   font-size: 1.5rem;       
 }
-.logo-title img {
-  max-width: 250px;   /* Adjust size */
-  height: auto;
-  display: block;
-  margin: 0 auto;     /* Center horizontally */
+.logo-title {
+  margin-bottom: 1rem;    /* Space under the logo */
 }
+
+.logo-title img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: inline-block;  /* Keep inline for centering */
+}
+
 
 .nav-links {
   list-style: none;
@@ -89,6 +94,8 @@ html, body {
   position: relative;
   z-index: 1;
   max-width: 600px;
+  margin: 0 auto;         /* Center the whole block */
+  text-align: center;     /* Center text & inline elements */
 }
 
 .hero-content h1 {
@@ -401,5 +408,10 @@ html, body {
   }
   .hero-content {
     max-width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .logo-title img {
+    max-width: 200px;  /* Smaller on phones */
   }
 }
