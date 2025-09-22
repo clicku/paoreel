@@ -40,6 +40,12 @@ html, body {
   font-weight: bold;       
   font-size: 1.5rem;       
 }
+.logo-title img {
+  max-width: 250px;   /* Adjust size */
+  height: auto;
+  display: block;
+  margin: 0 auto;     /* Center horizontally */
+}
 
 .nav-links {
   list-style: none;
