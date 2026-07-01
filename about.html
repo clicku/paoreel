@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - Paoreel Photography</title>
+  
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <div id="main-content">
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <a href="/index.html">
+            <img src="/assets/images/logo.png" alt="Paoreel Studios Logo">
+          </a>
+        </div>
+
+        <button class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="/portfolio.html">Portfolio</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="about-hero">
+      <div class="about-hero-container">
+        
+        <div class="about-hero-content">
+          <h3>The Vision Behind The Lens</h3>
+          <h1>About Paoreel</h1>
+          
+          <p>
+            Welcome to Paoreel Studios. We specialize in capturing pristine, high-resolution commercial imagery across food, beverage, and conceptual product design portfolios. 
+          </p>
+          <p>
+            Every visual composition is engineered to tell a clean, structural narrative—balancing precise lighting geometry with organic textures to elevate brands, print media layouts, and digital storefront campaigns.
+          </p>
+          <p>
+            Based in our studio space, we partner with creative agencies, restaurants, and product designers worldwide to transform commercial realities into fine-art interactions.
+          </p>
+          <a href="contact.html" class="btn">Work With Us</a>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuToggle = document.getElementById('mobile-menu');
+      const navLinks = document.querySelector('.nav-links');
+
+      menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

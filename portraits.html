@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portrait Photography - Paoreel Photography</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="main-content">
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <a href="/index.html">
+            <img src="/assets/images/logo.png" alt="Paoreel Studios Logo">
+          </a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="/index.html">Paoreel</a></li>
+          <li><a href="/portfolio.html">Portfolio</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    
+    <section class="portfolio-gallery">
+      <h2>Portrait Collections</h2>
+      <div class="grid" id="portrait-archive-grid"></div>
+    </section>
+
+    <footer class="footer">
+      <p>© 2025 Paoreel Photography | All Rights Reserved</p>
+    </footer>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
+
+  <script>
+    lightbox.option({
+      'resizeDuration': 200,
+      'fadeDuration': 200,
+      'wrapAround': true,
+      'disableScrolling': true
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const gridContainer = document.getElementById('portrait-archive-grid');
+      let index = 1;
+
+      function tryNextImage() {
+        const fullPath = `/assets/images/portraits/portrait${index}.webp`;
+        const imgTest = new Image();
+
+        imgTest.onload = function() {
+          const gridItem = document.createElement('div');
+          gridItem.className = 'grid-item';
+
+          const anchor = document.createElement('a');
+          anchor.href = fullPath;
+          anchor.setAttribute('data-lightbox', 'portrait-archive');
+          anchor.setAttribute('data-title', `Portrait Shot ${index}`);
+
+          const imgElement = document.createElement('img');
+          imgElement.src = fullPath;
+          imgElement.alt = 'Portrait Photography';
+
+          anchor.appendChild(imgElement);
+          gridItem.appendChild(anchor);
+          gridContainer.appendChild(gridItem);
+
+          index++;
+          tryNextImage();
+        };
+
+        imgTest.onerror = function() {
+          console.log(`Portrait archive loaded completely. Total: ${index - 1}`);
+        };
+
+        imgTest.src = fullPath;
+      }
+
+      tryNextImage();
+    });
+  </script>
+</body>
+</html>

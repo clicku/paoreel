@@ -1,0 +1,760 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  caret-color: transparent;      /* Hide caret */
+  user-select: none;             /* Prevent text selection */
+  -webkit-user-select: none;     /* Safari/Chrome */
+  -ms-user-select: none;         /* IE/Edge */
+  height: 100%;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif; /* Default body font */
+  background-color: #000;
+  color: #fff;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/*.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}*/
+.logo a {
+  text-decoration: none;   
+  color: inherit;          
+  font-weight: bold;       
+  font-size: 1.5rem;       
+}
+.logo-title {
+  margin-bottom: 1rem;    /* Space under the logo */
+}
+
+.logo img {
+  height: 50px;      /* typical navbar logo height */
+  width: auto;       /* maintain aspect ratio */
+  display: block;    /* remove extra inline spacing */
+}
+
+.logo-title img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: inline-block;  /* Keep inline for centering */
+}
+
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #ffcc00;
+}
+
+/* ==========================================================================
+   HERO SECTION & CINEMATIC INITIALIZATION
+   ========================================================================== */
+
+.hero {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  background: none; 
+  position: relative;
+  padding: 3rem;
+  color: #fff;
+  overflow: hidden; 
+}
+
+/* Setup baseline styles: completely hidden and blurred, waiting for GSAP */
+.hero-bg-image {
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: url('../images/paoreel.png') no-repeat center center/cover;
+  z-index: -2;
+  transform: scale(1.15); 
+  opacity: 0;
+  filter: blur(20px);
+  will-change: transform, filter, opacity;
+}
+
+/* Removed old CSS @keyframes cameraWakeUp to prevent engine conflicts */
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1; 
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 0 auto;         
+  text-align: center;     
+}
+
+.hero-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Initial structural hiding for text layout components */
+.logo-title img,
+.hero-content p,
+.hero-content .btn {
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   HERO BUTTON & INTERACTION STATES
+   ========================================================================== */
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #d3d3d3;
+  color: #000;
+  transform: translateY(-2px); 
+}
+/* About Alternating Sections */
+.about {
+  padding: 6rem 3rem;
+  background-color: #0d0d0d;
+}
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+.about-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  margin: 4rem 0;
+}
+
+.about-block.reverse {
+  flex-direction: row-reverse;
+}
+
+.about-text {
+  flex: 1;
+  max-width: 500px;
+  text-align: center;
+  color: #eee;
+}
+
+.about-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #ffcc00;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  color: #d1d1d1;
+}
+
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 530px;
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.6);
+  object-fit: cover;
+}
+
+/* Portfolio Hero */
+.portfolio-hero {
+  position: relative;
+  min-height: 60vh;
+  /*background: url('../images/portfolio-hero.jpg') no-repeat center center/cover; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+
+.portfolio-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 0;
+}
+
+.portfolio-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 2rem;
+}
+
+.portfolio-hero-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #ffcc00;
+}
+
+.portfolio-hero-content p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2rem;
+  color: #eee;
+}
+
+/* Portfolio Grid */
+.portfolio-gallery {
+  padding: 6rem 3rem 3rem;
+  background-color: #111;
+  text-align: center;
+}
+
+.portfolio-gallery h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  margin: 3rem 0 1.5rem;
+  color: #ffcc00;
+}
+/* --- STACKED GALLERY HEADER --- */
+.gallery-header-stack {
+  text-align: center;
+  margin-bottom: 3rem; /* Spacing between the header stack and the image grid */
+}
+
+.portfolio-sub-nav {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem; /* Small gap right above the word "Collections" */
+}
+
+.sub-nav-link {
+  color: #888888; /* Inactive text color */
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  padding: 0 4px;
+}
+
+/* Brightens only the category page the user is currently looking at */
+.sub-nav-link.active {
+  color: #ffffff; /* Active text color (change to #111111 if your background is white) */
+  pointer-events: none; /* Disables clicking the page you are already on */
+}
+
+.sub-nav-link:hover {
+  color: #cccccc; /* Subtle hover highlight for the inactive option */
+}
+
+.sub-nav-divider {
+  color: #444444;
+  user-select: none;
+  padding: 0 6px;
+}
+.grid {
+  display: grid;
+  /* Creates exactly 4 equal columns on desktop screens */
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 1.5rem;
+}
+
+/* Ensure the grid item handles proportions properly */
+.grid-item {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Force the image wrapper link to match the ratio */
+.grid-item a {
+  display: block;
+  width: 100%;
+  /* Forces the precise 1134x1418 structural ratio (4:5) */
+  aspect-ratio: 4 / 5; 
+}
+
+/* Force the image to fill the structural box beautifully */
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  /* Fills the space and crops any mismatched shapes without stretching them */
+  object-fit: cover; 
+  /* Centers the focus point of the photo */
+  object-position: center; 
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* Optional: Keep your clean hover effect if you have one */
+.grid-item img:hover {
+  transform: scale(1.03);
+}
+/* --- LIGHTBOX BACKGROUND BLUR EFFECTS --- */
+
+/* Base transition setup for your content container */
+#main-content {
+  transition: filter 0.3s ease;
+}
+
+/* Container setup for the item holding the text */
+.grid-item.has-more-link {
+  position: relative;
+}
+/* --- Responsive Adjustments --- */
+
+/* For iPads and Tablets: drop down to 2 items per row */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* For Mobile Phones: drop down to 1 item per row */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem; /* Margins get slightly tighter on small screens */
+  }
+}
+/* OPTION A: Floating "more..." directly on top of the image corner */
+/*.inline-more-link {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.85rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s ease;
+  z-index: 10; /* Keeps it above the image click layer */
+/*}*/
+
+/*.inline-more-link:hover {
+  background: #000;
+  color: #fff;
+}*/
+
+/* OPTION B: If you prefer the word "more..." to be positioned underneath the image instead,
+   comment out Option A above and use these simple rules instead:*/
+   
+.grid-item.has-more-link {
+  display: flex;
+  flex-direction: column;
+}
+/* Floating "more..." overlay positioned cleanly on the image */
+.inline-more-link {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  color: #ffffff !important; /* Forces text to remain crisp white */
+  font-weight: 700;          /* Bold typography */
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.95rem;
+  text-decoration: none;
+  z-index: 10;               /* Ensures it layers perfectly above the image click target */
+  
+  /* A dark drop shadow guarantees readability even on completely white background photos */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8), 0px 0px 8px rgba(0, 0, 0, 0.6);
+  
+  /* Optional: Smooth fade effect on hover */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Adds an interactive micro-interaction when hovered */
+.inline-more-link:hover {
+  transform: scale(1.08);
+  opacity: 0.9;
+}
+
+/* --- ELEGANT CATEGORY LINK STYLING --- */
+
+.category-title-link {
+  text-decoration: none; /* Removes the default underline */
+  display: inline-block; /* Essential for the transform & sizing mechanics to work */
+  margin-bottom: 1.5rem;  /* Keeps your layout spacing consistent */
+}
+
+.category-title-link h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff; /* Changed to crisp white */
+  letter-spacing: 0.05em;
+  margin: 0;
+  position: relative;
+  padding-bottom: 8px;
+  transition: color 0.3s ease;
+}
+
+/* Creating the elegant animated underline indicator */
+.category-title-link h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px; /* Sophisticated thin line weight */
+  background-color: #ffffff; /* Changed line to white */
+  transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Hover States */
+.category-title-link:hover h2 {
+  color: #cccccc; /* Softens to a clean light grey on hover */
+}
+
+.category-title-link:hover h2::after {
+  width: 100%;
+  left: 0;
+  background-color: #cccccc; /* Syncs line color change on hover */
+}
+/* When Lightbox opens, 'disableScrolling: true' attaches '.lb-disable-scrolling' to the <body>.
+  We target our content element downstream to apply the blur safely.
+*/
+body.lb-disable-scrolling #main-content {
+  filter: blur(8px);
+}
+
+/* Lightbox backdrop element modification */
+#lightboxOverlay {
+  background-color: rgba(0, 0, 0, 0.4) !important; /* Low dark mask opacity so the blur shows clearly */
+}
+/* Services */
+.services {
+  padding: 6rem 3rem;
+  background-color: #000;
+  text-align: center;
+}
+
+.services h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #ffcc00;
+  margin-bottom: 2rem;
+}
+
+.service-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-cards .card {
+  background: #111;
+  padding: 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #fff;
+  transition: transform 0.3s ease, background 0.3s;
+}
+
+.service-cards .card:hover {
+  background: #222;
+  transform: translateY(-5px);
+}
+
+/* Clients */
+.clients {
+  padding: 6rem 3rem;
+  background-color: #111;
+  text-align: center;
+}
+
+.clients h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #ffcc00;
+  margin-bottom: 2rem;
+}
+
+.client-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.client-logos img {
+  max-height: 60px;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.client-logos img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* Contact */
+.contact {
+  padding: 6rem 3rem;
+  background-color: #000;
+  text-align: center;
+}
+
+.contact h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #ffcc00;
+  margin-bottom: 2rem;
+}
+
+.contact form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.contact input,
+.contact textarea {
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+}
+
+.contact textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* Footer */
+.footer {
+  background-color: #111;
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.footer p {
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .about-block,
+  .about-block.reverse {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about-text {
+    max-width: 100%;
+  }
+  .about-image img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    text-align: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .hero-content {
+    max-width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .logo-title img {
+    max-width: 200px;  /* Smaller on phones */
+  }
+}
+ /* Styling to place the "more..." link neatly below the grid row */
+    .category-row-container {
+      margin-bottom: 4rem;
+      position: relative;
+    }
+    
+    .more-link-container {
+      text-align: right; /* Aligns to the right under the grid; change to 'center' if preferred */
+      margin-top: 1rem;
+      width: 100%;
+    }
+
+    .bottom-more-link {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888888;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      display: inline-block;
+      padding: 5px 0;
+    }
+
+    .bottom-more-link:hover {
+      color: #ffffff; /* Use #111111 if your theme background is white */
+      text-decoration: underline;
+    }
+     /* --- ABOUT PAGE SPLIT HERO CONFIGURATION --- */
+    .about-hero {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    width: 83vw;
+    background: url('/assets/images/profile.webp') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    padding: 3rem;
+    color: #ffffff;
+    box-sizing: border-box;
+}
+
+.about-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+    /* Outer wrapper layout block mirroring home page design metrics */
+    .about-hero-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-end; /* Shoves the text container completely to the right side */
+      position: relative;
+      z-index: 1; /* Pushes content stack safely over the background color mask */
+    }
+
+    /* Text Block Styling matching .hero-content style patterns */
+    .about-hero-content {
+      max-width: 550px;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+
+    .about-hero-content h3 {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #cccccc;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      color: #ffffff;
+    }
+
+    .about-hero-content p {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #e0e0e0;
+      margin-bottom: 1.5rem;
+    }
+
+    /* --- MOBILE RESPONSIVE ADAPTATIONS --- */
+    @media (max-width: 768px) {
+      .about-hero {
+        padding: 1.5rem;
+        align-items: flex-start; /* Starts layout stacking naturally downwards on mobile views */
+      }
+
+      .about-hero-container {
+        justify-content: center; /* Centers text block elements relative to viewport width */
+      }
+
+      .about-hero-content {
+        padding: 1rem;
+        text-align: center;
+      }
+
+      .about-hero-content h1 {
+        font-size: 2.2rem;
+      }
+    }

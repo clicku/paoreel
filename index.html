@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paoreel Photography</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- SYSTEM OVERLAYS FOR THE ELEGANT RAMP TRANSITION --- */
+    body {
+      background-color: #0b0b0b;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Cinematic Curtain Strips */
+    .transition-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 99999;
+      pointer-events: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .transition-column {
+<<<<<<< HEAD
+      background-color: #ffffff; /* Elegant white editorial blocks */
+=======
+      background-color: #ffffff; 
+>>>>>>> f141014cb12b3cf9701232dedab0c3e1b38eab50
+      height: 100%;
+      width: 100%;
+      transform: scaleY(0);
+      transform-origin: bottom center;
+    }
+
+    /* Custom tracking style to smoothly minimize the hero banner */
+    .cinematic-fade-out {
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                  transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="transition-overlay">
+    <div class="transition-column" id="col-1"></div>
+    <div class="transition-column" id="col-2"></div>
+    <div class="transition-column" id="col-3"></div>
+  </div>
+
+  <div id="page-wrapper">
+<<<<<<< HEAD
+    <header id="main-header">
+=======
+    <header id="main-header" style="opacity: 0;">
+>>>>>>> f141014cb12b3cf9701232dedab0c3e1b38eab50
+      <nav class="navbar">
+        <div class="logo"></div>
+        <ul class="nav-links">
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero" id="hero-content-wrapper">
+<<<<<<< HEAD
+=======
+      <div class="hero-bg-image"></div>
+      
+>>>>>>> f141014cb12b3cf9701232dedab0c3e1b38eab50
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1 class="logo-title">
+            <img src="/assets/images/logo.png" alt="Paoreel Studios Logo">
+          </h1>
+          <p>Specializing in food and product photography & videography, we craft stunning visuals that highlight flavor, detail, and quality—perfect for websites, marketing, and menus.</p>
+          <a href="portfolio.html" class="btn" id="portfolio-btn">See Our Portfolio</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <script>
+<<<<<<< HEAD
+    document.getElementById('portfolio-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetUrl = this.getAttribute('href');
+
+      // 1. Elegantly fade out background text assets instantly
+      document.getElementById('hero-content-wrapper').classList.add('cinematic-fade-out');
+      document.getElementById('main-header').classList.add('cinematic-fade-out');
+
+      // 2. Trigger the staggered editorial curtain raise
+      const tl = gsap.timeline({
+        onComplete: () => {
+          // Pass execution control seamlessly to the target page link
+          window.location.href = targetUrl;
+        }
+      });
+
+      tl.to(".transition-column", {
+        duration: 0.8,
+        scaleY: 1,
+        transformOrigin: "bottom center",
+        ease: "power4.inOut",
+        stagger: 0.15 // Creates a beautiful cascading column waterfall effect
+      });
+    });
+
+    // Handle seamless opening reveal when returning backwards or entering freshly
+    window.addEventListener('pageshow', (event) => {
+      // Re-initialize layouts flawlessly if back button cache is used
+      if (event.persisted) {
+        gsap.set(".transition-column", { scaleY: 0 });
+        document.getElementById('hero-content-wrapper').classList.remove('cinematic-fade-out');
+        document.getElementById('main-header').classList.remove('cinematic-fade-out');
+=======
+    document.addEventListener('DOMContentLoaded', () => {
+      // ==========================================
+      // 1. CINEMATIC PAGE ENTRANCE TIMELINE
+      // ==========================================
+      const entranceTimeline = gsap.timeline();
+
+      // Step A: The Background Shutter Flicker & Blur Dissolve (Starts Instantly)
+      entranceTimeline
+        .to(".hero-bg-image", { opacity: 0.6, filter: "blur(15px)", duration: 0.15 })
+        .to(".hero-bg-image", { opacity: 0.2, filter: "blur(18px)", duration: 0.05 }) // Flicker 1
+        .to(".hero-bg-image", { opacity: 0.8, filter: "blur(10px)", duration: 0.15 })
+        .to(".hero-bg-image", { opacity: 0.3, filter: "blur(12px)", duration: 0.05 }) // Flicker 2
+        .to(".hero-bg-image", { opacity: 0.9, filter: "blur(4px)", duration: 0.2 })
+        .to(".hero-bg-image", { opacity: 0.5, filter: "blur(6px)", duration: 0.08 })  // Shutter flutter
+        .to(".hero-bg-image", { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power2.out" });
+
+      // Step B: Slow Camera Lens Parallax Zoom (Runs smoothly in background from 0s)
+      entranceTimeline.to(".hero-bg-image", {
+        scale: 1,
+        duration: 2.8,
+        ease: "power1.out"
+      }, 0);
+
+      // Step C: Content Reveal (Triggers strictly AFTER the background becomes crystal clear)
+      entranceTimeline
+        .to(".logo-title img", {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          ease: "power4.out"
+        }) // Fires right at the end of the background animation chain
+        .to([".hero-content p", "#main-header"], {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          ease: "power4.out"
+        }, "-=0.6") // Elegant overlap fade
+        .to(".hero-content .btn", {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "back.out(1.4)"
+        }, "-=0.7");
+
+      // ==========================================
+      // 2. PREMIUM CURTAIN ROUTING SWEEP
+      // ==========================================
+      const portfolioBtn = document.getElementById('portfolio-btn');
+      
+      if (portfolioBtn) {
+        portfolioBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetUrl = this.getAttribute('href');
+
+          document.getElementById('hero-content-wrapper').classList.add('cinematic-fade-out');
+          
+          const mainHeader = document.getElementById('main-header');
+          if (mainHeader) mainHeader.classList.add('cinematic-fade-out');
+
+          const exitTimeline = gsap.timeline({
+            onComplete: () => {
+              window.location.href = targetUrl;
+            }
+          });
+
+          exitTimeline.to(".transition-column", {
+            duration: 0.8,
+            scaleY: 1,
+            transformOrigin: "bottom center",
+            ease: "power4.inOut",
+            stagger: 0.15 
+          });
+        });
+      }
+    });
+
+    // ==========================================
+    // 3. BACK-BUTTON HISTORY CACHE RECOVERY
+    // ==========================================
+    window.addEventListener('pageshow', (event) => {
+      if (event.persisted) {
+        gsap.set(".transition-column", { scaleY: 0 });
+        
+        const heroWrapper = document.getElementById('hero-content-wrapper');
+        const mainHeader = document.getElementById('main-header');
+        
+        if (heroWrapper) heroWrapper.classList.remove('cinematic-fade-out');
+        if (mainHeader) mainHeader.classList.remove('cinematic-fade-out');
+        
+        gsap.set([".logo-title img", ".hero-content p", ".hero-content .btn", "#main-header"], { 
+          opacity: 1, 
+          y: 0 
+        });
+        gsap.set(".hero-bg-image", { scale: 1, opacity: 1, filter: "blur(0px)" });
+>>>>>>> f141014cb12b3cf9701232dedab0c3e1b38eab50
+      }
+    });
+  </script>
+</body>
+</html>
