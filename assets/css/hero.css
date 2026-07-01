@@ -1,0 +1,1122 @@
+/* ==========================================================
+   HERO
+========================================================== */
+
+.hero{
+
+    position:relative;
+
+    width:100%;
+
+    min-height:100vh;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-start;
+
+    background:#000;
+
+}
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.hero-bg{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    url("../images/paoreel.webp")
+    center center / cover
+    no-repeat;
+
+    opacity:.55;
+
+    filter:blur(40px);
+
+    transform:scale(1.12);
+
+    will-change:
+        transform,
+        opacity,
+        filter;
+
+    z-index:1;
+
+}
+
+/* ==========================================================
+   DARK OVERLAY
+========================================================== */
+
+.hero-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.35);
+
+    z-index:2;
+
+}
+
+/* ==========================================================
+   CINEMATIC GRADIENT
+========================================================== */
+
+.hero-gradient{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:3;
+
+    background:
+
+        linear-gradient(
+            to bottom,
+
+            rgba(0,0,0,.05),
+
+            rgba(0,0,0,.25),
+
+            rgba(0,0,0,.55),
+
+            rgba(0,0,0,.82)
+
+        );
+
+}
+
+/* ==========================================================
+   VIGNETTE
+========================================================== */
+
+.hero-vignette{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:4;
+
+    pointer-events:none;
+
+    background:
+
+        radial-gradient(
+
+            ellipse at center,
+
+            transparent 40%,
+
+            rgba(0,0,0,.15) 70%,
+
+            rgba(0,0,0,.60) 100%
+
+        );
+
+}
+
+/* ==========================================================
+   HERO INNER
+========================================================== */
+
+.hero-inner{
+
+    position:relative;
+
+    z-index:20;
+
+    width:min(1400px,90%);
+
+    margin:auto;
+
+}
+
+/* ==========================================================
+   HERO CONTENT
+========================================================== */
+
+.hero-content{
+
+    width:100%;
+
+    max-width:650px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+}
+
+/* Hidden until loader finishes */
+
+.hero-content>*{
+
+    opacity:0;
+
+    transform:translateY(35px);
+
+}
+
+/* ==========================================================
+   CATEGORY
+========================================================== */
+
+.hero-category{
+
+    display:inline-block;
+
+    margin-bottom:20px;
+
+    font-size:.9rem;
+
+    font-weight:600;
+
+    letter-spacing:.35em;
+
+    text-transform:uppercase;
+
+    color:#d2d2d2;
+
+}
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.hero h1{
+
+    font-family:var(--font-heading);
+
+    font-size:clamp(3rem,7vw,6.5rem);
+
+    line-height:1;
+
+    margin-bottom:28px;
+
+    color:#fff;
+
+    text-shadow:
+
+        0 10px 35px rgba(0,0,0,.45);
+
+}
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.hero p{
+
+    max-width:560px;
+
+    font-size:1.1rem;
+
+    line-height:2;
+
+    color:#f2f2f2;
+
+    margin-bottom:42px;
+
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.hero-buttons{
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+/* ==========================================================
+   PRIMARY BUTTON
+========================================================== */
+
+.btn-primary{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:
+
+        18px
+        38px;
+
+    border-radius:999px;
+
+    background:#ffffff;
+
+    color:#000;
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+
+    transition:
+
+        transform .35s,
+
+        background .35s,
+
+        color .35s,
+
+        box-shadow .35s;
+
+    box-shadow:
+
+        0 12px 35px rgba(0,0,0,.35);
+
+}
+
+.btn-primary:hover{
+
+    transform:
+
+        translateY(-4px);
+
+    background:#d7b97d;
+
+    color:#000;
+
+    box-shadow:
+
+        0 18px 45px rgba(0,0,0,.45);
+
+}
+/* ==========================================================
+   FILM GRAIN
+========================================================== */
+
+.film-grain{
+
+    position:absolute;
+
+    inset:-50%;
+
+    z-index:5;
+
+    pointer-events:none;
+
+    opacity:.045;
+
+    background-image:
+        url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+
+    animation:filmGrain 8s steps(8) infinite;
+
+}
+
+@keyframes filmGrain{
+
+    0%{transform:translate(0,0);}
+    20%{transform:translate(-2%,-1%);}
+    40%{transform:translate(2%,1%);}
+    60%{transform:translate(-1%,2%);}
+    80%{transform:translate(1%,-2%);}
+    100%{transform:translate(0,0);}
+
+}
+
+/* ==========================================================
+   FLOATING DUST
+========================================================== */
+
+.dust{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:6;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+}
+
+.dust::before,
+.dust::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-20%;
+
+    background-repeat:repeat;
+
+    opacity:.08;
+
+}
+
+.dust::before{
+
+    background-image:
+        radial-gradient(circle,#ffffff 1px,transparent 1.5px);
+
+    background-size:180px 180px;
+
+    animation:dustSlow 45s linear infinite;
+
+}
+
+.dust::after{
+
+    background-image:
+        radial-gradient(circle,#ffffff .8px,transparent 1.2px);
+
+    background-size:260px 260px;
+
+    opacity:.05;
+
+    animation:dustFast 28s linear infinite;
+
+}
+
+@keyframes dustSlow{
+
+    from{
+
+        transform:translateY(0);
+
+    }
+
+    to{
+
+        transform:translateY(-220px);
+
+    }
+
+}
+
+@keyframes dustFast{
+
+    from{
+
+        transform:
+
+            translateY(0)
+            translateX(0);
+
+    }
+
+    to{
+
+        transform:
+
+            translateY(-300px)
+            translateX(80px);
+
+    }
+
+}
+
+/* ==========================================================
+   LIGHT BLOOM
+========================================================== */
+
+.light-bloom{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:7;
+
+    pointer-events:none;
+
+    background:
+
+        radial-gradient(circle at 75% 25%,
+
+            rgba(255,255,255,.12),
+
+            transparent 40%);
+
+    mix-blend-mode:screen;
+
+    animation:bloomPulse 7s ease-in-out infinite;
+
+}
+
+@keyframes bloomPulse{
+
+    0%{
+
+        opacity:.18;
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        opacity:.30;
+
+        transform:scale(1.08);
+
+    }
+
+    100%{
+
+        opacity:.18;
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* ==========================================================
+   CURSOR LIGHT
+========================================================== */
+
+.cursor-light{
+
+    position:absolute;
+
+    width:450px;
+
+    height:450px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(circle,
+
+        rgba(255,255,255,.10),
+
+        transparent 70%);
+
+    pointer-events:none;
+
+    z-index:8;
+
+    mix-blend-mode:screen;
+
+    opacity:0;
+
+    transform:translate(-50%,-50%);
+
+}
+
+/* ==========================================================
+   BACKGROUND BREATHING
+========================================================== */
+
+.hero-bg{
+
+    animation:heroBreathing 18s ease-in-out infinite;
+
+}
+
+@keyframes heroBreathing{
+
+    0%{
+
+        transform:scale(1.12);
+
+    }
+
+    50%{
+
+        transform:scale(1.16);
+
+    }
+
+    100%{
+
+        transform:scale(1.12);
+
+    }
+
+}
+
+/* ==========================================================
+   CINEMATIC SHIMMER
+========================================================== */
+
+.hero-overlay{
+
+    animation:overlayShift 12s ease-in-out infinite;
+
+}
+
+@keyframes overlayShift{
+
+    0%{
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        opacity:.88;
+
+    }
+
+    100%{
+
+        opacity:1;
+
+    }
+
+}
+
+/* ==========================================================
+   IMAGE SHARPNESS
+   (GSAP will animate blur from 40px to 0px)
+========================================================== */
+
+.hero-bg{
+
+    will-change:
+
+        transform,
+        filter,
+        opacity;
+
+}
+/* ==========================================================
+   LOADER
+========================================================== */
+
+#loader{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#000;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    z-index:99999;
+
+}
+
+/* ==========================================================
+   BLACK BACKGROUND
+========================================================== */
+
+.loader-black{
+
+    position:absolute;
+
+    inset:0;
+
+    background:#000;
+
+}
+
+/* ==========================================================
+   APERTURE
+========================================================== */
+
+.loader-aperture{
+
+    position:relative;
+
+    width:160px;
+
+    height:160px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+/* ==========================================================
+   APERTURE BLADES
+========================================================== */
+
+.blade{
+
+    position:absolute;
+
+    width:90px;
+
+    height:90px;
+
+    background:#1a1a1a;
+
+    clip-path:polygon(50% 0%,100% 100%,0% 100%);
+
+    transform-origin:bottom center;
+
+}
+
+.blade1{transform:rotate(0deg);}
+.blade2{transform:rotate(60deg);}
+.blade3{transform:rotate(120deg);}
+.blade4{transform:rotate(180deg);}
+.blade5{transform:rotate(240deg);}
+.blade6{transform:rotate(300deg);}
+
+/* ==========================================================
+   CENTER
+========================================================== */
+
+.loader-aperture::after{
+
+    content:"";
+
+    width:36px;
+
+    height:36px;
+
+    border-radius:50%;
+
+    background:#000;
+
+    position:absolute;
+
+    z-index:10;
+
+}
+
+/* ==========================================================
+   APERTURE ANIMATION
+========================================================== */
+
+@keyframes apertureOpen{
+
+    0%{
+
+        transform:scale(.4) rotate(0deg);
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        transform:scale(2.2) rotate(35deg);
+
+        opacity:0;
+
+    }
+
+}
+
+.loader-aperture{
+
+    animation:apertureOpen 1.8s ease forwards;
+
+}
+
+/* ==========================================================
+   HERO REVEAL
+========================================================== */
+
+.hero{
+
+    opacity:0;
+
+}
+
+/* ==========================================================
+   SCROLL INDICATOR
+========================================================== */
+
+.scroll-indicator{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:40px;
+
+    transform:translateX(-50%);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:10px;
+
+    z-index:30;
+
+    opacity:0;
+
+}
+
+/* ==========================================================
+   MOUSE
+========================================================== */
+
+.scroll-indicator span{
+
+    width:24px;
+
+    height:42px;
+
+    border:2px solid rgba(255,255,255,.65);
+
+    border-radius:50px;
+
+    position:relative;
+
+}
+
+/* ==========================================================
+   WHEEL
+========================================================== */
+
+.scroll-indicator span::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:8px;
+
+    width:4px;
+
+    height:8px;
+
+    border-radius:50px;
+
+    background:#fff;
+
+    transform:translateX(-50%);
+
+    animation:scrollWheel 1.6s infinite;
+
+}
+
+@keyframes scrollWheel{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+        translate(-50%,0);
+
+    }
+
+    40%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+        translate(-50%,14px);
+
+    }
+
+}
+
+/* ==========================================================
+   SCROLL TEXT
+========================================================== */
+
+.scroll-indicator p{
+
+    font-size:.75rem;
+
+    letter-spacing:.25em;
+
+    text-transform:uppercase;
+
+    color:#dddddd;
+
+}
+/* ==========================================================
+   RESPONSIVE HERO
+========================================================== */
+
+/* ---------- Large Desktop ---------- */
+
+@media (min-width:1600px){
+
+    .hero-inner{
+
+        width:min(1600px,88%);
+
+    }
+
+    .hero-content{
+
+        max-width:760px;
+
+    }
+
+    .hero h1{
+
+        font-size:7rem;
+
+    }
+
+}
+
+/* ---------- Laptop ---------- */
+
+@media (max-width:1200px){
+
+    .hero-inner{
+
+        width:90%;
+
+    }
+
+    .hero-content{
+
+        max-width:620px;
+
+    }
+
+    .hero h1{
+
+        font-size:clamp(3rem,6vw,5.5rem);
+
+    }
+
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width:992px){
+
+    .hero{
+
+        justify-content:center;
+
+        text-align:center;
+
+    }
+
+    .hero-inner{
+
+        width:90%;
+
+    }
+
+    .hero-content{
+
+        max-width:700px;
+
+        margin:auto;
+
+        align-items:center;
+
+    }
+
+    .hero p{
+
+        max-width:600px;
+
+    }
+
+    .hero-buttons{
+
+        justify-content:center;
+
+    }
+
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width:768px){
+
+    .hero{
+
+        min-height:100svh;
+
+        padding:120px 24px 80px;
+
+    }
+
+    .hero-bg{
+
+        transform:scale(1.05);
+
+        background-position:center center;
+
+    }
+
+    .hero-category{
+
+        font-size:.75rem;
+
+        letter-spacing:.25em;
+
+    }
+
+    .hero h1{
+
+        font-size:clamp(2.4rem,11vw,4rem);
+
+        line-height:1.05;
+
+        margin-bottom:20px;
+
+    }
+
+    .hero p{
+
+        font-size:1rem;
+
+        line-height:1.8;
+
+        margin-bottom:32px;
+
+    }
+
+    .btn-primary{
+
+        width:100%;
+
+        max-width:320px;
+
+        justify-content:center;
+
+        padding:16px 28px;
+
+        font-size:.9rem;
+
+    }
+
+    .scroll-indicator{
+
+        bottom:25px;
+
+    }
+
+}
+
+/* ---------- Small Phones ---------- */
+
+@media (max-width:480px){
+
+    .hero{
+
+        padding:110px 20px 70px;
+
+    }
+
+    .hero-content{
+
+        max-width:100%;
+
+    }
+
+    .hero-category{
+
+        font-size:.68rem;
+
+    }
+
+    .hero h1{
+
+        font-size:2.3rem;
+
+    }
+
+    .hero p{
+
+        font-size:.95rem;
+
+        line-height:1.7;
+
+    }
+
+    .btn-primary{
+
+        width:100%;
+
+    }
+
+    .scroll-indicator{
+
+        display:none;
+
+    }
+
+}
+
+/* ---------- Landscape Phones ---------- */
+
+@media (max-height:500px){
+
+    .hero{
+
+        padding:100px 50px;
+
+    }
+
+    .scroll-indicator{
+
+        display:none;
+
+    }
+
+}
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    .hero-bg,
+    .film-grain,
+    .dust::before,
+    .dust::after,
+    .light-bloom,
+    .scroll-indicator span::before{
+
+        animation:none !important;
+
+    }
+
+}

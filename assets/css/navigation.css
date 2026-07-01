@@ -1,0 +1,256 @@
+/* ==========================================================
+   NAVIGATION
+========================================================== */
+
+#header{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    z-index:var(--z-nav);
+
+    transition:
+        background .45s ease,
+        backdrop-filter .45s ease,
+        padding .35s ease;
+
+}
+
+/* Added by JavaScript after scrolling */
+
+#header.scrolled{
+
+    background:rgba(0,0,0,.55);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    box-shadow:0 12px 40px rgba(0,0,0,.35);
+
+}
+
+/* ==========================================================
+   NAVBAR
+========================================================== */
+
+.navbar{
+
+    width:min(var(--container),92%);
+
+    height:90px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+/* ==========================================================
+   LOGO
+========================================================== */
+
+.brand{
+
+    font-family:var(--font-heading);
+
+    font-size:1.5rem;
+
+    letter-spacing:.12em;
+
+    color:var(--white);
+
+    transition:.35s;
+
+}
+
+.brand:hover{
+
+    color:var(--gold);
+
+}
+
+/* ==========================================================
+   LINKS
+========================================================== */
+
+.nav-links{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:2.5rem;
+
+}
+
+.nav-links li{
+
+    list-style:none;
+
+}
+
+.nav-links a{
+
+    position:relative;
+
+    display:inline-block;
+
+    color:var(--white);
+
+    font-size:.95rem;
+
+    font-weight:500;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+    transition:.35s;
+
+}
+
+/* Elegant underline */
+
+.nav-links a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-6px;
+
+    width:0;
+
+    height:1px;
+
+    background:var(--gold);
+
+    transition:width .35s ease;
+
+}
+
+.nav-links a:hover{
+
+    color:var(--gold);
+
+}
+
+.nav-links a:hover::after{
+
+    width:100%;
+
+}
+
+/* ==========================================================
+   MOBILE MENU BUTTON
+========================================================== */
+
+.mobile-toggle{
+
+    display:none;
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    color:#fff;
+
+    font-size:1.5rem;
+
+    cursor:pointer;
+
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width:900px){
+
+    .mobile-toggle{
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:center;
+
+    }
+
+    .nav-links{
+
+        position:fixed;
+
+        top:90px;
+
+        right:-100%;
+
+        width:260px;
+
+        height:calc(100vh - 90px);
+
+        padding:50px 30px;
+
+        background:rgba(0,0,0,.96);
+
+        backdrop-filter:blur(25px);
+
+        -webkit-backdrop-filter:blur(25px);
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:2rem;
+
+        transition:right .45s ease;
+
+    }
+
+    .nav-links.active{
+
+        right:0;
+
+    }
+
+    .nav-links a{
+
+        font-size:1rem;
+
+    }
+
+}
+
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media (max-width:500px){
+
+    .navbar{
+
+        height:80px;
+
+    }
+
+    .brand{
+
+        font-size:1.2rem;
+
+    }
+
+}

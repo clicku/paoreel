@@ -4,20 +4,12 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <title>Paoreel Studios | Commercial Photography</title>
 
-    <meta
-        name="description"
-        content="Paoreel Studios specializes in premium food, product, commercial photography and videography.">
-
-    <meta
-        name="theme-color"
-        content="#000000">
-
-    <title>Paoreel Studios | Photography & Videography</title>
+    <meta name="description"
+        content="Commercial Food, Product & Brand Photography by Paoreel Studios.">
 
     <!-- Google Fonts -->
 
@@ -27,155 +19,218 @@
           href="https://fonts.gstatic.com"
           crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
 
     <!-- CSS -->
 
-    <link
-        rel="stylesheet"
-        href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/navigation.css">
+    <link rel="stylesheet" href="assets/css/hero.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
 
 </head>
 
 <body>
 
-    <!-- ==========================================================
-         PAGE TRANSITION
-    =========================================================== -->
+<!-- ======================================================
+LOADER
+======================================================= -->
 
-    <div class="transition-overlay">
+<div id="loader">
 
-        <div class="transition-column"></div>
-        <div class="transition-column"></div>
-        <div class="transition-column"></div>
+    <div class="loader-black"></div>
+
+    <div class="loader-aperture">
+
+        <div class="blade blade1"></div>
+        <div class="blade blade2"></div>
+        <div class="blade blade3"></div>
+        <div class="blade blade4"></div>
+        <div class="blade blade5"></div>
+        <div class="blade blade6"></div>
 
     </div>
 
-    <!-- ==========================================================
-         HEADER
-    =========================================================== -->
+</div>
 
-    <header id="main-header">
+<!-- ======================================================
+HEADER
+======================================================= -->
 
-        <nav class="navbar">
+<header id="header">
 
-            <a
-                href="index.html"
-                class="logo"
-                aria-label="Paoreel Home">
+    <nav class="navbar">
 
-                <img
-                    src="assets/images/logo.png"
-                    alt="Paoreel Studios">
+        <a href="index.html"
+           class="brand">
 
-            </a>
+            PAOREEL
 
-            <ul class="nav-links">
+        </a>
 
-                <li>
-                    <a href="about.html">
-                        About
-                    </a>
-                </li>
+        <button
+            class="mobile-toggle"
+            aria-label="Menu">
 
-                <li>
-                    <a href="portfolio.html">
-                        Portfolio
-                    </a>
-                </li>
+            ☰
 
-                <li>
-                    <a href="contact.html">
-                        Contact
-                    </a>
-                </li>
+        </button>
 
-            </ul>
+        <ul class="nav-links">
 
-        </nav>
+            <li>
 
-    </header>
+                <a href="about.html">
 
-    <!-- ==========================================================
-         HERO
-    =========================================================== -->
+                    About
 
-    <main>
+                </a>
 
-        <section class="hero">
+            </li>
 
-            <!-- Background -->
+            <li>
 
-            <div class="hero-bg-image"></div>
+                <a href="portfolio.html">
 
-            <!-- Overlay -->
+                    Portfolio
 
-            <div class="hero-overlay"></div>
+                </a>
 
-            <!-- Lens Vignette -->
+            </li>
 
-            <div class="hero-vignette"></div>
+            <li>
 
-            <!-- Film Grain -->
+                <a href="contact.html">
 
-            <div class="film-grain"></div>
+                    Contact
 
-            <!-- Floating Dust -->
+                </a>
 
-            <div class="dust"></div>
+            </li>
 
-            <!-- Hero Content -->
+        </ul>
 
-            <div class="hero-container">
+    </nav>
 
-                <div class="hero-content">
+</header>
 
-                    <h1 class="logo-title">
+<!-- ======================================================
+HERO
+======================================================= -->
 
-                        <img
-                            src="assets/images/logo.png"
-                            alt="Paoreel Studios Logo">
+<section class="hero">
 
-                    </h1>
+    <!-- Background -->
 
-                    <p>
+    <div class="hero-bg"></div>
 
-                        Specializing in food, product, commercial,
-                        and brand photography & videography.
-                        We create cinematic visuals that elevate
-                        restaurants, hotels, businesses,
-                        and marketing campaigns.
+    <!-- Dark Overlay -->
 
-                    </p>
+    <div class="hero-overlay"></div>
 
-                    <a
-                        href="portfolio.html"
-                        class="btn"
-                        id="portfolio-btn">
+    <!-- Gradient -->
 
-                        Explore Portfolio
+    <div class="hero-gradient"></div>
 
-                    </a>
+    <!-- Vignette -->
 
-                </div>
+    <div class="hero-vignette"></div>
+
+    <!-- Film Grain -->
+
+    <div class="film-grain"></div>
+
+    <!-- Dust -->
+
+    <div class="dust"></div>
+
+    <!-- Light Bloom -->
+
+    <div class="light-bloom"></div>
+
+    <!-- Mouse Glow -->
+
+    <div class="cursor-light"></div>
+
+    <!-- Hero Content -->
+
+    <div class="hero-inner">
+
+        <div class="hero-content">
+
+            <span class="hero-category">
+
+                COMMERCIAL PHOTOGRAPHY
+
+            </span>
+
+            <h1>
+
+                Visual stories<br>
+
+                worth tasting.
+
+            </h1>
+
+            <p>
+
+                Premium food, product and brand
+                photography crafted for restaurants,
+                hotels and businesses that demand
+                exceptional imagery.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a
+                    href="portfolio.html"
+                    class="btn-primary">
+
+                    Explore Portfolio
+
+                </a>
 
             </div>
 
-        </section>
+        </div>
 
-    </main>
+    </div>
 
-    <!-- ==========================================================
-         GSAP
-    =========================================================== -->
+    <!-- Scroll -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <div class="scroll-indicator">
 
-    <!-- Main Script -->
+        <span></span>
 
-    <script src="assets/js/main.js"></script>
+        <p>
+
+            Scroll
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ======================================================
+GSAP
+======================================================= -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<!-- Scripts -->
+
+<script src="assets/js/loader.js"></script>
+
+<script src="assets/js/navigation.js"></script>
+
+<script src="assets/js/hero.js"></script>
+
+<script src="assets/js/main.js"></script>
 
 </body>
 
