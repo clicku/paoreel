@@ -1,179 +1,316 @@
 /* Reset */
+/* ==========================================================================
+   GLOBAL
+   ========================================================================== */
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html, body {
-  caret-color: transparent;      /* Hide caret */
-  user-select: none;             /* Prevent text selection */
-  -webkit-user-select: none;     /* Safari/Chrome */
-  -ms-user-select: none;         /* IE/Edge */
-  height: 100%;
-  width: 100%;
-  font-family: 'Open Sans', sans-serif; /* Default body font */
-  background-color: #000;
-  color: #fff;
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background: #000;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+
+    caret-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
+    overflow-x: hidden;
 }
 
-/* Navbar */
+/* ==========================================================================
+   NAVBAR
+   ========================================================================== */
+
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 3rem;
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1000;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1.5rem 3rem;
+
+    z-index: 100;
+
 }
 
-/*.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}*/
 .logo a {
-  text-decoration: none;   
-  color: inherit;          
-  font-weight: bold;       
-  font-size: 1.5rem;       
-}
-.logo-title {
-  margin-bottom: 1rem;    /* Space under the logo */
+
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+    font-size: 1.5rem;
+
 }
 
 .logo img {
-  height: 50px;      /* typical navbar logo height */
-  width: auto;       /* maintain aspect ratio */
-  display: block;    /* remove extra inline spacing */
+
+    height: 50px;
+    width: auto;
+    display: block;
+
+}
+
+.logo-title {
+
+    margin-bottom: 1rem;
+
 }
 
 .logo-title img {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  display: inline-block;  /* Keep inline for centering */
+
+    width: 100%;
+    max-width: 300px;
+
+    display: inline-block;
+
 }
 
-
 .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
+
+    list-style: none;
+
+    display: flex;
+
+    gap: 2rem;
+
 }
 
 .nav-links a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: bold;
-  transition: color 0.3s;
+
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+
+    transition: .3s;
+
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: #ffcc00;
+
+    color: #ffcc00;
+
 }
 
 /* ==========================================================================
-   HERO SECTION & CINEMATIC INITIALIZATION
+   HERO
    ========================================================================== */
 
 .hero {
-  display: flex;
-  align-items: center;
-  min-height: 100vh;
-  background: none; 
-  position: relative;
-  padding: 3rem;
-  color: #fff;
-  overflow: hidden; 
-}
 
-/* Setup baseline styles: completely hidden and blurred, waiting for GSAP */
-.hero-bg-image {
-  position: absolute;
-  top: 0; 
-  left: 0;
-  width: 100%; 
-  height: 100%;
-  background: url('../images/paoreel.png') no-repeat center center/cover;
-  z-index: -2;
-  transform: scale(1.15); 
-  opacity: 0;
-  filter: blur(20px);
-  will-change: transform, filter, opacity;
-}
+    position: relative;
 
-/* Removed old CSS @keyframes cameraWakeUp to prevent engine conflicts */
+    display: flex;
 
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0; 
-  left: 0;
-  width: 100%; 
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: -1; 
-}
+    justify-content: center;
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 600px;
-  margin: 0 auto;         
-  text-align: center;     
-}
+    align-items: center;
 
-.hero-content h1 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  line-height: 1.2;
-}
+    min-height: 100vh;
 
-.hero-content p {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
+    padding: 3rem;
 
-/* Initial structural hiding for text layout components */
-.logo-title img,
-.hero-content p,
-.hero-content .btn {
-  opacity: 0;
-  transform: translateY(30px);
-  will-change: transform, opacity;
+    overflow: hidden;
+
+    color: #fff;
+
 }
 
 /* ==========================================================================
-   HERO BUTTON & INTERACTION STATES
+   BACKGROUND IMAGE
+   ========================================================================== */
+
+.hero-bg-image {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: url("../images/paoreel.png") center center / cover no-repeat;
+
+    z-index: 1;
+
+    opacity: 0;
+
+    filter: blur(35px);
+
+    transform: scale(1.15);
+
+    will-change: transform, opacity, filter;
+
+}
+
+/* ==========================================================================
+   DARK OVERLAY
+   ========================================================================== */
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.45);
+
+    z-index: 2;
+
+}
+
+/* ==========================================================================
+   CONTENT
+   ========================================================================== */
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 3;
+
+    max-width: 650px;
+
+    margin: auto;
+
+    text-align: center;
+
+}
+
+.hero-content h1 {
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 3rem;
+
+    font-weight: 700;
+
+    margin-bottom: 1rem;
+
+    line-height: 1.2;
+
+}
+
+.hero-content p {
+
+    font-size: 1.2rem;
+
+    line-height: 1.8;
+
+    margin-bottom: 2rem;
+
+}
+
+/* ==========================================================================
+   INITIAL HIDDEN STATE
+   ========================================================================== */
+
+#main-header,
+.logo-title img,
+.hero-content p,
+.hero-content .btn {
+
+    opacity: 0;
+
+    transform: translateY(40px);
+
+    will-change: opacity, transform;
+
+}
+
+/* ==========================================================================
+   BUTTON
    ========================================================================== */
 
 .btn {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background-color: #000;
-  color: #fff;
-  text-decoration: none;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-radius: 5px;
-  transition: background-color 0.3s, color 0.3s, transform 0.2s ease;
+
+    display: inline-block;
+
+    padding: .9rem 1.8rem;
+
+    background: #000;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    font-weight: 600;
+
+    border-radius: 5px;
+
+    transition: .3s;
+
 }
 
 .btn:hover {
-  background-color: #d3d3d3;
-  color: #000;
-  transform: translateY(-2px); 
+
+    background: #d3d3d3;
+
+    color: #000;
+
+    transform: translateY(-3px);
+
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width:768px){
+
+    .navbar{
+
+        padding:1.2rem;
+
+    }
+
+    .nav-links{
+
+        gap:1rem;
+
+    }
+
+    .hero{
+
+        padding:2rem;
+
+    }
+
+    .hero-content h1{
+
+        font-size:2.2rem;
+
+    }
+
+    .hero-content p{
+
+        font-size:1rem;
+
+    }
+
+    .logo-title img{
+
+        max-width:240px;
+
+    }
+
 }
 /* About Alternating Sections */
 .about {
