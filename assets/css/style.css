@@ -110,6 +110,41 @@ body {
 
 }
 
+
+/* ==========================================================================
+   HERO CONTENT
+   ========================================================================== */
+
+.hero-container{
+    position:relative;
+    z-index:10;
+    width:100%;
+    max-width:1400px;
+    margin:0 auto;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    padding:0 3rem;
+
+}
+
+.hero-content{
+    max-width:600px;
+    text-align:left;
+}
+
+.hero-content h1{
+    font-family:"Playfair Display", serif;
+    font-size:3rem;
+    margin-bottom:1rem;
+}
+
+.hero-content p{
+    font-size:1.2rem;
+    line-height:1.8;
+    margin-bottom:2rem;
+}
+
 /* ==========================================================================
    HERO
    ========================================================================== */
@@ -175,7 +210,7 @@ body {
 
     background:rgba(0,0,0,.45);
 
-    z-index:2;
+    z-index:1;
 
 }
 
@@ -192,7 +227,7 @@ body {
 
     pointer-events:none;
 
-    z-index:3;
+    z-index:2;
 
     background:
     radial-gradient(circle,
@@ -217,7 +252,7 @@ body {
 
     pointer-events:none;
 
-    z-index:4;
+    z-index:3;
 
     background-image:
     url("https://www.transparenttextures.com/patterns/asfalt-light.png");
@@ -271,7 +306,7 @@ transform:translate(0,0);
 
     inset:0;
 
-    z-index:5;
+    z-index:4;
 
     opacity:.18;
 
@@ -302,42 +337,6 @@ background-position:220px 320px;
 }
 
 }
-
-
-/* ==========================================================================
-   HERO CONTENT
-   ========================================================================== */
-
-.hero-container{
-    position:relative;
-    z-index:10;
-    width:100%;
-    max-width:1400px;
-    margin:0 auto;
-    display:flex;
-    justify-content:flex-start;
-    align-items:center;
-    padding:0 3rem;
-
-}
-
-.hero-content{
-    max-width:600px;
-    text-align:left;
-}
-
-.hero-content h1{
-    font-family:"Playfair Display", serif;
-    font-size:3rem;
-    margin-bottom:1rem;
-}
-
-.hero-content p{
-    font-size:1.2rem;
-    line-height:1.8;
-    margin-bottom:2rem;
-}
-
 
 /* ==========================================================================
    INITIAL ANIMATION STATE
