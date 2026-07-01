@@ -305,48 +305,33 @@ background-position:220px 320px;
    ========================================================================== */
 
 .hero-container{
-
     position:relative;
-
     z-index:10;
-
     width:100%;
-
+    max-width:1400px;
+    margin:0 auto;
     display:flex;
-
-    justify-content:center;
+    justify-content:flex-start;
+    align-items:center;
+    padding:0 3rem;
 
 }
-
 
 .hero-content{
-
-    max-width:650px;
-
-    text-align:center;
-
+    max-width:600px;
+    text-align:left;
 }
-
 
 .hero-content h1{
-
     font-family:"Playfair Display", serif;
-
     font-size:3rem;
-
     margin-bottom:1rem;
-
 }
 
-
 .hero-content p{
-
     font-size:1.2rem;
-
     line-height:1.8;
-
     margin-bottom:2rem;
-
 }
 
 
