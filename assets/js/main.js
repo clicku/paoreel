@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gsap.set(".hero-bg-image", {
         opacity: 0,
-        scale: 1.18,
+        scale: 1.00,
         filter: "blur(40px)"
     });
 
@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gsap.to(".hero-bg-image", {
 
-        scale: 1.04,
+        scale: 1.01,
 
         duration: 30,
 
