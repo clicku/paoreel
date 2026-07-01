@@ -29,11 +29,7 @@
     }
 
     .transition-column {
-<<<<<<< HEAD
       background-color: #ffffff; /* Elegant white editorial blocks */
-=======
-      background-color: #ffffff; 
->>>>>>> f141014cb12b3cf9701232dedab0c3e1b38eab50
       height: 100%;
       width: 100%;
       transform: scaleY(0);
@@ -58,11 +54,7 @@
   </div>
 
   <div id="page-wrapper">
-<<<<<<< HEAD
-    <header id="main-header">
-=======
     <header id="main-header" style="opacity: 0;">
->>>>>>> f141014cb12b3cf9701232dedab0c3e1b38eab50
       <nav class="navbar">
         <div class="logo"></div>
         <ul class="nav-links">
@@ -73,11 +65,7 @@
     </header>
 
     <section class="hero" id="hero-content-wrapper">
-<<<<<<< HEAD
-=======
       <div class="hero-bg-image"></div>
-      
->>>>>>> f141014cb12b3cf9701232dedab0c3e1b38eab50
       <div class="hero-container">
         <div class="hero-content">
           <h1 class="logo-title">
@@ -93,41 +81,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
   <script>
-<<<<<<< HEAD
-    document.getElementById('portfolio-btn').addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetUrl = this.getAttribute('href');
-
-      // 1. Elegantly fade out background text assets instantly
-      document.getElementById('hero-content-wrapper').classList.add('cinematic-fade-out');
-      document.getElementById('main-header').classList.add('cinematic-fade-out');
-
-      // 2. Trigger the staggered editorial curtain raise
-      const tl = gsap.timeline({
-        onComplete: () => {
-          // Pass execution control seamlessly to the target page link
-          window.location.href = targetUrl;
-        }
-      });
-
-      tl.to(".transition-column", {
-        duration: 0.8,
-        scaleY: 1,
-        transformOrigin: "bottom center",
-        ease: "power4.inOut",
-        stagger: 0.15 // Creates a beautiful cascading column waterfall effect
-      });
-    });
-
-    // Handle seamless opening reveal when returning backwards or entering freshly
-    window.addEventListener('pageshow', (event) => {
-      // Re-initialize layouts flawlessly if back button cache is used
-      if (event.persisted) {
-        gsap.set(".transition-column", { scaleY: 0 });
-        document.getElementById('hero-content-wrapper').classList.remove('cinematic-fade-out');
-        document.getElementById('main-header').classList.remove('cinematic-fade-out');
-=======
     document.addEventListener('DOMContentLoaded', () => {
+      
       // ==========================================
       // 1. CINEMATIC PAGE ENTRANCE TIMELINE
       // ==========================================
@@ -143,27 +98,27 @@
         .to(".hero-bg-image", { opacity: 0.5, filter: "blur(6px)", duration: 0.08 })  // Shutter flutter
         .to(".hero-bg-image", { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power2.out" });
 
-      // Step B: Slow Camera Lens Parallax Zoom (Runs smoothly in background from 0s)
+      // Step B: Slow Camera Lens Parallax Zoom (Runs smoothly from 0s)
       entranceTimeline.to(".hero-bg-image", {
         scale: 1,
         duration: 2.8,
         ease: "power1.out"
       }, 0);
 
-      // Step C: Content Reveal (Triggers strictly AFTER the background becomes crystal clear)
+      // Step C: Content Reveal (Triggers strictly AFTER background finishes flickering clear)
       entranceTimeline
         .to(".logo-title img", {
           opacity: 1,
           y: 0,
           duration: 1.0,
           ease: "power4.out"
-        }) // Fires right at the end of the background animation chain
+        }) 
         .to([".hero-content p", "#main-header"], {
           opacity: 1,
           y: 0,
           duration: 1.0,
           ease: "power4.out"
-        }, "-=0.6") // Elegant overlap fade
+        }, "-=0.6") 
         .to(".hero-content .btn", {
           opacity: 1,
           y: 0,
@@ -221,7 +176,6 @@
           y: 0 
         });
         gsap.set(".hero-bg-image", { scale: 1, opacity: 1, filter: "blur(0px)" });
->>>>>>> f141014cb12b3cf9701232dedab0c3e1b38eab50
       }
     });
   </script>
