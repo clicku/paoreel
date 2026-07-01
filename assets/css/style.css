@@ -395,30 +395,22 @@ background-position:220px 320px;
    PAGE TRANSITION
 ===================================== */
 
-.transition-overlay {
+.transition-overlay{
+    position:fixed;
+    inset:0;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    z-index:9999;
 
-    position: fixed;
-
-    inset: 0;
-
-    display: grid;
-
-    grid-template-columns: repeat(3,1fr);
-
-    pointer-events: none;
-
-    z-index: 9999;
-
+    pointer-events:none;   /* THIS IS IMPORTANT */
 }
 
-.transition-column {
+.transition-column{
+    background:#fff;
+    transform:scaleY(0);
+    transform-origin:bottom;
 
-    background: #ffffff;
-
-    transform: scaleY(0);
-
-    transform-origin: bottom;
-
+    pointer-events:none;   /* Add this too */
 }
 /* ==========================================================================
    RESPONSIVE
