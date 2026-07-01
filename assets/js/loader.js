@@ -23,7 +23,7 @@ window.addEventListener("load", () => {
 
     });
 
-    gsap.set(".hero-bg",{
+    gsap.set(".hero-bg-image",{
 
         opacity:0,
         filter:"blur(40px)",
@@ -51,7 +51,7 @@ window.addEventListener("load", () => {
        Camera Sensor Power
     ------------------------------------------------------ */
 
-    tl.to(".hero-bg",{
+    tl.to(".hero-bg-image",{
 
         opacity:.35,
 
@@ -65,7 +65,7 @@ window.addEventListener("load", () => {
        Autofocus Hunt
     ------------------------------------------------------ */
 
-    tl.to(".hero-bg",{
+    tl.to(".hero-bg-image",{
 
         filter:"blur(26px)",
 
@@ -75,7 +75,7 @@ window.addEventListener("load", () => {
 
     })
 
-    .to(".hero-bg",{
+    .to(".hero-bg-image",{
 
         filter:"blur(34px)",
 
@@ -85,7 +85,7 @@ window.addEventListener("load", () => {
 
     })
 
-    .to(".hero-bg",{
+    .to(".hero-bg-image",{
 
         filter:"blur(18px)",
 
@@ -95,7 +95,7 @@ window.addEventListener("load", () => {
 
     })
 
-    .to(".hero-bg",{
+    .to(".hero-bg-image",{
 
         filter:"blur(24px)",
 
@@ -105,7 +105,7 @@ window.addEventListener("load", () => {
 
     })
 
-    .to(".hero-bg",{
+    .to(".hero-bg-image",{
 
         filter:"blur(10px)",
 
@@ -115,7 +115,7 @@ window.addEventListener("load", () => {
 
     })
 
-    .to(".hero-bg",{
+    .to(".hero-bg-image",{
 
         filter:"blur(4px)",
 
@@ -125,7 +125,7 @@ window.addEventListener("load", () => {
 
     })
 
-    .to(".hero-bg",{
+    .to(".hero-bg-image",{
 
         filter:"blur(0px)",
 
