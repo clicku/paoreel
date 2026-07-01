@@ -31,19 +31,23 @@ body {
 
 .navbar {
 
-    position: absolute;
+    position: fixed;
+
     top: 0;
+
     left: 0;
 
     width: 100%;
 
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
     padding: 1.5rem 3rem;
 
-    z-index: 20;
+    z-index: 10000;
 
 }
 
@@ -485,7 +489,27 @@ background-position:220px 320px;
   text-align: center;
   color: #eee;
 }
+.navbar {
 
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 1.5rem 3rem;
+
+    z-index: 10000;
+
+}
 .about-text h2 {
   font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
