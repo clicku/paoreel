@@ -41,9 +41,18 @@ body {
     z-index: 10000;
 
 }
-/* Home page navbar (no logo) */
-.home-navbar{
-    justify-content:flex-end;
+.home-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 3rem;
+}
+
+.home-navbar .nav-links {
+    margin-left: auto;
+    display: flex;
+    gap: 2rem;
 }
 
 .logo a {
