@@ -10,7 +10,7 @@
   <style>
     /* --- SYSTEM OVERLAYS FOR THE ELEGANT RAMP TRANSITION --- */
     body {
-      background-color: #0b0b0b;
+      background-color: #0b0b0b; /* Ensures initial pitch-black canvas */
       margin: 0;
       padding: 0;
     }
@@ -29,7 +29,7 @@
     }
 
     .transition-column {
-      background-color: #ffffff; /* Elegant white editorial blocks */
+      background-color: #ffffff; 
       height: 100%;
       width: 100%;
       transform: scaleY(0);
@@ -84,47 +84,57 @@
     document.addEventListener('DOMContentLoaded', () => {
       
       // ==========================================
-      // 1. CINEMATIC PAGE ENTRANCE TIMELINE
+      // 1. STRICT SEQUENTIAL PAGE ENTRANCE TIMELINE
       // ==========================================
       const entranceTimeline = gsap.timeline();
 
-      // Step A: The Background Shutter Flicker & Blur Dissolve (Starts Instantly)
-      entranceTimeline
-        .to(".hero-bg-image", { opacity: 0.6, filter: "blur(15px)", duration: 0.15 })
-        .to(".hero-bg-image", { opacity: 0.2, filter: "blur(18px)", duration: 0.05 }) // Flicker 1
-        .to(".hero-bg-image", { opacity: 0.8, filter: "blur(10px)", duration: 0.15 })
-        .to(".hero-bg-image", { opacity: 0.3, filter: "blur(12px)", duration: 0.05 }) // Flicker 2
-        .to(".hero-bg-image", { opacity: 0.9, filter: "blur(4px)", duration: 0.2 })
-        .to(".hero-bg-image", { opacity: 0.5, filter: "blur(6px)", duration: 0.08 })  // Shutter flutter
-        .to(".hero-bg-image", { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power2.out" });
+      // STEP 1: INITIAL BLURRY REVEAL (No Text, No Flicker Yet)
+      // Smoothly bring the background from 0 to 0.4 opacity while keeping it heavily blurred (20px)
+      entranceTimeline.to(".hero-bg-image", {
+        opacity: 0.4,
+        filter: "blur(20px)",
+        duration: 0.6,
+        ease: "power1.inOut"
+      });
 
-      // Step B: Slow Camera Lens Parallax Zoom (Runs smoothly from 0s)
+      // STEP 2: THE CAMERA SHUTTER FLICKER & FOCUS RESOLVE
+      // The background image begins flashing/flickering while the blur decreases step-by-step
+      entranceTimeline
+        .to(".hero-bg-image", { opacity: 0.7, filter: "blur(15px)", duration: 0.15 })
+        .to(".hero-bg-image", { opacity: 0.2, filter: "blur(16px)", duration: 0.05 }) // Flicker Drop 1
+        .to(".hero-bg-image", { opacity: 0.8, filter: "blur(10px)", duration: 0.15 })
+        .to(".hero-bg-image", { opacity: 0.3, filter: "blur(11px)", duration: 0.05 }) // Flicker Drop 2
+        .to(".hero-bg-image", { opacity: 0.9, filter: "blur(5px)", duration: 0.2 })
+        .to(".hero-bg-image", { opacity: 0.5, filter: "blur(6px)", duration: 0.08 })  // Quick shutter flutter
+        .to(".hero-bg-image", { opacity: 1, filter: "blur(0px)", duration: 0.6, ease: "power2.out" });
+
+      // STEP 3: THE PARALLAX ZOOM SETTLE (Runs seamlessly across the stages above)
       entranceTimeline.to(".hero-bg-image", {
         scale: 1,
-        duration: 2.8,
+        duration: 2.2,
         ease: "power1.out"
       }, 0);
 
-      // Step C: Content Reveal (Triggers strictly AFTER background finishes flickering clear)
+      // STEP 4: INTERFACE TEXT REVEAL (Strictly triggers ONLY when background is crystal clear)
       entranceTimeline
         .to(".logo-title img", {
           opacity: 1,
           y: 0,
-          duration: 1.0,
+          duration: 0.8,
           ease: "power4.out"
-        }) 
+        }) // The logo animates first
         .to([".hero-content p", "#main-header"], {
           opacity: 1,
           y: 0,
-          duration: 1.0,
+          duration: 0.8,
           ease: "power4.out"
-        }, "-=0.6") 
+        }, "-=0.3") // The body paragraphs follow right behind
         .to(".hero-content .btn", {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          ease: "back.out(1.4)"
-        }, "-=0.7");
+          duration: 0.7,
+          ease: "back.out(1.5)"
+        }, "-=0.4"); // The Call-To-Action button arrives last with a micro-bounce
 
       // ==========================================
       // 2. PREMIUM CURTAIN ROUTING SWEEP
