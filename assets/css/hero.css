@@ -1120,3 +1120,248 @@
     }
 
 }
+/* ==========================================================
+   FEATURED CATEGORIES
+========================================================== */
+
+.featured-categories{
+
+    background:#050505;
+
+    padding:140px 0;
+
+}
+
+.featured-item{
+
+    width:min(1500px,92%);
+
+    margin:0 auto 140px;
+
+}
+
+.featured-item:last-child{
+
+    margin-bottom:0;
+
+}
+
+.featured-item a{
+
+    display:grid;
+
+    grid-template-columns:1.35fr 1fr;
+
+    gap:80px;
+
+    align-items:center;
+
+    color:#fff;
+
+    text-decoration:none;
+
+}
+
+.featured-image{
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+    background:#111;
+
+}
+
+.featured-image img{
+
+    width:100%;
+
+    height:700px;
+
+    display:block;
+
+    object-fit:cover;
+
+    transform:scale(1.08);
+
+    transition:
+        transform .9s ease,
+        filter .8s ease;
+
+}
+
+.featured-item:hover img{
+
+    transform:scale(1.02);
+
+    filter:brightness(1.08);
+
+}
+
+.featured-content{
+
+    max-width:520px;
+
+}
+
+.featured-content span{
+
+    display:inline-block;
+
+    margin-bottom:20px;
+
+    font-size:.8rem;
+
+    letter-spacing:.35em;
+
+    color:#999;
+
+}
+
+.featured-content h2{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(3rem,4vw,5rem);
+
+    font-weight:700;
+
+    line-height:1.05;
+
+    margin-bottom:28px;
+
+}
+
+.featured-content p{
+
+    font-size:1.08rem;
+
+    line-height:1.9;
+
+    color:#cfcfcf;
+
+    margin-bottom:40px;
+
+}
+
+.featured-link{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    font-size:.9rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:.18em;
+
+    transition:transform .35s ease;
+
+}
+
+.featured-item:hover .featured-link{
+
+    transform:translateX(12px);
+
+}
+
+/* ==========================================================
+   ALTERNATING LAYOUT
+========================================================== */
+
+.featured-item:nth-child(even) a{
+
+    grid-template-columns:1fr 1.35fr;
+
+}
+
+.featured-item:nth-child(even) .featured-image{
+
+    order:2;
+
+}
+
+.featured-item:nth-child(even) .featured-content{
+
+    order:1;
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:1100px){
+
+    .featured-item a{
+
+        grid-template-columns:1fr;
+
+        gap:50px;
+
+    }
+
+    .featured-item:nth-child(even) .featured-image,
+
+    .featured-item:nth-child(even) .featured-content{
+
+        order:unset;
+
+    }
+
+    .featured-image img{
+
+        height:500px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .featured-categories{
+
+        padding:80px 0;
+
+    }
+
+    .featured-item{
+
+        margin-bottom:80px;
+
+    }
+
+    .featured-item a{
+
+        gap:30px;
+
+    }
+
+    .featured-image img{
+
+        height:320px;
+
+    }
+
+    .featured-content{
+
+        max-width:100%;
+
+    }
+
+    .featured-content h2{
+
+        font-size:2.4rem;
+
+    }
+
+    .featured-content p{
+
+        font-size:1rem;
+
+    }
+
+}
