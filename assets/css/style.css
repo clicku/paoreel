@@ -177,24 +177,17 @@ body {
 .hero-bg-image{
 
     position:absolute;
-
     inset:0;
-
     background:url("../images/paoreel.png") center center/cover no-repeat;
-
     opacity:0;
-
     filter:blur(40px);
-
+    pointer-events:none;
     transform:scale(1.18);
-
     z-index:0;
-
     will-change:
         transform,
         opacity,
         filter;
-
 }
 
 
@@ -337,7 +330,25 @@ background-position:220px 320px;
 }
 
 }
+/* ===========================
+   HEADER
+=========================== */
 
+#main-header{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    z-index:10000;
+
+    pointer-events:auto;
+
+}
 /* ==========================================================================
    INITIAL ANIMATION STATE
    ========================================================================== */
@@ -435,9 +446,15 @@ background-position:220px 320px;
 
     .hero{
 
-        padding:2rem;
+    position:relative;
 
-    }
+    min-height:100vh;
+
+    overflow:hidden;
+
+    isolation:isolate;   /* <-- ADD THIS */
+
+}
 
     .hero-content h1{
 
