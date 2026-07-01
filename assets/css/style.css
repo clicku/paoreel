@@ -179,7 +179,7 @@ body {
     position:absolute;
     inset:0;
     background:url("../images/paoreel.png") center center/cover no-repeat;
-    opacity:0;
+    opacity:1;
     filter:blur(40px);
     pointer-events:none;
     transform:scale(1.18);
@@ -201,7 +201,7 @@ body {
 
     inset:0;
 
-    background:rgba(0,0,0,.45);
+    background:rgba(0,0,0,.35);
 
     z-index:1;
 
