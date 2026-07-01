@@ -1,26 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
 
-    <title>Paoreel Photography</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <meta
+        name="description"
+        content="Paoreel Studios specializes in premium food, product, commercial photography and videography.">
+
+    <meta
+        name="theme-color"
+        content="#000000">
+
+    <title>Paoreel Studios | Photography & Videography</title>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap"
-          rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css">
 
 </head>
 
 <body>
 
-    <!-- =======================================================
+    <!-- ==========================================================
          PAGE TRANSITION
-    ======================================================== -->
+    =========================================================== -->
 
     <div class="transition-overlay">
 
@@ -30,27 +53,41 @@
 
     </div>
 
-
-    <!-- =======================================================
+    <!-- ==========================================================
          HEADER
-    ======================================================== -->
+    =========================================================== -->
 
     <header id="main-header">
 
         <nav class="navbar">
 
-            <div class="logo"></div>
+            <a
+                href="index.html"
+                class="logo"
+                aria-label="Paoreel Home">
+
+                <img
+                    src="assets/images/logo.png"
+                    alt="Paoreel Studios">
+
+            </a>
 
             <ul class="nav-links">
 
                 <li>
-                    <a href="/about.html">
+                    <a href="about.html">
                         About
                     </a>
                 </li>
 
                 <li>
-                    <a href="/contact.html">
+                    <a href="portfolio.html">
+                        Portfolio
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html">
                         Contact
                     </a>
                 </li>
@@ -61,362 +98,85 @@
 
     </header>
 
-
-    <!-- =======================================================
+    <!-- ==========================================================
          HERO
-    ======================================================== -->
+    =========================================================== -->
 
-    <section class="hero">
+    <main>
 
-        <!-- Background Image -->
+        <section class="hero">
 
-        <div class="hero-bg-image"></div>
+            <!-- Background -->
 
-        <!-- Dark Overlay -->
+            <div class="hero-bg-image"></div>
 
-        <div class="hero-overlay"></div>
+            <!-- Overlay -->
 
-        <!-- Hero Content -->
+            <div class="hero-overlay"></div>
 
-        <div class="hero-container">
+            <!-- Lens Vignette -->
 
-            <div class="hero-content">
+            <div class="hero-vignette"></div>
 
-                <h1 class="logo-title">
+            <!-- Film Grain -->
 
-                    <img
-                        src="/assets/images/logo.png"
-                        alt="Paoreel Studios">
+            <div class="film-grain"></div>
 
-                </h1>
+            <!-- Floating Dust -->
 
-                <p>
+            <div class="dust"></div>
 
-                    Specializing in food and product photography &
-                    videography, we craft stunning visuals that
-                    highlight flavor, detail and quality for
-                    restaurants, hotels, brands and marketing.
+            <!-- Hero Content -->
 
-                </p>
+            <div class="hero-container">
 
-                <a
-                    href="portfolio.html"
-                    class="btn"
-                    id="portfolio-btn">
+                <div class="hero-content">
 
-                    See Our Portfolio
+                    <h1 class="logo-title">
 
-                </a>
+                        <img
+                            src="assets/images/logo.png"
+                            alt="Paoreel Studios Logo">
+
+                    </h1>
+
+                    <p>
+
+                        Specializing in food, product, commercial,
+                        and brand photography & videography.
+                        We create cinematic visuals that elevate
+                        restaurants, hotels, businesses,
+                        and marketing campaigns.
+
+                    </p>
+
+                    <a
+                        href="portfolio.html"
+                        class="btn"
+                        id="portfolio-btn">
+
+                        Explore Portfolio
+
+                    </a>
+
+                </div>
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
+    </main>
 
-
-    <!-- =======================================================
+    <!-- ==========================================================
          GSAP
-    ======================================================== -->
+    =========================================================== -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
-    <script>
+    <!-- Main Script -->
 
-    document.addEventListener("DOMContentLoaded", () => {
-
-    //=========================================================
-    // INITIAL STATES
-    //=========================================================
-
-    gsap.set(".hero-bg-image", {
-        opacity: 0,
-        scale: 1.18,
-        filter: "blur(40px) brightness(0.15)"
-    });
-
-    gsap.set([
-        "#main-header",
-        ".logo-title img",
-        ".hero-content p",
-        ".hero-content .btn"
-    ], {
-        opacity: 0,
-        y: 35
-    });
-
-
-    //=========================================================
-    // CINEMATIC INTRO
-    //=========================================================
-
-    const intro = gsap.timeline({
-        defaults: {
-            ease: "power2.out"
-        }
-    });
-
-
-    //---------------------------------------------------------
-    // Fade from black
-    //---------------------------------------------------------
-
-    intro.to(".hero-bg-image", {
-
-        opacity: 0.35,
-        duration: 1.2,
-
-        filter: "blur(38px) brightness(.35)"
-
-    });
-
-
-    //---------------------------------------------------------
-    // Camera searching for focus
-    //---------------------------------------------------------
-
-    intro.to(".hero-bg-image", {
-
-        opacity: 0.15,
-        duration: 0.05
-
-    });
-
-    intro.to(".hero-bg-image", {
-
-        opacity: 0.65,
-        duration: 0.08
-
-    });
-
-    intro.to(".hero-bg-image", {
-
-        opacity: 0.30,
-        duration: 0.05
-
-    });
-
-    intro.to(".hero-bg-image", {
-
-        opacity: 0.80,
-        duration: 0.08
-
-    });
-
-
-    //---------------------------------------------------------
-    // Lens breathing
-    //---------------------------------------------------------
-
-    intro.to(".hero-bg-image", {
-
-        scale: 1.10,
-
-        duration: 0.40,
-
-        ease: "power1.inOut"
-
-    });
-
-    intro.to(".hero-bg-image", {
-
-        scale: 1.13,
-
-        duration: 0.30,
-
-        ease: "power1.inOut"
-
-    });
-
-
-    //---------------------------------------------------------
-    // Focus lock
-    //---------------------------------------------------------
-
-    intro.to(".hero-bg-image", {
-
-        opacity: 1,
-
-        filter: "blur(0px) brightness(1)",
-
-        scale: 1,
-
-        duration: 1.8,
-
-        ease: "power3.out"
-
-    });
-
-
-    //---------------------------------------------------------
-    // Camera flash
-    //---------------------------------------------------------
-
-    intro.to(".hero-bg-image", {
-
-        filter: "blur(0px) brightness(1.22)",
-
-        duration: 0.08
-
-    });
-
-    intro.to(".hero-bg-image", {
-
-        filter: "blur(0px) brightness(1)",
-
-        duration: 0.25
-
-    });
-
-
-    //---------------------------------------------------------
-    // Reveal Header
-    //---------------------------------------------------------
-
-    intro.to("#main-header", {
-
-        opacity: 1,
-        y: 0,
-        duration: 0.7
-
-    });
-
-
-    //---------------------------------------------------------
-    // Reveal Logo
-    //---------------------------------------------------------
-
-    intro.to(".logo-title img", {
-
-        opacity: 1,
-
-        y: 0,
-
-        duration: 1,
-
-        ease: "power4.out"
-
-    }, "-=0.2");
-
-
-    //---------------------------------------------------------
-    // Reveal Description
-    //---------------------------------------------------------
-
-    intro.to(".hero-content p", {
-
-        opacity: 1,
-
-        y: 0,
-
-        duration: 0.8
-
-    }, "-=0.45");
-
-
-    //---------------------------------------------------------
-    // Reveal Button
-    //---------------------------------------------------------
-
-    intro.to(".hero-content .btn", {
-
-        opacity: 1,
-
-        y: 0,
-
-        duration: 0.8,
-
-        ease: "back.out(1.7)"
-
-    }, "-=0.35");
-
-
-    //=========================================================
-    // PORTFOLIO PAGE TRANSITION
-    //=========================================================
-
-    const portfolioBtn = document.getElementById("portfolio-btn");
-
-    if (portfolioBtn) {
-
-        portfolioBtn.addEventListener("click", function (e) {
-
-            e.preventDefault();
-
-            const targetUrl = this.href;
-
-            const exit = gsap.timeline({
-
-                onComplete() {
-
-                    window.location.href = targetUrl;
-
-                }
-
-            });
-
-            exit.to(".transition-column", {
-
-                scaleY: 1,
-
-                duration: 0.75,
-
-                ease: "power4.inOut",
-
-                stagger: 0.15,
-
-                transformOrigin: "bottom center"
-
-            });
-
-        });
-
-    }
-
-
-    //=========================================================
-    // BACK BUTTON FIX
-    //=========================================================
-
-    window.addEventListener("pageshow", function (event) {
-
-        if (event.persisted) {
-
-            gsap.set(".transition-column", {
-
-                scaleY: 0
-
-            });
-
-            gsap.set(".hero-bg-image", {
-
-                opacity: 1,
-                scale: 1,
-                filter: "blur(0px) brightness(1)"
-
-            });
-
-            gsap.set([
-
-                "#main-header",
-                ".logo-title img",
-                ".hero-content p",
-                ".hero-content .btn"
-
-            ], {
-
-                opacity: 1,
-                y: 0
-
-            });
-
-        }
-
-    });
-
-});
-
-    </script>
+    <script src="assets/js/main.js"></script>
 
 </body>
+
 </html>
