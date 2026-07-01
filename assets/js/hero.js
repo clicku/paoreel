@@ -6,7 +6,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const hero = document.querySelector(".hero");
-    const bg = document.querySelector(".hero-bg-image");
+    const bg = document.querySelector(".bg-image");
     const bloom = document.querySelector(".light-bloom");
     const cursor = document.querySelector(".cursor-light");
 
