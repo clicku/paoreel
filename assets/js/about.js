@@ -1,39 +1,153 @@
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", () => {
 
-if(typeof gsap==="undefined") return;
+    const tl = gsap.timeline();
 
-gsap.from(".about-image",{
+    tl.to(".about-hero-image img", {
+        scale: 1,
+        duration: 2,
+        ease: "power2.out"
+    })
 
-scrollTrigger:{
-trigger:".about-home",
-start:"top 75%"
-},
+    .to(".about-hero-content span", {
+        opacity: 1,
+        y: 0,
+        duration: 0.8
+    }, "-=1.3")
 
-opacity:0,
+    .to(".about-hero-content h1", {
+        opacity: 1,
+        y: 0,
+        duration: 1
+    }, "-=0.4")
 
-x:-100,
+    .to(".about-hero-content p", {
+        opacity: 1,
+        y: 0,
+        duration: 1
+    }, "-=0.5");
 
-duration:1.2,
+});
+gsap.to(".story-image",{
 
-ease:"power3.out"
+    scrollTrigger:{
+        trigger:".about-story",
+        start:"top 75%"
+    },
+
+    opacity:1,
+
+    y:0,
+
+    duration:1.2,
+
+    ease:"power3.out"
 
 });
 
-gsap.from(".about-content",{
+gsap.to(".story-content",{
 
-scrollTrigger:{
-trigger:".about-home",
-start:"top 75%"
-},
+    scrollTrigger:{
+        trigger:".about-story",
+        start:"top 75%"
+    },
 
-opacity:0,
+    opacity:1,
 
-x:100,
+    y:0,
 
-duration:1.2,
+    duration:1.2,
 
-ease:"power3.out"
+    delay:.2,
+
+    ease:"power3.out"
 
 });
+gsap.utils.toArray(".philosophy-card").forEach((card, index)=>{
+
+    gsap.to(card,{
+
+        scrollTrigger:{
+            trigger:card,
+            start:"top 85%"
+        },
+
+        opacity:1,
+
+        y:0,
+
+        duration:1,
+
+        delay:index*.2,
+
+        ease:"power3.out"
+
+    });
+
+});
+gsap.to(".behind-content",{
+
+    scrollTrigger:{
+        trigger:".behind-scenes",
+        start:"top 70%"
+    },
+
+    opacity:1,
+
+    y:0,
+
+    duration:1.2,
+
+    ease:"power3.out"
+
+});
+
+gsap.to(".behind-image img",{
+
+    scrollTrigger:{
+        trigger:".behind-scenes",
+        start:"top bottom",
+        end:"bottom top",
+        scrub:true
+    },
+
+    scale:1
+
+});
+gsap.utils.toArray(".service-card").forEach((card,index)=>{
+
+    gsap.to(card,{
+
+        scrollTrigger:{
+            trigger:card,
+            start:"top 85%"
+        },
+
+        opacity:1,
+
+        y:0,
+
+        duration:1,
+
+        delay:index*.15,
+
+        ease:"power3.out"
+
+    });
+
+});
+gsap.to(".about-cta",{
+
+    scrollTrigger:{
+        trigger:".about-cta",
+        start:"top 80%"
+    },
+
+    opacity:1,
+
+    y:0,
+
+    duration:1.2,
+
+    ease:"power3.out"
 
 });

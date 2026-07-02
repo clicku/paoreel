@@ -1,72 +1,420 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About - Paoreel Photography</title>
-  
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>About | Paoreel Studios</title>
+
+    <!-- Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/favicon.ico" sizes="any">
+
+    <!-- PNG Fallback -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+
+    <!-- Apple -->
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+
+    <!-- Android -->
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-192.png">
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/about.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
 
 </head>
+
 <body>
 
-  <div id="main-content">
-    <header>
-      <nav class="navbar">
-        <div class="logo">
-          <a href="/index.html">
-            <img src="/assets/images/logo.png" alt="Paoreel Studios Logo">
-          </a>
-        </div>
+<!-- ==========================================================
+     NAVIGATION
+========================================================== -->
 
-        <button class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </button>
+<header>
+
+    <nav class="navbar">
+
+        <a
+            href="index.html"
+            class="logo">
+
+            <img
+                src="assets/images/logo.webp"
+                alt="Paoreel Studios">
+
+        </a>
 
         <ul class="nav-links">
-          <li><a href="/portfolio.html">Portfolio</a></li>
-          <li><a href="/about.html">About</a></li>
-          <li><a href="/contact.html">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
 
-    <section class="about-hero">
-      <div class="about-hero-container">
-        
+            <li><a href="about.html" class="active">About</a></li>
+
+            <li><a href="portfolio.html">Portfolio</a></li>
+
+            <li><a href="contact.html">Contact</a></li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+<!-- ==========================================================
+     HERO
+========================================================== -->
+
+<section class="about-hero">
+
+    <div class="about-hero-image">
+
+        <img
+            src="assets/images/about-hero.webp"
+            alt="Paoreel Studios">
+
+    </div>
+
+    <div class="about-hero-overlay"></div>
+
+    <div class="container">
+
         <div class="about-hero-content">
-          <h3>The Vision Behind The Lens</h3>
-          <h1>About Paoreel</h1>
-          
-          <p>
-            Welcome to Paoreel Studios. We specialize in capturing pristine, high-resolution commercial imagery across food, beverage, and conceptual product design portfolios. 
-          </p>
-          <p>
-            Every visual composition is engineered to tell a clean, structural narrative—balancing precise lighting geometry with organic textures to elevate brands, print media layouts, and digital storefront campaigns.
-          </p>
-          <p>
-            Based in our studio space, we partner with creative agencies, restaurants, and product designers worldwide to transform commercial realities into fine-art interactions.
-          </p>
-          <a href="contact.html" class="btn">Work With Us</a>
+
+            <span>
+
+                PAOREEL STUDIOS
+
+            </span>
+
+            <h1>
+
+                Every Photograph
+                Begins With
+                A Story.
+
+            </h1>
+
+            <p>
+
+                We create cinematic food, product and portrait
+                photography that transforms brands into unforgettable
+                visual experiences.
+
+            </p>
+
         </div>
 
-      </div>
-    </section>
-  </div>
+    </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const menuToggle = document.getElementById('mobile-menu');
-      const navLinks = document.querySelector('.nav-links');
+</section>
+    <!-- ==========================================================
+     MY STORY
+========================================================== -->
 
-      menuToggle.addEventListener('click', () => {
-        menuToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
-      });
-    });
-  </script>
+<section class="about-story">
+
+    <div class="container">
+
+        <div class="about-story-grid">
+
+            <div class="story-image">
+
+                <img
+                    src="assets/images/about-profile.webp"
+                    alt="Philip - Paoreel Studios">
+
+            </div>
+
+            <div class="story-content">
+
+                <span>
+
+                    MY STORY
+
+                </span>
+
+                <h2>
+
+                    Creating photographs that
+                    make people stop and look.
+
+                </h2>
+
+                <p>
+
+                    Photography has always been more than taking
+                    beautiful pictures. It is about creating emotion,
+                    telling stories and helping businesses present
+                    themselves in a way that people remember.
+
+                </p>
+
+                <p>
+
+                    At Paoreel Studios, every project is approached
+                    with careful attention to lighting, composition
+                    and detail, whether it's an elegant restaurant
+                    dish, a premium product, or a timeless portrait.
+
+                </p>
+
+                <p>
+
+                    My goal is simple—to create imagery that not only
+                    looks beautiful but also helps brands connect with
+                    their audience.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+            <!-- ==========================================================
+     PHILOSOPHY
+========================================================== -->
+
+<section class="philosophy">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>PHILOSOPHY</span>
+
+            <h2>
+
+                Every frame
+                has a purpose.
+
+            </h2>
+
+        </div>
+
+        <div class="philosophy-grid">
+
+            <article class="philosophy-card">
+
+                <h3>Vision</h3>
+
+                <p>
+
+                    Every image begins with understanding the story,
+                    the brand and the emotion we want people to feel.
+
+                </p>
+
+            </article>
+
+            <article class="philosophy-card">
+
+                <h3>Craft</h3>
+
+                <p>
+
+                    Careful lighting, composition and attention to
+                    detail transform ordinary scenes into premium
+                    visual experiences.
+
+                </p>
+
+            </article>
+
+            <article class="philosophy-card">
+
+                <h3>Experience</h3>
+
+                <p>
+
+                    Photography should inspire confidence, build
+                    trust and leave a lasting impression on every
+                    client and every viewer.
+
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+            <!-- ==========================================================
+     BEHIND THE SCENES
+========================================================== -->
+
+<section class="behind-scenes">
+
+    <div class="behind-image">
+
+        <img
+            src="assets/images/behind-scenes.webp"
+            alt="Behind the Scenes">
+
+    </div>
+
+    <div class="behind-overlay"></div>
+
+    <div class="container">
+
+        <div class="behind-content">
+
+            <span>BEHIND THE SCENES</span>
+
+            <h2>
+
+                Great photographs
+                are carefully crafted,
+                never accidental.
+
+            </h2>
+
+            <p>
+
+                Every shoot begins with planning, lighting and
+                attention to the smallest details. From styling food
+                and arranging products to directing portraits, every
+                decision contributes to creating imagery that tells a
+                compelling story.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+            <!-- ==========================================================
+     SERVICES
+========================================================== -->
+
+<section class="about-services">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>SERVICES</span>
+
+            <h2>
+
+                Crafted for brands
+                that value quality.
+
+            </h2>
+
+        </div>
+
+        <div class="services-grid">
+
+            <a href="food.html" class="service-card">
+
+                <h3>Food & Beverage</h3>
+
+                <p>
+
+                    Cinematic food photography for restaurants,
+                    cafés, hotels and hospitality brands.
+
+                </p>
+
+            </a>
+
+            <a href="products.html" class="service-card">
+
+                <h3>Product Photography</h3>
+
+                <p>
+
+                    Premium commercial imagery designed to elevate
+                    products across print, web and social media.
+
+                </p>
+
+            </a>
+
+            <a href="portrait.html" class="service-card">
+
+                <h3>Portrait Photography</h3>
+
+                <p>
+
+                    Authentic portraits that capture personality,
+                    confidence and professionalism.
+
+                </p>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+        <!-- ==========================================================
+     CALL TO ACTION
+========================================================== -->
+
+<section class="about-cta">
+
+    <div class="container">
+
+        <h2>
+
+            Let's create
+            something remarkable.
+
+        </h2>
+
+        <p>
+
+            Whether you're launching a new menu, introducing a product,
+            or building your personal brand, let's bring your vision to life.
+
+        </p>
+
+        <a
+            href="contact.html"
+            class="btn-primary">
+
+            Start a Project
+
+        </a>
+
+    </div>
+
+</section>
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<!-- Page Scripts -->
+<script src="assets/js/loader.js"></script>
+<script src="assets/js/navigation.js"></script>
+
+<!-- Page-specific -->
+<script src="assets/js/about.js"></script>
+
+<!-- Global -->
+<script src="assets/js/main.js"></script>
 </body>
+
 </html>

@@ -1,248 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio - Paoreel Photography</title>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css">
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
-  <style>
-    /* --- BLACK & WHITE TO COLOR HOVER EFFECT --- */
-    .grid-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      
-      /* Start completely desaturated (Black and White) */
-      filter: grayscale(100%);
-      
-      /* Hardware acceleration: optimizes rendering engine for filter transitions */
-      will-change: filter, transform;
-      
-      /* MOUSE LEAVE: Slow, dramatic 1.5s dissolution curve back to grayscale */
-      transition: filter 1.5s cubic-bezier(0.25, 1, 0.5, 1), 
-                  transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-      transition-delay: 0s;
-    }
+    <meta charset="UTF-8">
 
-    /* When the user hovers over the specific grid card container */
-    .grid-item:hover img {
-      /* Restores full organic imagery coloring smoothly */
-      filter: grayscale(0%);
-      
-      /* Subtle scale adjustment matching high-end portfolio aesthetics */
-      transform: scale(1.02); 
-      
-      /* MOUSE HOVER: Color wakes up swiftly (0.4s) for responsive user feedback */
-      transition: filter 0.4s ease, 
-                  transform 0.4s ease;
-      transition-delay: 0s;
-    }
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    /* Keeps structural styling clean for links underneath rows */
-    .more-link-container {
-      text-align: right;
-      margin-top: 1rem;
-      width: 100%;
-    }
+    <title>Portfolio | Paoreel Studios</title>
 
-    .bottom-more-link {
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #888888;
-      text-decoration: none;
-      transition: color 0.3s ease;
-      display: inline-block;
-    }
+    <!-- Google Fonts -->
 
-    .bottom-more-link:hover {
-      color: #ffffff;
-    }
-  </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/favicon.ico" sizes="any">
+
+    <!-- PNG Fallback -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+
+    <!-- Apple -->
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+
+    <!-- Android -->
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-192.png">
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/portfolio.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
 </head>
+
 <body>
 
-  <div id="main-content">
-    <header>
-      <nav class="navbar">
-        <div class="logo">
-          <a href="/index.html">
-            <img src="/assets/images/logo.png" alt="Paoreel Studios Logo">
-          </a>
-        </div>
+<header>
 
-        <button class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </button>
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+
+            <img
+                src="assets/images/logo.webp"
+                alt="Paoreel Studios">
+
+        </a>
 
         <ul class="nav-links">
-          
-          <li><a href="/about.html">About</a></li>
-          <li><a href="/contact.html">Contact</a></li>
+
+            <li><a href="about.html">About</a></li>
+
+            <li><a href="portfolio.html" class="active">Portfolio</a></li>
+
+            <li><a href="contact.html">Contact</a></li>
+
         </ul>
-      </nav>
-    </header>
 
-    <section class="portfolio-hero">
-      <div class="portfolio-overlay"></div>
-      <div class="portfolio-hero-content">
-        <h1>Our Portfolio</h1>
-        <p>Showcasing the best of food and product photography for brands, menus, and campaigns.</p>
-      </div>
-    </section>
+    </nav>
 
-    <section class="portfolio-gallery">
-      
-      <div class="category-row-container" id="food-section">
-        <a href="food.html" class="category-title-link">
-          <h2>Food & Beverage Photography</h2>
-        </a>
-        <div class="grid" id="food-grid"></div>
-      </div>
+</header>
 
-      <div class="category-row-container" id="product-section">
-        <a href="products.html" class="category-title-link">
-          <h2>Product Photography</h2>
-        </a>
-        <div class="grid" id="product-grid"></div>
-      </div>
+<section class="portfolio-hero">
 
-      <div class="category-row-container" id="portrait-section">
-        <a href="portraits.html" class="category-title-link">
-          <h2>Portrait Photography</h2>
-        </a>
-        <div class="grid" id="portrait-grid"></div>
-      </div>
+    <div class="portfolio-hero-image">
 
-    </section>
+        <img
+            src="assets/images/portfolio-hero.webp"
+            alt="Portfolio Hero">
 
-    <footer class="footer">
-      <p>© 2025 Paoreel Photography | All Rights Reserved</p>
-    </footer>
-  </div>
+    </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
+    <div class="portfolio-overlay"></div>
 
-  <script>
-    lightbox.option({
-      'resizeDuration': 200,
-      'fadeDuration': 200,
-      'wrapAround': true,
-      'disableScrolling': true
-    });
+    <div class="container">
 
-    function loadGallerySequentially(settings) {
-      const { targetGridId, parentSectionId, prefix, extension, folderPath, lightboxGroup, morePageUrl } = settings;
-      const gridContainer = document.getElementById(targetGridId);
-      const sectionContainer = document.getElementById(parentSectionId);
-      let index = 1;
+        <div class="portfolio-content">
 
-      function tryNextImage() {
-        if (index > 4) {
-          if (morePageUrl && sectionContainer) {
-            if (!sectionContainer.querySelector('.more-link-container')) {
-              const linkContainer = document.createElement('div');
-              linkContainer.className = 'more-link-container';
+            <span>SELECTED WORKS</span>
 
-              const moreLink = document.createElement('a');
-              moreLink.href = morePageUrl;
-              moreLink.className = 'bottom-more-link';
-              moreLink.innerText = 'more...';
+            <h1>
 
-              linkContainer.appendChild(moreLink);
-              sectionContainer.appendChild(linkContainer);
-            }
-          }
-          return; 
-        }
+                Photography
+                that elevates
+                every brand.
 
-        const filename = `${prefix}${index}${extension}`;
-        const fullPath = `${folderPath}${filename}`;
-        const imgTest = new Image();
+            </h1>
 
-        imgTest.onload = function() {
-          const gridItem = document.createElement('div');
-          gridItem.className = 'grid-item';
+            <p>
 
-          const anchor = document.createElement('a');
-          anchor.href = fullPath;
-          anchor.setAttribute('data-lightbox', lightboxGroup);
-          anchor.setAttribute('data-title', `${prefix.charAt(0).toUpperCase() + prefix.slice(1)} Shot ${index}`);
+                A curated collection of food, commercial product,
+                and portrait photography created with cinematic
+                lighting and meticulous attention to detail.
 
-          const imgElement = document.createElement('img');
-          imgElement.src = fullPath;
-          imgElement.alt = `${prefix} Photography`;
-          
-          /* OPTIMIZATION: Defers offscreen image parsing until the user scrolls nearby */
-          imgElement.loading = "lazy"; 
+            </p>
 
-          anchor.appendChild(imgElement);
-          gridItem.appendChild(anchor);
-          gridContainer.appendChild(gridItem);
+        </div>
 
-          index++;
-          tryNextImage();
-        };
+    </div>
 
-        imgTest.onerror = function() {
-          console.log(`Finished tracking ${prefix} grid assets.`);
-        };
+</section>
 
-        imgTest.src = fullPath;
-      }
+<!-- CATEGORY SECTION STARTS BELOW -->
 
-      tryNextImage();
-    }
+<!-- GSAP -->
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const menuToggle = document.getElementById('mobile-menu');
-      const navLinks = document.querySelector('.nav-links');
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
-      menuToggle.addEventListener('click', () => {
-        menuToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
-      });
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="assets/js/loader.js"></script>
+<script src="assets/js/navigation.js"></script>
 
-      loadGallerySequentially({
-        targetGridId: 'food-grid',
-        parentSectionId: 'food-section',
-        prefix: 'food',
-        extension: '.webp',
-        folderPath: '/assets/images/fnb/',
-        lightboxGroup: 'food',
-        morePageUrl: 'food.html'
-      });
+<script src="assets/js/portfolio.js"></script>
+<!-- Global -->
+<script src="assets/js/main.js"></script>
 
-      loadGallerySequentially({
-        targetGridId: 'product-grid',
-        parentSectionId: 'product-section',
-        prefix: 'product',
-        extension: '.webp',
-        folderPath: '/assets/images/products/',
-        lightboxGroup: 'products',
-        morePageUrl: 'products.html'
-      });
-
-      loadGallerySequentially({
-        targetGridId: 'portrait-grid',
-        parentSectionId: 'portrait-section',
-        prefix: 'portrait',
-        extension: '.webp',
-        folderPath: '/assets/images/portraits/',
-        lightboxGroup: 'portraits',
-        morePageUrl: 'portraits.html'
-      });
-    });
-  </script>
 </body>
+
 </html>

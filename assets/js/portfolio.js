@@ -1,28 +1,45 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
-if(typeof gsap==="undefined") return;
+const tl=gsap.timeline();
 
-gsap.utils.toArray(".portfolio-card").forEach((card,i)=>{
+tl.to(".portfolio-hero-image img",{
 
-gsap.from(card,{
+scale:1,
 
-scrollTrigger:{
-trigger:card,
-start:"top 88%"
-},
+duration:2,
 
-opacity:0,
+ease:"power2.out"
 
-y:80,
+})
 
-duration:.9,
+.to(".portfolio-content span",{
 
-delay:i*0.08,
+opacity:1,
 
-ease:"power3.out"
+y:0,
 
-});
+duration:.8
 
-});
+},"-=1.4")
+
+.to(".portfolio-content h1",{
+
+opacity:1,
+
+y:0,
+
+duration:1
+
+},"-=.5")
+
+.to(".portfolio-content p",{
+
+opacity:1,
+
+y:0,
+
+duration:1
+
+},"-=.6");
 
 });

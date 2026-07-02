@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Layout
+========================================================================== */
+
+main{
+
+    position:relative;
+
+}
+
+.navbar{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:28px 60px;
+
+    z-index:10000;
+
+    transition:.4s ease;
+
+}
+
+.home-navbar{
+
+    justify-content:flex-end;
+
+}
+
+.logo{
+
+    width:170px;
+
+}
+
+.nav-links{
+
+    display:flex;
+
+    gap:40px;
+
+}
+
+.nav-links a{
+
+    position:relative;
+
+    font-size:.95rem;
+
+    letter-spacing:.08em;
+
+    transition:.3s;
+
+}
+
+.nav-links a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-6px;
+
+    width:0;
+
+    height:1px;
+
+    background:#fff;
+
+    transition:.3s;
+
+}
+
+.nav-links a:hover::after{
+
+    width:100%;
+
+}
+
+.hero-container{
+
+    width:min(1500px,90%);
+
+    margin:auto;
+
+}

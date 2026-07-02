@@ -1,0 +1,542 @@
+/* ==========================================================================
+   ABOUT HERO
+========================================================================== */
+
+.about-hero{
+
+    position:relative;
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    background:#000;
+
+}
+
+.about-hero-image{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:1;
+
+}
+
+.about-hero-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transform:scale(1.08);
+
+    filter:brightness(.55);
+
+}
+
+.about-hero-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:2;
+
+    background:
+
+    linear-gradient(
+        to right,
+        rgba(0,0,0,.82) 0%,
+        rgba(0,0,0,.45) 45%,
+        rgba(0,0,0,.55) 100%
+    );
+
+}
+
+.about-hero .container{
+
+    position:relative;
+
+    z-index:3;
+
+}
+
+.about-hero-content{
+
+    max-width:650px;
+
+}
+
+.about-hero-content span{
+
+    display:inline-block;
+
+    margin-bottom:20px;
+
+    color:#c7a86d;
+
+    font-size:.85rem;
+
+    letter-spacing:.35em;
+
+    text-transform:uppercase;
+
+}
+
+.about-hero-content h1{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(3.5rem,7vw,6rem);
+
+    line-height:1.05;
+
+    font-weight:700;
+
+    margin-bottom:30px;
+
+}
+
+.about-hero-content p{
+
+    max-width:600px;
+
+    color:#d6d6d6;
+
+    font-size:1.15rem;
+
+    line-height:2;
+
+}
+/* ==========================================================================
+   ABOUT HERO INITIAL STATE
+========================================================================== */
+
+.about-hero-content span,
+.about-hero-content h1,
+.about-hero-content p{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+}
+/* ==========================================================================
+   MY STORY
+========================================================================== */
+
+.about-story{
+
+    padding:140px 0;
+
+    background:#050505;
+
+}
+
+.about-story-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:90px;
+
+    align-items:center;
+
+}
+
+.story-image{
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+}
+
+.story-image img{
+
+    width:100%;
+
+    display:block;
+
+    transition:transform 1s ease;
+
+}
+
+.story-image:hover img{
+
+    transform:scale(1.05);
+
+}
+
+.story-content span{
+
+    color:#c7a86d;
+
+    text-transform:uppercase;
+
+    letter-spacing:.3em;
+
+    font-size:.85rem;
+
+}
+
+.story-content h2{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(2.8rem,5vw,4.5rem);
+
+    margin:25px 0;
+
+    line-height:1.15;
+
+}
+
+.story-content p{
+
+    color:#cfcfcf;
+
+    line-height:2;
+
+    margin-bottom:22px;
+
+    font-size:1.05rem;
+
+}
+
+/* Initial Animation */
+
+.story-image,
+.story-content{
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+}
+/* ==========================================================================
+   PHILOSOPHY
+========================================================================== */
+
+.philosophy{
+
+    padding:140px 0;
+
+    background:#000;
+
+}
+
+.section-title{
+
+    text-align:center;
+
+    margin-bottom:80px;
+
+}
+
+.section-title span{
+
+    color:#c7a86d;
+
+    text-transform:uppercase;
+
+    letter-spacing:.3em;
+
+    font-size:.85rem;
+
+}
+
+.section-title h2{
+
+    margin-top:20px;
+
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(2.8rem,5vw,4.8rem);
+
+    line-height:1.15;
+
+}
+
+.philosophy-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:40px;
+
+}
+
+.philosophy-card{
+
+    background:#090909;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    padding:50px;
+
+    transition:.45s ease;
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+}
+
+.philosophy-card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:#c7a86d;
+
+}
+
+.philosophy-card h3{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:2rem;
+
+    margin-bottom:20px;
+
+}
+
+.philosophy-card p{
+
+    color:#cfcfcf;
+
+    line-height:2;
+
+}
+/* ==========================================================================
+   BEHIND THE SCENES
+========================================================================== */
+
+.behind-scenes{
+
+    position:relative;
+
+    min-height:90vh;
+
+    display:flex;
+
+    align-items:center;
+
+    overflow:hidden;
+
+}
+
+.behind-image{
+
+    position:absolute;
+
+    inset:0;
+
+}
+
+.behind-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    filter:brightness(.45);
+
+    transform:scale(1.08);
+
+}
+
+.behind-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        to right,
+        rgba(0,0,0,.82),
+        rgba(0,0,0,.35)
+    );
+
+}
+
+.behind-scenes .container{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.behind-content{
+
+    max-width:650px;
+
+}
+
+.behind-content span{
+
+    color:#c7a86d;
+
+    letter-spacing:.35em;
+
+    text-transform:uppercase;
+
+    font-size:.85rem;
+
+}
+
+.behind-content h2{
+
+    margin:25px 0;
+
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(3rem,6vw,5rem);
+
+    line-height:1.1;
+
+}
+
+.behind-content p{
+
+    color:#d6d6d6;
+
+    font-size:1.1rem;
+
+    line-height:2;
+
+}
+
+.behind-content{
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+}
+/* ==========================================================================
+   SERVICES
+========================================================================== */
+
+.about-services{
+
+    padding:140px 0;
+
+    background:#050505;
+
+}
+
+.services-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:35px;
+
+}
+
+.service-card{
+
+    display:block;
+
+    padding:55px 45px;
+
+    background:#0a0a0a;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.45s ease;
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+}
+
+.service-card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:#c7a86d;
+
+    background:#111;
+
+}
+
+.service-card h3{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:2rem;
+
+    margin-bottom:25px;
+
+}
+
+.service-card p{
+
+    color:#cfcfcf;
+
+    line-height:2;
+
+}
+/* ==========================================================================
+   CTA
+========================================================================== */
+
+.about-cta{
+
+    padding:160px 0;
+
+    text-align:center;
+
+    background:#000;
+
+}
+
+.about-cta h2{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(3rem,6vw,5.5rem);
+
+    margin-bottom:30px;
+
+}
+
+.about-cta p{
+
+    max-width:720px;
+
+    margin:0 auto 50px;
+
+    color:#d0d0d0;
+
+    line-height:2;
+
+    font-size:1.1rem;
+
+}
+
+.about-cta{
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+}
