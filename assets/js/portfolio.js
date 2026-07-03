@@ -43,3 +43,46 @@ duration:1
 },"-=.6");
 
 });
+gsap.utils.toArray(".category-card").forEach((card,index)=>{
+
+    gsap.to(card,{
+
+        scrollTrigger:{
+
+            trigger:card,
+
+            start:"top 85%"
+
+        },
+
+        opacity:1,
+
+        y:0,
+
+        duration:1,
+
+        delay:index*.15,
+
+        ease:"power3.out"
+
+    });
+
+});
+gsap.utils.toArray(".work-item").forEach((item,index)=>{
+
+    gsap.to(item,{
+
+        scrollTrigger:{
+            trigger:item,
+            start:"top 85%"
+        },
+
+        opacity:1,
+        y:0,
+        duration:1,
+        delay:index*.08,
+        ease:"power3.out"
+
+    });
+
+});

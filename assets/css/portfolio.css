@@ -116,3 +116,167 @@
     transform:translateY(40px);
 
 }
+/* ==========================================================================
+   CATEGORY SECTION
+========================================================================== */
+
+.portfolio-categories{
+
+    padding:140px 0;
+
+    background:#050505;
+
+}
+
+.category-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:35px;
+
+}
+
+.category-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+    height:650px;
+
+}
+
+.category-card img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:1s ease;
+
+}
+
+.category-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    padding:45px;
+
+    background:linear-gradient(
+
+        transparent,
+
+        rgba(0,0,0,.82)
+
+    );
+
+}
+
+.category-overlay h3{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:2.2rem;
+
+    margin-bottom:15px;
+
+}
+
+.category-overlay span{
+
+    color:#c7a86d;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+
+    font-size:.8rem;
+
+}
+
+.category-card:hover img{
+
+    transform:scale(1.08);
+
+}
+
+.category-card{
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+}
+/* ==========================================================================
+   SELECTED WORKS
+========================================================================== */
+
+.selected-works{
+
+    padding:140px 0;
+
+    background:#000;
+
+}
+
+.works-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:25px;
+
+}
+
+.work-item{
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+}
+
+.work-item.large{
+
+    grid-column:span 2;
+
+}
+
+.work-item img{
+
+    width:100%;
+
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+    transition:transform .8s ease;
+
+}
+
+.work-item:hover img{
+
+    transform:scale(1.06);
+
+}
