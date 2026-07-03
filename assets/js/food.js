@@ -1,0 +1,102 @@
+document.addEventListener("DOMContentLoaded",()=>{
+
+const tl=gsap.timeline();
+
+tl.to(".food-hero-image img",{
+
+scale:1,
+
+duration:2,
+
+ease:"power2.out"
+
+})
+
+.to(".food-content span",{
+
+opacity:1,
+
+y:0,
+
+duration:.8
+
+},"-=1.4")
+
+.to(".food-content h1",{
+
+opacity:1,
+
+y:0,
+
+duration:1
+
+},"-=.5")
+
+.to(".food-content p",{
+
+opacity:1,
+
+y:0,
+
+duration:1
+
+},"-=.5");
+
+});
+gsap.to(".food-intro-text",{
+
+    scrollTrigger:{
+        trigger:".food-intro",
+        start:"top 75%"
+    },
+
+    opacity:1,
+
+    y:0,
+
+    duration:1.2,
+
+    ease:"power3.out"
+
+});
+
+gsap.to(".food-intro-image",{
+
+    scrollTrigger:{
+        trigger:".food-intro",
+        start:"top 75%"
+    },
+
+    opacity:1,
+
+    y:0,
+
+    duration:1.2,
+
+    delay:.2,
+
+    ease:"power3.out"
+
+});
+gsap.utils.toArray(".food-item").forEach((item,index)=>{
+
+    gsap.to(item,{
+
+        scrollTrigger:{
+            trigger:item,
+            start:"top 85%"
+        },
+
+        opacity:1,
+
+        y:0,
+
+        duration:1,
+
+        delay:index*.08,
+
+        ease:"power3.out"
+
+    });
+
+});

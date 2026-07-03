@@ -280,3 +280,66 @@
     transform:scale(1.06);
 
 }
+/* ==========================================================================
+   PORTFOLIO CTA
+========================================================================== */
+
+.portfolio-cta{
+
+    padding:180px 0;
+
+    background:#050505;
+
+    text-align:center;
+
+}
+
+.portfolio-cta span{
+
+    display:block;
+
+    margin-bottom:20px;
+
+    color:#c7a86d;
+
+    letter-spacing:.35em;
+
+    text-transform:uppercase;
+
+    font-size:.85rem;
+
+}
+
+.portfolio-cta h2{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(3rem,6vw,5.5rem);
+
+    line-height:1.1;
+
+    margin-bottom:30px;
+
+}
+
+.portfolio-cta p{
+
+    max-width:720px;
+
+    margin:0 auto 50px;
+
+    color:#d6d6d6;
+
+    line-height:2;
+
+    font-size:1.1rem;
+
+}
+
+.portfolio-cta{
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+}

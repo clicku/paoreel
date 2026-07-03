@@ -86,3 +86,19 @@ gsap.utils.toArray(".work-item").forEach((item,index)=>{
     });
 
 });
+gsap.to(".portfolio-cta",{
+
+    scrollTrigger:{
+        trigger:".portfolio-cta",
+        start:"top 80%"
+    },
+
+    opacity:1,
+
+    y:0,
+
+    duration:1.2,
+
+    ease:"power3.out"
+
+});
