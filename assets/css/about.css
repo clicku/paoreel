@@ -540,3 +540,7 @@
     transform:translateY(60px);
 
 }
+.about-image img{
+    -webkit-mask-image: radial-gradient(circle, black 72%, transparent 100%);
+    mask-image: radial-gradient(circle, black 72%, transparent 100%);
+}
