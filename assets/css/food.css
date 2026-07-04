@@ -123,7 +123,7 @@ transform:translateY(40px);
 
 .food-intro{
 
-    padding:140px 0;
+    padding:var(--space-md) 0;
 
     background:#050505;
 
@@ -179,7 +179,7 @@ transform:translateY(40px);
 
     overflow:hidden;
 
-    border-radius:18px;
+    border-radius:var(--radius);
 
 }
 
@@ -189,7 +189,7 @@ transform:translateY(40px);
 
     display:block;
 
-    transition:1s ease;
+    transition:transform .8s cubic-bezier(.2,.8,.2,1);
 
 }
 
@@ -213,7 +213,7 @@ transform:translateY(40px);
 
 .food-gallery{
 
-    padding:140px 0;
+    padding:var(--space-md) 0;
 
     background:#000;
 
@@ -235,7 +235,7 @@ transform:translateY(40px);
 
     overflow:hidden;
 
-    border-radius:18px;
+    border-radius:var(--radius);
 
     cursor:pointer;
 

@@ -1,9 +1,11 @@
 /* ==========================================================================
    PAOREEL STUDIOS
-   Base Styles
+   BASE STYLES
 ========================================================================== */
 
-/* Reset */
+/* ==========================================================================
+   RESET
+========================================================================== */
 
 *{
     margin:0;
@@ -11,25 +13,46 @@
     box-sizing:border-box;
 }
 
-/* Root Variables */
+/* ==========================================================================
+   DESIGN SYSTEM V2
+========================================================================== */
 
 :root{
 
-    --black:#000;
-    --dark:#050505;
-    --white:#fff;
-    --gray:#bdbdbd;
-    --light:#f4f4f4;
+    /* Colors */
 
-    --gold:#d7b56d;
+    --black:#050505;
+    --white:#ffffff;
+    --gold:#c7a86d;
 
-    --container:1500px;
+    --text:#d7d7d7;
+    --border:rgba(255,255,255,.08);
 
-    --transition:.35s ease;
+    /* Layout */
+
+    --container:1320px;
+
+    /* Radius */
+
+    --radius:20px;
+
+    /* Section Spacing */
+
+    --space-xs:40px;
+    --space-sm:80px;
+    --space-md:140px;
+    --space-lg:180px;
+    --space-xl:240px;
+
+    /* Animation */
+
+    --transition:.45s cubic-bezier(.2,.8,.2,1);
 
 }
 
-/* Document */
+/* ==========================================================================
+   DOCUMENT
+========================================================================== */
 
 html{
 
@@ -43,7 +66,7 @@ body{
 
     color:var(--white);
 
-    font-family:'Open Sans',sans-serif;
+    font-family:"Open Sans",sans-serif;
 
     overflow-x:hidden;
 
@@ -55,7 +78,9 @@ body{
 
 }
 
-/* Images */
+/* ==========================================================================
+   ELEMENTS
+========================================================================== */
 
 img{
 
@@ -67,8 +92,6 @@ img{
 
 }
 
-/* Links */
-
 a{
 
     color:inherit;
@@ -77,15 +100,11 @@ a{
 
 }
 
-/* Lists */
-
 ul{
 
     list-style:none;
 
 }
-
-/* Buttons */
 
 button{
 
@@ -99,21 +118,88 @@ button{
 
 }
 
-/* Section spacing */
-
 section{
 
     position:relative;
 
 }
 
-/* Container */
+/* ==========================================================================
+   TYPOGRAPHY
+========================================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+
+    font-family:"Playfair Display",serif;
+
+    font-weight:600;
+
+    line-height:1.1;
+
+}
+
+p{
+
+    color:var(--text);
+
+    font-size:1.05rem;
+
+    line-height:2;
+
+}
+
+/* ==========================================================================
+   LAYOUT
+========================================================================== */
 
 .container{
 
-    width:min(var(--container),92%);
+    width:min(92%,var(--container));
 
     margin:auto;
+
+}
+
+/* ==========================================================================
+   SHARED COMPONENTS
+========================================================================== */
+
+/* Section Title */
+
+.section-title{
+
+    text-align:center;
+
+    margin-bottom:90px;
+
+}
+
+.section-title span{
+
+    display:block;
+
+    margin-bottom:18px;
+
+    color:var(--gold);
+
+    font-size:.82rem;
+
+    letter-spacing:.45em;
+
+    text-transform:uppercase;
+
+}
+
+.section-title h2{
+
+    font-size:clamp(2.8rem,5vw,4.8rem);
+
+    line-height:1.08;
 
 }
 
@@ -127,22 +213,24 @@ section{
 
     justify-content:center;
 
-    padding:16px 34px;
+    padding:18px 42px;
 
-    border:1px solid rgba(255,255,255,.18);
+    border-radius:999px;
 
-    color:#fff;
+    background:var(--gold);
 
-    backdrop-filter:blur(10px);
+    color:#111;
 
-    transition:all .35s ease;
+    font-weight:600;
+
+    transition:var(--transition);
 
 }
 
 .btn-primary:hover{
 
-    background:#fff;
+    transform:translateY(-4px);
 
-    color:#000;
+    box-shadow:0 15px 45px rgba(199,168,109,.35);
 
 }

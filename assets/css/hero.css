@@ -1128,7 +1128,7 @@
 
     background:#050505;
 
-    padding:140px 0;
+    padding:var(--space-md) 0;
 
 }
 
@@ -1166,7 +1166,7 @@
 
     overflow:hidden;
 
-    border-radius:18px;
+    border-radius:var(--radius);
 
     background:#111;
 
@@ -1371,7 +1371,7 @@
 
 .portfolio-preview{
 
-    padding:140px 0;
+    padding:var(--space-md) 0;
 
     background:#090909;
 

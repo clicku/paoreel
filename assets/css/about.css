@@ -135,7 +135,7 @@
 
 .about-story{
 
-    padding:140px 0;
+    padding:var(--space-md) 0;
 
     background:#050505;
 
@@ -229,7 +229,7 @@
 
 .philosophy{
 
-    padding:140px 0;
+    padding:var(--space-md) 0;
 
     background:#000;
 
@@ -434,7 +434,7 @@
 
 .about-services{
 
-    padding:140px 0;
+    padding:var(--space-md) 0;
 
     background:#050505;
 
