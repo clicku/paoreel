@@ -49,7 +49,38 @@
     --transition:.45s cubic-bezier(.2,.8,.2,1);
 
 }
+::selection{
 
+    background:var(--gold);
+
+    color:#111;
+
+}
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#050505;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#2b2b2b;
+
+    border-radius:999px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--gold);
+
+}
 /* ==========================================================================
    DOCUMENT
 ========================================================================== */
@@ -232,5 +263,31 @@ p{
     transform:translateY(-4px);
 
     box-shadow:0 15px 45px rgba(199,168,109,.35);
+
+}
+button,
+a{
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+a,
+button{
+
+    outline:none;
+
+}
+
+a:focus-visible,
+button:focus-visible{
+
+    outline:2px solid var(--gold);
+
+    outline-offset:6px;
+
+}
+img{
+
+    image-rendering:auto;
 
 }

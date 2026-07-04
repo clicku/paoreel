@@ -89,6 +89,59 @@ main{
     width:100%;
 
 }
+/* ==========================================================================
+   ACTIVE NAVIGATION
+========================================================================== */
+
+.nav-links a{
+
+    position:relative;
+
+    transition:color .35s ease;
+
+}
+
+.nav-links a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-10px;
+
+    width:100%;
+
+    height:2px;
+
+    background:var(--gold);
+
+    transform:scaleX(0);
+
+    transform-origin:left;
+
+    transition:transform .35s ease;
+
+}
+
+.nav-links a:hover::after{
+
+    transform:scaleX(1);
+
+}
+
+.nav-links a.active::after{
+
+    transform:scaleX(1);
+
+}
+
+.nav-links a:hover{
+
+    color:var(--gold);
+
+}
 
 .hero-container{
 

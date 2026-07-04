@@ -36,7 +36,7 @@
 
     object-fit:cover;
 
-    transform:scale(1.08);
+    transform:scale(1.05);;
 
     filter:brightness(.55);
 
@@ -167,7 +167,7 @@
 
     display:block;
 
-    transition:transform 1s ease;
+    transition:transform 6s ease;
 
 }
 
@@ -354,7 +354,7 @@
 
     filter:brightness(.45);
 
-    transform:scale(1.08);
+    transform:scale(1.05);;
 
 }
 
