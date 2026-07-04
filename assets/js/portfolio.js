@@ -1,8 +1,8 @@
-window.initPortfolio=function(){
+document.addEventListener("DOMContentLoaded",()=>{
 
-const aboutHero = document.querySelector(".portfolio-hero");
+const portfolioHero = document.querySelector(".portfolio-hero");
 
-if (!aboutHero) return;
+if (!portfolioHero) return;
 
 const tl=gsap.timeline();
 
@@ -46,7 +46,7 @@ duration:1
 
 },"-=.6");
 
-};
+});
 gsap.utils.toArray(".category-card").forEach((card,index)=>{
 
     gsap.to(card,{

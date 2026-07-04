@@ -1,4 +1,4 @@
-window.initAbout=function(){
+document.addEventListener("DOMContentLoaded",()=>{
 
 if(typeof gsap==="undefined") return;
 
@@ -38,4 +38,4 @@ ease:"none"
 
 });
 
-};
+});
