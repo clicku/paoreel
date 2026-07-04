@@ -1,177 +1,219 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const aboutHero = document.querySelector(".about-hero");
+    if (!window.gsap || !window.ScrollTrigger) return;
 
-    if (!aboutHero) return;
+    gsap.registerPlugin(ScrollTrigger);
 
-    const tl = gsap.timeline();
+    const hero = document.querySelector(".about-hero");
+
+    if (!hero) return;
+
+    /* ==========================================================
+       HERO
+    ========================================================== */
+
+    const tl = gsap.timeline({
+
+        defaults: {
+
+            ease: "power3.out"
+
+        }
+
+    });
 
     tl.to(".about-hero-image img", {
 
-        scale:1,
+        scale: 1,
 
-        duration:2,
-
-        ease:"power2.out"
+        duration: 2.4
 
     })
 
-    .to(".about-hero-content span",{
+    .to(".about-hero-content span", {
 
-        opacity:1,
+        opacity: 1,
 
-        y:0,
+        y: 0,
 
-        duration:.8
+        duration: .7
 
-    },"-=1.3")
+    }, "-=1.8")
 
-    .to(".about-hero-content h1",{
+    .to(".about-hero-content h1", {
 
-        opacity:1,
+        opacity: 1,
 
-        y:0,
+        y: 0,
 
-        duration:1
+        duration: 1
 
-    },"-=.4")
+    }, "-=.4")
 
-    .to(".about-hero-content p",{
+    .to(".about-hero-content p", {
 
-        opacity:1,
+        opacity: 1,
 
-        y:0,
+        y: 0,
 
-        duration:1
+        duration: .9
 
-    },"-=.5");
+    }, "-=.5");
 
-    gsap.to(".story-image",{
 
-        scrollTrigger:{
-            trigger:".about-story",
-            start:"top 75%"
+    /* ==========================================================
+       INTRO
+    ========================================================== */
+
+    gsap.to(".intro-content", {
+
+        scrollTrigger: {
+
+            trigger: ".about-intro",
+
+            start: "top 70%"
+
         },
 
-        opacity:1,
+        opacity: 1,
 
-        y:0,
+        y: 0,
 
-        duration:1.2,
+        duration: 1.1,
 
-        ease:"power3.out"
+        ease: "power3.out"
 
     });
 
-    gsap.to(".story-content",{
+    gsap.to(".intro-image", {
 
-        scrollTrigger:{
-            trigger:".about-story",
-            start:"top 75%"
+        scrollTrigger: {
+
+            trigger: ".about-intro",
+
+            start: "top 70%"
+
         },
 
-        opacity:1,
+        opacity: 1,
 
-        y:0,
+        y: 0,
 
-        duration:1.2,
+        duration: 1.2,
 
-        delay:.2,
+        delay: .2,
 
-        ease:"power3.out"
+        ease: "power3.out"
 
     });
 
-    gsap.utils.toArray(".philosophy-card").forEach((card,index)=>{
 
-        gsap.to(card,{
+    /* ==========================================================
+       PARALLAX BANNER
+    ========================================================== */
 
-            scrollTrigger:{
-                trigger:card,
-                start:"top 85%"
+    gsap.to(".about-banner img", {
+
+        scrollTrigger: {
+
+            trigger: ".about-banner",
+
+            start: "top bottom",
+
+            end: "bottom top",
+
+            scrub: true
+
+        },
+
+        scale: 1.1
+
+    });
+
+
+    /* ==========================================================
+       PHILOSOPHY
+    ========================================================== */
+
+    gsap.utils.toArray(".philosophy-card").forEach((card, index) => {
+
+        gsap.to(card, {
+
+            scrollTrigger: {
+
+                trigger: card,
+
+                start: "top 85%"
+
             },
 
-            opacity:1,
+            opacity: 1,
 
-            y:0,
+            y: 0,
 
-            duration:1,
+            duration: .9,
 
-            delay:index*.2,
+            delay: index * .15,
 
-            ease:"power3.out"
+            ease: "power3.out"
 
         });
 
     });
 
-    gsap.to(".behind-content",{
 
-        scrollTrigger:{
-            trigger:".behind-scenes",
-            start:"top 70%"
-        },
+    /* ==========================================================
+       SERVICES
+    ========================================================== */
 
-        opacity:1,
+    gsap.utils.toArray(".service-card").forEach((card, index) => {
 
-        y:0,
+        gsap.to(card, {
 
-        duration:1.2,
+            scrollTrigger: {
 
-        ease:"power3.out"
+                trigger: card,
 
-    });
+                start: "top 85%"
 
-    gsap.to(".behind-image img",{
-
-        scrollTrigger:{
-            trigger:".behind-scenes",
-            start:"top bottom",
-            end:"bottom top",
-            scrub:true
-        },
-
-        scale:1
-
-    });
-
-    gsap.utils.toArray(".service-card").forEach((card,index)=>{
-
-        gsap.to(card,{
-
-            scrollTrigger:{
-                trigger:card,
-                start:"top 85%"
             },
 
-            opacity:1,
+            opacity: 1,
 
-            y:0,
+            y: 0,
 
-            duration:1,
+            duration: .9,
 
-            delay:index*.15,
+            delay: index * .15,
 
-            ease:"power3.out"
+            ease: "power3.out"
 
         });
 
     });
 
-    gsap.to(".about-cta",{
 
-        scrollTrigger:{
-            trigger:".about-cta",
-            start:"top 80%"
+    /* ==========================================================
+       CTA
+    ========================================================== */
+
+    gsap.to(".about-cta", {
+
+        scrollTrigger: {
+
+            trigger: ".about-cta",
+
+            start: "top 80%"
+
         },
 
-        opacity:1,
+        opacity: 1,
 
-        y:0,
+        y: 0,
 
-        duration:1.2,
+        duration: 1.2,
 
-        ease:"power3.out"
+        ease: "power3.out"
 
     });
 
