@@ -24,35 +24,99 @@ document.addEventListener("DOMContentLoaded", () => {
 
     current = index;
 
-    image.src = gallery[current].src;
+    gsap.to(image,{
 
-    image.alt = gallery[current].alt || "";
+        opacity:0,
 
-    caption.textContent =
-        gallery[current].dataset.caption || "";
+        scale:.96,
 
-    updateCounter();
+        duration:.18,
+
+        onComplete:()=>{
+
+            image.src=gallery[current].src;
+
+            image.alt=gallery[current].alt || "";
+
+            caption.textContent=
+                gallery[current].dataset.caption || "";
+
+            updateCounter();
+
+            gsap.fromTo(image,
+
+                {
+
+                    opacity:0,
+
+                    scale:.96
+
+                },
+
+                {
+
+                    opacity:1,
+
+                    scale:1,
+
+                    duration:.45,
+
+                    ease:"power2.out"
+
+                }
+
+            );
+
+        }
+
+    });
 
 }
 
     function open(index) {
 
-        show(index);
+    show(index);
 
-        lightbox.classList.add("active");
+    lightbox.classList.add("active");
 
-        document.body.style.overflow = "hidden";
+    gsap.fromTo(
 
-    }
+        lightbox,
+
+        {
+            opacity: 0
+        },
+
+        {
+            opacity: 1,
+            duration: .3
+        }
+
+    );
+
+    document.body.style.overflow = "hidden";
+
+}
 
     function hide() {
 
-        lightbox.classList.remove("active");
+    gsap.to(lightbox, {
 
-        document.body.style.overflow = "";
+        opacity: 0,
 
-    }
+        duration: .25,
 
+        onComplete: () => {
+
+            lightbox.classList.remove("active");
+
+            document.body.style.overflow = "";
+
+        }
+
+    });
+
+}
     function previous() {
 
         current--;

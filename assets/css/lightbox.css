@@ -182,3 +182,20 @@
     color:#d6d6d6;
 
 }
+.lightbox-prev,
+.lightbox-next{
+
+    transition:
+        background .3s,
+        transform .3s;
+
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover{
+
+    transform:
+        translateY(-50%)
+        scale(1.08);
+
+}
