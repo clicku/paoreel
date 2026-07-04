@@ -1,5 +1,4 @@
-document.addEventListener("DOMContentLoaded",()=>{
-
+window.initFooter=function(){
 if(typeof gsap==="undefined") return;
 
 gsap.from(".footer",{
@@ -22,4 +21,4 @@ ease:"power3.out"
 
 });
 
-});
+};

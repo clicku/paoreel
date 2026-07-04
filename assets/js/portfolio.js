@@ -1,6 +1,6 @@
-document.addEventListener("DOMContentLoaded",()=>{
+window.initPortfolio=function(){
 
-const aboutHero = document.querySelector(".about-hero");
+const aboutHero = document.querySelector(".portfolio-hero");
 
 if (!aboutHero) return;
 
@@ -46,7 +46,7 @@ duration:1
 
 },"-=.6");
 
-});
+};
 gsap.utils.toArray(".category-card").forEach((card,index)=>{
 
     gsap.to(card,{

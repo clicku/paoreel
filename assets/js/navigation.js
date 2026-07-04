@@ -3,7 +3,7 @@
    NAVIGATION
 ========================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+window.initNavigation=function(){
 
     const toggle = document.querySelector(".mobile-toggle");
     const nav = document.querySelector(".nav-links");
@@ -154,4 +154,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("scroll", updateHeader);
 
-});
+};

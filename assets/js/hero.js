@@ -3,7 +3,7 @@
    HERO INTERACTIONS
 ========================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+window.initHero=function(){
     const hero = document.querySelector(".hero");
     if (!hero) return;
     const bg = document.querySelector(".bg-image");
@@ -180,4 +180,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-});
+};
