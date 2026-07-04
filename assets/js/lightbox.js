@@ -73,48 +73,87 @@ document.addEventListener("DOMContentLoaded", () => {
 
 }
 
-    function open(index) {
+    let activeThumb = null;
+
+function open(index, thumb) {
+
+    activeThumb = thumb;
 
     show(index);
 
     lightbox.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
+    animateOpen();
+
+}
+
+    function hide(){
+
+    gsap.to(image,{
+
+        opacity:0,
+
+        scale:.92,
+
+        duration:.25
+
+    });
+
+    gsap.to(lightbox,{
+
+        opacity:0,
+
+        duration:.3,
+
+        onComplete:()=>{
+
+            lightbox.classList.remove("active");
+
+            document.body.style.overflow="";
+
+        }
+
+    });
+
+}
+    function animateOpen(){
+
+    if(!activeThumb) return;
+
+    gsap.fromTo(
+
+        image,
+
+        {
+            opacity:0,
+            scale:.85
+        },
+
+        {
+            opacity:1,
+            scale:1,
+            duration:.45,
+            ease:"power3.out"
+        }
+
+    );
 
     gsap.fromTo(
 
         lightbox,
 
         {
-            opacity: 0
+            opacity:0
         },
 
         {
-            opacity: 1,
-            duration: .3
+            opacity:1,
+            duration:.35
         }
 
     );
-
-    document.body.style.overflow = "hidden";
-
-}
-
-    function hide() {
-
-    gsap.to(lightbox, {
-
-        opacity: 0,
-
-        duration: .25,
-
-        onComplete: () => {
-
-            lightbox.classList.remove("active");
-
-            document.body.style.overflow = "";
-
-        }
-
-    });
 
 }
     function previous() {
@@ -149,9 +188,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         img.addEventListener("click", () => {
 
-            open(index);
+    open(index, img);
 
-        });
+});
 
     });
 

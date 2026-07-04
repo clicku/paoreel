@@ -206,3 +206,9 @@
         scale(1.08);
 
 }
+.work-item img,
+.food-item img{
+
+    cursor:zoom-in;
+
+}
