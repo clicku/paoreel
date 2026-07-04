@@ -100,3 +100,32 @@ gsap.utils.toArray(".food-item").forEach((item,index)=>{
     });
 
 });
+gsap.to(".food-featured-content",{
+
+    scrollTrigger:{
+        trigger:".food-featured",
+        start:"top 75%"
+    },
+
+    opacity:1,
+
+    y:0,
+
+    duration:1.2,
+
+    ease:"power3.out"
+
+});
+
+gsap.to(".food-featured-image img",{
+
+    scrollTrigger:{
+        trigger:".food-featured",
+        start:"top bottom",
+        end:"bottom top",
+        scrub:true
+    },
+
+    scale:1
+
+});
