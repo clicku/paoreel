@@ -130,7 +130,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+gsap.to(".about-banner-content", {
 
+    scrollTrigger: {
+
+        trigger: ".about-banner",
+
+        start: "top 65%"
+
+    },
+
+    opacity: 1,
+
+    y: 0,
+
+    duration: 1.2,
+
+    ease: "power3.out"
+
+});
     /* ==========================================================
        PHILOSOPHY
     ========================================================== */
