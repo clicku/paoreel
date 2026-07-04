@@ -129,3 +129,19 @@ gsap.to(".food-featured-image img",{
     scale:1
 
 });
+gsap.to(".food-cta",{
+
+    scrollTrigger:{
+        trigger:".food-cta",
+        start:"top 80%"
+    },
+
+    opacity:1,
+
+    y:0,
+
+    duration:1.2,
+
+    ease:"power3.out"
+
+});
