@@ -184,3 +184,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+/* ==========================================================
+   TOUCH SWIPE
+========================================================== */
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+lightbox.addEventListener("touchstart", (e) => {
+
+    touchStartX = e.changedTouches[0].clientX;
+
+}, { passive: true });
+
+lightbox.addEventListener("touchend", (e) => {
+
+    touchEndX = e.changedTouches[0].clientX;
+
+    const distance = touchEndX - touchStartX;
+
+    if (Math.abs(distance) < 60) return;
+
+    if (distance > 0) {
+
+        previous();
+
+    } else {
+
+        following();
+
+    }
+
+}, { passive: true });
