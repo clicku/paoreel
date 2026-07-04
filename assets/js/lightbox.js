@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let gallery = [];
     let current = 0;
+    let activeThumb = null;
 
     function updateCounter() {
 
@@ -20,147 +21,145 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    function show(index){
+    function show(index) {
 
-    current = index;
+        current = index;
 
-    gsap.to(image,{
+        gsap.to(image, {
 
-        opacity:0,
+            opacity: 0,
 
-        scale:.96,
+            scale: .96,
 
-        duration:.18,
+            duration: .18,
 
-        onComplete:()=>{
+            onComplete: () => {
 
-            image.src=gallery[current].src;
+                image.src = gallery[current].src;
 
-            image.alt=gallery[current].alt || "";
+                image.alt = gallery[current].alt || "";
 
-            caption.textContent=
-                gallery[current].dataset.caption || "";
+                caption.textContent =
+                    gallery[current].dataset.caption || "";
 
-            updateCounter();
+                updateCounter();
 
-            gsap.fromTo(image,
+                gsap.fromTo(
 
-                {
+                    image,
 
-                    opacity:0,
+                    {
+                        opacity: 0,
+                        scale: .96
+                    },
 
-                    scale:.96
+                    {
+                        opacity: 1,
+                        scale: 1,
+                        duration: .45,
+                        ease: "power2.out"
+                    }
 
-                },
+                );
 
-                {
+            }
 
-                    opacity:1,
+        });
 
-                    scale:1,
+    }
 
-                    duration:.45,
+    function open(index, thumb) {
 
-                    ease:"power2.out"
+        activeThumb = thumb;
 
-                }
+        show(index);
 
-            );
+        lightbox.classList.add("active");
 
-        }
+        window.lenis?.stop();
 
-    });
+        animateOpen();
 
-}
+    }
 
-    let activeThumb = null;
+    function hide() {
 
-function open(index, thumb) {
+        gsap.to(image, {
 
-    activeThumb = thumb;
+            opacity: 0,
 
-    show(index);
+            scale: .92,
 
-    lightbox.classList.add("active");
+            duration: .25
 
-    document.body.style.overflow = "hidden";
+        });
 
-    animateOpen();
+        gsap.to(lightbox, {
 
-}
+            opacity: 0,
 
-    function hide(){
+            duration: .3,
 
-    gsap.to(image,{
+            onComplete: () => {
 
-        opacity:0,
+                lightbox.classList.remove("active");
 
-        scale:.92,
+                window.lenis?.start();
 
-        duration:.25
+            }
 
-    });
+        });
 
-    gsap.to(lightbox,{
+    }
 
-        opacity:0,
+    function animateOpen() {
 
-        duration:.3,
+        if (!activeThumb) return;
 
-        onComplete:()=>{
+        gsap.fromTo(
 
-            lightbox.classList.remove("active");
+            image,
 
-            document.body.style.overflow="";
+            {
+                opacity: 0,
+                scale: .85
+            },
 
-        }
+            {
+                opacity: 1,
+                scale: 1,
+                duration: .45,
+                ease: "power3.out"
+            }
 
-    });
+        );
 
-}
-    function animateOpen(){
+        gsap.fromTo(
 
-    if(!activeThumb) return;
+            lightbox,
 
-    gsap.fromTo(
+            {
+                opacity: 0
+            },
 
-        image,
+            {
+                opacity: 1,
+                duration: .35
+            }
 
-        {
-            opacity:0,
-            scale:.85
-        },
+        );
 
-        {
-            opacity:1,
-            scale:1,
-            duration:.45,
-            ease:"power3.out"
-        }
+    }
 
-    );
-
-    gsap.fromTo(
-
-        lightbox,
-
-        {
-            opacity:0
-        },
-
-        {
-            opacity:1,
-            duration:.35
-        }
-
-    );
-
-}
     function previous() {
 
         current--;
 
-        if (current < 0) current = gallery.length - 1;
+        if (current < 0) {
+
+            current = gallery.length - 1;
+
+        }
 
         show(current);
 
@@ -170,17 +169,25 @@ function open(index, thumb) {
 
         current++;
 
-        if (current >= gallery.length) current = 0;
+        if (current >= gallery.length) {
+
+            current = 0;
+
+        }
 
         show(current);
 
     }
 
-    gallery = Array.from(document.querySelectorAll(
+    gallery = Array.from(
 
-        ".work-item img, .food-item img"
+        document.querySelectorAll(
 
-    ));
+            ".work-item img, .food-item img"
+
+        )
+
+    );
 
     gallery.forEach((img, index) => {
 
@@ -188,9 +195,9 @@ function open(index, thumb) {
 
         img.addEventListener("click", () => {
 
-    open(index, img);
+            open(index, img);
 
-});
+        });
 
     });
 
@@ -222,36 +229,37 @@ function open(index, thumb) {
 
     });
 
+    /* ==========================================================
+       TOUCH SWIPE
+    ========================================================== */
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    lightbox.addEventListener("touchstart", (e) => {
+
+        touchStartX = e.changedTouches[0].clientX;
+
+    }, { passive: true });
+
+    lightbox.addEventListener("touchend", (e) => {
+
+        touchEndX = e.changedTouches[0].clientX;
+
+        const distance = touchEndX - touchStartX;
+
+        if (Math.abs(distance) < 60) return;
+
+        if (distance > 0) {
+
+            previous();
+
+        } else {
+
+            following();
+
+        }
+
+    }, { passive: true });
+
 });
-/* ==========================================================
-   TOUCH SWIPE
-========================================================== */
-
-let touchStartX = 0;
-let touchEndX = 0;
-
-lightbox.addEventListener("touchstart", (e) => {
-
-    touchStartX = e.changedTouches[0].clientX;
-
-}, { passive: true });
-
-lightbox.addEventListener("touchend", (e) => {
-
-    touchEndX = e.changedTouches[0].clientX;
-
-    const distance = touchEndX - touchStartX;
-
-    if (Math.abs(distance) < 60) return;
-
-    if (distance > 0) {
-
-        previous();
-
-    } else {
-
-        following();
-
-    }
-
-}, { passive: true });
