@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
+const aboutHero = document.querySelector(".about-hero");
+
+if (!aboutHero) return;
+
 const tl=gsap.timeline();
 
 tl.to(".portfolio-hero-image img",{

@@ -4,8 +4,8 @@
 ========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-
     const hero = document.querySelector(".hero");
+    if (!hero) return;
     const bg = document.querySelector(".bg-image");
     const bloom = document.querySelector(".light-bloom");
     const cursor = document.querySelector(".cursor-light");

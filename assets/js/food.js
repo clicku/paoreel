@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
+const foodHero = document.querySelector(".food-hero");
+
+if (!foodHero) return;
+
 const tl=gsap.timeline();
 
 tl.to(".food-hero-image img",{

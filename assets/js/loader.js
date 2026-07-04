@@ -5,10 +5,17 @@
 
 window.addEventListener("load", () => {
 
+    const loader = document.querySelector("#loader");
+
+    if (!loader || !window.gsap) return;
+
+    const logo = loader.querySelector(".loader-logo");
+    const text = loader.querySelector(".loader-text");
+
     const tl = gsap.timeline({
 
-        defaults:{
-            ease:"power3.out"
+        defaults: {
+            ease: "power3.out"
         }
 
     });
