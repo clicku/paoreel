@@ -250,11 +250,9 @@ main {
 
     position: relative;
 
-    overflow: hidden;
-
     background: transparent;
 
-    isolation: isolate;
+    z-index: 5;
 
 }
 
@@ -264,11 +262,9 @@ main {
 
     inset: 0;
 
-    background: #fff;
+    background: white;
 
     opacity: 0;
-
-    pointer-events: none;
 
     z-index: 1;
 

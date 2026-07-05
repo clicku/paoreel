@@ -50,12 +50,13 @@ window.addEventListener("load", () => {
 
     });
 
-    gsap.set(".hero-title", {
+    gsap.set(".hero-line-inner", {
 
-        opacity: 0,
-        y: 40
+    yPercent: 100,
 
-    });
+    opacity: 0
+
+});
 
     /* ======================================================
        INTRO TIMELINE
@@ -117,15 +118,25 @@ window.addEventListener("load", () => {
 
         /* Hero Title */
 
-        .to(".hero-title", {
+        /* ======================================================
+            HERO TITLE
+            ====================================================== */
 
-            opacity: 1,
+            .to(".hero-line-inner", {
 
-            y: 0,
+                yPercent: 0,
 
-            duration: 0.7
+                opacity: 1,
 
-        }, "-=0.3")
+                duration: 2.2,
+
+                stagger: 0.28,
+
+                ease: "expo.out",
+
+                clearProps: "transform"
+
+            }, "-=0.15")
 
         /* Small pause */
 

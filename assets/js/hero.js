@@ -1,7 +1,7 @@
 /* ==========================================================
    PAOREEL STUDIOS V3
    HERO
-========================================================== */
+   ========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -14,13 +14,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const heroContent = document.querySelector(".hero-content");
     const scrollIndicator = document.querySelector(".scroll-indicator");
     const gallery = document.querySelector(".gallery-section");
-    const galleryTrack = document.querySelector(".gallery-track");
+    const galleryPaper = document.querySelector(".gallery-paper");
 
-    if (!hero || !heroParallax || !heroImage || !heroImageImg) return;
+    if (!hero) return;
+
+
 
     /* ======================================================
        MOUSE PARALLAX
-    ====================================================== */
+       ====================================================== */
 
     let mouseX = 0;
     let mouseY = 0;
@@ -32,8 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const rect = hero.getBoundingClientRect();
 
-        mouseX = ((event.clientX - rect.left) / rect.width - 0.5) * 20;
-        mouseY = ((event.clientY - rect.top) / rect.height - 0.5) * 14;
+        mouseX = ((event.clientX - rect.left) / rect.width - 0.5) * 18;
+        mouseY = ((event.clientY - rect.top) / rect.height - 0.5) * 12;
 
     });
 
@@ -59,13 +61,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        KEN BURNS
-    ====================================================== */
+       ====================================================== */
 
     gsap.to(heroImageImg, {
 
-        scale: 1.04,
+        scale: 1.13,
 
-        duration: 30,
+        duration: 28,
 
         repeat: -1,
 
@@ -79,11 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        HERO PARALLAX
-    ====================================================== */
+       ====================================================== */
 
     gsap.to(heroImage, {
 
-        yPercent: 6,
+        yPercent: 10,
 
         ease: "none",
 
@@ -95,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             end: "bottom top",
 
-            scrub:5
+            scrub: 4
 
         }
 
@@ -104,12 +106,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ======================================================
-       HERO BLUR
-    ====================================================== */
+       HERO IMAGE BLUR
+       ====================================================== */
 
     gsap.to(heroImageImg, {
 
-        filter: "blur(4px)",
+        filter: "blur(8px)",
 
         ease: "none",
 
@@ -121,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             end: "bottom top",
 
-            scrub:5
+            scrub: 4
 
         }
 
@@ -130,12 +132,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ======================================================
-       HERO SCROLL ZOOM
-    ====================================================== */
+       HERO ZOOM ON SCROLL
+       ====================================================== */
 
     gsap.to(heroImageImg, {
 
-        scale: 1.08,
+        scale: 1.18,
 
         ease: "none",
 
@@ -147,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             end: "bottom top",
 
-            scrub:5
+            scrub: 4
 
         }
 
@@ -157,13 +159,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        HERO CONTENT
-    ====================================================== */
+       ====================================================== */
 
     gsap.to(heroContent, {
 
-        yPercent: -18,
+        yPercent: -20,
 
-        opacity: 0.35,
+        opacity: 0.2,
 
         ease: "none",
 
@@ -175,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             end: "bottom top",
 
-            scrub:5
+            scrub: 3
 
         }
 
@@ -184,93 +186,108 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ======================================================
-   SCROLL INDICATOR
-====================================================== */
+       SCROLL INDICATOR
+       ====================================================== */
 
-if (scrollIndicator) {
+    if (scrollIndicator) {
 
-    gsap.to(scrollIndicator, {
+        gsap.to(scrollIndicator, {
 
-        opacity: 0,
+            opacity: 0,
 
-        y: 20,
+            y: 20,
 
-        ease: "none",
+            ease: "none",
 
-        scrollTrigger: {
+            scrollTrigger: {
 
-            trigger: hero,
+                trigger: hero,
 
-            start: "top top",
+                start: "top top",
 
-            end: "top+=180 top",
+                end: "top+=180 top",
 
-            scrub: 1
+                scrub: 1
 
-        }
+            }
 
-    });
+        });
 
-}
-
-
-/* ======================================================
-   GALLERY OVERLAY FADE
-====================================================== */
-
-const galleryOverlay = document.querySelector(".gallery-overlay");
-
-if (galleryOverlay) {
-
-    gsap.to(galleryOverlay, {
-
-        opacity: 1,
-
-        ease: "none",
-
-        scrollTrigger: {
-
-            trigger: ".gallery-section",
-
-            start: "top bottom",
-
-            end: "top 85%",
-
-            scrub: true
-
-        }
-
-    });
-
-}
+    }
 
 
-/* ======================================================
-   GALLERY REVEAL
-====================================================== */
 
-if (galleryTrack) {
+    /* ======================================================
+       GALLERY PAPER
+       Transparent -> White
+       ====================================================== */
 
-    gsap.from(galleryTrack, {
+    if (galleryPaper) {
 
-        y: 40,
+        gsap.fromTo(
 
-        ease: "none",
+            galleryPaper,
 
-        scrollTrigger: {
+            {
 
-            trigger: gallery,
+                opacity: 0
 
-            start: "top 90%",
+            },
 
-            end: "top 70%",
+            {
 
-            scrub: 2
+                opacity: 1,
 
-        }
+                ease: "none",
 
-    });
+                scrollTrigger: {
 
-}
+                    trigger: gallery,
+
+                    start: "top bottom",
+
+                    end: "top 75%",
+
+                    scrub: 2
+
+                }
+
+            }
+
+        );
+
+    }
+
+
+
+    /* ======================================================
+       GALLERY REVEAL
+       ====================================================== */
+
+    if (gallery) {
+
+        gsap.from(gallery, {
+
+            y: 80,
+
+            opacity: 0.98,
+
+            ease: "power2.out",
+
+            scrollTrigger: {
+
+                trigger: gallery,
+
+                start: "top 92%",
+
+                end: "top 70%",
+
+                scrub: 2
+
+            }
+
+        });
+
+    }
 
 });
