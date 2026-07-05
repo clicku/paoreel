@@ -250,9 +250,9 @@ main {
 
     position: relative;
 
-    background: transparent;
-
     overflow: hidden;
+
+    background: transparent;
 
     isolation: isolate;
 

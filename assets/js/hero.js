@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             end: "bottom top",
 
-            scrub: 3
+            scrub:5
 
         }
 
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             end: "bottom top",
 
-            scrub: 3
+            scrub:5
 
         }
 
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             end: "bottom top",
 
-            scrub: 3
+            scrub:5
 
         }
 
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             end: "bottom top",
 
-            scrub: 3
+            scrub:5
 
         }
 
@@ -184,104 +184,93 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ======================================================
-       SCROLL INDICATOR
-    ====================================================== */
+   SCROLL INDICATOR
+====================================================== */
 
-    if (scrollIndicator) {
+if (scrollIndicator) {
 
-        gsap.to(scrollIndicator, {
+    gsap.to(scrollIndicator, {
 
-            opacity: 0,
+        opacity: 0,
 
-            y: 20,
+        y: 20,
 
-            ease: "none",
+        ease: "none",
 
-            scrollTrigger: {
+        scrollTrigger: {
 
-                trigger: hero,
+            trigger: hero,
 
-                start: "top top",
+            start: "top top",
 
-                end: "top+=180 top",
+            end: "top+=180 top",
 
-                scrub: 1
+            scrub: 1
 
-            }
+        }
 
-        });
+    });
 
-    }
+}
 
 
-
-    /* ======================================================
-   GALLERY BACKGROUND FADE
+/* ======================================================
+   GALLERY OVERLAY FADE
 ====================================================== */
 
 const galleryOverlay = document.querySelector(".gallery-overlay");
 
 if (galleryOverlay) {
 
-    gsap.fromTo(galleryOverlay,
+    gsap.to(galleryOverlay, {
 
-        {
+        opacity: 1,
 
-            opacity: 0
+        ease: "none",
 
-        },
+        scrollTrigger: {
 
-        {
+            trigger: ".gallery-section",
 
-            opacity: 1,
+            start: "top bottom",
 
-            ease: "none",
+            end: "top 85%",
 
-            scrollTrigger: {
-
-                trigger: gallery,
-
-                start: "top bottom",
-
-                end: "top 85%",
-
-                scrub: 2
-
-            }
+            scrub: true
 
         }
 
-    );
+    });
 
 }
 
 
-    /* ======================================================
-       GALLERY REVEAL
-    ====================================================== */
+/* ======================================================
+   GALLERY REVEAL
+====================================================== */
 
-    if (galleryTrack) {
+if (galleryTrack) {
 
-        gsap.from(galleryTrack, {
+    gsap.from(galleryTrack, {
 
-            y: 40,
+        y: 40,
 
-            ease: "none",
+        ease: "none",
 
-            scrollTrigger: {
+        scrollTrigger: {
 
-                trigger: gallery,
+            trigger: gallery,
 
-                start: "top 90%",
+            start: "top 90%",
 
-                end: "top 70%",
+            end: "top 70%",
 
-                scrub: 2
+            scrub: 2
 
-            }
+        }
 
-        });
+    });
 
-    }
+}
 
 });
