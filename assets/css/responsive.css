@@ -53,3 +53,57 @@
     }
 
 }
+/* ==========================================================
+   GALLERY INTRO
+   ========================================================== */
+
+@media (max-width: 768px) {
+
+    .gallery-intro {
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 2rem;
+
+        max-width: 100%;
+
+        margin: 0 auto 3rem;
+
+        padding: 0 2rem;
+
+    }
+
+    .gallery-intro-left,
+    .gallery-intro-right {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        justify-self: unset;
+
+    }
+
+    .gallery-title {
+
+        font-size: clamp(2.5rem, 10vw, 3.5rem);
+
+        line-height: 0.95;
+
+    }
+
+    .gallery-copy {
+
+        max-width: 100%;
+
+        font-size: 1rem;
+
+        line-height: 1.8;
+
+    }
+
+}
