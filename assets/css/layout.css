@@ -217,11 +217,9 @@ main {
 
     font-weight: 300;
 
-    line-height: 0.95;
+    line-height: 1.08;
 
     letter-spacing: -0.05em;
-
-    color: var(--color-text);
 
 }
 
@@ -248,22 +246,48 @@ main {
 /* ==========================================================
    GALLERY SECTION
    ========================================================== */
-
 .gallery-section {
 
-    background: var(--color-white);
+    position: relative;
+
+    background: transparent;
 
     overflow: hidden;
 
-    padding: 8rem 0;
+    isolation: isolate;
 
 }
 
+.gallery-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: #fff;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 1;
+
+}
+
+.gallery-intro,
+.gallery-track {
+
+    position: relative;
+
+    z-index: 2;
+
+}
 
 
 /* ==========================================================
    GALLERY TRACK
    ========================================================== */
+
 
 .gallery-track {
 
@@ -281,7 +305,14 @@ main {
 
 }
 
+.gallery-intro,
+.gallery-track {
 
+    position: relative;
+
+    z-index: 2;
+
+}
 
 /* ==========================================================
    GALLERY ITEM
@@ -303,7 +334,11 @@ main {
 
 }
 
+.gallery-item:hover .gallery-image img {
 
+    transform: scale(1.06);
+
+}
 
 /* ==========================================================
    GALLERY IMAGE CONTAINER
@@ -361,14 +396,13 @@ main {
 
     font-size: var(--fs-xs);
 
-    letter-spacing: 0.14em;
+    letter-spacing: .18em;
 
     text-transform: uppercase;
 
-    color: var(--color-light-text);
+    color: rgba(0,0,0,.45);
 
 }
-
 
 
 /* ==========================================================

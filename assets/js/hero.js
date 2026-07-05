@@ -1,16 +1,22 @@
 /* ==========================================================
-   PAOREEL V2
-   HERO INTERACTIONS
+   PAOREEL STUDIOS V3
+   HERO
 ========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-    const hero = document.querySelector(".hero");
-    if (!hero) return;
-    const bg = document.querySelector(".bg-image");
-    const bloom = document.querySelector(".light-bloom");
-    const cursor = document.querySelector(".cursor-light");
 
-    if (!hero || !bg) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const hero = document.querySelector(".hero");
+    const heroParallax = document.querySelector(".hero-parallax");
+    const heroImage = document.querySelector(".hero-image");
+    const heroImageImg = document.querySelector(".hero-image img");
+    const heroContent = document.querySelector(".hero-content");
+    const scrollIndicator = document.querySelector(".scroll-indicator");
+    const gallery = document.querySelector(".gallery-section");
+    const galleryTrack = document.querySelector(".gallery-track");
+
+    if (!hero || !heroParallax || !heroImage || !heroImageImg) return;
 
     /* ======================================================
        MOUSE PARALLAX
@@ -22,70 +28,26 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentX = 0;
     let currentY = 0;
 
-    hero.addEventListener("mousemove", (e) => {
+    hero.addEventListener("mousemove", (event) => {
 
         const rect = hero.getBoundingClientRect();
 
-        mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
-        mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
-
-        if (cursor) {
-
-            gsap.to(cursor, {
-
-                x: e.clientX,
-                y: e.clientY,
-                opacity: 1,
-                duration: 0.4,
-                ease: "power2.out"
-
-            });
-
-        }
+        mouseX = ((event.clientX - rect.left) / rect.width - 0.5) * 20;
+        mouseY = ((event.clientY - rect.top) / rect.height - 0.5) * 14;
 
     });
-
-    hero.addEventListener("mouseleave", () => {
-
-        if (cursor) {
-
-            gsap.to(cursor, {
-
-                opacity: 0,
-                duration: 0.5
-
-            });
-
-        }
-
-    });
-
-    /* ======================================================
-       SMOOTH PARALLAX LOOP
-    ====================================================== */
 
     function animateHero() {
 
         currentX += (mouseX - currentX) * 0.05;
         currentY += (mouseY - currentY) * 0.05;
 
-        gsap.set(bg, {
+        gsap.set(heroParallax, {
 
             x: currentX,
             y: currentY
 
         });
-
-        if (bloom) {
-
-            gsap.set(bloom, {
-
-                x: currentX * 0.5,
-                y: currentY * 0.5
-
-            });
-
-        }
 
         requestAnimationFrame(animateHero);
 
@@ -93,60 +55,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     animateHero();
 
-    /* ======================================================
-       SCROLL PARALLAX
-    ====================================================== */
 
-    window.addEventListener("scroll", () => {
-
-        const scroll = window.scrollY;
-
-        gsap.to(bg, {
-
-            y: currentY + scroll * 0.12,
-            duration: 0.5,
-            overwrite: true,
-            ease: "none"
-
-        });
-
-    });
 
     /* ======================================================
-       HEADER GLASS EFFECT
+       KEN BURNS
     ====================================================== */
 
-    const header = document.getElementById("header");
+    gsap.to(heroImageImg, {
 
-    function updateHeader() {
+        scale: 1.04,
 
-        if (!header) return;
-
-        if (window.scrollY > 60) {
-
-            header.classList.add("scrolled");
-
-        } else {
-
-            header.classList.remove("scrolled");
-
-        }
-
-    }
-
-    updateHeader();
-
-    window.addEventListener("scroll", updateHeader);
-
-    /* ======================================================
-       HERO BREATHING (VERY SUBTLE)
-    ====================================================== */
-
-    gsap.to(bg, {
-
-        scale: 1.14,
-
-        duration: 12,
+        duration: 30,
 
         repeat: -1,
 
@@ -156,25 +75,210 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+
+
     /* ======================================================
-       LIGHT BLOOM FLOAT
+       HERO PARALLAX
     ====================================================== */
 
-    if (bloom) {
+    gsap.to(heroImage, {
 
-        gsap.to(bloom, {
+        yPercent: 6,
 
-            x: 20,
+        ease: "none",
 
-            y: -15,
+        scrollTrigger: {
 
-            duration: 10,
+            trigger: hero,
 
-            repeat: -1,
+            start: "top top",
 
-            yoyo: true,
+            end: "bottom top",
 
-            ease: "sine.inOut"
+            scrub: 3
+
+        }
+
+    });
+
+
+
+    /* ======================================================
+       HERO BLUR
+    ====================================================== */
+
+    gsap.to(heroImageImg, {
+
+        filter: "blur(4px)",
+
+        ease: "none",
+
+        scrollTrigger: {
+
+            trigger: hero,
+
+            start: "top top",
+
+            end: "bottom top",
+
+            scrub: 3
+
+        }
+
+    });
+
+
+
+    /* ======================================================
+       HERO SCROLL ZOOM
+    ====================================================== */
+
+    gsap.to(heroImageImg, {
+
+        scale: 1.08,
+
+        ease: "none",
+
+        scrollTrigger: {
+
+            trigger: hero,
+
+            start: "top top",
+
+            end: "bottom top",
+
+            scrub: 3
+
+        }
+
+    });
+
+
+
+    /* ======================================================
+       HERO CONTENT
+    ====================================================== */
+
+    gsap.to(heroContent, {
+
+        yPercent: -18,
+
+        opacity: 0.35,
+
+        ease: "none",
+
+        scrollTrigger: {
+
+            trigger: hero,
+
+            start: "top top",
+
+            end: "bottom top",
+
+            scrub: 3
+
+        }
+
+    });
+
+
+
+    /* ======================================================
+       SCROLL INDICATOR
+    ====================================================== */
+
+    if (scrollIndicator) {
+
+        gsap.to(scrollIndicator, {
+
+            opacity: 0,
+
+            y: 20,
+
+            ease: "none",
+
+            scrollTrigger: {
+
+                trigger: hero,
+
+                start: "top top",
+
+                end: "top+=180 top",
+
+                scrub: 1
+
+            }
+
+        });
+
+    }
+
+
+
+    /* ======================================================
+   GALLERY BACKGROUND FADE
+====================================================== */
+
+const galleryOverlay = document.querySelector(".gallery-overlay");
+
+if (galleryOverlay) {
+
+    gsap.fromTo(galleryOverlay,
+
+        {
+
+            opacity: 0
+
+        },
+
+        {
+
+            opacity: 1,
+
+            ease: "none",
+
+            scrollTrigger: {
+
+                trigger: gallery,
+
+                start: "top bottom",
+
+                end: "top 85%",
+
+                scrub: 2
+
+            }
+
+        }
+
+    );
+
+}
+
+
+    /* ======================================================
+       GALLERY REVEAL
+    ====================================================== */
+
+    if (galleryTrack) {
+
+        gsap.from(galleryTrack, {
+
+            y: 40,
+
+            ease: "none",
+
+            scrollTrigger: {
+
+                trigger: gallery,
+
+                start: "top 90%",
+
+                end: "top 70%",
+
+                scrub: 2
+
+            }
 
         });
 

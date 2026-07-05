@@ -19,17 +19,29 @@ gsap.registerPlugin(ScrollTrigger);
 
 const lenis = new Lenis({
 
-    duration: 1.2,
+    duration: 2.0,
 
     smoothWheel: true,
 
-    touchMultiplier: 1.5,
+    smoothTouch: false,
 
-    wheelMultiplier: 1,
+    wheelMultiplier: 0.65,
+
+    touchMultiplier: 1,
 
     infinite: false
 
 });
+
+
+
+/* ==========================================================
+   LOCK SCROLL DURING INTRO
+   ========================================================== */
+
+lenis.stop();
+
+window.lenis = lenis;
 
 
 
