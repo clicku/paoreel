@@ -1365,18 +1365,223 @@
     }
 
 }
-/* ==========================================================
-   PORTFOLIO PREVIEW
-========================================================== */
+/* ==========================================================================
+   SELECTED WORKS
+========================================================================== */
 
-.portfolio-preview{
+.home-portfolio{
 
-    padding:var(--space-md) 0;
+    padding:var(--space-xl) 0;
 
-    background:#090909;
+    background:#000;
 
 }
 
+.home-portfolio-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(12,1fr);
+
+    gap:28px;
+
+    margin-top:90px;
+
+}
+
+.home-portfolio-card{
+
+    position:relative;
+
+    display:block;
+
+    overflow:hidden;
+
+    border-radius:var(--radius);
+
+    background:#0b0b0b;
+
+    grid-column:span 4;
+
+}
+
+.home-portfolio-card.large{
+
+    grid-column:span 8;
+
+}
+
+.home-portfolio-card.medium{
+
+    grid-column:span 6;
+
+}
+
+.home-portfolio-card img{
+
+    width:100%;
+
+    height:100%;
+
+    aspect-ratio:4/5;
+
+    object-fit:cover;
+
+    transition:
+        transform 7s ease,
+        filter .45s ease;
+
+}
+
+.home-portfolio-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,.35),
+        transparent 45%
+    );
+
+    opacity:0;
+
+    transition:var(--transition);
+
+}
+
+.home-portfolio-card:hover img{
+
+    transform:scale(1.08);
+
+    filter:brightness(.92);
+
+}
+
+.home-portfolio-card:hover::after{
+
+    opacity:1;
+
+}
+
+.home-portfolio-button{
+
+    margin-top:80px;
+
+    text-align:center;
+
+}
+/* ==========================================================================
+   HOME PORTFOLIO OVERLAY
+========================================================================== */
+
+.home-portfolio-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    padding:40px;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,.82),
+        rgba(0,0,0,.05) 65%
+    );
+
+    opacity:0;
+
+    transition:var(--transition);
+
+}
+
+.home-portfolio-card:hover .home-portfolio-overlay{
+
+    opacity:1;
+
+}
+
+.home-portfolio-overlay span{
+
+    color:var(--gold);
+
+    letter-spacing:.35em;
+
+    text-transform:uppercase;
+
+    font-size:.75rem;
+
+    margin-bottom:15px;
+
+}
+
+.home-portfolio-overlay h3{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:2rem;
+
+    line-height:1.2;
+
+    margin-bottom:20px;
+
+    color:#fff;
+
+}
+
+.home-portfolio-arrow{
+
+    color:#fff;
+
+    font-size:.95rem;
+
+    letter-spacing:.08em;
+
+    transform:translateY(12px);
+
+    transition:var(--transition);
+
+}
+
+.home-portfolio-card:hover .home-portfolio-arrow{
+
+    transform:translateY(0);
+
+}
+/* ==========================================================================
+   HOME PORTFOLIO
+========================================================================== */
+
+@media (max-width:991px){
+
+    .home-portfolio-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .home-portfolio-card,
+
+    .home-portfolio-card.large,
+
+    .home-portfolio-card.medium{
+
+        grid-column:auto;
+
+    }
+
+}
 .section-heading{
 
     width:min(1400px,90%);
