@@ -1,0 +1,215 @@
+/* ==========================================================
+   PAOREEL STUDIOS V3
+   FOOTER
+   ========================================================== */
+
+
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+
+.site-footer {
+
+    background: var(--color-white);
+
+    border-top: 1px solid var(--color-border);
+
+    padding:
+        7rem
+        var(--content-padding)
+        3rem;
+
+}
+
+
+
+/* ==========================================================
+   FOOTER GRID
+   ========================================================== */
+
+.site-footer {
+
+    display: grid;
+
+    grid-template-columns: 2fr 1fr;
+
+    gap: 4rem;
+
+}
+
+
+
+/* ==========================================================
+   BRAND
+   ========================================================== */
+
+.footer-brand h2 {
+
+    margin-bottom: 1.25rem;
+
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+
+    font-weight: var(--font-weight-light);
+
+    line-height: 0.95;
+
+    letter-spacing: -0.04em;
+
+    color: var(--color-text);
+
+}
+
+
+
+.footer-brand p {
+
+    max-width: 460px;
+
+    font-size: var(--fs-base);
+
+    line-height: 1.8;
+
+    color: var(--color-light-text);
+
+}
+
+
+
+/* ==========================================================
+   FOOTER LINKS
+   ========================================================== */
+
+.footer-links {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 1.1rem;
+
+}
+
+
+
+.footer-links a {
+
+    position: relative;
+
+    display: inline-block;
+
+    font-size: var(--fs-sm);
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+
+    color: var(--color-text);
+
+    transition:
+        color var(--transition-medium),
+        transform var(--transition-medium);
+
+}
+
+
+
+.footer-links a:hover {
+
+    color: var(--color-light-text);
+
+    transform: translateX(6px);
+
+}
+
+
+
+/* ==========================================================
+   FOOTER BOTTOM
+   ========================================================== */
+
+.site-footer::after {
+
+    content: "© PAOREEL STUDIOS";
+
+    display: block;
+
+    grid-column: 1 / -1;
+
+    margin-top: 5rem;
+
+    padding-top: 2rem;
+
+    border-top: 1px solid var(--color-border);
+
+    font-size: var(--fs-xs);
+
+    letter-spacing: 0.18em;
+
+    text-transform: uppercase;
+
+    color: var(--color-light-text);
+
+}
+
+
+
+/* ==========================================================
+   TABLET
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+    .site-footer {
+
+        grid-template-columns: 1fr;
+
+        gap: 3rem;
+
+        padding:
+            5rem
+            2rem
+            2.5rem;
+
+    }
+
+}
+
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media (max-width: 480px) {
+
+    .site-footer {
+
+        padding:
+            4rem
+            1.5rem
+            2rem;
+
+    }
+
+    .footer-brand h2 {
+
+        font-size: 2.5rem;
+
+    }
+
+    .footer-brand p {
+
+        font-size: 0.95rem;
+
+    }
+
+    .site-footer::after {
+
+        margin-top: 3rem;
+
+    }
+
+}

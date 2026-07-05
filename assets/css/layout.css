@@ -1,152 +1,236 @@
-/* ==========================================================================
-   Layout
-========================================================================== */
+/* ==========================================================
+   PAOREEL STUDIOS V3
+   LAYOUT
+   ========================================================== */
 
-main{
 
-    position:relative;
 
-}
+/* ==========================================================
+   SITE HEADER
+   ========================================================== */
 
-.navbar{
+.site-header {
 
-    position:fixed;
+    position: fixed;
 
-    top:0;
+    top: 0;
+    left: 0;
 
-    left:0;
+    width: 100%;
+    height: var(--header-height);
 
-    width:100%;
+    padding: 0 var(--content-padding);
 
-    display:flex;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    justify-content:space-between;
+    z-index: var(--z-header);
 
-    align-items:center;
-
-    padding:28px 60px;
-
-    z-index:10000;
-
-    transition:.4s ease;
-
-}
-
-.home-navbar{
-
-    justify-content:flex-end;
+    background: transparent;
 
 }
 
-.logo{
 
-    width:170px;
 
-}
+/* ==========================================================
+   LOGO
+   ========================================================== */
 
-.nav-links{
+.logo a {
 
-    display:flex;
+    font-size: var(--fs-sm);
 
-    gap:40px;
+    font-weight: var(--font-weight-medium);
 
-}
+    letter-spacing: 0.20em;
 
-.nav-links a{
+    text-transform: uppercase;
 
-    position:relative;
-
-    font-size:.95rem;
-
-    letter-spacing:.08em;
-
-    transition:.3s;
+    color: var(--color-white);
 
 }
 
-.nav-links a::after{
 
-    content:"";
 
-    position:absolute;
+/* ==========================================================
+   MAIN NAVIGATION
+   ========================================================== */
 
-    left:0;
+.main-navigation {
 
-    bottom:-6px;
+    display: flex;
 
-    width:0;
+    align-items: center;
 
-    height:1px;
-
-    background:#fff;
-
-    transition:.3s;
+    gap: 2.75rem;
 
 }
 
-.nav-links a:hover::after{
 
-    width:100%;
 
-}
-/* ==========================================================================
-   ACTIVE NAVIGATION
-========================================================================== */
+.main-navigation a {
 
-.nav-links a{
+    font-size: var(--fs-sm);
 
-    position:relative;
+    font-weight: var(--font-weight-regular);
 
-    transition:color .35s ease;
+    letter-spacing: 0.08em;
 
-}
+    text-transform: uppercase;
 
-.nav-links a::after{
+    color: var(--color-white);
 
-    content:"";
+    opacity: .85;
 
-    position:absolute;
-
-    left:0;
-
-    bottom:-10px;
-
-    width:100%;
-
-    height:2px;
-
-    background:var(--gold);
-
-    transform:scaleX(0);
-
-    transform-origin:left;
-
-    transition:transform .35s ease;
+    transition:
+        opacity var(--transition-medium),
+        transform var(--transition-medium);
 
 }
 
-.nav-links a:hover::after{
 
-    transform:scaleX(1);
 
-}
+.main-navigation a:hover {
 
-.nav-links a.active::after{
+    opacity: 1;
 
-    transform:scaleX(1);
+    transform: translateY(-2px);
 
 }
 
-.nav-links a:hover{
 
-    color:var(--gold);
+
+/* ==========================================================
+   MAIN
+   ========================================================== */
+
+main {
+
+    width: 100%;
 
 }
 
-.hero-container{
 
-    width:min(1500px,90%);
 
-    margin:auto;
+/* ==========================================================
+   GALLERY SECTION
+   ========================================================== */
+
+.gallery-section {
+
+    background: var(--color-white);
+
+    overflow: hidden;
+
+    padding: 8rem 0;
+
+}
+
+
+
+/* ==========================================================
+   GALLERY TRACK
+   ========================================================== */
+
+.gallery-track {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    flex-wrap: nowrap;
+
+    gap: 0;
+
+    width: max-content;
+
+    will-change: transform;
+
+}
+
+
+
+/* ==========================================================
+   GALLERY ITEM
+   ========================================================== */
+
+.gallery-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 0 0 auto;
+
+    width: var(--gallery-image-width);
+
+    text-decoration: none;
+
+}
+
+
+
+/* ==========================================================
+   GALLERY IMAGE
+   ========================================================== */
+
+.gallery-item img {
+
+    width: 100%;
+
+    height: var(--gallery-height);
+
+    object-fit: cover;
+
+    transform: scale(1);
+
+    transition: transform var(--transition-slow);
+
+}
+
+
+
+/* ==========================================================
+   CAPTION
+   ========================================================== */
+
+.gallery-item span {
+
+    margin-top: var(--gallery-caption-gap);
+
+    text-align: center;
+
+    font-size: var(--fs-xs);
+
+    letter-spacing: 0.14em;
+
+    text-transform: uppercase;
+
+    color: var(--color-light-text);
+
+}
+
+
+
+/* ==========================================================
+   HOVER
+   ========================================================== */
+
+.gallery-item:hover img {
+
+    transform: scale(1.05);
+
+}
+
+
+
+/* ==========================================================
+   PAGE SPACING
+   ========================================================== */
+
+section {
+
+    width: 100%;
 
 }

@@ -1,175 +1,131 @@
 /* ==========================================================
+   PAOREEL STUDIOS V3
    VARIABLES
-========================================================== */
+   ========================================================== */
 
-:root{
+:root {
 
     /* ======================================================
        COLORS
     ====================================================== */
 
-    --black:#000000;
+    --color-black: #000000;
+    --color-white: #ffffff;
 
-    --black-soft:#080808;
+    --color-text: #111111;
+    --color-light-text: #8a8a8a;
 
-    --black-light:#111111;
+    --color-border: #e8e8e8;
+    --color-background: #ffffff;
 
-    --white:#ffffff;
+    --color-overlay: rgba(0, 0, 0, 0.25);
 
-    --white-soft:#f3f3f3;
 
-    --gray-100:#dddddd;
-
-    --gray-200:#bbbbbb;
-
-    --gray-300:#999999;
-
-    --gray-400:#777777;
-
-    --gray-500:#555555;
-
-    --gold:#c8a96a;
-
-    --overlay:rgba(0,0,0,.42);
-
-    --gradient-top:rgba(0,0,0,.15);
-
-    --gradient-bottom:rgba(0,0,0,.82);
 
     /* ======================================================
        TYPOGRAPHY
     ====================================================== */
 
-    --font-heading:"Playfair Display",serif;
+    --font-family:
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif;
 
-    --font-body:"Inter",sans-serif;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
 
-    --hero-title:clamp(3rem,7vw,6.5rem);
 
-    --hero-subtitle:clamp(.85rem,1vw,1rem);
-
-    --hero-text:clamp(1rem,1.3vw,1.15rem);
-
-    --section-title:clamp(2rem,5vw,4rem);
-
-    /* ======================================================
-       WIDTHS
-    ====================================================== */
-
-    --content-width:650px;
-
-    --container:1400px;
 
     /* ======================================================
-       SPACING
+       FONT SIZES
     ====================================================== */
 
-    --space-xs:.5rem;
+    --fs-xs: 0.75rem;
+    --fs-sm: 0.875rem;
+    --fs-base: 1rem;
+    --fs-lg: 1.125rem;
+    --fs-xl: 1.5rem;
 
-    --space-sm:1rem;
+    --fs-display: clamp(4rem, 10vw, 9rem);
 
-    --space-md:2rem;
 
-    --space-lg:4rem;
-
-    --space-xl:6rem;
-
-    --space-2xl:10rem;
 
     /* ======================================================
-       BORDER
+       LINE HEIGHT
     ====================================================== */
 
-    --radius-sm:6px;
+    --lh-tight: 0.92;
+    --lh-normal: 1.5;
+    --lh-loose: 1.8;
 
-    --radius-md:12px;
 
-    --radius-lg:18px;
-
-    --radius-xl:30px;
 
     /* ======================================================
-       SHADOWS
+       LETTER SPACING
     ====================================================== */
 
-    --shadow-soft:
+    --tracking-tight: -0.05em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.12em;
 
-        0 20px 60px rgba(0,0,0,.25);
 
-    --shadow-large:
 
-        0 40px 120px rgba(0,0,0,.45);
+    /* ======================================================
+       LAYOUT
+    ====================================================== */
+
+    --site-width: 1800px;
+
+    --header-height: 90px;
+
+    --section-padding: 8rem;
+    --content-padding: 4rem;
+
+
+
+    /* ======================================================
+       GALLERY
+    ====================================================== */
+
+    --gallery-height: 650px;
+
+    --gallery-image-width: 420px;
+
+    --gallery-caption-gap: 16px;
+
+
+
+    /* ======================================================
+       BORDER RADIUS
+    ====================================================== */
+
+    --radius-none: 0;
+    --radius-sm: 4px;
+
+
 
     /* ======================================================
        TRANSITIONS
     ====================================================== */
 
-    --transition-fast:.25s;
+    --transition-fast: 0.25s ease;
 
-    --transition:.45s;
+    --transition-medium: 0.45s ease;
 
-    --transition-slow:.8s;
+    --transition-slow: 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+
+
 
     /* ======================================================
        Z-INDEX
     ====================================================== */
 
-    --z-bg:1;
-
-    --z-overlay:5;
-
-    --z-content:20;
-
-    --z-nav:100;
-
-    --z-loader:9999;
-
-}
-
-/* ==========================================================
-   GLOBAL BODY SETTINGS
-========================================================== */
-
-body{
-
-    background:var(--black);
-
-    color:var(--white);
-
-    font-family:var(--font-body);
-
-}
-
-/* ==========================================================
-   HEADINGS
-========================================================== */
-
-h1,
-h2,
-h3{
-
-    font-family:var(--font-heading);
-
-}
-
-/* ==========================================================
-   PARAGRAPHS
-========================================================== */
-
-p{
-
-    color:var(--gray-100);
-
-}
-
-/* ==========================================================
-   DEFAULT TRANSITIONS
-========================================================== */
-
-a,
-button,
-img{
-
-    transition:all var(--transition);
+    --z-loader: 9999;
+    --z-header: 500;
+    --z-overlay: 300;
+    --z-content: 100;
 
 }

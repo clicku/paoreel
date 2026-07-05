@@ -1,310 +1,312 @@
-/* ==========================================================================
-   PAOREEL STUDIOS
+/* ==========================================================
+   PAOREEL STUDIOS V3
    BASE STYLES
-========================================================================== */
+   ========================================================== */
 
-/* ==========================================================================
+
+
+/* ==========================================================
    RESET
-========================================================================== */
+   ========================================================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+*,
+*::before,
+*::after {
 
-/* ==========================================================================
-   DESIGN SYSTEM V2
-========================================================================== */
+    margin: 0;
+    padding: 0;
 
-:root{
-
-    /* Colors */
-
-    --black:#050505;
-    --white:#ffffff;
-    --gold:#c7a86d;
-
-    --text:#d7d7d7;
-    --border:rgba(255,255,255,.08);
-
-    /* Layout */
-
-    --container:1320px;
-
-    /* Radius */
-
-    --radius:20px;
-
-    /* Section Spacing */
-
-    --space-xs:40px;
-    --space-sm:80px;
-    --space-md:140px;
-    --space-lg:180px;
-    --space-xl:240px;
-
-    /* Animation */
-
-    --transition:.45s cubic-bezier(.2,.8,.2,1);
-
-}
-::selection{
-
-    background:var(--gold);
-
-    color:#111;
-
-}
-::-webkit-scrollbar{
-
-    width:10px;
+    box-sizing: border-box;
 
 }
 
-::-webkit-scrollbar-track{
 
-    background:#050505;
 
-}
+/* ==========================================================
+   ROOT
+   ========================================================== */
 
-::-webkit-scrollbar-thumb{
+html {
 
-    background:#2b2b2b;
+    scroll-behavior: smooth;
 
-    border-radius:999px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:var(--gold);
-
-}
-/* ==========================================================================
-   DOCUMENT
-========================================================================== */
-
-html{
-
-    scroll-behavior:smooth;
+    -webkit-text-size-adjust: 100%;
 
 }
 
-body{
 
-    background:var(--black);
 
-    color:var(--white);
+body {
 
-    font-family:"Open Sans",sans-serif;
+    font-family: var(--font-family);
 
-    overflow-x:hidden;
+    font-size: var(--fs-base);
 
-    -webkit-font-smoothing:antialiased;
+    font-weight: var(--font-weight-regular);
 
-    text-rendering:optimizeLegibility;
+    line-height: var(--lh-normal);
 
-    caret-color:transparent;
+    letter-spacing: var(--tracking-normal);
 
-}
+    color: var(--color-text);
 
-/* ==========================================================================
-   ELEMENTS
-========================================================================== */
+    background: var(--color-background);
 
-img{
+    overflow-x: hidden;
 
-    display:block;
+    text-rendering: optimizeLegibility;
 
-    width:100%;
+    -webkit-font-smoothing: antialiased;
 
-    height:auto;
+    -moz-osx-font-smoothing: grayscale;
 
 }
 
-a{
 
-    color:inherit;
 
-    text-decoration:none;
-
-}
-
-ul{
-
-    list-style:none;
-
-}
-
-button{
-
-    border:none;
-
-    background:none;
-
-    font:inherit;
-
-    cursor:pointer;
-
-}
-
-section{
-
-    position:relative;
-
-}
-
-/* ==========================================================================
+/* ==========================================================
    TYPOGRAPHY
-========================================================================== */
+   ========================================================== */
 
 h1,
 h2,
 h3,
 h4,
 h5,
-h6{
+h6 {
 
-    font-family:"Playfair Display",serif;
+    font-weight: var(--font-weight-regular);
 
-    font-weight:600;
+    line-height: var(--lh-tight);
 
-    line-height:1.1;
-
-}
-
-p{
-
-    color:var(--text);
-
-    font-size:1.05rem;
-
-    line-height:2;
+    letter-spacing: var(--tracking-tight);
 
 }
 
-/* ==========================================================================
-   LAYOUT
-========================================================================== */
 
-.container{
 
-    width:min(92%,var(--container));
+p {
 
-    margin:auto;
+    line-height: var(--lh-normal);
 
 }
 
-/* ==========================================================================
-   SHARED COMPONENTS
-========================================================================== */
 
-/* Section Title */
 
-.section-title{
+/* ==========================================================
+   LINKS
+   ========================================================== */
 
-    text-align:center;
+a {
 
-    margin-bottom:90px;
+    color: inherit;
 
-}
+    text-decoration: none;
 
-.section-title span{
-
-    display:block;
-
-    margin-bottom:18px;
-
-    color:var(--gold);
-
-    font-size:.82rem;
-
-    letter-spacing:.45em;
-
-    text-transform:uppercase;
+    transition: color var(--transition-medium);
 
 }
 
-.section-title h2{
 
-    font-size:clamp(2.8rem,5vw,4.8rem);
 
-    line-height:1.08;
+/* ==========================================================
+   LISTS
+   ========================================================== */
 
-}
+ul,
+ol {
 
-/* Primary Button */
-
-.btn-primary{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:18px 42px;
-
-    border-radius:999px;
-
-    background:var(--gold);
-
-    color:#111;
-
-    font-weight:600;
-
-    transition:var(--transition);
+    list-style: none;
 
 }
 
-.btn-primary:hover{
 
-    transform:translateY(-4px);
 
-    box-shadow:0 15px 45px rgba(199,168,109,.35);
+/* ==========================================================
+   MEDIA
+   ========================================================== */
+
+img {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
 
 }
+
+
+
+picture {
+
+    display: block;
+
+}
+
+
+
+video {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+}
+
+
+
+/* ==========================================================
+   FORM ELEMENTS
+   ========================================================== */
+
 button,
-a{
+input,
+textarea,
+select {
 
-    -webkit-tap-highlight-color:transparent;
+    font: inherit;
 
-}
-a,
-button{
+    color: inherit;
 
-    outline:none;
+    border: none;
 
-}
+    background: none;
 
-a:focus-visible,
-button:focus-visible{
-
-    outline:2px solid var(--gold);
-
-    outline-offset:6px;
-
-}
-img{
-
-    image-rendering:auto;
-
-}
-html.lenis{
-
-    height:auto;
+    outline: none;
 
 }
 
-.lenis.lenis-smooth{
 
-    scroll-behavior:auto;
+
+button {
+
+    cursor: pointer;
 
 }
 
-.lenis.lenis-stopped{
 
-    overflow:hidden;
+
+/* ==========================================================
+   SVG
+   ========================================================== */
+
+svg {
+
+    display: block;
+
+}
+
+
+
+/* ==========================================================
+   IFRAME
+   ========================================================== */
+
+iframe {
+
+    border: 0;
+
+}
+
+
+
+/* ==========================================================
+   SELECTION
+   ========================================================== */
+
+::selection {
+
+    color: var(--color-white);
+
+    background: var(--color-black);
+
+}
+
+
+
+/* ==========================================================
+   FOCUS
+   ========================================================== */
+
+:focus-visible {
+
+    outline: 2px solid var(--color-black);
+
+    outline-offset: 4px;
+
+}
+
+
+
+/* ==========================================================
+   UTILITIES
+   ========================================================== */
+
+.container {
+
+    width: min(100%, var(--site-width));
+
+    margin-inline: auto;
+
+    padding-inline: var(--content-padding);
+
+}
+
+
+
+.section {
+
+    padding-block: var(--section-padding);
+
+}
+
+
+
+/* ==========================================================
+   LENIS
+   ========================================================== */
+
+html.lenis {
+
+    height: auto;
+
+}
+
+
+
+.lenis.lenis-smooth {
+
+    scroll-behavior: auto;
+
+}
+
+
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+
+    overscroll-behavior: contain;
+
+}
+
+
+
+.lenis.lenis-stopped {
+
+    overflow: hidden;
+
+}
+
+
+
+.lenis.lenis-scrolling iframe {
+
+    pointer-events: none;
 
 }
