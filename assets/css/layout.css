@@ -17,17 +17,26 @@
     left: 0;
 
     width: 100%;
-    height: var(--header-height);
-
-    padding: 0 var(--content-padding);
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 
     z-index: var(--z-header);
 
-    background: transparent;
+    padding: 2rem var(--content-padding);
+
+}
+
+
+
+/* ==========================================================
+   NAVBAR
+   ========================================================== */
+
+.navbar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
 
 }
 
@@ -37,68 +46,87 @@
    LOGO
    ========================================================== */
 
-.logo a {
+.logo {
 
-    font-size: var(--fs-sm);
+    display: block;
 
-    font-weight: var(--font-weight-medium);
+}
 
-    letter-spacing: 0.20em;
 
-    text-transform: uppercase;
 
-    color: var(--color-white);
+.logo img {
+
+    display: block;
+
+    height: 42px;
+
+    width: auto;
 
 }
 
 
 
 /* ==========================================================
-   MAIN NAVIGATION
+   NAVIGATION
    ========================================================== */
 
-.main-navigation {
+.nav-links {
 
     display: flex;
 
     align-items: center;
 
-    gap: 2.75rem;
+    gap: 3rem;
+
+    list-style: none;
 
 }
 
 
 
-.main-navigation a {
+.nav-links a {
 
-    font-size: var(--fs-sm);
+    position: relative;
 
-    font-weight: var(--font-weight-regular);
+    font-size: 0.9rem;
+
+    font-weight: 400;
 
     letter-spacing: 0.08em;
 
     text-transform: uppercase;
 
-    color: var(--color-white);
+    color: #ffffff;
 
-    opacity: .85;
-
-    transition:
-        opacity var(--transition-medium),
-        transform var(--transition-medium);
+    transition: opacity .35s ease;
 
 }
 
 
 
-.main-navigation a:hover {
+.nav-links a:hover {
 
-    opacity: 1;
-
-    transform: translateY(-2px);
+    opacity: .65;
 
 }
 
+
+
+/* ==========================================================
+   MOBILE TOGGLE
+   ========================================================== */
+
+.mobile-toggle {
+
+    display: none;
+
+    color: #ffffff;
+
+    font-size: 1.6rem;
+
+    cursor: pointer;
+
+}
 
 
 /* ==========================================================
