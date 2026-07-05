@@ -167,6 +167,28 @@ main {
 
     text-decoration: none;
 
+    cursor: pointer;
+
+}
+
+
+
+/* ==========================================================
+   GALLERY IMAGE CONTAINER
+   ========================================================== */
+
+.gallery-image {
+
+    position: relative;
+
+    width: 100%;
+
+    height: var(--gallery-height);
+
+    overflow: hidden;
+
+    background: #f5f5f5;
+
 }
 
 
@@ -175,17 +197,19 @@ main {
    GALLERY IMAGE
    ========================================================== */
 
-.gallery-item img {
+.gallery-image img {
+
+    display: block;
 
     width: 100%;
 
-    height: var(--gallery-height);
+    height: 100%;
 
     object-fit: cover;
 
     transform: scale(1);
 
-    transition: transform var(--transition-slow);
+    will-change: transform;
 
 }
 
@@ -196,6 +220,8 @@ main {
    ========================================================== */
 
 .gallery-item span {
+
+    display: block;
 
     margin-top: var(--gallery-caption-gap);
 
@@ -208,18 +234,6 @@ main {
     text-transform: uppercase;
 
     color: var(--color-light-text);
-
-}
-
-
-
-/* ==========================================================
-   HOVER
-   ========================================================== */
-
-.gallery-item:hover img {
-
-    transform: scale(1.05);
 
 }
 
