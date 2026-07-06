@@ -211,3 +211,24 @@
     }
 
 }
+.site-header .logo{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+
+}
+
+.site-header.scrolled .logo{
+
+    opacity:0;
+
+    transform:translateY(-12px);
+
+    pointer-events:none;
+
+}
