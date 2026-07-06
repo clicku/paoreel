@@ -238,8 +238,18 @@
 
     cursor:pointer;
 
-}
+    transition:
 
+    color .35s ease,
+
+    transform .35s ease;
+
+}
+.site-header.scrolled .mobile-toggle{
+
+    color:#111;
+
+}
 /* ==========================================================
    MOBILE
 ========================================================== */
