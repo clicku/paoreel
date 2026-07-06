@@ -32,29 +32,22 @@ document.querySelectorAll(".nav-links a").forEach(link => {
     });
 
 });
-const header = document.getElementById("main-header");
 
-window.addEventListener("scroll", () => {
-
-    if (window.scrollY > 80) {
-
-        header.classList.add("scrolled");
-
-    } else {
-
-        header.classList.remove("scrolled");
-
-    }
-
-});
 /* ==========================================================
    MOBILE HEADER SHRINK
 ========================================================== */
 
-const header = document.querySelector(".site-header");
+const siteHeader = document.querySelector(".site-header");
 
-window.addEventListener("scroll", () => {
+if (siteHeader) {
 
-    header.classList.toggle("scrolled", window.scrollY > 80);
+    window.addEventListener("scroll", () => {
 
-});
+        siteHeader.classList.toggle(
+            "scrolled",
+            window.scrollY > 80
+        );
+
+    });
+
+}
