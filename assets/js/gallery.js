@@ -1,69 +1,203 @@
 /* ==========================================================
    PAOREEL STUDIOS V3
-   GALLERY
+   PREMIUM GALLERY
    ========================================================== */
 
-window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
+    const viewport = document.querySelector(".gallery-viewport");
     const track = document.querySelector(".gallery-track");
 
-    if (!track) return;
+    if (!viewport || !track) return;
 
-
+    gsap.registerPlugin();
 
     /* ======================================================
-       CONTINUOUS SCROLL
-       ====================================================== */
+       SETTINGS
+    ====================================================== */
 
-    gsap.to(track, {
+    const AUTO_SPEED = 0.35;
+    const RESUME_DELAY = 2500;
 
-        xPercent: -50,
+    /* ======================================================
+       STATE
+    ====================================================== */
 
-        duration: 40,
+    let currentX = 0;
+    let targetX = 0;
 
-        ease: "none",
+    let isDragging = false;
+    let startX = 0;
+    let dragStart = 0;
 
-        repeat: -1
+    let autoScroll = true;
+    let resumeTimer = null;
+
+    /* ======================================================
+       LOOP WIDTH
+    ====================================================== */
+
+    const loopWidth = track.scrollWidth / 2;
+
+    /* ======================================================
+       RESUME
+    ====================================================== */
+
+    function scheduleResume() {
+
+        clearTimeout(resumeTimer);
+
+        resumeTimer = setTimeout(() => {
+
+            autoScroll = true;
+
+        }, RESUME_DELAY);
+
+    }
+
+    /* ======================================================
+       ANIMATION LOOP
+    ====================================================== */
+
+    function animate() {
+
+        if (autoScroll && !isDragging) {
+
+            targetX -= AUTO_SPEED;
+
+        }
+
+        currentX += (targetX - currentX) * 0.12;
+
+        if (currentX <= -loopWidth) {
+
+            currentX += loopWidth;
+            targetX += loopWidth;
+
+        }
+
+        if (currentX > 0) {
+
+            currentX -= loopWidth;
+            targetX -= loopWidth;
+
+        }
+
+        gsap.set(track, {
+
+            x: currentX
+
+        });
+
+        requestAnimationFrame(animate);
+
+    }
+
+    animate();
+
+    /* ======================================================
+       DESKTOP DRAG
+    ====================================================== */
+
+    viewport.addEventListener("mousedown", (event) => {
+
+        isDragging = true;
+
+        autoScroll = false;
+
+        startX = event.clientX;
+
+        dragStart = targetX;
+
+        viewport.style.cursor = "grabbing";
 
     });
 
+    window.addEventListener("mousemove", (event) => {
 
+        if (!isDragging) return;
+
+        const distance = event.clientX - startX;
+
+        targetX = dragStart + distance;
+
+    });
+
+    window.addEventListener("mouseup", () => {
+
+        if (!isDragging) return;
+
+        isDragging = false;
+
+        viewport.style.cursor = "grab";
+
+        scheduleResume();
+
+    });
 
     /* ======================================================
-       IMAGE HOVER
-       ====================================================== */
+       TOUCH
+    ====================================================== */
 
-    document.querySelectorAll(".gallery-item").forEach(item => {
+    viewport.addEventListener("touchstart", (event) => {
 
-        item.addEventListener("mouseenter", () => {
+        isDragging = true;
 
-            gsap.to(item.querySelector("img"), {
+        autoScroll = false;
 
-                scale: 1.08,
+        startX = event.touches[0].clientX;
 
-                duration: 0.8,
+        dragStart = targetX;
 
-                ease: "power3.out"
+    }, {
 
-            });
+        passive: true
 
-        });
+    });
 
+    viewport.addEventListener("touchmove", (event) => {
 
+        if (!isDragging) return;
 
-        item.addEventListener("mouseleave", () => {
+        const distance = event.touches[0].clientX - startX;
 
-            gsap.to(item.querySelector("img"), {
+        targetX = dragStart + distance;
 
-                scale: 1,
+    }, {
 
-                duration: 0.8,
+        passive: true
 
-                ease: "power3.out"
+    });
 
-            });
+    viewport.addEventListener("touchend", () => {
 
-        });
+        isDragging = false;
+
+        scheduleResume();
+
+    });
+
+    /* ======================================================
+       HOVER
+    ====================================================== */
+
+    viewport.addEventListener("mouseenter", () => {
+
+        if (!isDragging) {
+
+            autoScroll = false;
+
+        }
+
+    });
+
+    viewport.addEventListener("mouseleave", () => {
+
+        if (!isDragging) {
+
+            scheduleResume();
+
+        }
 
     });
 

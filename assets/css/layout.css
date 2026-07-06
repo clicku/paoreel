@@ -270,15 +270,31 @@ main {
 
 }
 
-.gallery-intro,
-.gallery-track {
+/* ==========================================================
+   GALLERY VIEWPORT
+   ========================================================== */
+
+.gallery-viewport {
 
     position: relative;
 
-    z-index: 2;
+    overflow: hidden;
+
+    width: 100%;
+
+    cursor: grab;
+
+    user-select: none;
+
+    touch-action: pan-y;
 
 }
 
+.gallery-viewport:active {
+
+    cursor: grabbing;
+
+}
 
 /* ==========================================================
    GALLERY TRACK
@@ -298,6 +314,8 @@ main {
     width: max-content;
 
     will-change: transform;
+
+    backface-visibility: hidden;
 
 }
 
