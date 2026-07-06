@@ -34,20 +34,40 @@ document.querySelectorAll(".nav-links a").forEach(link => {
 });
 
 /* ==========================================================
-   MOBILE HEADER SHRINK
+   HERO HEADER VISIBILITY
 ========================================================== */
 
 const siteHeader = document.querySelector(".site-header");
+const hero = document.querySelector(".hero");
 
-if (siteHeader) {
+if (siteHeader && hero) {
 
-    window.addEventListener("scroll", () => {
+    const observer = new IntersectionObserver(
 
-        siteHeader.classList.toggle(
-            "scrolled",
-            window.scrollY > 80
-        );
+        (entries) => {
 
-    });
+            const entry = entries[0];
+
+            if (entry.isIntersecting) {
+
+                siteHeader.classList.remove("scrolled");
+
+            } else {
+
+                siteHeader.classList.add("scrolled");
+
+            }
+
+        },
+
+        {
+
+            threshold: 0.15
+
+        }
+
+    );
+
+    observer.observe(hero);
 
 }

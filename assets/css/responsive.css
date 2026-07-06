@@ -212,17 +212,6 @@
 
 }
 
-.logo-wordmark{
-
-    opacity:0;
-
-    transform:translateY(8px);
-
-    transition:
-        opacity .45s ease,
-        transform .45s ease;
-
-}
 
 .site-header.scrolled .logo-image{
 
@@ -232,10 +221,3 @@
 
 }
 
-.site-header.scrolled .logo-wordmark{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
