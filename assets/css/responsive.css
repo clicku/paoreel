@@ -159,3 +159,34 @@
 }
 
 }
+/* ==========================================================
+   MOBILE HEADER
+========================================================== */
+
+@media (max-width:768px){
+
+    #main-header{
+
+        transition:all .35s ease;
+
+    }
+
+    #main-header.scrolled .navbar{
+
+        height:64px;
+
+    }
+
+    #main-header.scrolled .logo-title img{
+
+        transform:scale(.82);
+
+    }
+
+    .logo-title img{
+
+        transition:transform .35s ease;
+
+    }
+
+}
