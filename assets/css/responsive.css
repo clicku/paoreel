@@ -190,3 +190,24 @@
     }
 
 }
+@media (max-width:768px){
+
+    .logo img{
+
+        width:190px;
+
+    }
+
+    .site-header.scrolled .navbar{
+
+        height:68px;
+
+    }
+
+    .site-header.scrolled .logo img{
+
+        width:135px;
+
+    }
+
+}

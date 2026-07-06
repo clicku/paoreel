@@ -40,9 +40,9 @@
 
 .navbar{
 
-    width:min(var(--container),92%);
+    width:min(var(--site-width),92%);
 
-    height:90px;
+    height:96px;
 
     margin:auto;
 
@@ -52,9 +52,34 @@
 
     justify-content:space-between;
 
+    transition:height .35s ease;
+
+}
+.site-header{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    z-index:500;
+
+    transition:background .35s ease;
+
+}
+
+.logo img{
+
+    width:220px;
+
     transition:
-        height .35s ease,
-        padding .35s ease;
+
+        width .35s ease,
+
+        transform .35s ease;
 
 }
 
