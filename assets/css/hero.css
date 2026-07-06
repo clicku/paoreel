@@ -202,36 +202,18 @@
 
     font-size: var(--fs-display);
     font-weight: var(--font-weight-light);
-    line-height: 1;
+    line-height: 1.05;
     letter-spacing: -0.05em;
 
     color: var(--color-white);
 
 }
 
-.hero-line {
+.hero-line{
 
-    display: block;
+    display:block;
 
-    overflow: hidden;
-
-    padding-bottom: .18em;
-
-    margin-bottom: -.18em;
-
-}
-
-.hero-line {
-
-    display: block;
-
-    overflow: hidden;
-
-    /* Expands the clipping region */
-    padding: 0 .18em .18em 0;
-
-    /* Cancels the visual spacing added by the padding */
-    margin: 0 -.18em -.18em 0;
+    padding-bottom:.22em;
 
 }
 
