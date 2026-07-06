@@ -2,8 +2,21 @@
    PAOREEL STUDIOS V3
    LOADER
    ========================================================== */
+   /* ======================================================
+   LOCK PAGE
+====================================================== */
+
+document.documentElement.style.overflow = "hidden";
+document.body.style.overflow = "hidden";
+
+if (window.lenis) {
+
+    window.lenis.stop();
+
+}
 
 window.addEventListener("load", () => {
+
 
     const loader = document.getElementById("loader");
 
@@ -150,11 +163,17 @@ window.addEventListener("load", () => {
 
         .to(".scroll-indicator", {
 
-            opacity: 1,
+    opacity: 1,
 
-            duration: 0.8
+    duration: 0.8,
 
-        });
+    onComplete: () => {
+
+        introFinished = true;
+
+    }
+
+});
 
     /* ======================================================
        SCROLL INDICATOR LOOP
@@ -182,9 +201,12 @@ window.addEventListener("load", () => {
    UNLOCK ON FIRST SCROLL
    ========================================================== */
 
+let introFinished = false;
 let introUnlocked = false;
 
 function unlockIntro() {
+
+    if (!introFinished) return;
 
     if (introUnlocked) return;
 
@@ -209,6 +231,9 @@ function unlockIntro() {
 
         .add(() => {
 
+            document.documentElement.style.overflow = "";
+            document.body.style.overflow = "";
+
             if (window.lenis) {
 
                 window.lenis.start();
@@ -221,12 +246,12 @@ function unlockIntro() {
 
 window.addEventListener("wheel", unlockIntro, {
 
-    passive: true
+    passive: false
 
 });
 
 window.addEventListener("touchstart", unlockIntro, {
 
-    passive: true
+    passive: false
 
 });
