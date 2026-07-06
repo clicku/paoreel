@@ -215,16 +215,17 @@
 
 }
 
-.hero-line-inner {
+.hero-line {
 
-    display: inline-block;
+    display: block;
 
-    padding-right: 0.18em;
-    margin-right: -0.18em;
+    overflow: hidden;
 
-    padding-bottom: 0.12em;
+    /* Expands the clipping region */
+    padding: 0 .18em .18em 0;
 
-    will-change: transform, opacity;
+    /* Cancels the visual spacing added by the padding */
+    margin: 0 -.18em -.18em 0;
 
 }
 
