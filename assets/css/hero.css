@@ -209,7 +209,9 @@
 
     overflow: hidden;
 
-    padding-bottom: .15em;
+    padding-bottom: .18em;
+
+    margin-bottom: -.18em;
 
 }
 
