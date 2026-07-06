@@ -296,10 +296,10 @@ main {
 
 }
 
+
 /* ==========================================================
    GALLERY TRACK
    ========================================================== */
-
 
 .gallery-track {
 
@@ -315,10 +315,19 @@ main {
 
     will-change: transform;
 
-    backface-visibility: hidden;
+    transition: gap 0.55s cubic-bezier(.22,.61,.36,1);
 
 }
 
+/* ==========================================================
+   GALLERY HOVER
+   ========================================================== */
+
+.gallery-viewport:hover .gallery-track {
+
+    gap: 18px;
+
+}
 .gallery-intro,
 .gallery-track {
 
@@ -334,17 +343,13 @@ main {
 
 .gallery-item {
 
-    display: flex;
-
-    flex-direction: column;
-
     flex: 0 0 auto;
 
     width: var(--gallery-image-width);
 
     text-decoration: none;
 
-    cursor: pointer;
+    cursor: grab;
 
 }
 
@@ -353,10 +358,6 @@ main {
     transform: scale(1.06);
 
 }
-
-/* ==========================================================
-   GALLERY IMAGE CONTAINER
-   ========================================================== */
 
 .gallery-image {
 
@@ -370,13 +371,9 @@ main {
 
     background: #f5f5f5;
 
+    transition: transform .55s cubic-bezier(.22,.61,.36,1);
+
 }
-
-
-
-/* ==========================================================
-   GALLERY IMAGE
-   ========================================================== */
 
 .gallery-image img {
 
@@ -390,10 +387,21 @@ main {
 
     transform: scale(1);
 
+    transition:
+        transform .55s cubic-bezier(.22,.61,.36,1);
+
     will-change: transform;
 
 }
+/* ==========================================================
+   IMAGE HOVER SCALE
+   ========================================================== */
 
+.gallery-viewport:hover .gallery-image {
+
+    transform: translateY(-4px) scale(0.97);
+
+}
 
 
 /* ==========================================================
@@ -415,6 +423,17 @@ main {
     text-transform: uppercase;
 
     color: rgba(0,0,0,.45);
+
+}
+.gallery-viewport {
+
+    cursor: grab;
+
+}
+
+.gallery-viewport:active {
+
+    cursor: grabbing;
 
 }
 
