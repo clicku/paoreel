@@ -107,6 +107,7 @@
     }
 
 }
+
 /* ==========================================================
    HERO - MOBILE FOUNDATION
 ========================================================== */
@@ -117,6 +118,8 @@
 
         align-items:center;
 
+        justify-content:center;
+
         padding-top:env(safe-area-inset-top);
 
         padding-bottom:env(safe-area-inset-bottom);
@@ -125,17 +128,17 @@
 
     .hero-content{
 
+        width:100%;
+
         max-width:420px;
 
-        margin:auto;
+        margin:0 auto;
 
-        padding-left:24px;
-
-        padding-right:24px;
-
-        padding-bottom:0;
+        padding:0 24px;
 
         text-align:center;
+
+        transform:translateY(6vh);
 
     }
 
