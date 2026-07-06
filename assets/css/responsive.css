@@ -17,11 +17,12 @@
     position: fixed;
 
     top: 0;
-    right: -100%;
+    right: 0;
+    transform: translateX(100%);
 
     width: min(320px, 82vw);
 
-    height: 100vh;
+    height: 100dvh;
 
     padding: 7.5rem 2.5rem;
 
@@ -42,15 +43,15 @@
 
     gap: 2rem;
 
-    transition: right .45s cubic-bezier(.22,1,.36,1);
+    transition: transform .45s cubic-bezier(.22,1,.36,1);
 
 }
 
-    .nav-links.active {
+    .nav-links.active{
 
-        right: 0;
+    transform: translateX(0);
 
-    }
+}
 
     .nav-links a {
 
