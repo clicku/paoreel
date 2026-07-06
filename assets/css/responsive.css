@@ -141,5 +141,16 @@
         transform:translateY(6vh);
 
     }
+    .hero-title{
+
+    line-height:1.02;
+
+}
+
+.hero-line-inner{
+
+    padding-bottom:.18em;
+
+}
 
 }
