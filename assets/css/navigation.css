@@ -82,7 +82,45 @@
         transform .35s ease;
 
 }
+/* ==========================================================
+   WORDMARK
+========================================================== */
 
+.logo{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.logo-wordmark{
+
+    position:absolute;
+
+    left:0;
+
+    opacity:0;
+
+    transform:translateY(6px);
+
+    font-size:.78rem;
+
+    letter-spacing:.35em;
+
+    font-weight:500;
+
+    color:#fff;
+
+    transition:
+
+        opacity .4s ease,
+
+        transform .4s ease;
+
+}
 /* ==========================================================
    LOGO
 ========================================================== */

@@ -14,31 +14,37 @@
 
     .nav-links {
 
-        position: fixed;
+    position: fixed;
 
-        top: 0;
-        right: -100%;
+    top: 0;
+    right: -100%;
 
-        width: 320px;
-        height: 100vh;
+    width: min(320px, 82vw);
 
-        padding: 8rem 3rem;
+    height: 100vh;
 
-        background: #000;
+    padding: 7.5rem 2.5rem;
 
-        display: flex;
+    background: rgba(10,10,10,.72);
 
-        flex-direction: column;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
 
-        align-items: flex-start;
+    border-left: 1px solid rgba(255,255,255,.08);
 
-        justify-content: flex-start;
+    display: flex;
 
-        gap: 2rem;
+    flex-direction: column;
 
-        transition: right .45s ease;
+    align-items: flex-start;
 
-    }
+    justify-content: flex-start;
+
+    gap: 2rem;
+
+    transition: right .45s cubic-bezier(.22,1,.36,1);
+
+}
 
     .nav-links.active {
 
@@ -159,37 +165,7 @@
 }
 
 }
-/* ==========================================================
-   MOBILE HEADER
-========================================================== */
 
-@media (max-width:768px){
-
-    #main-header{
-
-        transition:all .35s ease;
-
-    }
-
-    #main-header.scrolled .navbar{
-
-        height:64px;
-
-    }
-
-    #main-header.scrolled .logo-title img{
-
-        transform:scale(.82);
-
-    }
-
-    .logo-title img{
-
-        transition:transform .35s ease;
-
-    }
-
-}
 @media (max-width:768px){
 
     .logo img{
@@ -215,20 +191,50 @@
 
     opacity:1;
 
-    transform:translateY(0);
+    transform:translateY(0) scale(1);
 
     transition:
-        opacity .35s ease,
-        transform .35s ease;
+        opacity .45s ease,
+        transform .45s cubic-bezier(.22,1,.36,1);
+
+    transform-origin:left center;
 
 }
 
-.site-header.scrolled .logo{
+.logo-image{
+
+    opacity:1;
+
+    transition:
+        opacity .45s ease,
+        transform .45s ease;
+
+}
+
+.logo-wordmark{
 
     opacity:0;
 
-    transform:translateY(-12px);
+    transform:translateY(8px);
 
-    pointer-events:none;
+    transition:
+        opacity .45s ease,
+        transform .45s ease;
+
+}
+
+.site-header.scrolled .logo-image{
+
+    opacity:0;
+
+    transform:translateY(-8px);
+
+}
+
+.site-header.scrolled .logo-wordmark{
+
+    opacity:1;
+
+    transform:translateY(0);
 
 }
