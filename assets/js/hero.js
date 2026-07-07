@@ -215,48 +215,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    gsap.to(".gallery-overlay", {
 
+    opacity: 1,
 
-    /* ======================================================
-       GALLERY PAPER
-       Transparent -> White
-       ====================================================== */
+    ease: "none",
 
-    if (galleryPaper) {
+    scrollTrigger: {
 
-        gsap.fromTo(
+        trigger: ".gallery-section",
 
-            galleryPaper,
+        start: "top bottom",
 
-            {
+        end: "top 70%",
 
-                opacity: 0
+        scrub: 2
 
-            },
+    }
 
-            {
+});
 
-                opacity: 1,
+   /* ======================================================
+   GALLERY PAPER
+   Transparent → White
+   ====================================================== */
 
-                ease: "none",
+if (galleryPaper) {
 
-                scrollTrigger: {
+    gsap.fromTo(
 
-                    trigger: gallery,
+        galleryPaper,
 
-                    start: "top bottom",
+        {
 
-                    end: "top 75%",
+            opacity: 0
 
-                    scrub: 2
+        },
 
-                }
+        {
+
+            opacity: 1,
+
+            ease: "none",
+
+            scrollTrigger: {
+
+                trigger: gallery,
+
+                start: "top bottom",
+
+                end: "top 55%",
+
+                scrub: 3
 
             }
 
-        );
+        }
 
-    }
+    );
+
+}
 
 
 
@@ -291,27 +309,37 @@ gsap.to(".hero-transition", {
 
 if (gallery) {
 
-    gsap.from(gallery, {
+    gsap.fromTo(gallery,
 
-        y: 80,
+    {
 
-        opacity: 0.98,
+        y: 140
 
-        ease: "power2.out",
+    },
+
+    {
+
+        y: 0,
+
+        ease: "none",
 
         scrollTrigger: {
 
             trigger: gallery,
 
-            start: "top 92%",
+            start: "top bottom",
 
-            end: "top 70%",
+            end: "top 55%",
 
-            scrub: 2
+            scrub: 3
 
         }
 
-    });
+    }
+
+);
+
+  
 
 }
 

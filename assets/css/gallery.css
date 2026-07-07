@@ -5,25 +5,15 @@
 
 
 
-/* ==========================================================
-   GALLERY SECTION
-   ========================================================== */
-
 .gallery-section {
 
     position: relative;
 
-    background: #ffffff;
+    z-index: 20;
 
-    z-index: 5;
+    background: transparent;
 
 }
-
-
-
-/* ==========================================================
-   GALLERY OVERLAY
-   ========================================================== */
 
 .gallery-overlay {
 
@@ -31,12 +21,22 @@
 
     inset: 0;
 
-    background: #ffffff;
+    background: #fff;
 
-    /*opacity: 0;*/
-    display: none;
+    opacity: 0;
 
-    z-index: 1;
+    z-index: 0;
+
+    pointer-events: none;
+
+}
+
+.gallery-intro,
+.gallery-viewport {
+
+    position: relative;
+
+    z-index: 2;
 
 }
 
