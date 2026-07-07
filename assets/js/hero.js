@@ -260,34 +260,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    /* ======================================================
-       GALLERY REVEAL
-       ====================================================== */
+   /* ======================================================
+   HERO TRANSITION
+====================================================== */
 
-    if (gallery) {
+gsap.to(".hero-transition", {
 
-        gsap.from(gallery, {
+    yPercent: -100,
 
-            y: 80,
+    ease: "none",
 
-            opacity: 0.98,
+    scrollTrigger: {
 
-            ease: "power2.out",
+        trigger: ".hero",
 
-            scrollTrigger: {
+        start: "top top",
 
-                trigger: gallery,
+        end: "bottom top",
 
-                start: "top 92%",
-
-                end: "top 70%",
-
-                scrub: 2
-
-            }
-
-        });
+        scrub: true
 
     }
+
+});
+
+
+/* ======================================================
+   GALLERY REVEAL
+====================================================== */
+
+if (gallery) {
+
+    gsap.from(gallery, {
+
+        y: 80,
+
+        opacity: 0.98,
+
+        ease: "power2.out",
+
+        scrollTrigger: {
+
+            trigger: gallery,
+
+            start: "top 92%",
+
+            end: "top 70%",
+
+            scrub: 2
+
+        }
+
+    });
+
+}
 
 });
