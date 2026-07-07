@@ -52,8 +52,6 @@
 
 }
 
-
-
 .logo img {
 
     display: block;
@@ -82,8 +80,6 @@
 
 }
 
-
-
 .nav-links a {
 
     position: relative;
@@ -101,8 +97,6 @@
     transition: opacity .35s ease;
 
 }
-
-
 
 .nav-links a:hover {
 
@@ -129,6 +123,7 @@
 }
 
 
+
 /* ==========================================================
    MAIN
    ========================================================== */
@@ -139,303 +134,6 @@ main {
 
 }
 
-/* ==========================================================
-   GALLERY INTRO
-   ========================================================== */
-
-.gallery-intro {
-
-    display: grid;
-
-    grid-template-columns: 1.4fr 0.9fr;
-
-    align-items: center;
-
-    gap: 3rem;
-
-    max-width: 1200px;
-
-    margin: 0 auto 5rem;
-
-    padding: 0 var(--content-padding);
-
-}
-
-
-
-/* ==========================================================
-   LEFT COLUMN
-   ========================================================== */
-
-.gallery-intro-left {
-
-    max-width: 620px;
-
-}
-
-
-
-/* ==========================================================
-   MARKETING COPY
-   ========================================================== */
-
-.gallery-copy {
-
-    font-size: 1.05rem;
-
-    line-height: 2;
-
-    letter-spacing: 0.01em;
-
-    color: var(--color-light-text);
-
-}
-
-
-
-/* ==========================================================
-   RIGHT COLUMN
-   ========================================================== */
-
-.gallery-intro-right {
-
-    justify-self: end;
-
-    text-align: left;
-
-}
-
-
-
-/* ==========================================================
-   TITLE
-   ========================================================== */
-
-.gallery-title {
-
-    font-size: clamp(2.8rem, 5vw, 5rem);
-
-    font-weight: 300;
-
-    line-height: 1.08;
-
-    letter-spacing: -0.05em;
-
-}
-
-
-
-.gallery-title .word {
-
-    display: inline-block;
-
-    white-space: nowrap;
-
-}
-
-
-
-.gallery-title .word span {
-
-    display: inline-block;
-
-    will-change: transform;
-
-}
-
-/* ==========================================================
-   GALLERY SECTION
-   ========================================================== */
-.gallery-section {
-
-    position: relative;
-
-    background: transparent;
-
-    z-index: 5;
-
-}
-
-.gallery-overlay {
-
-    position: absolute;
-
-    inset: 0;
-
-    background: white;
-
-    opacity: 0;
-
-    z-index: 1;
-
-}
-
-/* ==========================================================
-   GALLERY VIEWPORT
-   ========================================================== */
-
-.gallery-viewport {
-
-    position: relative;
-
-    overflow: hidden;
-
-    width: 100%;
-
-    cursor: grab;
-
-    user-select: none;
-
-    touch-action: pan-y;
-
-}
-
-.gallery-viewport:active {
-
-    cursor: grabbing;
-
-}
-
-
-/* ==========================================================
-   GALLERY TRACK
-   ========================================================== */
-
-.gallery-track {
-
-    display: flex;
-
-    align-items: flex-start;
-
-    flex-wrap: nowrap;
-
-    gap: 0;
-
-    width: max-content;
-
-    will-change: transform;
-
-    transition: gap 0.55s cubic-bezier(.22,.61,.36,1);
-
-}
-
-/* ==========================================================
-   GALLERY HOVER
-   ========================================================== */
-
-.gallery-viewport:hover .gallery-track {
-
-    gap: 18px;
-
-}
-.gallery-intro,
-.gallery-track {
-
-    position: relative;
-
-    z-index: 2;
-
-}
-
-/* ==========================================================
-   GALLERY ITEM
-   ========================================================== */
-
-.gallery-item {
-
-    flex: 0 0 auto;
-
-    width: var(--gallery-image-width);
-
-    text-decoration: none;
-
-    cursor: grab;
-
-}
-
-.gallery-item:hover .gallery-image img {
-
-    transform: scale(1.06);
-
-}
-
-.gallery-image {
-
-    position: relative;
-
-    width: 100%;
-
-    height: var(--gallery-height);
-
-    overflow: hidden;
-
-    background: #f5f5f5;
-
-    transition: transform .55s cubic-bezier(.22,.61,.36,1);
-
-}
-
-.gallery-image img {
-
-    display: block;
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    transform: scale(1);
-
-    transition:
-        transform .55s cubic-bezier(.22,.61,.36,1);
-
-    will-change: transform;
-
-}
-/* ==========================================================
-   IMAGE HOVER SCALE
-   ========================================================== */
-
-.gallery-viewport:hover .gallery-image {
-
-    transform: translateY(-4px) scale(0.97);
-
-}
-
-
-/* ==========================================================
-   CAPTION
-   ========================================================== */
-
-.gallery-item span {
-
-    display: block;
-
-    margin-top: var(--gallery-caption-gap);
-
-    text-align: center;
-
-    font-size: var(--fs-xs);
-
-    letter-spacing: .18em;
-
-    text-transform: uppercase;
-
-    color: rgba(0,0,0,.45);
-
-}
-.gallery-viewport {
-
-    cursor: grab;
-
-}
-
-.gallery-viewport:active {
-
-    cursor: grabbing;
-
-}
 
 
 /* ==========================================================

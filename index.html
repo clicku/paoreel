@@ -53,11 +53,16 @@
     <link rel="stylesheet"
           href="assets/css/hero.css">
 
+     <link rel="stylesheet" 
+          href="assets/css/gallery.css">
+
     <link rel="stylesheet"
           href="assets/css/footer.css">
 
     <link rel="stylesheet"
           href="assets/css/responsive.css">
+    
+   
 
 </head>
 
@@ -191,16 +196,16 @@
 
 
        <!-- ========================================
-     Horizontal Gallery
-========================================= -->
+            Horizontal Gallery
+        ========================================= -->
 
 <section class="gallery-section">
 
     <!-- ========================================
          Gallery Overlay
     ========================================= -->
-
-    <div class="gallery-paper"></div>
+    <div class="gallery-overlay"></div>
+    
 
     <!-- ========================================
          Intro
@@ -247,8 +252,9 @@
              Set 01
         ========================================= -->
 
-        <a class="gallery-item"
-           href="food.html">
+        <a class="gallery-item" href="food.html">
+
+             <div class="gallery-card">
 
             <div class="gallery-image">
 
@@ -256,13 +262,15 @@
                      alt="Food Photography">
 
             </div>
+             </div>
 
             <span>Food Stories</span>
 
         </a>
 
-        <a class="gallery-item"
-           href="beverage.html">
+        <a class="gallery-item" href="beverage.html">
+
+             <div class="gallery-card">
 
             <div class="gallery-image">
 
@@ -270,182 +278,84 @@
                      alt="Beverage Photography">
 
             </div>
-
+                </div>  
             <span>Craft Drinks</span>
 
         </a>
 
-        <a class="gallery-item"
-           href="products.html">
+        <a class="gallery-item" href="products.html">
 
+                 <div class="gallery-card">
             <div class="gallery-image">
 
                 <img src="assets/images/gallery-03.webp"
                      alt="Product Photography">
 
             </div>
+                 </div>
 
             <span>Product Shot</span>
 
         </a>
 
-        <a class="gallery-item"
-           href="portrait.html">
+        <a class="gallery-item" href="portrait.html">
 
+             <div class="gallery-card">
             <div class="gallery-image">
 
                 <img src="assets/images/gallery-04.webp"
                      alt="Portrait Photography">
 
             </div>
-
+             </div>
             <span>People Portrait</span>
 
         </a>
 
-        <a class="gallery-item"
-           href="food.html">
-
+        <a class="gallery-item" href="food.html">
+             <div class="gallery-card">
             <div class="gallery-image">
 
                 <img src="assets/images/gallery-05.webp"
                      alt="Food Photography">
 
             </div>
-
+             </div>
             <span>Fresh Plates</span>
 
         </a>
 
-        <a class="gallery-item"
-           href="products.html">
+        <a class="gallery-item" href="products.html">
 
+             <div class="gallery-card">
             <div class="gallery-image">
 
                 <img src="assets/images/gallery-06.webp"
                      alt="Product Photography">
 
             </div>
+                </div>
 
             <span>Studio Light</span>
 
         </a>
-         <a class="gallery-item"
-           href="portrait.html">
+         <a class="gallery-item" href="portrait.html">
 
+             <div class="gallery-card">
             <div class="gallery-image">
 
                 <img src="assets/images/gallery-07.webp"
                      alt="Portrait Photography">
 
             </div>
+                </div>
 
             <span>Black & White Portrait</span>
 
         </a>
 
-        <!-- ========================================
-             Duplicate Set
-        ========================================= -->
-
-        <a class="gallery-item"
-           href="food.html">
-
-            <div class="gallery-image">
-
-                <img src="assets/images/gallery-01.webp"
-                     alt="Food Photography">
-
-            </div>
-
-            <span>Food Stories</span>
-
-        </a>
-
-        <a class="gallery-item"
-           href="beverage.html">
-
-            <div class="gallery-image">
-
-                <img src="assets/images/gallery-02.webp"
-                     alt="Beverage Photography">
-
-            </div>
-
-            <span>Craft Drinks</span>
-
-        </a>
-
-        <a class="gallery-item"
-           href="products.html">
-
-            <div class="gallery-image">
-
-                <img src="assets/images/gallery-03.webp"
-                     alt="Product Photography">
-
-            </div>
-
-            <span>Product Shot</span>
-
-        </a>
-
-        <a class="gallery-item"
-           href="portrait.html">
-
-            <div class="gallery-image">
-
-                <img src="assets/images/gallery-04.webp"
-                     alt="Portrait Photography">
-
-            </div>
-
-            <span>People Portrait</span>
-
-        </a>
-
-        <a class="gallery-item"
-           href="food.html">
-
-            <div class="gallery-image">
-
-                <img src="assets/images/gallery-05.webp"
-                     alt="Food Photography">
-
-            </div>
-
-            <span>Fresh Plates</span>
-
-        </a>
-
-        <a class="gallery-item"
-           href="products.html">
-
-            <div class="gallery-image">
-
-                <img src="assets/images/gallery-06.webp"
-                     alt="Product Photography">
-
-            </div>
-
-            <span>Studio Light</span>
-
-        </a>
-         <a class="gallery-item"
-           href="portrait.html">
-
-            <div class="gallery-image">
-
-                <img src="assets/images/gallery-07.webp"
-                     alt="Portrait Photography">
-
-            </div>
-
-            <span>Black & White Portrait</span>
-
-        </a>
-
-    </div>
+       
+        </div>
     </div>
 </section>
 
@@ -510,6 +420,8 @@
     <script src="assets/js/navigation.js"></script>
 
     <script src="assets/js/hero.js"></script>
+
+    <script src="assets/js/gallery-engine.js"></script>
 
     <script src="assets/js/gallery.js"></script>
 
