@@ -344,3 +344,64 @@ if (gallery) {
 }
 
 });
+function shutterEffect(nextImage){
+
+    const tl = gsap.timeline();
+
+    tl.to(".blade",{
+
+        xPercent:120,
+
+        opacity:1,
+
+        duration:.18,
+
+        stagger:.015,
+
+        ease:"power3.in"
+
+    });
+
+    tl.add(()=>{
+
+        heroImage.src = nextImage;
+
+    });
+
+    tl.to(".camera-flash",{
+
+        opacity:.12,
+
+        duration:.04,
+
+        yoyo:true,
+
+        repeat:1
+
+    },"-=.05");
+
+    tl.to(".blade",{
+
+        xPercent:0,
+
+        duration:.22,
+
+        stagger:{
+
+            each:.015,
+
+            from:"end"
+
+        },
+
+        ease:"power3.out"
+
+    });
+
+    tl.set(".blade",{
+
+        opacity:0
+
+    });
+
+}

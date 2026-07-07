@@ -234,7 +234,7 @@ let dragging = false;
 let moved = false;
 let lastX = 0;
 
-viewport.style.cursor = "grab";
+viewport.style.cursor = "pointer";
 
 viewport.addEventListener("mousedown", (event) => {
 
@@ -243,7 +243,7 @@ viewport.addEventListener("mousedown", (event) => {
 
     lastX = event.clientX;
 
-    viewport.style.cursor = "grabbing";
+    viewport.style.cursor = "pointer";
 
 });
 
@@ -269,7 +269,7 @@ window.addEventListener("mouseup", () => {
 
     dragging = false;
 
-    viewport.style.cursor = "grab";
+    viewport.style.cursor = "pointer";
 
 });
 

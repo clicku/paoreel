@@ -340,7 +340,70 @@
 
 }
 
+/* ==========================================================
+   CAMERA SHUTTER
+   ========================================================== */
 
+.camera-shutter {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 50;
+
+}
+
+.blade{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:70vw;
+    height:160vh;
+
+    background:#000;
+
+    transform-origin:left center;
+
+    opacity:0;
+
+    will-change:transform;
+
+}
+
+/* six blades */
+
+.blade1{ transform:rotate(0deg) translateX(-120%);}
+.blade2{ transform:rotate(60deg) translateX(-120%);}
+.blade3{ transform:rotate(120deg) translateX(-120%);}
+.blade4{ transform:rotate(180deg) translateX(-120%);}
+.blade5{ transform:rotate(240deg) translateX(-120%);}
+.blade6{ transform:rotate(300deg) translateX(-120%);}
+
+/* ==========================================================
+   CAMERA FLASH
+   ========================================================== */
+
+.camera-flash{
+
+    position:absolute;
+
+    inset:0;
+
+    background:white;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    z-index:55;
+
+}
 
 /* ==========================================================
    RESPONSIVE
