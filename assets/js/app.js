@@ -1,50 +1,29 @@
-document.addEventListener("DOMContentLoaded",()=>{
+/* ==========================================================
+   PAOREEL STUDIOS
+   APPLICATION ENTRY
+========================================================== */
 
-    if(window.initNavigation){
+window.addEventListener("load", () => {
 
-        initNavigation();
+    console.log("Application Loaded");
 
-    }
+    if (window.Hero) {
 
-    if(window.initFooter){
+        Hero.init();
 
-        initFooter();
+    } else {
 
-    }
-
-    if(window.initLightbox){
-
-        initLightbox();
-
-    }
-
-    if(document.querySelector(".hero")){
-
-        initHero?.();
+        console.error("Hero not found.");
 
     }
 
-    if(document.querySelector(".about-hero")){
+    if (window.CinematicController) {
 
-        initAbout?.();
+        CinematicController.start();
 
-    }
+    } else {
 
-    if(document.querySelector(".portfolio-hero")){
-
-        initPortfolio?.();
-
-    }
-
-    if(document.querySelector(".food-hero")){
-
-        initFood?.();
-
-    }
-
-    if(document.querySelector(".contact-hero")){
-
-        initContact?.();
+        console.error("CinematicController not found.");
 
     }
 

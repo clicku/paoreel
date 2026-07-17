@@ -1,407 +1,213 @@
-/* ==========================================================
-   PAOREEL STUDIOS V3
-   HERO
-   ========================================================== */
+/*
+==========================================
+PAOREEL STUDIOS
 
-document.addEventListener("DOMContentLoaded", () => {
+V5 HERO ENGINE
 
-    gsap.registerPlugin(ScrollTrigger);
+==========================================
+*/
 
-    const hero = document.querySelector(".hero");
-    const heroParallax = document.querySelector(".hero-parallax");
-    const heroImage = document.querySelector(".hero-image");
-    const heroImageImg = document.querySelector(".hero-image img");
-    const heroContent = document.querySelector(".hero-content");
-    const scrollIndicator = document.querySelector(".scroll-indicator");
-    const gallery = document.querySelector(".gallery-section");
-    const galleryPaper = document.querySelector(".gallery-paper");
+window.Hero = (() => {
 
-    if (!hero) return;
+    let initialized = false;
 
+    /* ==========================================
+       Cached Elements
+    ========================================== */
 
+    let hero;
+    let content;
+    let heroParallax;
+    let title;
+    let lines;
 
-    /* ======================================================
-       MOUSE PARALLAX
-       ====================================================== */
+    let scrollIndicator;
+    /* ==========================================
+       Cache DOM
+    ========================================== */
 
-    let mouseX = 0;
-    let mouseY = 0;
+    function cacheElements() {
 
-    let currentX = 0;
-    let currentY = 0;
+        hero = document.querySelector(".hero");
 
-    hero.addEventListener("mousemove", (event) => {
+        content = hero.querySelector(".hero-content");
 
-        const rect = hero.getBoundingClientRect();
+        heroParallax = document.querySelector(".hero-parallax");
 
-        mouseX = ((event.clientX - rect.left) / rect.width - 0.5) * 18;
-        mouseY = ((event.clientY - rect.top) / rect.height - 0.5) * 12;
+        title = hero.querySelector(".hero-title");
 
-    });
+        lines = hero.querySelectorAll(".hero-line-inner");
 
-    function animateHero() {
-
-        currentX += (mouseX - currentX) * 0.05;
-        currentY += (mouseY - currentY) * 0.05;
-
-        gsap.set(heroParallax, {
-
-            x: currentX,
-            y: currentY
-
-        });
-
-        requestAnimationFrame(animateHero);
+        scrollIndicator =
+            hero.querySelector(".scroll-indicator");
 
     }
+        /* ==========================================
+       Validate
+    ========================================== */
 
-    animateHero();
+    function validateElements() {
 
+        if (!hero) return false;
 
-
-    /* ======================================================
-       KEN BURNS
-       ====================================================== */
-
-    gsap.to(heroImageImg, {
-
-        scale: 1.13,
-
-        duration: 28,
-
-        repeat: -1,
-
-        yoyo: true,
-
-        ease: "sine.inOut"
-
-    });
-
-
-
-    /* ======================================================
-       HERO PARALLAX
-       ====================================================== */
-
-    gsap.to(heroImage, {
-
-        yPercent: 10,
-
-        ease: "none",
-
-        scrollTrigger: {
-
-            trigger: hero,
-
-            start: "top top",
-
-            end: "bottom top",
-
-            scrub: 4
-
-        }
-
-    });
-
-
-
-    /* ======================================================
-       HERO IMAGE BLUR
-       ====================================================== */
-
-    gsap.to(heroImageImg, {
-
-        filter: "blur(8px)",
-
-        ease: "none",
-
-        scrollTrigger: {
-
-            trigger: hero,
-
-            start: "top top",
-
-            end: "bottom top",
-
-            scrub: 4
-
-        }
-
-    });
-
-
-
-    /* ======================================================
-       HERO ZOOM ON SCROLL
-       ====================================================== */
-
-    gsap.to(heroImageImg, {
-
-        scale: 1.18,
-
-        ease: "none",
-
-        scrollTrigger: {
-
-            trigger: hero,
-
-            start: "top top",
-
-            end: "bottom top",
-
-            scrub: 4
-
-        }
-
-    });
-
-
-
-    /* ======================================================
-       HERO CONTENT
-       ====================================================== */
-
-    gsap.to(heroContent, {
-
-        yPercent: -20,
-
-        opacity: 0.2,
-
-        ease: "none",
-
-        scrollTrigger: {
-
-            trigger: hero,
-
-            start: "top top",
-
-            end: "bottom top",
-
-            scrub: 3
-
-        }
-
-    });
-
-
-
-    /* ======================================================
-       SCROLL INDICATOR
-       ====================================================== */
-
-    if (scrollIndicator) {
-
-        gsap.to(scrollIndicator, {
-
-            opacity: 0,
-
-            y: 20,
-
-            ease: "none",
-
-            scrollTrigger: {
-
-                trigger: hero,
-
-                start: "top top",
-
-                end: "top+=180 top",
-
-                scrub: 1
-
-            }
-
-        });
-
-    }
-
-    gsap.to(".gallery-overlay", {
-
-    opacity: 1,
-
-    ease: "none",
-
-    scrollTrigger: {
-
-        trigger: ".gallery-section",
-
-        start: "top bottom",
-
-        end: "top 70%",
-
-        scrub: 2
-
-    }
-
-});
-
-   /* ======================================================
-   GALLERY PAPER
-   Transparent → White
-   ====================================================== */
-
-if (galleryPaper) {
-
-    gsap.fromTo(
-
-        galleryPaper,
-
-        {
-
-            opacity: 0
-
-        },
-
-        {
-
-            opacity: 1,
-
-            ease: "none",
-
-            scrollTrigger: {
-
-                trigger: gallery,
-
-                start: "top bottom",
-
-                end: "top 55%",
-
-                scrub: 3
-
-            }
-
-        }
-
-    );
-
-}
-
-
-
-   /* ======================================================
-   HERO TRANSITION
-====================================================== */
-
-gsap.to(".hero-transition", {
-
-    yPercent: -100,
-
-    ease: "none",
-
-    scrollTrigger: {
-
-        trigger: ".hero",
-
-        start: "top top",
-
-        end: "bottom top",
-
-        scrub: true
-
-    }
-
-});
-
-
-/* ======================================================
-   GALLERY REVEAL
-====================================================== */
-
-if (gallery) {
-
-    gsap.fromTo(gallery,
-
-    {
-
-        y: 140
-
-    },
-
-    {
-
-        y: 0,
-
-        ease: "none",
-
-        scrollTrigger: {
-
-            trigger: gallery,
-
-            start: "top bottom",
-
-            end: "top 55%",
-
-            scrub: 3
-
-        }
-
-    }
-
-);
-
+        if (!content) return false;
   
+        if (!title) return false;
+
+        if (!lines.length) return false;
+
+        if (!scrollIndicator) return false;
+
+        return true;
+
+    }
+       /* ==========================================
+   Initial State
+========================================== */
+
+function setupInitialState() {
+
+    gsap.set(content, {
+
+        opacity: 0
+
+    });
+    
+
+    gsap.set(lines, {
+
+        opacity: 0,
+        yPercent: 100
+
+    });
+
+    gsap.set(scrollIndicator, {
+
+        opacity: 0,
+        y: 20
+
+    });
 
 }
+        /* ==========================================
+       Init
+    ========================================== */
 
-});
-function shutterEffect(nextImage){
+    function init() {
 
-    const tl = gsap.timeline();
+        if (initialized) return;
 
-    tl.to(".blade",{
+        initialized = true;
 
-        xPercent:120,
+        console.log("Hero V5 Ready");
+
+        cacheElements();
+
+        if (!validateElements()) {
+
+            console.error("Hero elements missing.");
+
+            return;
+
+        }
+
+        setupInitialState();
+
+    }
+   
+/* ==========================================
+   Reveal
+========================================== */
+
+function reveal() {
+
+    console.log("Hero.reveal() called");
+
+    const tl = gsap.timeline({
+
+        defaults: {
+
+            ease: "power3.out"
+
+        }
+
+    });
+
+    tl.set(content, {
+
+        opacity:1
+
+    })
+
+
+    .to(lines,{
 
         opacity:1,
+        yPercent:0,
+        duration:1.2,
+        stagger:.22,
+        ease:"expo.out"
 
-        duration:.18,
+    },"-=0.15")
 
-        stagger:.015,
+    .to(scrollIndicator,{
 
-        ease:"power3.in"
+        opacity:1,
+        y:0,
+        duration:.8,
 
-    });
+        onComplete:()=>{
 
-    tl.add(()=>{
+            startCameraBreathing();
 
-        heroImage.src = nextImage;
+            document.body.classList.remove("cinematic-lock");
 
-    });
+            if(window.App?.startScroll){
 
-    tl.to(".camera-flash",{
+                App.startScroll();
 
-        opacity:.12,
+            }
 
-        duration:.04,
+        }
 
-        yoyo:true,
+    },"-=0.4");
 
-        repeat:1
+}
 
-    },"-=.05");
+/* ==========================================
+   Camera Breathing
+========================================== */
 
-    tl.to(".blade",{
+function startCameraBreathing() {
 
-        xPercent:0,
+    if (!heroParallax) return;
 
-        duration:.22,
+gsap.to(heroParallax,{
 
-        stagger:{
+        scale:1.018,
 
-            each:.015,
+        x:-8,
 
-            from:"end"
+        y:6,
 
-        },
+        rotation:0.12,
 
-        ease:"power3.out"
+        duration:18,
 
-    });
+        ease:"sine.inOut",
 
-    tl.set(".blade",{
+        repeat:-1,
 
-        opacity:0
+        yoyo:true
 
     });
 
 }
+   return {
+
+    init,
+    reveal
+
+};
+    
+})();

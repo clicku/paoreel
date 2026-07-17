@@ -1,0 +1,232 @@
+/* ==========================================
+   PAOREEL STUDIOS
+   EDITORIAL OVERLAY
+========================================== */
+
+.editorial-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:4;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+}
+
+/* ==========================================
+   LEFT SIDE
+========================================== */
+
+.editorial-left{
+
+    position:absolute;
+
+    top:26vh;
+
+    left:10vw;
+
+    width:180px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:2rem;
+
+    z-index:5;
+
+}
+
+.credit-group{
+
+    opacity:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:.35rem;
+
+}
+
+.credit-small{
+
+    margin:0;
+
+    font-size:.72rem;
+
+    letter-spacing:.28em;
+
+    text-transform:uppercase;
+
+    color:rgba(255,255,255,.45);
+
+}
+
+.credit-group h3{
+
+    margin:0;
+
+    font-size:2rem;
+
+    font-weight:300;
+
+    line-height:1;
+
+    letter-spacing:-.04em;
+
+    color:#fff;
+
+}
+
+/* ==========================================
+   RIGHT SIDE
+========================================== */
+
+/* ==========================================
+   RIGHT EDITORIAL
+========================================== */
+
+.editorial-right{
+
+    position:absolute;
+
+    top:0;
+
+    right:6vw;
+
+    width:160px;
+
+    height:100vh;
+
+    overflow:hidden;
+
+    z-index:5;
+
+}
+
+.editorial-scroll{
+
+    position:absolute;
+
+    top:18vh;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:8rem;
+
+    will-change:transform;
+
+}
+
+.editorial-copy{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:.18em;
+
+}
+
+.editorial-copy span{
+
+    font-size:clamp(2.8rem,4vw,5rem);
+
+    font-weight:700;
+
+    letter-spacing:.06em;
+
+    color:rgba(255,255,255,.10);
+
+    line-height:.9;
+
+}
+
+.editorial-copy .gap{
+
+    height:12rem;
+
+}
+
+/* ==========================================
+   LETTERS
+========================================== */
+
+.editorial-scroll span{
+
+    display:block;
+
+    font-size:clamp(3rem,7vw,8rem);
+
+    font-weight:200;
+
+    line-height:.88;
+
+    letter-spacing:-.08em;
+
+    color:rgba(255,255,255,.12);
+
+    user-select:none;
+
+}
+
+.editorial-scroll .gap{
+
+    height:3rem;
+
+}
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width:1024px){
+
+    .editorial-left{
+
+        left:40px;
+
+        top:20vh;
+
+        width:150px;
+
+    }
+
+    .credit-group h3{
+
+        font-size:1.5rem;
+
+    }
+
+}
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:768px){
+
+    .editorial-overlay{
+
+        display:none;
+
+    }
+
+}

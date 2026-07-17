@@ -1,0 +1,30 @@
+/* ==========================================
+   SHUTTER STRUCTURAL LAYOUT
+========================================== */
+
+.shutterAnimationHolder {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+/* The vertical filmstrip container holding the layered canvas frames */
+.shutterAnimationHolder .film {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+}
+
+/* Individual frame canvases stacked inside the film strip */
+.shutterAnimationHolder canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+}

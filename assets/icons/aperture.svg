@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 256 256"
+    width="256"
+    height="256">
+
+    <g fill="#ffffff">
+
+        <!-- Blade 1 -->
+        <path d="M128 32
+                 L165 54
+                 L136 104
+                 L92 104
+                 Z"/>
+
+        <!-- Blade 2 -->
+        <path d="M203 74
+                 L224 112
+                 L172 140
+                 L150 102
+                 Z"/>
+
+        <!-- Blade 3 -->
+        <path d="M203 182
+                 L165 204
+                 L136 154
+                 L172 116
+                 Z"/>
+
+        <!-- Blade 4 -->
+        <path d="M128 224
+                 L91 203
+                 L120 152
+                 L164 152
+                 Z"/>
+
+        <!-- Blade 5 -->
+        <path d="M53 182
+                 L32 144
+                 L84 116
+                 L106 154
+                 Z"/>
+
+        <!-- Blade 6 -->
+        <path d="M53 74
+                 L91 53
+                 L120 104
+                 L84 140
+                 Z"/>
+
+    </g>
+
+</svg>

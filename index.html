@@ -40,6 +40,8 @@
     <!-- =========================
          CSS
     ========================== -->
+    <link rel="stylesheet"
+      href="assets/css/cinematic.css">
 
     <link rel="stylesheet"
           href="assets/css/variables.css">
@@ -52,6 +54,8 @@
 
     <link rel="stylesheet"
           href="assets/css/hero.css">
+    
+    <link rel="stylesheet" href="assets/css/editorial.css">
 
      <link rel="stylesheet" 
           href="assets/css/gallery.css">
@@ -67,10 +71,77 @@
 </head>
 
 <body>
+   <!-- ==========================================
+     Cinematic Overlay
+========================================== -->
+
+<div class="cinematic-overlay">
+        <!-- ==========================================
+         BTS INTRO VIDEO
+    ========================================== -->
+
+    <video class="cinematic-video"
+           muted
+           playsinline
+           preload="auto">
+
+        <source
+            src="assets/video/hero-bts.mp4"
+            type="video/mp4">
+
+    </video>
+
+    <!-- ==========================================
+         LENS VIEWPORT MASK
+    ========================================== -->
+
+    <div class="cinematic-lens-mask"></div>
+
+
+    <!-- Stranger in the Q Math Anchor Container with Glass Layers -->
+   <div class="cinematic-aperture">
+    <svg viewBox="-100 -100 200 200" id="aperture-svg">
+        <defs>
+            <!-- Physical Lens Reflection and Glass Curve Filter -->
+            <filter id="lens-glass-reflection" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur" />
+                <feSpecularLighting in="blur" surfaceScale="5" specularConstant="1.2" specularExponent="40" lighting-color="#bbddee" result="specularOut">
+                    <fePointLight x="-60" y="-60" z="90" />
+                </feSpecularLighting>
+                <feComposite in="SourceGraphic" in2="specularOut" operator="arithmetic" k1="0" k2="1" k3="0.4" k4="0" result="litGraphic" />
+            </filter>
+            
+            <!-- Internal Barrel Shadow Depth Profile -->
+            <radialGradient id="barrel-shadow" cx="50%" cy="50%" r="50%">
+                <stop offset="75%" stop-color="#000000" stop-opacity="0" />
+                <stop offset="95%" stop-color="#000000" stop-opacity="0.4" />
+                <stop offset="100%" stop-color="#050505" stop-opacity="0.9" />
+            </radialGradient>
+        </defs>
+
+        <!-- ⚠️ REMOVED: The solid/masked rect background is gone! -->
+        <!-- The video is now fully visible behind this transparent area. -->
+        
+        <!-- Internal Barrel Shadow overlay (retained to give the video an organic 3D vignette) -->
+        <circle cx="0" cy="0" r="80" fill="url(#barrel-shadow)" pointer-events="none" />
+
+        <!-- The Shutter Blade System Components -->
+        <g id="aperture-bodies"></g>
+        <g id="aperture-edges"></g>
+
+        <!-- Foreground Glass Reflections Element Layer (Applied on Top) -->
+        <circle cx="0" cy="0" r="80" fill="none" stroke="#223344" stroke-width="0.5" filter="url(#lens-glass-reflection)" opacity="0.65" pointer-events="none" />
+        <circle cx="0" cy="0" r="79.5" fill="none" stroke="#ffffff" stroke-width="0.25" opacity="0.2" pointer-events="none" />
+    </svg>
+</div>
+
+    <div class="cinematic-flash"></div>
+
+</div>
 
     <!-- ========================================
          Page Loader
-    ========================================= -->
+    ========================================= 
 
     <div id="loader">
 
@@ -80,7 +151,7 @@
 
     </div>
 
-</div>
+</div>-->
 
 
     <!-- ========================================
@@ -147,41 +218,178 @@
 <div class="hero-fixed">
 
     <div class="hero-parallax">
-        <!-- ========================================
-     Camera Shutter
-========================================= -->
-
-<div class="camera-shutter">
-
-    <div class="blade blade1"></div>
-    <div class="blade blade2"></div>
-    <div class="blade blade3"></div>
-    <div class="blade blade4"></div>
-    <div class="blade blade5"></div>
-    <div class="blade blade6"></div>
-
-</div>
-
-<div class="camera-flash"></div>
+ 
 
         <div class="hero-image">
 
-            <img src="assets/images/paoreel.webp"
-                 alt="Paoreel Studios">
+           <video
+    class="hero-bts"
+    muted
+    playsinline
+    preload="auto">
+
+    <source
+        src="assets/video/hero-bts.mp4"
+        type="video/mp4">
+
+</video>
+
+<img
+    src="assets/images/paoreel.webp"
+    alt="">
+    
+        </div>
+
+        <div class="hero-mask"></div>
+
+<div class="film-grain"></div>
+
+<div class="hero-transition"></div>
+
+    </div>
+
+    
+</div>
+
+    <!-- ========================================
+     BTS Editorial Overlay
+========================================= -->
+
+<div class="editorial-overlay">
+
+    <!-- Left Credits -->
+
+    <div class="editorial-left">
+
+        <div class="credit-group">
+
+            <p class="credit-small">PAOREEL</p>
+
+            <h3>STUDIOS</h3>
+
+        </div>
+
+        <div class="credit-group">
+
+            <p class="credit-small">COMMERCIAL</p>
+
+            <h3>PHOTOGRAPHY</h3>
+
+        </div>
+
+        <div class="credit-group">
+
+            <p class="credit-small">ART</p>
+
+            <h3>Paoreel</h3>
 
         </div>
 
     </div>
-    <div class="hero-transition"></div>
+
+    <!-- Right Typography -->
+
+    <div class="editorial-right">
+
+    <div class="editorial-scroll">
+
+        <div class="editorial-copy">
+
+            <span>F</span>
+            <span>O</span>
+            <span>O</span>
+            <span>D</span>
+
+            <span class="gap"></span>
+
+            <span>B</span>
+            <span>R</span>
+            <span>A</span>
+            <span>N</span>
+            <span>D</span>
+            <span>S</span>
+
+            <span class="gap"></span>
+
+            <span>P</span>
+            <span>O</span>
+            <span>R</span>
+            <span>T</span>
+            <span>R</span>
+            <span>A</span>
+            <span>I</span>
+            <span>T</span>
+            <span>S</span>
+
+        </div>
+
+        <div class="editorial-copy">
+
+            <span>F</span>
+            <span>O</span>
+            <span>O</span>
+            <span>D</span>
+
+            <span class="gap"></span>
+
+            <span>B</span>
+            <span>R</span>
+            <span>A</span>
+            <span>N</span>
+            <span>D</span>
+            <span>S</span>
+
+            <span class="gap"></span>
+
+            <span>P</span>
+            <span>O</span>
+            <span>R</span>
+            <span>T</span>
+            <span>R</span>
+            <span>A</span>
+            <span>I</span>
+            <span>T</span>
+            <span>S</span>
+
+        </div>
+             <div class="editorial-copy">
+
+            <span>F</span>
+            <span>O</span>
+            <span>O</span>
+            <span>D</span>
+
+            <span class="gap"></span>
+
+            <span>B</span>
+            <span>R</span>
+            <span>A</span>
+            <span>N</span>
+            <span>D</span>
+            <span>S</span>
+
+            <span class="gap"></span>
+
+            <span>P</span>
+            <span>O</span>
+            <span>R</span>
+            <span>T</span>
+            <span>R</span>
+            <span>A</span>
+            <span>I</span>
+            <span>T</span>
+            <span>S</span>
+
+        </div>
+
+    </div>
 
 </div>
+    </div>
 
     <div class="hero-content">
 
-        <p class="hero-label">
-            Commercial Photography
-        </p>
-
+       
         <h1 class="hero-title">
 
     <span class="hero-line">
@@ -411,7 +619,41 @@
     </footer>
 
 
+            <button class="sound-toggle" aria-label="Toggle sound">
 
+            <svg
+                viewBox="0 0 24 24"
+                class="sound-icon">
+
+                <path
+                    d="M5 9H9L14 5V19L9 15H5Z"
+                    fill="currentColor"/>
+
+                <path
+                    class="sound-wave"
+
+                    d="M16 9C17.2 10.2 17.8 11.3 17.8 12C17.8 12.7 17.2 13.8 16 15"
+
+                    stroke="currentColor"
+
+                    stroke-width="1.7"
+
+                    stroke-linecap="round"
+
+                    fill="none"/>
+
+            </svg>
+
+            </button>
+                    <audio
+                class="hero-audio"
+                preload="auto">
+
+                <source
+                    src="assets/audio/hero-intro.mp3"
+                    type="audio/mpeg">
+
+            </audio>
     <!-- ========================================
          GSAP
     ========================================= -->
@@ -427,15 +669,21 @@
 
     <script src="https://unpkg.com/@studio-freight/lenis/dist/lenis.min.js"></script>
 
+    <!-- Cinematic -->
 
-    <!-- ========================================
+    <script src="assets/js/cinematic/config.js"></script>
+    <script src="assets/js/cinematic/video.js"></script>
+    <script src="assets/js/cinematic/audio.js"></script>
+    <script src="assets/js/cinematic/controller.js"></script>
+    <script src="assets/js/cinematic/shutter.js"></script>
+    
+        <!-- ========================================
          JavaScript
     ========================================= -->
-
-    <script src="assets/js/loader.js"></script>
-
+    <!-- Modules -->
+   
     <script src="assets/js/navigation.js"></script>
-
+  
     <script src="assets/js/hero.js"></script>
 
     <script src="assets/js/gallery-engine.js"></script>
@@ -443,6 +691,10 @@
     <script src="assets/js/gallery.js"></script>
 
     <script src="assets/js/main.js"></script>
+
+    <!-- Entry Point -->
+
+    <script src="assets/js/app.js"></script>
 
 </body>
 
