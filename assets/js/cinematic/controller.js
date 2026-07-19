@@ -24,16 +24,12 @@ window.CinematicController = (() => {
     function cacheElements() {
         body = document.body;
         overlay = document.querySelector(".cinematic-overlay");
-        flash = document.querySelector(".cinematic-flash");
-    if(!flash){
-    flash = document.createElement("div");
-    flash.className = "cinematic-flash";
-    document.body.appendChild(flash);
-
-}
+       flash = document.querySelector(".cinematic-flash");
+        if(!flash){
         flash = document.createElement("div");
         flash.className = "cinematic-flash";
         document.body.appendChild(flash);
+    }
         video=document.querySelector(".cinematic-video");
         heroVideo = document.querySelector(".hero-bts");
         console.log(
@@ -57,7 +53,16 @@ window.CinematicController = (() => {
     
     function waitForHeroVideo(callback){
 
+    console.log(
+        "WAITING READY STATE:",
+        heroVideo.readyState
+    );
+
     if(heroVideo.readyState >= 4){
+
+        console.log(
+            "VIDEO ALREADY READY"
+        );
 
         callback();
         return;
@@ -66,7 +71,16 @@ window.CinematicController = (() => {
 
     heroVideo.addEventListener(
         "canplaythrough",
-        callback,
+        () => {
+
+            console.log(
+                "VIDEO READY NOW:",
+                heroVideo.readyState
+            );
+
+            callback();
+
+        },
         { once:true }
     );
 
@@ -230,6 +244,11 @@ heroVideo.addEventListener("canplaythrough", () => {
     waitForHeroVideo(() => {
 
         console.log(
+            "readyState before seek:",
+            heroVideo.readyState
+        );
+
+        console.log(
             "PLAY VIDEO ELEMENT",
             heroVideo
         );
@@ -244,19 +263,14 @@ heroVideo.addEventListener("canplaythrough", () => {
             heroVideo.currentTime
         );
 
-        heroVideo.currentTime = video.currentTime;
+        const targetTime = video.currentTime;
 
         console.log(
-            "AFTER SEEK",
-            heroVideo.currentTime
+            "REQUEST SEEK TO",
+            targetTime
         );
 
-        console.log(
-            "peek:", video.currentTime,
-            "hero:", heroVideo.currentTime,
-            "readyState:", heroVideo.readyState,
-            "duration:", heroVideo.duration
-        );
+        heroVideo.currentTime = targetTime;
 
         heroVideo.addEventListener("seeked", () => {
 
@@ -283,6 +297,19 @@ heroVideo.addEventListener("canplaythrough", () => {
 
             });
 
+            gsap.to(heroVideo,{
+                opacity:1,
+                duration:0.8,
+                ease:"power2.out"
+            });
+
+            gsap.to(heroVideo,{
+                "--lens-blur":"0px",
+                duration:1.0
+            });
+
+            startEditorialScroll();
+
         }, { once:true });
 
     });
@@ -303,26 +330,6 @@ heroVideo.addEventListener("canplaythrough", () => {
         });
 
     }
-
-    gsap.to(heroVideo,{
-
-        opacity:1,
-
-        duration:0.8,
-
-        ease:"power2.out"
-
-    });
-
-    gsap.to(heroVideo,{
-
-        "--lens-blur":"0px",
-
-        duration:1.0
-
-    });
-
-    startEditorialScroll();
 
     heroVideo.ontimeupdate = () => {
 
