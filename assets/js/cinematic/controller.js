@@ -25,6 +25,12 @@ window.CinematicController = (() => {
         body = document.body;
         overlay = document.querySelector(".cinematic-overlay");
         flash = document.querySelector(".cinematic-flash");
+    if(!flash){
+    flash = document.createElement("div");
+    flash.className = "cinematic-flash";
+    document.body.appendChild(flash);
+
+}
         flash = document.createElement("div");
         flash.className = "cinematic-flash";
         document.body.appendChild(flash);
@@ -49,6 +55,22 @@ window.CinematicController = (() => {
         }
     }
     
+    function waitForHeroVideo(callback){
+
+    if(heroVideo.readyState >= 4){
+
+        callback();
+        return;
+
+    }
+
+    heroVideo.addEventListener(
+        "canplaythrough",
+        callback,
+        { once:true }
+    );
+
+}
     function triggerTripleFlash() {
          console.log("FLASH TRIGGERED");
 
@@ -203,54 +225,65 @@ heroVideo.addEventListener("canplaythrough", () => {
         editorialUpdater = null;
     }
 
-    function playVideoFullScreen(){
+   function playVideoFullScreen(){
 
-    // Sync fullscreen video to the exact frame
-    // where the peek video ended
-    console.log(
-    "PLAY VIDEO ELEMENT",
-    heroVideo
-);
-console.log(
-    "same element?",
-    heroVideo === window.__heroVideoRef
-);
-
-    console.log("BEFORE SEEK", heroVideo.currentTime);
-
-heroVideo.currentTime = video.currentTime;
-
-console.log("AFTER SEEK", heroVideo.currentTime);
-setTimeout(() => {
-
-    console.log(
-        "500ms LATER",
-        heroVideo.currentTime
-    );
-
-}, 500);
-    console.log(
-        "peek:", video.currentTime,
-        "hero:", heroVideo.currentTime,
-        "readyState:", heroVideo.readyState,
-        "duration:", heroVideo.duration
-    );
-
-    heroVideo.addEventListener("seeked", () => {
+    waitForHeroVideo(() => {
 
         console.log(
-            "SEEKED",
+            "PLAY VIDEO ELEMENT",
+            heroVideo
+        );
+
+        console.log(
+            "same element?",
+            heroVideo === window.__heroVideoRef
+        );
+
+        console.log(
+            "BEFORE SEEK",
             heroVideo.currentTime
         );
 
-    }, { once:true });
+        heroVideo.currentTime = video.currentTime;
 
-    heroVideo.play().catch(err => {
-
-        console.warn(
-            "Hero video play failed:",
-            err
+        console.log(
+            "AFTER SEEK",
+            heroVideo.currentTime
         );
+
+        console.log(
+            "peek:", video.currentTime,
+            "hero:", heroVideo.currentTime,
+            "readyState:", heroVideo.readyState,
+            "duration:", heroVideo.duration
+        );
+
+        heroVideo.addEventListener("seeked", () => {
+
+            console.log(
+                "SEEKED",
+                heroVideo.currentTime
+            );
+
+            setTimeout(() => {
+
+                console.log(
+                    "500ms LATER",
+                    heroVideo.currentTime
+                );
+
+            }, 500);
+
+            heroVideo.play().catch(err => {
+
+                console.warn(
+                    "Hero video play failed:",
+                    err
+                );
+
+            });
+
+        }, { once:true });
 
     });
 
@@ -291,48 +324,48 @@ setTimeout(() => {
 
     startEditorialScroll();
 
-   heroVideo.ontimeupdate = () => {
+    heroVideo.ontimeupdate = () => {
 
-    if (heroVideo.currentTime >= 22.2) {
+        if(heroVideo.currentTime >= 22.2){
 
-        heroVideo.ontimeupdate = null;
+            heroVideo.ontimeupdate = null;
 
-        heroVideo.pause();
+            heroVideo.pause();
 
-        startHeroReveal();
+            startHeroReveal();
+
+        }
+
+    };
+
+    function startHeroReveal(){
+
+        gsap.timeline()
+
+            .to(heroStill,{
+                opacity:1,
+                duration:0.15
+            })
+
+            .call(triggerTripleFlash)
+
+            .to(heroStill,{
+                duration:1,
+                filter:"grayscale(100%) contrast(1.15) brightness(0.95) blur(0px)"
+            })
+
+            .call(() => {
+
+                finishSequence();
+
+            })
+
+            .to(heroStill,{
+                duration:4,
+                filter:"grayscale(0%) contrast(1.05) brightness(1) blur(0px)"
+            });
 
     }
-
-};
-    
-   function startHeroReveal() {
-
-    gsap.timeline()
-
-        .to(heroStill,{
-            opacity:1,
-            duration:0.15
-        })
-
-        .call(triggerTripleFlash)
-
-        .to(heroStill,{
-            duration:1,
-            filter:"grayscale(100%) contrast(1.15) brightness(0.95) blur(0px)"
-        })
-
-        .call(() => {
-
-            finishSequence();
-
-        })
-
-        .to(heroStill,{
-            duration:4,
-            filter:"grayscale(0%) contrast(1.05) brightness(1) blur(0px)"
-        });
-
-}
 
 }
 
