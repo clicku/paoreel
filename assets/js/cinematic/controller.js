@@ -159,34 +159,50 @@ window.CinematicController = (() => {
 
     function playVideoFullScreen(){
 
-    heroVideo.currentTime = 5.5;
-        console.log(
-    "peek:", video.currentTime,
-    "hero:", heroVideo.currentTime,
-    "readyState:", heroVideo.readyState,
-    "duration:", heroVideo.duration
-);
-heroVideo.currentTime = video.currentTime;
-heroVideo.addEventListener("seeked", () => {
+    // Sync fullscreen video to the exact frame
+    // where the peek video ended
+
+    heroVideo.currentTime = video.currentTime;
 
     console.log(
-        "SEEKED",
-        heroVideo.currentTime
+        "peek:", video.currentTime,
+        "hero:", heroVideo.currentTime,
+        "readyState:", heroVideo.readyState,
+        "duration:", heroVideo.duration
     );
 
-}, { once:true });
+    heroVideo.addEventListener("seeked", () => {
 
-heroVideo.currentTime = video.currentTime;
-    
-    heroVideo.play().catch(()=>{});
+        console.log(
+            "SEEKED",
+            heroVideo.currentTime
+        );
+
+    }, { once:true });
+
+    heroVideo.play().catch(err => {
+
+        console.warn(
+            "Hero video play failed:",
+            err
+        );
+
+    });
 
     if(heroAudio){
 
-        heroAudio.currentTime = 5.5;
+        heroAudio.currentTime = video.currentTime;
 
         heroAudio.volume = 1;
 
-        heroAudio.play().catch(()=>{});
+        heroAudio.play().catch(err => {
+
+            console.warn(
+                "Hero audio play failed:",
+                err
+            );
+
+        });
 
     }
 
