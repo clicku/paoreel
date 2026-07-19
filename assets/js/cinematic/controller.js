@@ -30,6 +30,10 @@ window.CinematicController = (() => {
         document.body.appendChild(flash);
         video=document.querySelector(".cinematic-video");
         heroVideo = document.querySelector(".hero-bts");
+        console.log(
+    "HERO VIDEO ELEMENT",
+    heroVideo
+);
         heroStill = document.getElementById("hero-still");
         heroAudio = document.querySelector(".hero-audio");
         soundToggle = document.querySelector(".sound-toggle");
@@ -90,6 +94,12 @@ window.CinematicController = (() => {
     ========================================= */
 
     function setupInitialState() {
+        window.__heroVideoRef = heroVideo;
+
+console.log(
+    "HERO VIDEO ELEMENT",
+    heroVideo
+);
         body.classList.add("cinematic-lock");
         body.classList.add("cursor-hidden");
 
@@ -197,6 +207,14 @@ heroVideo.addEventListener("canplaythrough", () => {
 
     // Sync fullscreen video to the exact frame
     // where the peek video ended
+    console.log(
+    "PLAY VIDEO ELEMENT",
+    heroVideo
+);
+console.log(
+    "same element?",
+    heroVideo === window.__heroVideoRef
+);
 
     console.log("BEFORE SEEK", heroVideo.currentTime);
 
