@@ -330,6 +330,11 @@ heroVideo.addEventListener("canplaythrough", () => {
     }
 
    function playVideoFullScreen(){
+    waitForHeroVideo(() => {
+
+    trySeek();
+
+});
 
     if(videoTransitionStarted){
         console.log("VIDEO TRANSITION ALREADY RUNNING");
@@ -345,16 +350,7 @@ heroVideo.addEventListener("canplaythrough", () => {
     );
    waitForHeroVideo(() => {
 
-    heroVideo.addEventListener("loadeddata",()=>{
-
-        console.log(
-            "MEDIA DATA READY FOR SEEK"
-        );
-
-        trySeek();
-
-    }, {once:true});
-
+   
 });
 
     if(heroAudio){
