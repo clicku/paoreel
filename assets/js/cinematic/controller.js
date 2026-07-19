@@ -162,10 +162,11 @@ window.CinematicController = (() => {
     heroVideo.currentTime = video.currentTime;
 
     console.log(
-        "handoff",
-        "peek:", video.currentTime,
-        "hero:", heroVideo.currentTime
-    );
+    "peek:", video.currentTime,
+    "hero:", heroVideo.currentTime,
+    "readyState:", heroVideo.readyState,
+    "duration:", heroVideo.duration
+);
 
     heroVideo.play().catch(()=>{});
 
