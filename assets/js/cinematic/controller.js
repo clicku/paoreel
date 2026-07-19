@@ -22,34 +22,77 @@ window.CinematicController = (() => {
     const shutterConfig = { irisValue: 0 };
 
     function cacheElements() {
-        body = document.body;
-        overlay = document.querySelector(".cinematic-overlay");
-       flash = document.querySelector(".cinematic-flash");
-        if(!flash){
+
+    body = document.body;
+
+    overlay = document.querySelector(".cinematic-overlay");
+
+    /* ------------------------------------------
+       Flash Overlay
+    ------------------------------------------ */
+
+    flash = document.querySelector(".cinematic-flash");
+
+    if (!flash) {
+
         flash = document.createElement("div");
         flash.className = "cinematic-flash";
-        document.body.appendChild(flash);
-    }
-        video=document.querySelector(".cinematic-video");
-        heroVideo = document.querySelector(".hero-bts");
-        console.log(
-    "HERO VIDEO ELEMENT",
-    heroVideo
-);
-        heroStill = document.getElementById("hero-still");
-        heroAudio = document.querySelector(".hero-audio");
-        soundToggle = document.querySelector(".sound-toggle");
-        header = document.querySelector(".site-header");
-        editorial = document.querySelector(".editorial-overlay");
-        heroImage = document.querySelector(".hero-image img");
-        heroMask = document.querySelector(".hero-mask");
-        filmGrain = document.querySelector(".film-grain");
-        apertureContainer = document.querySelector(".cinematic-aperture");
 
-        if (window.Shutter && typeof window.Shutter.init === "function") {
-            window.Shutter.init();
-        }
+        document.body.appendChild(flash);
+
+        console.log("Created cinematic flash element");
+
     }
+
+    /* ------------------------------------------
+       Video Elements
+    ------------------------------------------ */
+
+    video = document.querySelector(".cinematic-video");
+
+    heroVideo = document.querySelector(".hero-bts");
+
+    console.log(
+        "HERO VIDEO ELEMENT",
+        heroVideo
+    );
+
+    heroStill = document.getElementById("hero-still");
+
+    heroAudio = document.querySelector(".hero-audio");
+
+    /* ------------------------------------------
+       UI Elements
+    ------------------------------------------ */
+
+    soundToggle = document.querySelector(".sound-toggle");
+
+    header = document.querySelector(".site-header");
+
+    editorial = document.querySelector(".editorial-overlay");
+
+    heroImage = document.querySelector(".hero-image img");
+
+    heroMask = document.querySelector(".hero-mask");
+
+    filmGrain = document.querySelector(".film-grain");
+
+    apertureContainer = document.querySelector(".cinematic-aperture");
+
+    /* ------------------------------------------
+       Shutter
+    ------------------------------------------ */
+
+    if (
+        window.Shutter &&
+        typeof window.Shutter.init === "function"
+    ) {
+
+        window.Shutter.init();
+
+    }
+
+}
     
     function waitForHeroVideo(callback){
 
@@ -158,8 +201,10 @@ console.log(
             transformOrigin: "center center"
         });
                 gsap.set(heroVideo,{
-                opacity:0
-            });
+    opacity:1,
+    "--lens-blur":"0px",
+    scale:1
+});
 
             gsap.to(heroVideo,{
                 opacity:1,

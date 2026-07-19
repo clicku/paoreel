@@ -250,16 +250,12 @@ body.cursor-hidden *{
 
 .cinematic-flash{
     position:fixed;
-    top:0;
-    left:0;
-    width:100vw;
-    height:100vh;
+    inset:0;
     background:#fff;
     opacity:0;
     pointer-events:none;
-    z-index:999999;
+    z-index:99999;
 }
-
 
 /* ==========================================
    HERO MEDIA
