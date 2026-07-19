@@ -329,93 +329,80 @@ heroVideo.addEventListener("canplaythrough", () => {
         editorialUpdater = null;
     }
 
-   function playVideoFullScreen(){
-    waitForHeroVideo(() => {
-
-    trySeek();
-
-});
-
-    if(videoTransitionStarted){
-        console.log("VIDEO TRANSITION ALREADY RUNNING");
-        return;
-    }
-
-    videoTransitionStarted = true;
+  function playVideoFullScreen(){
 
     console.log(
         "WAIT START",
         heroVideo.readyState,
         heroVideo.networkState
     );
-   waitForHeroVideo(() => {
 
-   
-});
 
-    if(heroAudio){
+    const targetTime = video.currentTime;
 
-        heroAudio.currentTime = video.currentTime;
 
-        heroAudio.volume = 1;
+    const trySeek = () => {
 
-        heroAudio.play().catch(err => {
+        console.log(
+            "TRY SEEK",
+            "readyState:",
+            heroVideo.readyState,
+            "current:",
+            heroVideo.currentTime,
+            "target:",
+            targetTime
+        );
 
-            console.warn(
-                "Hero audio play failed:",
-                err
+
+        heroVideo.currentTime = targetTime;
+
+
+        console.log(
+            "AFTER SEEK SET",
+            heroVideo.currentTime
+        );
+
+
+        heroVideo.addEventListener("seeked",()=>{
+
+            console.log(
+                "SEEK SUCCESS",
+                heroVideo.currentTime
             );
 
-        });
 
-    }
-    
+            heroVideo.play()
+            .then(()=>{
 
-    heroVideo.ontimeupdate = () => {
+                console.log(
+                    "HERO VIDEO PLAYING"
+                );
 
-        if(heroVideo.currentTime >= 22){
+                startEditorialScroll();
 
-            heroVideo.ontimeupdate = null;
+            })
+            .catch(err=>{
 
-            heroVideo.pause();
+                console.warn(
+                    "Hero video play failed:",
+                    err
+                );
 
-            startHeroReveal();
+            });
 
-        }
+
+        },{once:true});
 
     };
 
-    function startHeroReveal(){
 
-        gsap.timeline()
+    waitForHeroVideo(()=>{
 
-            .to(heroStill,{
-                opacity:1,
-                duration:0.15
-            })
+        trySeek();
 
-            .call(triggerTripleFlash)
-
-            .to(heroStill,{
-                duration:1,
-                filter:"grayscale(100%) contrast(1.15) brightness(0.95) blur(0px)"
-            })
-
-            .call(() => {
-
-                finishSequence();
-
-            })
-
-            .to(heroStill,{
-                duration:4,
-                filter:"grayscale(0%) contrast(1.05) brightness(1) blur(0px)"
-            });
-
-    }
+    });
 
 }
-
     /* ==========================================
        Intro Timeline
     ========================================== */
