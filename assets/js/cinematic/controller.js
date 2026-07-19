@@ -159,25 +159,27 @@ window.CinematicController = (() => {
 
     function playVideoFullScreen(){
 
-    heroVideo.currentTime = 5.5;
-        console.log(
-    "handoff",
-    "peek:", video.currentTime,
-    "hero:", heroVideo.currentTime
-);
-heroVideo.currentTime = video.currentTime;
-    
+    heroVideo.currentTime = video.currentTime;
+
+    console.log(
+        "handoff",
+        "peek:", video.currentTime,
+        "hero:", heroVideo.currentTime
+    );
+
     heroVideo.play().catch(()=>{});
 
     if(heroAudio){
 
-        heroAudio.currentTime = 5.5;
+        heroAudio.currentTime = video.currentTime;
 
         heroAudio.volume = 1;
 
         heroAudio.play().catch(()=>{});
 
     }
+
+}
 
     gsap.to(heroVideo,{
 
