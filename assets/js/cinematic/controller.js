@@ -363,8 +363,6 @@ heroVideo.addEventListener("canplaythrough", () => {
 
 const trySeek = () => {
 
-    seekAttempts++;
-
     console.log(
         "TRY SEEK",
         "readyState:",
@@ -378,22 +376,26 @@ const trySeek = () => {
     );
 
 
+    const seekableEnd =
+        heroVideo.seekable.length
+        ? heroVideo.seekable.end(0)
+        : 0;
+
+
     const seekReady =
         heroVideo.readyState >= 2 &&
         heroVideo.seekable.length > 0 &&
-        heroVideo.seekable.end(0) > 0;
+        seekableEnd > 0;
 
 
-    if (!seekReady && seekAttempts < 20) {
+    if (!seekReady) {
 
         console.log(
             "WAITING FOR SEEKABLE RANGE",
             {
-                attempt: seekAttempts,
-                seekableEnd:
-                    heroVideo.seekable.length
-                    ? heroVideo.seekable.end(0)
-                    : 0
+                readyState: heroVideo.readyState,
+                seekableLength: heroVideo.seekable.length,
+                seekableEnd: seekableEnd
             }
         );
 
@@ -406,11 +408,7 @@ const trySeek = () => {
     console.log(
         "PROCEEDING WITH SEEK",
         {
-            attempts: seekAttempts,
-            seekableEnd:
-                heroVideo.seekable.length
-                ? heroVideo.seekable.end(0)
-                : 0
+            seekableEnd: seekableEnd
         }
     );
 
@@ -421,6 +419,59 @@ const trySeek = () => {
     );
 
 
+    heroVideo.addEventListener("seeked", () => {
+
+        console.log(
+            "SEEK SUCCESS",
+            heroVideo.currentTime
+        );
+
+
+        setTimeout(() => {
+
+            console.log(
+                "500ms LATER",
+                heroVideo.currentTime
+            );
+
+        },500);
+
+
+        console.log(
+            "FINAL HANDOFF",
+            {
+                current: heroVideo.currentTime,
+                duration: heroVideo.duration,
+                paused: heroVideo.paused,
+                ready: heroVideo.readyState
+            }
+        );
+
+
+        heroVideo.play()
+        .then(()=>{
+
+            console.log(
+                "HERO VIDEO PLAYING",
+                heroVideo.currentTime
+            );
+
+            startEditorialScroll();
+
+        })
+        .catch(err=>{
+
+            console.warn(
+                "Hero video play failed:",
+                err
+            );
+
+        });
+
+
+    }, { once:true });
+
+
     heroVideo.currentTime = targetTime;
 
 
@@ -429,64 +480,26 @@ const trySeek = () => {
         heroVideo.currentTime
     );
 
-setTimeout(() => {
 
-    console.log(
-        "100ms AFTER SEEK",
-        heroVideo.currentTime
-    );
-
-}, 100);
+    setTimeout(()=>{
 
         console.log(
-            "AFTER SEEK REQUEST",
+            "100ms AFTER SEEK",
             heroVideo.currentTime
         );
 
-        heroVideo.addEventListener("seeked", () => {
+    },100);
 
-            console.log(
-                "SEEK SUCCESS",
-                heroVideo.currentTime
-            );
 
-            setTimeout(() => {
-
-                console.log(
-                    "500ms LATER",
-                    heroVideo.currentTime
-                );
-
-            }, 500);
-
-            console.log(
-    "FINAL HANDOFF",
-    {
-        current: heroVideo.currentTime,
-        duration: heroVideo.duration,
-        paused: heroVideo.paused,
-        ready: heroVideo.readyState
-    }
-);
-
-            heroVideo.play().then(()=>{
-
-    startEditorialScroll();
-
-}).catch(err => {
-
-    console.warn(
-        "Hero video play failed:",
-        err
+    console.log(
+        "AFTER SEEK REQUEST",
+        heroVideo.currentTime
     );
 
-});
+};
 
-        }, { once:true });
 
-    };
-
-    trySeek();
+trySeek();
 
 });
 
