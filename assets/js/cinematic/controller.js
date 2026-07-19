@@ -2,6 +2,7 @@ window.CinematicController = (() => {
     "use strict";
 
     let started = false;
+    let videoTransitionStarted = false;
     let editorialUpdater = null;
     let overlay,
     flash,
@@ -222,7 +223,6 @@ console.log(
             });
 
         heroVideo.pause();
-        heroVideo.currentTime = 0;
         heroVideo.muted = true;
         heroVideo.preload = "auto";
 
@@ -315,11 +315,19 @@ heroVideo.addEventListener("canplaythrough", () => {
     }
 
    function playVideoFullScreen(){
+
+    if(videoTransitionStarted){
+        console.log("VIDEO TRANSITION ALREADY RUNNING");
+        return;
+    }
+
+    videoTransitionStarted = true;
+
     console.log(
-    "WAIT START",
-    heroVideo.readyState,
-    heroVideo.networkState
-);
+        "WAIT START",
+        heroVideo.readyState,
+        heroVideo.networkState
+    );
    waitForHeroVideo(() => {
 
     console.log(
@@ -401,14 +409,28 @@ setTimeout(() => {
 
             }, 500);
 
-            heroVideo.play().catch(err => {
+            console.log(
+    "FINAL HANDOFF",
+    {
+        current: heroVideo.currentTime,
+        duration: heroVideo.duration,
+        paused: heroVideo.paused,
+        ready: heroVideo.readyState
+    }
+);
 
-                console.warn(
-                    "Hero video play failed:",
-                    err
-                );
+            heroVideo.play().then(()=>{
 
-            });
+    startEditorialScroll();
+
+}).catch(err => {
+
+    console.warn(
+        "Hero video play failed:",
+        err
+    );
+
+});
 
         }, { once:true });
 
@@ -437,19 +459,6 @@ setTimeout(() => {
     startEditorialScroll();
 
 
-heroVideo.ontimeupdate = () => {
-
-    if(heroVideo.currentTime >= 22){
-
-        heroVideo.ontimeupdate = null;
-
-        heroVideo.pause();
-
-        startHeroReveal();
-
-    }
-
-};
     heroVideo.ontimeupdate = () => {
 
         if(heroVideo.currentTime >= 22){
