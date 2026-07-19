@@ -160,7 +160,11 @@ window.CinematicController = (() => {
     function playVideoFullScreen(){
 
     heroVideo.currentTime = 5.5;
-
+        console.log(
+    "handoff",
+    "peek:", video.currentTime,
+    "hero:", heroVideo.currentTime
+);
     heroVideo.play().catch(()=>{});
 
     if(heroAudio){
