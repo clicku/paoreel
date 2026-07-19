@@ -62,12 +62,23 @@ console.log(
     video = document.querySelector(".cinematic-video");
 
     heroVideo = document.querySelector(".hero-bts");
+    heroVideo.addEventListener("loadedmetadata",()=>{
+
+        console.log(
+            "Hero metadata position:",
+            heroVideo.currentTime
+        );
+
+    });
+
 
     console.log(
         "HERO VIDEO ELEMENT",
         heroVideo
     );
-
+    heroVideo.autoplay = false;
+    heroVideo.controls = false;
+    heroVideo.removeAttribute("autoplay");
     heroStill = document.getElementById("hero-still");
 
     heroAudio = document.querySelector(".hero-audio");
