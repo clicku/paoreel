@@ -161,10 +161,9 @@ window.CinematicController = (() => {
 
     heroVideo.currentTime = 5.5;
         console.log(
+    "handoff",
     "peek:", video.currentTime,
-    "hero:", heroVideo.currentTime,
-    "readyState:", heroVideo.readyState,
-    "duration:", heroVideo.duration
+    "hero:", heroVideo.currentTime
 );
 heroVideo.currentTime = video.currentTime;
     
