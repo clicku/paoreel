@@ -167,16 +167,6 @@ window.CinematicController = (() => {
     "duration:", heroVideo.duration
 );
 heroVideo.currentTime = video.currentTime;
-heroVideo.addEventListener("seeked", () => {
-
-    console.log(
-        "SEEKED",
-        heroVideo.currentTime
-    );
-
-}, { once:true });
-
-heroVideo.currentTime = video.currentTime;
     
     heroVideo.play().catch(()=>{});
 
