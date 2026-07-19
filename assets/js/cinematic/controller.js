@@ -198,8 +198,19 @@ heroVideo.addEventListener("canplaythrough", () => {
     // Sync fullscreen video to the exact frame
     // where the peek video ended
 
-    heroVideo.currentTime = video.currentTime;
+    console.log("BEFORE SEEK", heroVideo.currentTime);
 
+heroVideo.currentTime = video.currentTime;
+
+console.log("AFTER SEEK", heroVideo.currentTime);
+setTimeout(() => {
+
+    console.log(
+        "500ms LATER",
+        heroVideo.currentTime
+    );
+
+}, 500);
     console.log(
         "peek:", video.currentTime,
         "hero:", heroVideo.currentTime,
