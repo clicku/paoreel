@@ -122,17 +122,44 @@ window.CinematicController = (() => {
             });
 
         heroVideo.pause();
-        heroVideo.currentTime = 0;
-        heroVideo.muted = true;
-        heroVideo.load();
-        heroVideo.addEventListener("canplay", () => {
+heroVideo.currentTime = 0;
+heroVideo.muted = true;
+
+heroVideo.preload = "auto";
+heroVideo.load();
+
+console.log(
+    "Hero preload started",
+    heroVideo.readyState
+);
+heroVideo.addEventListener("loadedmetadata", () => {
 
     console.log(
-        "HERO VIDEO READY",
+        "loadedmetadata",
+        heroVideo.readyState,
+        heroVideo.duration
+    );
+
+});
+
+heroVideo.addEventListener("canplay", () => {
+
+    console.log(
+        "canplay",
         heroVideo.readyState
     );
 
-}, { once:true });
+});
+
+heroVideo.addEventListener("canplaythrough", () => {
+
+    console.log(
+        "canplaythrough",
+        heroVideo.readyState
+    );
+
+});
+        
         video.play().catch(err => {
             console.warn("Autoplay block bypassed, playback starting:", err.message);
         });
