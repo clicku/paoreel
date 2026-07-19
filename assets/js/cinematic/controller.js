@@ -359,7 +359,11 @@ heroVideo.addEventListener("canplaythrough", () => {
         heroVideo === window.__heroVideoRef
     );
 
-   const trySeek = () => {
+   let seekAttempts = 0;
+
+const trySeek = () => {
+
+    seekAttempts++;
 
     console.log(
         "TRY SEEK",
@@ -374,29 +378,41 @@ heroVideo.addEventListener("canplaythrough", () => {
     );
 
 
-    // Wait until browser has enough data AND a valid seek range
-   if (
-    heroVideo.readyState < 2 ||
-    heroVideo.seekable.length === 0 ||
-    heroVideo.seekable.end(0) <= 0
-) {
+    const seekReady =
+        heroVideo.readyState >= 2 &&
+        heroVideo.seekable.length > 0 &&
+        heroVideo.seekable.end(0) > 0;
+
+
+    if (!seekReady && seekAttempts < 20) {
+
+        console.log(
+            "WAITING FOR SEEKABLE RANGE",
+            {
+                attempt: seekAttempts,
+                seekableEnd:
+                    heroVideo.seekable.length
+                    ? heroVideo.seekable.end(0)
+                    : 0
+            }
+        );
+
+        setTimeout(trySeek,100);
+        return;
+
+    }
+
 
     console.log(
-        "WAITING FOR SEEKABLE RANGE",
+        "PROCEEDING WITH SEEK",
         {
-            readyState: heroVideo.readyState,
-            seekableLength: heroVideo.seekable.length,
+            attempts: seekAttempts,
             seekableEnd:
                 heroVideo.seekable.length
                 ? heroVideo.seekable.end(0)
                 : 0
         }
     );
-
-    setTimeout(trySeek,100);
-    return;
-
-}
 
 
     console.log(
@@ -405,18 +421,13 @@ heroVideo.addEventListener("canplaythrough", () => {
     );
 
 
+    heroVideo.currentTime = targetTime;
+
+
     console.log(
-        "SEEKABLE RANGE",
-        heroVideo.seekable.start(0),
-        heroVideo.seekable.end(0)
+        "AFTER SEEK SET",
+        heroVideo.currentTime
     );
-
-        heroVideo.currentTime = targetTime;
-
-        console.log(
-    "AFTER SEEK SET",
-    heroVideo.currentTime
-);
 
 setTimeout(() => {
 
