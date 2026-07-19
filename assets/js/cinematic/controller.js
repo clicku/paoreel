@@ -290,6 +290,20 @@ heroVideo.addEventListener("canplaythrough", () => {
         heroVideo.currentTime = targetTime;
 
         console.log(
+    "AFTER SEEK SET",
+    heroVideo.currentTime
+);
+
+setTimeout(() => {
+
+    console.log(
+        "100ms AFTER SEEK",
+        heroVideo.currentTime
+    );
+
+}, 100);
+
+        console.log(
             "AFTER SEEK REQUEST",
             heroVideo.currentTime
         );

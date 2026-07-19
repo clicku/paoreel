@@ -13,7 +13,9 @@ window.CinematicVideo = (() => {
     let video = null;
 
     function init() {
-
+console.trace(
+    "CinematicVideo.init()"
+);
         video = document.querySelector(".hero-bts");
         console.log("Video element:", video);
 
@@ -62,7 +64,7 @@ if (video) {
     }
 
     function play() {
-
+console.trace("CinematicVideo.play() CALLED");
         if (!video) return;
 
         video.pause();
