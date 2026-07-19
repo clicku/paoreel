@@ -168,11 +168,9 @@ console.log(
             });
 
         heroVideo.pause();
-heroVideo.currentTime = 0;
-heroVideo.muted = true;
-
-heroVideo.preload = "auto";
-heroVideo.load();
+        heroVideo.currentTime = 0;
+        heroVideo.muted = true;
+        heroVideo.preload = "auto";
 
 console.log(
     "Hero preload started",
