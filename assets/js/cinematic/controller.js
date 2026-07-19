@@ -375,19 +375,28 @@ heroVideo.addEventListener("canplaythrough", () => {
 
 
     // Wait until browser has enough data AND a valid seek range
-    if (
-        heroVideo.readyState < 2 ||
-        heroVideo.seekable.length === 0
-    ) {
+   if (
+    heroVideo.readyState < 2 ||
+    heroVideo.seekable.length === 0 ||
+    heroVideo.seekable.end(0) <= 0
+) {
 
-        console.log(
-            "WAITING FOR SEEKABLE RANGE"
-        );
+    console.log(
+        "WAITING FOR SEEKABLE RANGE",
+        {
+            readyState: heroVideo.readyState,
+            seekableLength: heroVideo.seekable.length,
+            seekableEnd:
+                heroVideo.seekable.length
+                ? heroVideo.seekable.end(0)
+                : 0
+        }
+    );
 
-        setTimeout(trySeek, 100);
-        return;
+    setTimeout(trySeek,100);
+    return;
 
-    }
+}
 
 
     console.log(
@@ -486,8 +495,7 @@ setTimeout(() => {
         });
 
     }
-    startEditorialScroll();
-
+    
 
     heroVideo.ontimeupdate = () => {
 
