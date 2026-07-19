@@ -159,28 +159,36 @@ window.CinematicController = (() => {
 
     function playVideoFullScreen(){
 
-    heroVideo.currentTime = video.currentTime;
-
-    console.log(
+    heroVideo.currentTime = 5.5;
+        console.log(
     "peek:", video.currentTime,
     "hero:", heroVideo.currentTime,
     "readyState:", heroVideo.readyState,
     "duration:", heroVideo.duration
 );
+heroVideo.currentTime = video.currentTime;
+heroVideo.addEventListener("seeked", () => {
 
+    console.log(
+        "SEEKED",
+        heroVideo.currentTime
+    );
+
+}, { once:true });
+
+heroVideo.currentTime = video.currentTime;
+    
     heroVideo.play().catch(()=>{});
 
     if(heroAudio){
 
-        heroAudio.currentTime = video.currentTime;
+        heroAudio.currentTime = 5.5;
 
         heroAudio.volume = 1;
 
         heroAudio.play().catch(()=>{});
 
     }
-
-}
 
     gsap.to(heroVideo,{
 
