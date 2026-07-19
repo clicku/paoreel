@@ -22,125 +22,32 @@ window.CinematicController = (() => {
     const shutterConfig = { irisValue: 0 };
 
     function cacheElements() {
+        body = document.body;
+        overlay = document.querySelector(".cinematic-overlay");
+        flash = document.querySelector(".cinematic-flash");
+        flash = document.createElement("div");
+        flash.className = "cinematic-flash";
+        document.body.appendChild(flash);
+        video=document.querySelector(".cinematic-video");
+        heroVideo = document.querySelector(".hero-bts");
+        heroStill = document.getElementById("hero-still");
+        heroAudio = document.querySelector(".hero-audio");
+        soundToggle = document.querySelector(".sound-toggle");
+        header = document.querySelector(".site-header");
+        editorial = document.querySelector(".editorial-overlay");
+        heroImage = document.querySelector(".hero-image img");
+        heroMask = document.querySelector(".hero-mask");
+        filmGrain = document.querySelector(".film-grain");
+        apertureContainer = document.querySelector(".cinematic-aperture");
 
-    body = document.body;
-
-    overlay = document.querySelector(".cinematic-overlay");
-
-    /* ------------------------------------------
-       Flash Overlay
-    ------------------------------------------ */
-
-    /* ------------------------------------------
-   Flash Overlay
------------------------------------------- */
-
-// Always create fresh flash layer
-
-const oldFlash = document.querySelector(".cinematic-flash");
-
-if (oldFlash) {
-    oldFlash.remove();
-}
-
-flash = document.createElement("div");
-
-flash.className = "cinematic-flash";
-
-document.body.appendChild(flash);
-
-console.log(
-    "NEW FLASH ELEMENT",
-    flash
-);
-
-    /* ------------------------------------------
-       Video Elements
-    ------------------------------------------ */
-
-    video = document.querySelector(".cinematic-video");
-
-    heroVideo = document.querySelector(".hero-bts");
-
-    console.log(
-        "HERO VIDEO ELEMENT",
-        heroVideo
-    );
-
-    heroStill = document.getElementById("hero-still");
-
-    heroAudio = document.querySelector(".hero-audio");
-
-    /* ------------------------------------------
-       UI Elements
-    ------------------------------------------ */
-
-    soundToggle = document.querySelector(".sound-toggle");
-
-    header = document.querySelector(".site-header");
-
-    editorial = document.querySelector(".editorial-overlay");
-
-    heroImage = document.querySelector(".hero-image img");
-
-    heroMask = document.querySelector(".hero-mask");
-
-    filmGrain = document.querySelector(".film-grain");
-
-    apertureContainer = document.querySelector(".cinematic-aperture");
-
-    /* ------------------------------------------
-       Shutter
-    ------------------------------------------ */
-
-    if (
-        window.Shutter &&
-        typeof window.Shutter.init === "function"
-    ) {
-
-        window.Shutter.init();
-
+        if (window.Shutter && typeof window.Shutter.init === "function") {
+            window.Shutter.init();
+        }
     }
-
-}
     
-    function waitForHeroVideo(callback){
+    function triggerTripleFlash() {
+         console.log("FLASH TRIGGERED");
 
-    console.log(
-        "WAITING READY STATE:",
-        heroVideo.readyState
-    );
-
-    if(heroVideo.readyState >= 4){
-
-        console.log(
-            "VIDEO ALREADY READY"
-        );
-
-        callback();
-        return;
-
-    }
-
-    heroVideo.addEventListener(
-        "canplaythrough",
-        () => {
-
-            console.log(
-                "VIDEO READY NOW:",
-                heroVideo.readyState
-            );
-
-            callback();
-
-        },
-        { once:true }
-    );
-
-}
- function triggerTripleFlash() {
-
-    console.log("FLASH TRIGGERED");
 
     gsap.timeline()
 
@@ -172,6 +79,7 @@ console.log(
         });
 
 }
+
     function validateElements() {
         const required = [overlay, flash, video, header, editorial, heroImage, apertureContainer];
         return required.every(Boolean);
@@ -182,12 +90,6 @@ console.log(
     ========================================= */
 
     function setupInitialState() {
-        window.__heroVideoRef = heroVideo;
-
-console.log(
-    "HERO VIDEO ELEMENT",
-    heroVideo
-);
         body.classList.add("cinematic-lock");
         body.classList.add("cursor-hidden");
 
@@ -210,10 +112,8 @@ console.log(
             transformOrigin: "center center"
         });
                 gsap.set(heroVideo,{
-    opacity:1,
-    "--lens-blur":"0px",
-    scale:1
-});
+                opacity:0
+            });
 
             gsap.to(heroVideo,{
                 opacity:1,
@@ -222,42 +122,8 @@ console.log(
             });
 
         heroVideo.pause();
-        heroVideo.currentTime = 0;
-        heroVideo.muted = true;
-        heroVideo.preload = "auto";
-
-console.log(
-    "Hero preload started",
-    heroVideo.readyState
-);
-heroVideo.addEventListener("loadedmetadata", () => {
-
-    console.log(
-        "loadedmetadata",
-        heroVideo.readyState,
-        heroVideo.duration
-    );
-
-});
-
-heroVideo.addEventListener("canplay", () => {
-
-    console.log(
-        "canplay",
-        heroVideo.readyState
-    );
-
-});
-
-heroVideo.addEventListener("canplaythrough", () => {
-
-    console.log(
-        "canplaythrough",
-        heroVideo.readyState
-    );
-
-});
-        
+        heroVideo.currentTime=0;
+        heroVideo.muted=true;
         video.play().catch(err => {
             console.warn("Autoplay block bypassed, playback starting:", err.message);
         });
@@ -272,41 +138,18 @@ heroVideo.addEventListener("canplaythrough", () => {
     function showCursor() { body.classList.remove("cursor-hidden"); }
 
     function startEditorialScroll() {
+        const editorialScroll = document.querySelector(".editorial-scroll");
+        if (!editorialScroll) return;
 
-    const editorialScroll = document.querySelector(".editorial-scroll");
-
-    if (!editorialScroll) return;
-
-
-    editorialUpdater = () => {
-
-        if (!heroVideo.duration) return;
-
-
-        const progress =
-            heroVideo.currentTime / heroVideo.duration;
-
-
-        gsap.set(editorialScroll, {
-
-            y: gsap.utils.interpolate(
-                0,
-                -900,
-                progress
-            )
-
-        });
-
-    };
-
-
-    gsap.ticker.add(editorialUpdater);
-
-    console.log(
-        "Editorial scroll started using hero video"
-    );
-
-}
+        editorialUpdater = () => {
+            if (!video.duration) return;
+            const progress = video.currentTime / video.duration;
+            gsap.set(editorialScroll, {
+                y: gsap.utils.interpolate(0, -900, progress)
+            });
+        };
+        gsap.ticker.add(editorialUpdater);
+    }
 
     function stopEditorialScroll() {
         if (!editorialUpdater) return;
@@ -314,132 +157,45 @@ heroVideo.addEventListener("canplaythrough", () => {
         editorialUpdater = null;
     }
 
-   function playVideoFullScreen(){
-    console.log(
-    "WAIT START",
-    heroVideo.readyState,
-    heroVideo.networkState
-);
-   waitForHeroVideo(() => {
+    function playVideoFullScreen(){
 
-    console.log(
-        "WAIT FINISHED",
-        heroVideo.readyState,
-        heroVideo.networkState
-    );
+    heroVideo.currentTime = 5.5;
 
-    const targetTime = video.currentTime;
-
-    console.log(
-        "PLAY VIDEO ELEMENT",
-        heroVideo
-    );
-
-    console.log(
-        "same element?",
-        heroVideo === window.__heroVideoRef
-    );
-
-    const trySeek = () => {
-
-        console.log(
-            "TRY SEEK",
-            "readyState:",
-            heroVideo.readyState,
-            "current:",
-            heroVideo.currentTime,
-            "target:",
-            targetTime
-        );
-
-        if (heroVideo.readyState < 2) {
-
-            setTimeout(trySeek, 100);
-            return;
-
-        }
-
-        console.log(
-            "BEFORE SEEK",
-            heroVideo.currentTime
-        );
-
-        heroVideo.currentTime = targetTime;
-
-        console.log(
-    "AFTER SEEK SET",
-    heroVideo.currentTime
-);
-
-setTimeout(() => {
-
-    console.log(
-        "100ms AFTER SEEK",
-        heroVideo.currentTime
-    );
-
-}, 100);
-
-        console.log(
-            "AFTER SEEK REQUEST",
-            heroVideo.currentTime
-        );
-
-        heroVideo.addEventListener("seeked", () => {
-
-            console.log(
-                "SEEK SUCCESS",
-                heroVideo.currentTime
-            );
-
-            setTimeout(() => {
-
-                console.log(
-                    "500ms LATER",
-                    heroVideo.currentTime
-                );
-
-            }, 500);
-
-            heroVideo.play().catch(err => {
-
-                console.warn(
-                    "Hero video play failed:",
-                    err
-                );
-
-            });
-
-        }, { once:true });
-
-    };
-
-    trySeek();
-
-});
+    heroVideo.play().catch(()=>{});
 
     if(heroAudio){
 
-        heroAudio.currentTime = video.currentTime;
+        heroAudio.currentTime = 5.5;
 
         heroAudio.volume = 1;
 
-        heroAudio.play().catch(err => {
-
-            console.warn(
-                "Hero audio play failed:",
-                err
-            );
-
-        });
+        heroAudio.play().catch(()=>{});
 
     }
+
+    gsap.to(heroVideo,{
+
+        opacity:1,
+
+        duration:0.8,
+
+        ease:"power2.out"
+
+    });
+
+    gsap.to(heroVideo,{
+
+        "--lens-blur":"0px",
+
+        duration:1.0
+
+    });
+
     startEditorialScroll();
 
+   heroVideo.ontimeupdate = () => {
 
-heroVideo.ontimeupdate = () => {
-
-    if(heroVideo.currentTime >= 22){
+    if (heroVideo.currentTime >= 22.2) {
 
         heroVideo.ontimeupdate = null;
 
@@ -450,48 +206,35 @@ heroVideo.ontimeupdate = () => {
     }
 
 };
-    heroVideo.ontimeupdate = () => {
+    
+   function startHeroReveal() {
 
-        if(heroVideo.currentTime >= 22){
+    gsap.timeline()
 
-            heroVideo.ontimeupdate = null;
+        .to(heroStill,{
+            opacity:1,
+            duration:0.15
+        })
 
-            heroVideo.pause();
+        .call(triggerTripleFlash)
 
-            startHeroReveal();
+        .to(heroStill,{
+            duration:1,
+            filter:"grayscale(100%) contrast(1.15) brightness(0.95) blur(0px)"
+        })
 
-        }
+        .call(() => {
 
-    };
+            finishSequence();
 
-    function startHeroReveal(){
+        })
 
-        gsap.timeline()
+        .to(heroStill,{
+            duration:4,
+            filter:"grayscale(0%) contrast(1.05) brightness(1) blur(0px)"
+        });
 
-            .to(heroStill,{
-                opacity:1,
-                duration:0.15
-            })
-
-            .call(triggerTripleFlash)
-
-            .to(heroStill,{
-                duration:1,
-                filter:"grayscale(100%) contrast(1.15) brightness(0.95) blur(0px)"
-            })
-
-            .call(() => {
-
-                finishSequence();
-
-            })
-
-            .to(heroStill,{
-                duration:4,
-                filter:"grayscale(0%) contrast(1.05) brightness(1) blur(0px)"
-            });
-
-    }
+}
 
 }
 
@@ -718,13 +461,7 @@ endTL.to(".scroll-indicator",{
 
         if(window.Hero){
 
-            setTimeout(() => {
-
-    if(window.Hero){
-        window.Hero.reveal();
-    }
-
-}, 1000);
+            window.Hero.reveal();
 
         }
 
