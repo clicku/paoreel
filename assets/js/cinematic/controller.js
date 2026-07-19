@@ -240,42 +240,66 @@ heroVideo.addEventListener("canplaythrough", () => {
     }
 
    function playVideoFullScreen(){
+    console.log(
+    "WAIT START",
+    heroVideo.readyState,
+    heroVideo.networkState
+);
+   waitForHeroVideo(() => {
 
-    waitForHeroVideo(() => {
+    console.log(
+        "WAIT FINISHED",
+        heroVideo.readyState,
+        heroVideo.networkState
+    );
+
+    const targetTime = video.currentTime;
+
+    console.log(
+        "PLAY VIDEO ELEMENT",
+        heroVideo
+    );
+
+    console.log(
+        "same element?",
+        heroVideo === window.__heroVideoRef
+    );
+
+    const trySeek = () => {
 
         console.log(
-            "readyState before seek:",
-            heroVideo.readyState
+            "TRY SEEK",
+            "readyState:",
+            heroVideo.readyState,
+            "current:",
+            heroVideo.currentTime,
+            "target:",
+            targetTime
         );
 
-        console.log(
-            "PLAY VIDEO ELEMENT",
-            heroVideo
-        );
+        if (heroVideo.readyState < 2) {
 
-        console.log(
-            "same element?",
-            heroVideo === window.__heroVideoRef
-        );
+            setTimeout(trySeek, 100);
+            return;
+
+        }
 
         console.log(
             "BEFORE SEEK",
             heroVideo.currentTime
         );
 
-        const targetTime = video.currentTime;
+        heroVideo.currentTime = targetTime;
 
         console.log(
-            "REQUEST SEEK TO",
-            targetTime
+            "AFTER SEEK REQUEST",
+            heroVideo.currentTime
         );
-
-        heroVideo.currentTime = targetTime;
 
         heroVideo.addEventListener("seeked", () => {
 
             console.log(
-                "SEEKED",
+                "SEEK SUCCESS",
                 heroVideo.currentTime
             );
 
@@ -297,22 +321,13 @@ heroVideo.addEventListener("canplaythrough", () => {
 
             });
 
-            gsap.to(heroVideo,{
-                opacity:1,
-                duration:0.8,
-                ease:"power2.out"
-            });
-
-            gsap.to(heroVideo,{
-                "--lens-blur":"0px",
-                duration:1.0
-            });
-
-            startEditorialScroll();
-
         }, { once:true });
 
-    });
+    };
+
+    trySeek();
+
+});
 
     if(heroAudio){
 
