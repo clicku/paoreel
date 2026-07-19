@@ -150,28 +150,44 @@ function reveal() {
 
     },"-=0.15")
 
-    .to(scrollIndicator,{
+   .to(scrollIndicator,{
 
-        opacity:1,
-        y:0,
-        duration:.8,
+    opacity:1,
+    y:0,
+    duration:.8
 
-        onComplete:()=>{
+})
 
-            startCameraBreathing();
 
-            document.body.classList.remove("cinematic-lock");
+.call(()=>{
 
-            if(window.App?.startScroll){
 
-                App.startScroll();
+    // Reveal gallery white background
+    if(window.revealGallery){
 
-            }
+        window.revealGallery();
 
-        }
+    }
 
-    },"-=0.4");
 
+})
+
+
+.call(()=>{
+
+    startCameraBreathing();
+
+    setupHeroExit();
+
+    document.body.classList.remove("cinematic-lock");
+
+    if(window.App?.startScroll){
+
+        App.startScroll();
+
+    }
+
+});
 }
 
 /* ==========================================
@@ -199,6 +215,53 @@ gsap.to(heroParallax,{
         repeat:-1,
 
         yoyo:true
+
+    });
+
+}
+function setupHeroExit() {
+
+    const heroFixed =
+        document.querySelector(".hero-fixed");
+
+    const gallery =
+        document.querySelector(".gallery-section");
+
+    if(!heroFixed || !gallery) return;
+
+    ScrollTrigger.create({
+
+        trigger: gallery,
+
+        start: "top 80%",
+
+        onEnter: () => {
+
+            gsap.to(heroFixed,{
+
+                opacity:0,
+
+                duration:1,
+
+                ease:"power2.out"
+
+            });
+
+        },
+
+        onLeaveBack: () => {
+
+            gsap.to(heroFixed,{
+
+                opacity:1,
+
+                duration:1,
+
+                ease:"power2.out"
+
+            });
+
+        }
 
     });
 

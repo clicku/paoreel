@@ -7,6 +7,7 @@ window.CinematicController = (() => {
     flash,
     video,
     heroVideo,
+    heroStill,
     header,
     editorial,
     heroImage,
@@ -24,8 +25,12 @@ window.CinematicController = (() => {
         body = document.body;
         overlay = document.querySelector(".cinematic-overlay");
         flash = document.querySelector(".cinematic-flash");
+        flash = document.createElement("div");
+        flash.className = "cinematic-flash";
+        document.body.appendChild(flash);
         video=document.querySelector(".cinematic-video");
         heroVideo = document.querySelector(".hero-bts");
+        heroStill = document.getElementById("hero-still");
         heroAudio = document.querySelector(".hero-audio");
         soundToggle = document.querySelector(".sound-toggle");
         header = document.querySelector(".site-header");
@@ -39,6 +44,41 @@ window.CinematicController = (() => {
             window.Shutter.init();
         }
     }
+    
+    function triggerTripleFlash() {
+         console.log("FLASH TRIGGERED");
+
+
+    gsap.timeline()
+
+        .to(flash,{
+            opacity:0.85,
+            duration:0.03
+        })
+        .to(flash,{
+            opacity:0,
+            duration:0.08
+        })
+
+        .to(flash,{
+            opacity:0.65,
+            duration:0.03
+        }, "+=0.08")
+        .to(flash,{
+            opacity:0,
+            duration:0.08
+        })
+
+        .to(flash,{
+            opacity:0.45,
+            duration:0.03
+        }, "+=0.12")
+        .to(flash,{
+            opacity:0,
+            duration:0.10
+        });
+
+}
 
     function validateElements() {
         const required = [overlay, flash, video, header, editorial, heroImage, apertureContainer];
@@ -153,17 +193,48 @@ window.CinematicController = (() => {
 
     startEditorialScroll();
 
-    heroVideo.ontimeupdate = () => {
+   heroVideo.ontimeupdate = () => {
 
-        if(heroVideo.currentTime >= 22){
+    if (heroVideo.currentTime >= 22.2) {
 
-            heroVideo.ontimeupdate = null;
+        heroVideo.ontimeupdate = null;
+
+        heroVideo.pause();
+
+        startHeroReveal();
+
+    }
+
+};
+    
+   function startHeroReveal() {
+
+    gsap.timeline()
+
+        .to(heroStill,{
+            opacity:1,
+            duration:0.15
+        })
+
+        .call(triggerTripleFlash)
+
+        .to(heroStill,{
+            duration:1,
+            filter:"grayscale(100%) contrast(1.15) brightness(0.95) blur(0px)"
+        })
+
+        .call(() => {
 
             finishSequence();
 
-        }
+        })
 
-    };
+        .to(heroStill,{
+            duration:4,
+            filter:"grayscale(0%) contrast(1.05) brightness(1) blur(0px)"
+        });
+
+}
 
 }
 
@@ -261,14 +332,8 @@ window.CinematicController = (() => {
     });
 
     // Fade out both video and audio together
-   endTL.to(heroVideo,{
-
-    opacity:0,
-
-    duration:1.5,
-
-    ease:"power2.out"
-
+  gsap.set(heroVideo,{
+    opacity:0
 });
 
 if(heroAudio){
@@ -310,9 +375,43 @@ if(soundToggle){
        Editorial fades away
     ------------------------------------------ */
 
-    endTL.to(editorial,{
+    /* ------------------------------------------
+   V5 Editorial Transition
+------------------------------------------ */
 
-        opacity:0,
+endTL.to(editorial,{
+    opacity:0,
+    duration:2,
+    ease:"power2.out"
+},"<");
+
+/* ------------------------------------------
+   Hero mask starts immediately
+------------------------------------------ */
+
+endTL.to(heroMask,{
+    opacity:1,
+    duration:2.5,
+    ease:"power2.out"
+},"<");
+
+/* ------------------------------------------
+   Keep hero still visible
+------------------------------------------ */
+
+endTL.set(heroStill,{
+    opacity:1
+},"<");
+
+/* ------------------------------------------
+   Film grain
+------------------------------------------ */
+
+if(filmGrain){
+
+    endTL.to(filmGrain,{
+
+        opacity:0.08,
 
         duration:1.5,
 
@@ -320,59 +419,39 @@ if(soundToggle){
 
     },"<");
 
-    /* ------------------------------------------
-       Reveal final hero image
-    ------------------------------------------ */
+}
 
-    endTL.to(heroMask,{
+/* ------------------------------------------
+   Header / Logo
+------------------------------------------ */
 
+endTL.to(header,{
     opacity:1,
-
+    y:0,
     duration:1.2,
-
     ease:"power2.out"
+},"<+0.3");
 
-},"-=0.5");
+/* ------------------------------------------
+   Hero title
+------------------------------------------ */
 
-        endTL.to(heroImage,{
-            opacity:1,
-            duration:2.2,
-            ease:"power2.out"
-        },"-=1.2");
+endTL.to(".hero-title",{
+    opacity:1,
+    y:0,
+    duration:1.4,
+    ease:"power2.out"
+},"<+0.2");
 
-    /* ------------------------------------------
-       Film grain
-    ------------------------------------------ */
+/* ------------------------------------------
+   Scroll indicator
+------------------------------------------ */
 
-    if(filmGrain){
-
-        endTL.to(filmGrain,{
-
-            opacity:0.08,
-
-            duration:1.5,
-
-            ease:"power2.out"
-
-        },"<");
-
-    }
-
-    /* ------------------------------------------
-       Navigation
-    ------------------------------------------ */
-
-    endTL.to(header,{
-
-        opacity:1,
-
-        y:0,
-
-        duration:0.7,
-
-        ease:"power2.out"
-
-    },"-=1.2");
+endTL.to(".scroll-indicator",{
+    opacity:1,
+    duration:1,
+    ease:"power2.out"
+},"<+0.3");
 
     /* ------------------------------------------
        Hero title + Scroll indicator

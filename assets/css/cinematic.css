@@ -248,20 +248,16 @@ body.cursor-hidden *{
    CINEMATIC FLASH
 ========================================== */
 
-.cinematic-flash {
-
-    position: absolute;
-
-    inset: 0;
-
-    background: #fff;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    z-index: 20;
-
+.cinematic-flash{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background:#fff;
+    opacity:0;
+    pointer-events:none;
+    z-index:999999;
 }
 
 
