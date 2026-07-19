@@ -165,6 +165,8 @@ window.CinematicController = (() => {
     "peek:", video.currentTime,
     "hero:", heroVideo.currentTime
 );
+heroVideo.currentTime = video.currentTime;
+    
     heroVideo.play().catch(()=>{});
 
     if(heroAudio){
