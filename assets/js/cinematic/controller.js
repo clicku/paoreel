@@ -122,8 +122,17 @@ window.CinematicController = (() => {
             });
 
         heroVideo.pause();
-        heroVideo.currentTime=0;
-        heroVideo.muted=true;
+        heroVideo.currentTime = 0;
+        heroVideo.muted = true;
+        heroVideo.load();
+        heroVideo.addEventListener("canplay", () => {
+
+    console.log(
+        "HERO VIDEO READY",
+        heroVideo.readyState
+    );
+
+}, { once:true });
         video.play().catch(err => {
             console.warn("Autoplay block bypassed, playback starting:", err.message);
         });
