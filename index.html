@@ -222,28 +222,37 @@
 
         <div class="hero-image">
 
-           <video
-    class="hero-bts"
-    muted
-    playsinline
-    preload="auto">
+    <!-- 1. Standalone Intro Video (00:00 - 00:05) Behind the Lens -->
+    <video
+        class="cinematic-video"
+        muted
+        playsinline
+        preload="auto">
+        <source
+            src="assets/video/hero-intro.mp4" 
+            type="video/mp4">
+    </video>
 
-    <source
-        src="assets/video/hero-bts.mp4"
-        type="video/mp4">
+    <!-- 2. Main Full-Screen Video Sequence (00:06 - 00:23) -->
+    <video
+        class="hero-bts"
+        muted
+        playsinline
+        preload="auto">
+        <source
+            src="assets/video/hero-main.mp4"
+            type="video/mp4">
+    </video>
 
-</video>
-
-<!--<img
-    src="assets/images/paoreel.webp"
-    alt="">-->
-     <img
+    <!-- 3. Final Still Image Reveal Asset -->
+    <img
         id="hero-still"
         src="assets/images/hero/hero-final.png"
         alt=""
     >
     
-        </div>
+</div>
+
 
         <div class="hero-mask"></div>
 
