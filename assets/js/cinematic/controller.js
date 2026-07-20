@@ -125,37 +125,49 @@ window.CinematicController = (() => {
     }
 
    function playVideoFullScreen() {
-    waitForHeroVideo(() => {
-        // Fallback to 5.0 seconds if the video hasn't progressed past 1 second yet due to caching
-        let targetTime = video.currentTime;
-        if (targetTime < 1.0) {
-            console.log("Cache race condition detected. Forcing targetTime to 5.0s baseline.");
-            targetTime = 5.0; 
-        }
+    // 1. Immediately halt the sneak peek video to capture its exact state
+    video.pause();
+    
+    // Set a solid baseline time: use the actual time or fall back to the 5.0s intro duration
+    const targetTime = video.currentTime > 1 ? video.currentTime : 5.0;
+    console.log("CinematicController: Synced target execution time set to:", targetTime);
 
-        const trySeek = () => {
-            if (heroVideo.readyState < 2) {
-                heroVideo.addEventListener("loadeddata", trySeek, { once: true });
-                return;
+    waitForHeroVideo(() => {
+        const applySeek = () => {
+            console.log("CinematicController: Attempting media seek to target:", targetTime);
+            
+            // 2. Set the time
+            heroVideo.currentTime = targetTime;
+
+            // 3. Double-check cache overwrite protection loop
+            // If the browser resets it instantly, catch it and force it again
+            if (heroVideo.currentTime !== targetTime) {
+                setTimeout(() => {
+                    heroVideo.currentTime = targetTime;
+                }, 0);
             }
 
-            console.log("Seeking heroVideo to safely calculated target:", targetTime);
-            heroVideo.currentTime = targetTime;
-            
+            // 4. Listen for completion before triggering playback
             heroVideo.addEventListener("seeked", () => {
-                heroVideo.play().catch(err => console.warn("Hero video play failed:", err));
+                console.log("CinematicController: Seek success confirmed at:", heroVideo.currentTime);
+                
+                heroVideo.play().catch(err => {
+                    console.warn("CinematicController: Hero video playback rejected:", err);
+                });
             }, { once: true });
         };
 
-        trySeek();
+        // If readyState is 4, the cache is primed. Wait a brief tick for the engine thread to settle.
+        if (heroVideo.readyState >= 3) {
+            setTimeout(applySeek, 50);
+        } else {
+            heroVideo.addEventListener("loadedmetadata", applySeek, { once: true });
+        }
     });
 
+    // Audio Synchronization Sync Block
     if (heroAudio) {
-        // Apply the same safe baseline logic to the audio synchronization track
-        let targetAudioTime = video.currentTime;
-        if (targetAudioTime < 1.0) targetAudioTime = 5.0;
-
-        heroAudio.currentTime = targetAudioTime;
+        heroAudio.currentTime = targetTime;
         heroAudio.volume = 1;
         heroAudio.play().catch(err => console.warn("Hero audio play failed:", err));
     }
