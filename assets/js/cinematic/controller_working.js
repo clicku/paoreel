@@ -41,15 +41,7 @@ window.CinematicController = (() => {
         }
     }
     
-    function waitForHeroVideo(callback) {
-        if (!heroVideo) return;
-        if (heroVideo.readyState >= 4) {
-            callback();
-            return;
-        }
-        heroVideo.addEventListener("canplaythrough", callback, { once: true });
-    }
-
+    
     function triggerTripleFlash() {
         if (!flash) return;
         gsap.timeline()
@@ -67,7 +59,7 @@ window.CinematicController = (() => {
     }
 
     function setupInitialState() {
-        window.__heroVideoRef = heroVideo;
+       
         body.classList.add("cinematic-lock", "cursor-hidden");
 
         shutterConfig.irisValue = 0; 
@@ -77,21 +69,8 @@ window.CinematicController = (() => {
         }
 
         if (video) {
-            // FIX: If the files share a cache source, break the timeline link using a fresh string query
-            const currentSrc = video.src || video.querySelector("source")?.src;
-            if (currentSrc && !currentSrc.includes("?t=")) {
-                const separator = currentSrc.includes("?") ? "&" : "?";
-                const cacheBuster = `${currentSrc}${separator}t=${Date.now()}`;
-                if (video.querySelector("source")) {
-                    video.querySelector("source").src = cacheBuster;
-                } else {
-                    video.src = cacheBuster;
-                }
-                video.load(); 
-            }
-
             video.muted = true;
-            video.currentTime = 0; 
+            video.currentTime = 1;
             gsap.set(video, { 
                 opacity: 0.95,
                 "--lens-blur": "18px",
@@ -101,13 +80,17 @@ window.CinematicController = (() => {
             video.play().catch(err => console.warn("Autoplay block bypassed:", err.message));
         }
 
-        if (heroVideo) {
-            gsap.set(heroVideo, { opacity: 1, "--lens-blur": "0px", scale: 1 });
-            gsap.to(heroVideo, { opacity: 1, duration: 0.9, ease: "power2.out" });
+        if (heroVideo) {gsap.set(heroVideo,{
+        opacity:0,
+        "--lens-blur":"0px",
+        scale:1
+            });
+
             heroVideo.pause();
-            heroVideo.currentTime = 6; // Safely buffers the full-screen loop ahead of time
+            heroVideo.currentTime = 0;
             heroVideo.muted = true;
             heroVideo.preload = "auto";
+
         }
 
         if (flash) gsap.set(flash, { opacity: 0 });
@@ -141,42 +124,69 @@ window.CinematicController = (() => {
     }
 
     function playVideoFullScreen() {
-        if (!heroVideo || !video) return;
 
-        waitForHeroVideo(() => {
-            const targetTime = 6; 
+    if (!heroVideo) return;
+    gsap.to(heroVideo,{
+    opacity:1,
+    duration:0.6,
+    ease:"power2.out"
+});
 
-            const trySeek = () => {
-                if (heroVideo.readyState >= 2) {
-                    heroVideo.currentTime = targetTime;
-                    heroVideo.play().catch(err => console.warn("Hero video play failed:", err));
-                    return;
-                }
-                heroVideo.addEventListener("loadeddata", () => {
-                    heroVideo.currentTime = targetTime;
-                    heroVideo.play().catch(err => console.warn("Hero video play failed:", err));
-                }, { once: true });
-            };
+    heroVideo.currentTime = 0;
 
-            trySeek();
+    heroVideo.play()
+        .then(() => {
+
+            startEditorialScroll();
+
+        })
+        .catch(err => {
+
+            console.warn(
+                "Hero video play failed:",
+                err
+            );
+
         });
 
-        if (heroAudio) {
-            heroAudio.currentTime = 6;
-            heroAudio.volume = 1;
-            heroAudio.play().catch(err => console.warn("Hero audio play failed:", err));
+    if (heroAudio) {
+
+        heroAudio.currentTime = 0;
+
+        heroAudio.volume = 1;
+
+        heroAudio.play().catch(err => {
+
+            console.warn(
+                "Hero audio play failed:",
+                err
+            );
+
+        });
+
+    }
+
+    heroVideo.ontimeupdate = () => {
+
+        const revealPoint =
+            Math.max(
+                0,
+                heroVideo.duration - 0.8
+            );
+
+        if (heroVideo.currentTime >= revealPoint) {
+
+            heroVideo.ontimeupdate = null;
+
+            heroVideo.pause();
+
+            startHeroReveal();
+
         }
 
-        startEditorialScroll();
+    };
 
-        heroVideo.ontimeupdate = () => {
-            if (heroVideo.currentTime >= 23) {
-                heroVideo.ontimeupdate = null;
-                heroVideo.pause();
-                startHeroReveal();
-            }
-        };
-    }
+}
 
     function startHeroReveal() {
         if (!heroStill) return;
@@ -229,6 +239,7 @@ window.CinematicController = (() => {
         if (!filmGrain) return;
         gsap.to(filmGrain, { backgroundPosition: "400px 300px", duration: 2, ease: "none", repeat: -1 });
     }
+
     function finishSequence() {
         stopEditorialScroll();
 
@@ -283,6 +294,7 @@ window.CinematicController = (() => {
     }
 
     function start() {
+        // Safe resets for hot-caching conditions
         if (started) {
             stopEditorialScroll();
             started = false;
