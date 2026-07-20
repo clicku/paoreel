@@ -2,326 +2,121 @@ window.CinematicController = (() => {
     "use strict";
 
     let started = false;
-    let videoTransitionStarted = false;
     let editorialUpdater = null;
-    let overlay,
-    flash,
-    video,
-    heroVideo,
-    heroStill,
-    header,
-    editorial,
-    heroImage,
-    filmGrain,
-    body;
-    let heroMask;
-    let heroAudio;
-    let soundToggle;
-    let apertureContainer;
+    let overlay, flash, video, heroVideo, heroStill, header, editorial, heroImage, filmGrain, body;
+    let heroMask, heroAudio, soundToggle, apertureContainer;
 
-    // Local configuration proxy object for tracking real-time layout values
     const shutterConfig = { irisValue: 0 };
 
     function cacheElements() {
+        body = document.body;
+        overlay = document.querySelector(".cinematic-overlay");
 
-    body = document.body;
+        // Flash Overlay Setup (Safely recreate to avoid leaks)
+        const oldFlash = document.querySelector(".cinematic-flash");
+        if (oldFlash) oldFlash.remove();
 
-    overlay = document.querySelector(".cinematic-overlay");
+        flash = document.createElement("div");
+        flash.className = "cinematic-flash";
+        body.appendChild(flash);
 
-    /* ------------------------------------------
-       Flash Overlay
-    ------------------------------------------ */
+        // Media Elements
+        video = document.querySelector(".cinematic-video");
+        heroVideo = document.querySelector(".hero-bts");
+        heroStill = document.getElementById("hero-still");
+        heroAudio = document.querySelector(".hero-audio");
 
-    /* ------------------------------------------
-   Flash Overlay
------------------------------------------- */
+        // UI Elements
+        soundToggle = document.querySelector(".sound-toggle");
+        header = document.querySelector(".site-header");
+        editorial = document.querySelector(".editorial-overlay");
+        heroImage = document.querySelector(".hero-image img");
+        heroMask = document.querySelector(".hero-mask");
+        filmGrain = document.querySelector(".film-grain");
+        apertureContainer = document.querySelector(".cinematic-aperture");
 
-// Always create fresh flash layer
-
-const oldFlash = document.querySelector(".cinematic-flash");
-
-if (oldFlash) {
-    oldFlash.remove();
-}
-
-flash = document.createElement("div");
-
-flash.className = "cinematic-flash";
-
-document.body.appendChild(flash);
-
-console.log(
-    "NEW FLASH ELEMENT",
-    flash
-);
-
-    /* ------------------------------------------
-       Video Elements
-    ------------------------------------------ */
-
-    video = document.querySelector(".cinematic-video");
-
-    heroVideo = document.querySelector(".hero-bts");
-    heroVideo.addEventListener("loadedmetadata",()=>{
-
-        console.log(
-            "Hero metadata position:",
-            heroVideo.currentTime
-        );
-
-    });
-
-
-    console.log(
-        "HERO VIDEO ELEMENT",
-        heroVideo
-    );
-    heroVideo.autoplay = false;
-    heroVideo.controls = false;
-    heroVideo.removeAttribute("autoplay");
-    heroStill = document.getElementById("hero-still");
-
-    heroAudio = document.querySelector(".hero-audio");
-
-    /* ------------------------------------------
-       UI Elements
-    ------------------------------------------ */
-
-    soundToggle = document.querySelector(".sound-toggle");
-
-    header = document.querySelector(".site-header");
-
-    editorial = document.querySelector(".editorial-overlay");
-
-    heroImage = document.querySelector(".hero-image img");
-
-    heroMask = document.querySelector(".hero-mask");
-
-    filmGrain = document.querySelector(".film-grain");
-
-    apertureContainer = document.querySelector(".cinematic-aperture");
-
-    /* ------------------------------------------
-       Shutter
-    ------------------------------------------ */
-
-    if (
-        window.Shutter &&
-        typeof window.Shutter.init === "function"
-    ) {
-
-        window.Shutter.init();
-
+        // Shutter Module Initialization
+        if (window.Shutter && typeof window.Shutter.init === "function") {
+            window.Shutter.init();
+        }
     }
-
-}
     
-    function waitForHeroVideo(callback){
-
-    console.log(
-        "WAITING READY STATE:",
-        heroVideo.readyState
-    );
-
-    if(heroVideo.readyState >= 4){
-
-        console.log(
-            "VIDEO ALREADY READY"
-        );
-
-        callback();
-        return;
-
+    function waitForHeroVideo(callback) {
+        if (heroVideo.readyState >= 4) {
+            callback();
+            return;
+        }
+        heroVideo.addEventListener("canplaythrough", callback, { once: true });
     }
 
-    heroVideo.addEventListener(
-        "canplaythrough",
-        () => {
+    function triggerTripleFlash() {
+        gsap.timeline()
+            .to(flash, { opacity: 0.85, duration: 0.03 })
+            .to(flash, { opacity: 0, duration: 0.08 })
+            .to(flash, { opacity: 0.65, duration: 0.03 }, "+=0.08")
+            .to(flash, { opacity: 0, duration: 0.08 })
+            .to(flash, { opacity: 0.45, duration: 0.03 }, "+=0.12")
+            .to(flash, { opacity: 0, duration: 0.10 });
+    }
 
-            console.log(
-                "VIDEO READY NOW:",
-                heroVideo.readyState
-            );
-
-            callback();
-
-        },
-        { once:true }
-    );
-
-}
- function triggerTripleFlash() {
-
-    console.log("FLASH TRIGGERED");
-
-    gsap.timeline()
-
-        .to(flash,{
-            opacity:0.85,
-            duration:0.03
-        })
-        .to(flash,{
-            opacity:0,
-            duration:0.08
-        })
-
-        .to(flash,{
-            opacity:0.65,
-            duration:0.03
-        }, "+=0.08")
-        .to(flash,{
-            opacity:0,
-            duration:0.08
-        })
-
-        .to(flash,{
-            opacity:0.45,
-            duration:0.03
-        }, "+=0.12")
-        .to(flash,{
-            opacity:0,
-            duration:0.10
-        });
-
-}
     function validateElements() {
         const required = [overlay, flash, video, header, editorial, heroImage, apertureContainer];
         return required.every(Boolean);
     }
 
-    /* ==========================================
-       Initial States
-    ========================================= */
-
     function setupInitialState() {
         window.__heroVideoRef = heroVideo;
-
-console.log(
-    "HERO VIDEO ELEMENT",
-    heroVideo
-);
-        body.classList.add("cinematic-lock");
-        body.classList.add("cursor-hidden");
+        body.classList.add("cinematic-lock", "cursor-hidden");
 
         shutterConfig.irisValue = 0; 
-        
         if (window.Shutter && typeof window.Shutter.init === "function") {
             window.Shutter.init();
             window.Shutter.update(0.20);
         }
 
-        // Force-mute to guarantee immediate browser playback
         video.muted = true;
         video.currentTime = 1;
 
-        // Pinhole State: Video expands naturally without background mask interference
         gsap.set(video, { 
             opacity: 0.95,
             "--lens-blur": "18px",
             scale: 0.4,
             transformOrigin: "center center"
         });
-                gsap.set(heroVideo,{
-    opacity:1,
-    "--lens-blur":"0px",
-    scale:1
-});
 
-            gsap.to(heroVideo,{
-                opacity:1,
-                duration:0.9,
-                ease:"power2.out"
-            });
+        gsap.set(heroVideo, { opacity: 1, "--lens-blur": "0px", scale: 1 });
+        gsap.to(heroVideo, { opacity: 1, duration: 0.9, ease: "power2.out" });
 
         heroVideo.pause();
-
-heroVideo.removeAttribute("src");
-heroVideo.load();
-
-heroVideo.muted = true;
-heroVideo.preload = "auto";
-
-console.log(
-    "Hero preload started",
-    heroVideo.readyState
-);
-heroVideo.addEventListener("loadedmetadata", () => {
-
-    console.log(
-        "loadedmetadata",
-        heroVideo.readyState,
-        heroVideo.duration
-    );
-
-});
-
-heroVideo.addEventListener("canplay", () => {
-
-    console.log(
-        "canplay",
-        heroVideo.readyState
-    );
-
-});
-
-heroVideo.addEventListener("canplaythrough", () => {
-
-    console.log(
-        "canplaythrough",
-        heroVideo.readyState
-    );
-
-});
+        heroVideo.currentTime = 0;
+        heroVideo.muted = true;
+        heroVideo.preload = "auto";
         
-        video.play().catch(err => {
-            console.warn("Autoplay block bypassed, playback starting:", err.message);
-        });
+        video.play().catch(err => console.warn("Autoplay block bypassed:", err.message));
 
         gsap.set(flash, { opacity: 0 });
         gsap.set(header, { opacity: 0, y: -20 });
         gsap.set(heroImage, { opacity: 0 });
-        gsap.set(heroMask,{ opacity:0 });
+        gsap.set(heroMask, { opacity: 0 });
         if (filmGrain) gsap.set(filmGrain, { opacity: 0 });
     }
 
     function showCursor() { body.classList.remove("cursor-hidden"); }
 
     function startEditorialScroll() {
+        const editorialScroll = document.querySelector(".editorial-scroll");
+        if (!editorialScroll) return;
 
-    const editorialScroll = document.querySelector(".editorial-scroll");
+        editorialUpdater = () => {
+            const duration = heroVideo.duration || 1;
+            const progress = (heroVideo.currentTime / duration) || 0;
+            gsap.set(editorialScroll, {
+                y: gsap.utils.interpolate(0, -900, progress)
+            });
+        };
 
-    if (!editorialScroll) return;
-
-
-    editorialUpdater = () => {
-
-        if (!heroVideo.duration) return;
-
-
-        const progress =
-            heroVideo.currentTime / heroVideo.duration;
-
-
-        gsap.set(editorialScroll, {
-
-            y: gsap.utils.interpolate(
-                0,
-                -900,
-                progress
-            )
-
-        });
-
-    };
-
-
-    gsap.ticker.add(editorialUpdater);
-
-    console.log(
-        "Editorial scroll started using hero video"
-    );
-
-}
+        gsap.ticker.add(editorialUpdater);
+    }
 
     function stopEditorialScroll() {
         if (!editorialUpdater) return;
@@ -329,90 +124,56 @@ heroVideo.addEventListener("canplaythrough", () => {
         editorialUpdater = null;
     }
 
-  function playVideoFullScreen(){
+    function playVideoFullScreen() {
+        waitForHeroVideo(() => {
+            const targetTime = video.currentTime;
 
-    console.log(
-        "WAIT START",
-        heroVideo.readyState,
-        heroVideo.networkState
-    );
+            const trySeek = () => {
+                if (heroVideo.readyState < 2) {
+                    // Use standard event handling instead of recursive setTimeout strings where possible
+                    heroVideo.addEventListener("loadeddata", trySeek, { once: true });
+                    return;
+                }
 
+                heroVideo.currentTime = targetTime;
+                heroVideo.addEventListener("seeked", () => {
+                    heroVideo.play().catch(err => console.warn("Hero video play failed:", err));
+                }, { once: true });
+            };
 
-    const targetTime = video.currentTime;
+            trySeek();
+        });
 
+        if (heroAudio) {
+            heroAudio.currentTime = video.currentTime;
+            heroAudio.volume = 1;
+            heroAudio.play().catch(err => console.warn("Hero audio play failed:", err));
+        }
 
-    const trySeek = () => {
+        startEditorialScroll();
 
-        console.log(
-            "TRY SEEK",
-            "readyState:",
-            heroVideo.readyState,
-            "current:",
-            heroVideo.currentTime,
-            "target:",
-            targetTime
-        );
+        heroVideo.ontimeupdate = () => {
+            if (heroVideo.currentTime >= 22) {
+                heroVideo.ontimeupdate = null;
+                heroVideo.pause();
+                startHeroReveal();
+            }
+        };
+    }
 
-
-        heroVideo.currentTime = targetTime;
-
-
-        console.log(
-            "AFTER SEEK SET",
-            heroVideo.currentTime
-        );
-
-
-        heroVideo.addEventListener("seeked",()=>{
-
-            console.log(
-                "SEEK SUCCESS",
-                heroVideo.currentTime
-            );
-
-
-            heroVideo.play()
-            .then(()=>{
-
-                console.log(
-                    "HERO VIDEO PLAYING"
-                );
-
-                startEditorialScroll();
-
-            })
-            .catch(err=>{
-
-                console.warn(
-                    "Hero video play failed:",
-                    err
-                );
-
-            });
-
-
-        },{once:true});
-
-    };
-
-
-    waitForHeroVideo(()=>{
-
-        trySeek();
-
-    });
-
-}
-    /* ==========================================
-       Intro Timeline
-    ========================================== */
+    function startHeroReveal() {
+        gsap.timeline()
+            .to(heroStill, { opacity: 1, duration: 0.15 })
+            .call(triggerTripleFlash)
+            .to(heroStill, { duration: 1, filter: "grayscale(100%) contrast(1.15) brightness(0.95) blur(0px)" })
+            .call(() => { finishSequence(); })
+            .to(heroStill, { duration: 4, filter: "grayscale(0%) contrast(1.05) brightness(1) blur(0px)" });
+    }
 
     function playIntro() {
         const tl = gsap.timeline();
 
         tl.to({}, { duration: 1 });
-
-        // Slow mechanical opening of the blades (0.0s -> 4.0s)
         tl.to(shutterConfig, {
             irisValue: 1.04, 
             duration: 4.0,   
@@ -424,221 +185,80 @@ heroVideo.addEventListener("canplaythrough", () => {
             }
         }, "<");
 
-        // Slowly maximize scale of the video matching the opening blades
-        tl.to(video, {
-            scale: 1.1,
-            duration: 4.0,
-            ease: "power1.inOut"
-        }, "<");
-       
-
-        // The Flash Event
+        tl.to(video, { scale: 1.1, duration: 4.0, ease: "power1.inOut" }, "<");
+        
         tl.fromTo(flash, { opacity: 0 }, { opacity: 1, duration: 0.05, ease: "none" }, "-=0.05")
           .to(flash, { opacity: 0, duration: 0.35, ease: "power2.out" });
 
-          tl.add(()=>{
-
-    body.classList.remove("cursor-hidden");
-
-},"-=0.2");
-        // BREAKOUT
-        tl.add(() => {
-
-    playVideoFullScreen();
-
-}, "-=0.15");
+        tl.add(() => { body.classList.remove("cursor-hidden"); }, "-=0.2");
+        tl.add(() => { playVideoFullScreen(); }, "-=0.15");
         
-        // Fade out the camera aperture interface and dark overlay
-      tl.to(overlay,{
-    opacity:0,
-    duration:1.0,
-    ease:"power1.out",
-    onComplete(){
-        overlay.style.display="none";
+        tl.to(overlay, {
+            opacity: 0,
+            duration: 1.0,
+            ease: "power1.out",
+            onComplete() { overlay.style.display = "none"; }
+        }, "-=0.45");
     }
-},"-=0.45");
-    }
-
-    /* ==========================================
-       Ending Sequence
-    ========================================== */
 
     function startFilmGrain() {
         if (!filmGrain) return;
         gsap.to(filmGrain, { backgroundPosition: "400px 300px", duration: 2, ease: "none", repeat: -1 });
     }
 
-    function finishSequence(){
+    function finishSequence() {
+        stopEditorialScroll();
 
-    stopEditorialScroll();
-
-    const endTL = gsap.timeline({
-
-        onComplete(){
-
-            if(heroAudio){
-
-                heroAudio.pause();
-                heroAudio.currentTime = 0;
-                heroAudio.volume = 1;
-
+        const endTL = gsap.timeline({
+            onComplete() {
+                if (heroAudio) {
+                    heroAudio.pause();
+                    heroAudio.currentTime = 0;
+                    heroAudio.volume = 1;
+                }
+                heroVideo.pause();
+                showCursor();
+                body.classList.remove("cinematic-lock");
+                startFilmGrain();
             }
+        });
 
-            heroVideo.pause();
+        // Enqueue everything smoothly into the structural timeline
+        endTL.set(heroVideo, { opacity: 0 });
 
-            showCursor();
-
-            document.body.classList.remove("cinematic-lock");
-
-            startFilmGrain();
-
+        if (heroAudio) {
+            endTL.to(heroAudio, { volume: 0, duration: 1.5, ease: "power2.out" }, "<");
         }
 
-    });
-
-    // Fade out both video and audio together
-  gsap.set(heroVideo,{
-    opacity:0
-});
-
-if(heroAudio){
-
-    endTL.to(heroAudio,{
-
-        volume:0,
-
-        duration:1.5,
-
-        ease:"power2.out"
-
-    },"<");
-
-}
-
-if(soundToggle){
-
-    endTL.to(soundToggle,{
-
-        opacity:0,
-
-        duration:0.8,
-
-        ease:"power2.out",
-
-        onComplete(){
-
-            soundToggle.style.display = "none";
-
+        if (soundToggle) {
+            endTL.to(soundToggle, {
+                opacity: 0,
+                duration: 0.8,
+                ease: "power2.out",
+                onComplete() { soundToggle.style.display = "none"; }
+            }, "<");
         }
 
-    },"<");
+        endTL.to(editorial, { opacity: 0, duration: 2, ease: "power2.out" }, "<")
+             .to(heroMask, { opacity: 1, duration: 2.5, ease: "power2.out" }, "<")
+             .set(heroStill, { opacity: 1 }, "<");
 
-}
+        if (filmGrain) {
+            endTL.to(filmGrain, { opacity: 0.08, duration: 1.5, ease: "power2.out" }, "<");
+        }
 
-    // Continue with the rest of your existing timeline...
-    /* ------------------------------------------
-       Editorial fades away
-    ------------------------------------------ */
+        endTL.to(header, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" }, "<+0.3")
+             .to(".hero-title", { opacity: 1, y: 0, duration: 1.4, ease: "power2.out" }, "<+0.2")
+             .to(".scroll-indicator", { opacity: 1, duration: 1, ease: "power2.out" }, "<+0.3");
 
-    /* ------------------------------------------
-   V5 Editorial Transition
------------------------------------------- */
-
-endTL.to(editorial,{
-    opacity:0,
-    duration:2,
-    ease:"power2.out"
-},"<");
-
-/* ------------------------------------------
-   Hero mask starts immediately
------------------------------------------- */
-
-endTL.to(heroMask,{
-    opacity:1,
-    duration:2.5,
-    ease:"power2.out"
-},"<");
-
-/* ------------------------------------------
-   Keep hero still visible
------------------------------------------- */
-
-endTL.set(heroStill,{
-    opacity:1
-},"<");
-
-/* ------------------------------------------
-   Film grain
------------------------------------------- */
-
-if(filmGrain){
-
-    endTL.to(filmGrain,{
-
-        opacity:0.08,
-
-        duration:1.5,
-
-        ease:"power2.out"
-
-    },"<");
-
-}
-
-/* ------------------------------------------
-   Header / Logo
------------------------------------------- */
-
-endTL.to(header,{
-    opacity:1,
-    y:0,
-    duration:1.2,
-    ease:"power2.out"
-},"<+0.3");
-
-/* ------------------------------------------
-   Hero title
------------------------------------------- */
-
-endTL.to(".hero-title",{
-    opacity:1,
-    y:0,
-    duration:1.4,
-    ease:"power2.out"
-},"<+0.2");
-
-/* ------------------------------------------
-   Scroll indicator
------------------------------------------- */
-
-endTL.to(".scroll-indicator",{
-    opacity:1,
-    duration:1,
-    ease:"power2.out"
-},"<+0.3");
-
-    /* ------------------------------------------
-       Hero title + Scroll indicator
-    ------------------------------------------ */
-
-    endTL.add(()=>{
-
-        if(window.Hero){
-
-            setTimeout(() => {
-
-    if(window.Hero){
-        window.Hero.reveal();
+        endTL.add(() => {
+            if (window.Hero) {
+                setTimeout(() => {
+                    if (window.Hero) window.Hero.reveal();
+                }, 1000);
+            }
+        }, "-=0.5");
     }
-
-}, 1000);
-
-        }
-
-    },"-=0.5");
-
-}
 
     function start() {
         if (started) return;
