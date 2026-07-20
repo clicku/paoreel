@@ -3,8 +3,8 @@ window.CinematicController = (() => {
 
     let started = false;
     let editorialUpdater = null;
-    let overlay, flash, video, heroVideo, heroStill, header, editorial, heroImage, filmGrain, body;
-    let heroMask, heroAudio, soundToggle, apertureContainer;
+    let overlay, flash, video, heroStill, header, editorial, heroImage, filmGrain, body;
+    let heroMask, soundToggle, apertureContainer;
 
     const shutterConfig = { irisValue: 0 };
 
@@ -20,11 +20,9 @@ window.CinematicController = (() => {
         flash.className = "cinematic-flash";
         body.appendChild(flash);
 
-        // Media Elements
+        // Core Unified Media Element
         video = document.querySelector(".cinematic-video");
-        heroVideo = document.querySelector(".hero-bts");
         heroStill = document.getElementById("hero-still");
-        heroAudio = document.querySelector(".hero-audio");
 
         // UI Elements
         soundToggle = document.querySelector(".sound-toggle");
@@ -40,14 +38,6 @@ window.CinematicController = (() => {
             window.Shutter.init();
         }
     }
-    
-    function waitForHeroVideo(callback) {
-        if (heroVideo.readyState >= 4) {
-            callback();
-            return;
-        }
-        heroVideo.addEventListener("canplaythrough", callback, { once: true });
-    }
 
     function triggerTripleFlash() {
         gsap.timeline()
@@ -60,12 +50,12 @@ window.CinematicController = (() => {
     }
 
     function validateElements() {
+        // Removed heroVideo and heroAudio from strict checks since they are deprecated
         const required = [overlay, flash, video, header, editorial, heroImage, apertureContainer];
         return required.every(Boolean);
     }
 
     function setupInitialState() {
-        window.__heroVideoRef = heroVideo;
         body.classList.add("cinematic-lock", "cursor-hidden");
 
         shutterConfig.irisValue = 0; 
@@ -74,9 +64,11 @@ window.CinematicController = (() => {
             window.Shutter.update(0.20);
         }
 
+        // Start element muted to bypass aggressive browser autoplay blocks
         video.muted = true;
-        video.currentTime = 1;
+        video.currentTime = 0;
 
+        // Pinhole State: Scale down the video inside the shutter mask boundaries
         gsap.set(video, { 
             opacity: 0.95,
             "--lens-blur": "18px",
@@ -84,14 +76,6 @@ window.CinematicController = (() => {
             transformOrigin: "center center"
         });
 
-        gsap.set(heroVideo, { opacity: 1, "--lens-blur": "0px", scale: 1 });
-        gsap.to(heroVideo, { opacity: 1, duration: 0.9, ease: "power2.out" });
-
-        heroVideo.pause();
-        heroVideo.currentTime = 0;
-        heroVideo.muted = true;
-        heroVideo.preload = "auto";
-        
         video.play().catch(err => console.warn("Autoplay block bypassed:", err.message));
 
         gsap.set(flash, { opacity: 0 });
@@ -108,8 +92,8 @@ window.CinematicController = (() => {
         if (!editorialScroll) return;
 
         editorialUpdater = () => {
-            const duration = heroVideo.duration || 1;
-            const progress = (heroVideo.currentTime / duration) || 0;
+            const duration = video.duration || 1;
+            const progress = (video.currentTime / duration) || 0;
             gsap.set(editorialScroll, {
                 y: gsap.utils.interpolate(0, -900, progress)
             });
@@ -124,64 +108,21 @@ window.CinematicController = (() => {
         editorialUpdater = null;
     }
 
-   function playVideoFullScreen() {
-    // 1. Immediately halt the sneak peek video to capture its exact state
-    video.pause();
-    
-    // Set a solid baseline time: use the actual time or fall back to the 5.0s intro duration
-    const targetTime = video.currentTime > 1 ? video.currentTime : 5.0;
-    console.log("CinematicController: Synced target execution time set to:", targetTime);
+    function handleBreakoutTransition() {
+        // Unmute the running video as it fills up the viewport window
+        video.muted = false;
+        
+        startEditorialScroll();
 
-    waitForHeroVideo(() => {
-        const applySeek = () => {
-            console.log("CinematicController: Attempting media seek to target:", targetTime);
-            
-            // 2. Set the time
-            heroVideo.currentTime = targetTime;
-
-            // 3. Double-check cache overwrite protection loop
-            // If the browser resets it instantly, catch it and force it again
-            if (heroVideo.currentTime !== targetTime) {
-                setTimeout(() => {
-                    heroVideo.currentTime = targetTime;
-                }, 0);
+        // Monitor continuous runtime metrics for target exit events
+        video.ontimeupdate = () => {
+            if (video.currentTime >= 22) {
+                video.ontimeupdate = null;
+                video.pause();
+                startHeroReveal();
             }
-
-            // 4. Listen for completion before triggering playback
-            heroVideo.addEventListener("seeked", () => {
-                console.log("CinematicController: Seek success confirmed at:", heroVideo.currentTime);
-                
-                heroVideo.play().catch(err => {
-                    console.warn("CinematicController: Hero video playback rejected:", err);
-                });
-            }, { once: true });
         };
-
-        // If readyState is 4, the cache is primed. Wait a brief tick for the engine thread to settle.
-        if (heroVideo.readyState >= 3) {
-            setTimeout(applySeek, 50);
-        } else {
-            heroVideo.addEventListener("loadedmetadata", applySeek, { once: true });
-        }
-    });
-
-    // Audio Synchronization Sync Block
-    if (heroAudio) {
-        heroAudio.currentTime = targetTime;
-        heroAudio.volume = 1;
-        heroAudio.play().catch(err => console.warn("Hero audio play failed:", err));
     }
-
-    startEditorialScroll();
-
-    heroVideo.ontimeupdate = () => {
-        if (heroVideo.currentTime >= 22) {
-            heroVideo.ontimeupdate = null;
-            heroVideo.pause();
-            startHeroReveal();
-        }
-    };
-}
 
     function startHeroReveal() {
         gsap.timeline()
@@ -196,6 +137,8 @@ window.CinematicController = (() => {
         const tl = gsap.timeline();
 
         tl.to({}, { duration: 1 });
+        
+        // Mechanical aperture opening sequence
         tl.to(shutterConfig, {
             irisValue: 1.04, 
             duration: 4.0,   
@@ -207,14 +150,22 @@ window.CinematicController = (() => {
             }
         }, "<");
 
-        tl.to(video, { scale: 1.1, duration: 4.0, ease: "power1.inOut" }, "<");
+        // Expand the EXACT SAME video out to its full border bounds dynamically
+        tl.to(video, { 
+            scale: 1.1, 
+            "--lens-blur": "0px", 
+            duration: 4.0, 
+            ease: "power1.inOut" 
+        }, "<");
         
+        // Single Flash Event
         tl.fromTo(flash, { opacity: 0 }, { opacity: 1, duration: 0.05, ease: "none" }, "-=0.05")
           .to(flash, { opacity: 0, duration: 0.35, ease: "power2.out" });
 
         tl.add(() => { body.classList.remove("cursor-hidden"); }, "-=0.2");
-        tl.add(() => { playVideoFullScreen(); }, "-=0.15");
+        tl.add(() => { handleBreakoutTransition(); }, "-=0.15");
         
+        // Remove introductory dark tracking panel from site viewport
         tl.to(overlay, {
             opacity: 0,
             duration: 1.0,
@@ -233,24 +184,15 @@ window.CinematicController = (() => {
 
         const endTL = gsap.timeline({
             onComplete() {
-                if (heroAudio) {
-                    heroAudio.pause();
-                    heroAudio.currentTime = 0;
-                    heroAudio.volume = 1;
-                }
-                heroVideo.pause();
+                video.pause();
                 showCursor();
                 body.classList.remove("cinematic-lock");
                 startFilmGrain();
             }
         });
 
-        // Enqueue everything smoothly into the structural timeline
-        endTL.set(heroVideo, { opacity: 0 });
-
-        if (heroAudio) {
-            endTL.to(heroAudio, { volume: 0, duration: 1.5, ease: "power2.out" }, "<");
-        }
+        // Enqueue remaining elements seamlessly into the master structural timeline
+        endTL.set(video, { opacity: 0 });
 
         if (soundToggle) {
             endTL.to(soundToggle, {
