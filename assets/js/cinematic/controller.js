@@ -109,8 +109,23 @@ window.CinematicController = (() => {
     }
 
     function handleBreakoutTransition() {
-        // Unmute the running video as it fills up the viewport window
+        // Try to unmute. If the browser blocks it, catch the error so the video keeps playing silently.
         video.muted = false;
+        
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.warn("Browser blocked audio unmuting. Continuing silently until user interaction:", error);
+                video.muted = true; // Fallback to muted so playback doesn't freeze
+                
+                // Optional: Listen for a click anywhere on the body to unmute safely later
+                const unmuteOnInteraction = () => {
+                    video.muted = false;
+                    document.body.removeEventListener("click", unmuteOnInteraction);
+                };
+                document.body.addEventListener("click", unmuteOnInteraction);
+            });
+        }
         
         startEditorialScroll();
 
