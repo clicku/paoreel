@@ -12,7 +12,7 @@ window.CinematicController = (() => {
         body = document.body;
         overlay = document.querySelector(".cinematic-overlay");
 
-        // Flash Overlay Setup (Safely recreate to avoid leaks)
+        // Flash Overlay Setup (Safely recreate to avoid leaks/stale references)
         const oldFlash = document.querySelector(".cinematic-flash");
         if (oldFlash) oldFlash.remove();
 
@@ -20,7 +20,7 @@ window.CinematicController = (() => {
         flash.className = "cinematic-flash";
         body.appendChild(flash);
 
-        // Media Elements
+        // Media Elements (Always fetch fresh queries to prevent cache mismatches)
         video = document.querySelector(".cinematic-video");
         heroVideo = document.querySelector(".hero-bts");
         heroStill = document.getElementById("hero-still");
@@ -42,6 +42,7 @@ window.CinematicController = (() => {
     }
     
     function waitForHeroVideo(callback) {
+        if (!heroVideo) return;
         if (heroVideo.readyState >= 4) {
             callback();
             return;
@@ -50,6 +51,7 @@ window.CinematicController = (() => {
     }
 
     function triggerTripleFlash() {
+        if (!flash) return;
         gsap.timeline()
             .to(flash, { opacity: 0.85, duration: 0.03 })
             .to(flash, { opacity: 0, duration: 0.08 })
@@ -74,30 +76,31 @@ window.CinematicController = (() => {
             window.Shutter.update(0.20);
         }
 
-        video.muted = true;
-        video.currentTime = 1;
+        if (video) {
+            video.muted = true;
+            video.currentTime = 1;
+            gsap.set(video, { 
+                opacity: 0.95,
+                "--lens-blur": "18px",
+                scale: 0.4,
+                transformOrigin: "center center"
+            });
+            video.play().catch(err => console.warn("Autoplay block bypassed:", err.message));
+        }
 
-        gsap.set(video, { 
-            opacity: 0.95,
-            "--lens-blur": "18px",
-            scale: 0.4,
-            transformOrigin: "center center"
-        });
+        if (heroVideo) {
+            gsap.set(heroVideo, { opacity: 1, "--lens-blur": "0px", scale: 1 });
+            gsap.to(heroVideo, { opacity: 1, duration: 0.9, ease: "power2.out" });
+            heroVideo.pause();
+            heroVideo.currentTime = 0;
+            heroVideo.muted = true;
+            heroVideo.preload = "auto";
+        }
 
-        gsap.set(heroVideo, { opacity: 1, "--lens-blur": "0px", scale: 1 });
-        gsap.to(heroVideo, { opacity: 1, duration: 0.9, ease: "power2.out" });
-
-        heroVideo.pause();
-        heroVideo.currentTime = 0;
-        heroVideo.muted = true;
-        heroVideo.preload = "auto";
-        
-        video.play().catch(err => console.warn("Autoplay block bypassed:", err.message));
-
-        gsap.set(flash, { opacity: 0 });
-        gsap.set(header, { opacity: 0, y: -20 });
-        gsap.set(heroImage, { opacity: 0 });
-        gsap.set(heroMask, { opacity: 0 });
+        if (flash) gsap.set(flash, { opacity: 0 });
+        if (header) gsap.set(header, { opacity: 0, y: -20 });
+        if (heroImage) gsap.set(heroImage, { opacity: 0 });
+        if (heroMask) gsap.set(heroMask, { opacity: 0 });
         if (filmGrain) gsap.set(filmGrain, { opacity: 0 });
     }
 
@@ -105,7 +108,7 @@ window.CinematicController = (() => {
 
     function startEditorialScroll() {
         const editorialScroll = document.querySelector(".editorial-scroll");
-        if (!editorialScroll) return;
+        if (!editorialScroll || !heroVideo) return;
 
         editorialUpdater = () => {
             const duration = heroVideo.duration || 1;
@@ -125,12 +128,13 @@ window.CinematicController = (() => {
     }
 
     function playVideoFullScreen() {
+        if (!heroVideo || !video) return;
+
         waitForHeroVideo(() => {
             const targetTime = video.currentTime;
 
             const trySeek = () => {
                 if (heroVideo.readyState < 2) {
-                    // Use standard event handling instead of recursive setTimeout strings where possible
                     heroVideo.addEventListener("loadeddata", trySeek, { once: true });
                     return;
                 }
@@ -162,6 +166,7 @@ window.CinematicController = (() => {
     }
 
     function startHeroReveal() {
+        if (!heroStill) return;
         gsap.timeline()
             .to(heroStill, { opacity: 1, duration: 0.15 })
             .call(triggerTripleFlash)
@@ -185,20 +190,26 @@ window.CinematicController = (() => {
             }
         }, "<");
 
-        tl.to(video, { scale: 1.1, duration: 4.0, ease: "power1.inOut" }, "<");
+        if (video) {
+            tl.to(video, { scale: 1.1, duration: 4.0, ease: "power1.inOut" }, "<");
+        }
         
-        tl.fromTo(flash, { opacity: 0 }, { opacity: 1, duration: 0.05, ease: "none" }, "-=0.05")
-          .to(flash, { opacity: 0, duration: 0.35, ease: "power2.out" });
+        if (flash) {
+            tl.fromTo(flash, { opacity: 0 }, { opacity: 1, duration: 0.05, ease: "none" }, "-=0.05")
+              .to(flash, { opacity: 0, duration: 0.35, ease: "power2.out" });
+        }
 
         tl.add(() => { body.classList.remove("cursor-hidden"); }, "-=0.2");
         tl.add(() => { playVideoFullScreen(); }, "-=0.15");
         
-        tl.to(overlay, {
-            opacity: 0,
-            duration: 1.0,
-            ease: "power1.out",
-            onComplete() { overlay.style.display = "none"; }
-        }, "-=0.45");
+        if (overlay) {
+            tl.to(overlay, {
+                opacity: 0,
+                duration: 1.0,
+                ease: "power1.out",
+                onComplete() { overlay.style.display = "none"; }
+            }, "-=0.45");
+        }
     }
 
     function startFilmGrain() {
@@ -216,15 +227,14 @@ window.CinematicController = (() => {
                     heroAudio.currentTime = 0;
                     heroAudio.volume = 1;
                 }
-                heroVideo.pause();
+                if (heroVideo) heroVideo.pause();
                 showCursor();
                 body.classList.remove("cinematic-lock");
                 startFilmGrain();
             }
         });
 
-        // Enqueue everything smoothly into the structural timeline
-        endTL.set(heroVideo, { opacity: 0 });
+        if (heroVideo) endTL.set(heroVideo, { opacity: 0 });
 
         if (heroAudio) {
             endTL.to(heroAudio, { volume: 0, duration: 1.5, ease: "power2.out" }, "<");
@@ -239,16 +249,16 @@ window.CinematicController = (() => {
             }, "<");
         }
 
-        endTL.to(editorial, { opacity: 0, duration: 2, ease: "power2.out" }, "<")
-             .to(heroMask, { opacity: 1, duration: 2.5, ease: "power2.out" }, "<")
-             .set(heroStill, { opacity: 1 }, "<");
+        if (editorial) endTL.to(editorial, { opacity: 0, duration: 2, ease: "power2.out" }, "<");
+        if (heroMask) endTL.to(heroMask, { opacity: 1, duration: 2.5, ease: "power2.out" }, "<");
+        if (heroStill) endTL.set(heroStill, { opacity: 1 }, "<");
 
         if (filmGrain) {
             endTL.to(filmGrain, { opacity: 0.08, duration: 1.5, ease: "power2.out" }, "<");
         }
 
-        endTL.to(header, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" }, "<+0.3")
-             .to(".hero-title", { opacity: 1, y: 0, duration: 1.4, ease: "power2.out" }, "<+0.2")
+        if (header) endTL.to(header, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" }, "<+0.3");
+        endTL.to(".hero-title", { opacity: 1, y: 0, duration: 1.4, ease: "power2.out" }, "<+0.2")
              .to(".scroll-indicator", { opacity: 1, duration: 1, ease: "power2.out" }, "<+0.3");
 
         endTL.add(() => {
@@ -261,9 +271,13 @@ window.CinematicController = (() => {
     }
 
     function start() {
-        if (started) return;
-        started = true;
+        // Safe resets for hot-caching conditions
+        if (started) {
+            stopEditorialScroll();
+            started = false;
+        }
         
+        started = true;
         cacheElements();
 
         if (!validateElements()) {

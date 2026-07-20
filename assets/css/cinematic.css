@@ -2,208 +2,120 @@
    PAOREEL STUDIOS
    V4 HERO CINEMATIC ENGINE
 
-   File:
-   cinematic.css
-
-   Purpose:
-   Shared cinematic styles used by the
-   intro sequence and hero animation.
+   File: cinematic.css
 ========================================== */
-
-
-
 
 /* ==========================================
    CURSOR LOCK
 ========================================== */
-
 body.cursor-hidden,
-body.cursor-hidden *{
-
-    cursor:none !important;
-
+body.cursor-hidden * {
+    cursor: none !important;
 }
 
-/* ==========================================
-   Cinematic Overlay
-==========================================
-
-.cinematic-overlay {
-
-    position: fixed;
-
-    inset: 0;
-
-    background: #000;
-
-    opacity: 1;
-
-    z-index: 999999;
-
-    pointer-events: all;
-
-    will-change: opacity;
-
-} */
-
-
-
-.cinematic-overlay.hidden {
-
-    pointer-events: none;
-
-}
 /* ==========================================
    INTRO VIDEO
 ========================================== */
-
-.cinematic-video{
-
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    object-position:center;
-
-    z-index:1;
-
-    opacity:1;
-
+.cinematic-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    opacity: 1;
 }
+
 /* ==========================================================
    SHUTTER
 ========================================================== */
-
 .cinematic-shutter {
-
     position: fixed;
-
     inset: 0;
-
     z-index: 999998;
-
     pointer-events: none;
-
 }
-
-/* ------------------------------------------ */
 
 .shutter-blade {
-
     position: absolute;
-
     width: 120vw;
-
     height: 120vh;
-
     background: #000;
-
     transform-origin: center center;
-
-}
-.shutter-blade:nth-child(1){
-
-    top:-95vh;
-    left:50%;
-    transform:translateX(-50%) rotate(0deg);
-
 }
 
-.shutter-blade:nth-child(2){
-
-    top:-45vh;
-    right:-85vw;
-    transform:rotate(60deg);
-
+.shutter-blade:nth-child(1) {
+    top: -95vh;
+    left: 50%;
+    transform: translateX(-50%) rotate(0deg);
 }
 
-.shutter-blade:nth-child(3){
-
-    bottom:-45vh;
-    right:-85vw;
-    transform:rotate(120deg);
-
+.shutter-blade:nth-child(2) {
+    top: -45vh;
+    right: -85vw;
+    transform: rotate(60deg);
 }
 
-.shutter-blade:nth-child(4){
-
-    bottom:-95vh;
-    left:50%;
-    transform:translateX(-50%) rotate(180deg);
-
+.shutter-blade:nth-child(3) {
+    bottom: -45vh;
+    right: -85vw;
+    transform: rotate(120deg);
 }
 
-.shutter-blade:nth-child(5){
-
-    bottom:-45vh;
-    left:-85vw;
-    transform:rotate(240deg);
-
+.shutter-blade:nth-child(4) {
+    bottom: -95vh;
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg);
 }
 
-.shutter-blade:nth-child(6){
-
-    top:-45vh;
-    left:-85vw;
-    transform:rotate(300deg);
-
+.shutter-blade:nth-child(5) {
+    bottom: -45vh;
+    left: -85vw;
+    transform: rotate(240deg);
 }
-/* ==========================================
-   APERTURE INTRO
-========================================== */
+
+.shutter-blade:nth-child(6) {
+    top: -45vh;
+    left: -85vw;
+    transform: rotate(300deg);
+}
 
 /* ==========================================
    BLACK OVERLAY
 ========================================== */
-
-.cinematic-overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:9999999;
-
-    pointer-events:all;
-
-    will-change:opacity;
-
-    background:transparent;
-
+.cinematic-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999999;
+    pointer-events: all;
+    will-change: opacity;
+    background: transparent;
 }
+
+.cinematic-overlay.hidden {
+    pointer-events: none;
+}
+
 /* ==========================================
    LENS VIEWPORT MASK
 ========================================== */
-
-.cinematic-lens-mask{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:5;
-
-    pointer-events:none;
-
-    background:
-        radial-gradient(
-            circle 40vh at center,
-            transparent 0,
-            transparent 39.5vh,
-            #000 40vh
-        );
-
+.cinematic-lens-mask {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    background: radial-gradient(
+        circle 40vh at center,
+        transparent 0,
+        transparent 39.5vh,
+        #000 40vh
+    );
 }
+
 /* ==========================================
    APERTURE
 ========================================== */
-
 .cinematic-aperture {
     position: absolute;
     top: 50%;
@@ -215,18 +127,11 @@ body.cursor-hidden *{
     align-items: center;
     justify-content: center;
     z-index: 10;
-
-    /* FIX 1: Force the square HTML box to behave like a perfect circle */
     border-radius: 50%;
-
-    /* FIX 2: Hide any layout boxes or background fills overflowing the circle */
     overflow: hidden;
-
-    /* FIX 3: Ensure no accidental solid background color is showing */
     background: transparent;
 }
 
-/* Structural Glass Element Coating Glow Reflection Aura */
 .cinematic-aperture::before {
     content: '';
     position: absolute;
@@ -244,119 +149,62 @@ body.cursor-hidden *{
     height: 100%;
     overflow: visible;
 }
+
 /* ==========================================
    CINEMATIC FLASH
 ========================================== */
-
-.cinematic-flash{
-    position:fixed;
-    inset:0;
-    background:#fff;
-    opacity:0;
-    pointer-events:none;
-    z-index:999999;
+.cinematic-flash {
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999999;
 }
 
 /* ==========================================
    HERO MEDIA
 ========================================== */
-
 .hero-image {
-
     position: absolute;
-
     inset: 0;
-
     overflow: hidden;
-
 }
-
-/* ==========================================
-   HERO VIDEO INITIAL STATE
-========================================== */
-
-/* SINGLE DECLARED LAYER 1: The BTS Video */
-
-
-/* Final Hero Image */
 
 .hero-image img {
-
     position: absolute;
-
     inset: 0;
-
     width: 100%;
-
     height: 100%;
-
     object-fit: cover;
-
     object-position: center;
-
     opacity: 0;
-
     z-index: 2;
-
+    transition: opacity 2s ease;
 }
+
 /* ==========================================
    HERO INITIAL STATES
 ========================================== */
-
-/* BTS video starts hidden */
-.hero-bts{
-
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    object-position:center;
-
-    display:block;
-
-    z-index:1;
-
-    opacity:0;
-
-    transform:scale(1.15);
-
-    --lens-blur:15px;
-
-    filter:blur(var(--lens-blur));
-
-    will-change:transform,opacity,filter;
-
-    transition:
-        transform 1.2s cubic-bezier(.25,1,.5,1),
-        opacity 1.2s cubic-bezier(.25,1,.5,1);
-
+.hero-bts {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    z-index: 1;
+    opacity: 0;
+    transform: scale(1.15);
+    --lens-blur: 15px;
+    filter: blur(var(--lens-blur));
+    will-change: transform, opacity, filter;
+    transition: 
+        transform 1.2s cubic-bezier(.25, 1, .5, 1),
+        opacity 1.2s cubic-bezier(.25, 1, .5, 1);
 }
 
-/* Final hero image starts hidden */
-.hero-image img {
-
-    opacity: 0;
-
-    transition: opacity 2s ease;
-
-}
-
-/* Hero content hidden until reveal
-.hero-content {
-
-    opacity: 0;
-
-} */
-
-/* Scroll indicator hidden */
 .scroll-indicator {
-
     opacity: 0;
-
 }
