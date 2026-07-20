@@ -124,42 +124,52 @@ window.CinematicController = (() => {
         editorialUpdater = null;
     }
 
-    function playVideoFullScreen() {
-        waitForHeroVideo(() => {
-            const targetTime = video.currentTime;
-
-            const trySeek = () => {
-                if (heroVideo.readyState < 2) {
-                    // Use standard event handling instead of recursive setTimeout strings where possible
-                    heroVideo.addEventListener("loadeddata", trySeek, { once: true });
-                    return;
-                }
-
-                heroVideo.currentTime = targetTime;
-                heroVideo.addEventListener("seeked", () => {
-                    heroVideo.play().catch(err => console.warn("Hero video play failed:", err));
-                }, { once: true });
-            };
-
-            trySeek();
-        });
-
-        if (heroAudio) {
-            heroAudio.currentTime = video.currentTime;
-            heroAudio.volume = 1;
-            heroAudio.play().catch(err => console.warn("Hero audio play failed:", err));
+   function playVideoFullScreen() {
+    waitForHeroVideo(() => {
+        // Fallback to 5.0 seconds if the video hasn't progressed past 1 second yet due to caching
+        let targetTime = video.currentTime;
+        if (targetTime < 1.0) {
+            console.log("Cache race condition detected. Forcing targetTime to 5.0s baseline.");
+            targetTime = 5.0; 
         }
 
-        startEditorialScroll();
-
-        heroVideo.ontimeupdate = () => {
-            if (heroVideo.currentTime >= 22) {
-                heroVideo.ontimeupdate = null;
-                heroVideo.pause();
-                startHeroReveal();
+        const trySeek = () => {
+            if (heroVideo.readyState < 2) {
+                heroVideo.addEventListener("loadeddata", trySeek, { once: true });
+                return;
             }
+
+            console.log("Seeking heroVideo to safely calculated target:", targetTime);
+            heroVideo.currentTime = targetTime;
+            
+            heroVideo.addEventListener("seeked", () => {
+                heroVideo.play().catch(err => console.warn("Hero video play failed:", err));
+            }, { once: true });
         };
+
+        trySeek();
+    });
+
+    if (heroAudio) {
+        // Apply the same safe baseline logic to the audio synchronization track
+        let targetAudioTime = video.currentTime;
+        if (targetAudioTime < 1.0) targetAudioTime = 5.0;
+
+        heroAudio.currentTime = targetAudioTime;
+        heroAudio.volume = 1;
+        heroAudio.play().catch(err => console.warn("Hero audio play failed:", err));
     }
+
+    startEditorialScroll();
+
+    heroVideo.ontimeupdate = () => {
+        if (heroVideo.currentTime >= 22) {
+            heroVideo.ontimeupdate = null;
+            heroVideo.pause();
+            startHeroReveal();
+        }
+    };
+}
 
     function startHeroReveal() {
         gsap.timeline()
