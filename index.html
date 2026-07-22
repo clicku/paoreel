@@ -116,6 +116,17 @@
                 <stop offset="95%" stop-color="#000000" stop-opacity="0.4" />
                 <stop offset="100%" stop-color="#050505" stop-opacity="0.9" />
             </radialGradient>
+            <radialGradient id="lens-concave">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.02"/>
+    <stop offset="55%"  stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="80%"  stop-color="#000000" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="#000000" stop-opacity="0.35"/>
+</radialGradient>
+<radialGradient id="lens-center-glow">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.05"/>
+    <stop offset="40%" stop-color="#ffffff" stop-opacity="0.02"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+</radialGradient>
         </defs>
 
         <!-- ⚠️ REMOVED: The solid/masked rect background is gone! -->
@@ -131,7 +142,46 @@
         <!-- Foreground Glass Reflections Element Layer (Applied on Top) -->
         <circle cx="0" cy="0" r="80" fill="none" stroke="#223344" stroke-width="0.5" filter="url(#lens-glass-reflection)" opacity="0.65" pointer-events="none" />
         <circle cx="0" cy="0" r="79.5" fill="none" stroke="#ffffff" stroke-width="0.25" opacity="0.2" pointer-events="none" />
+        <circle cx="0" cy="0" r="78" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+        <circle cx="0" cy="0" r="74" fill="none" stroke="rgba(0,150,255,0.08)"   stroke-width="1"/>
+        <circle
+    id="lens-reflection"
+    cx="-34"
+    cy="-32"
+    r="4"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="0.6"
+    opacity="0.12"
+    pointer-events="none"
+/>
+
+<circle
+    cx="-34"
+    cy="-32"
+    r="2.5"
+    fill="#ffffff"
+    opacity="0.015"
+    pointer-events="none"
+/>
+        <circle
+    cx="0"
+    cy="0"
+    r="72"
+    fill="url(#lens-concave)"
+    pointer-events="none"
+/><circle
+    cx="0"
+    cy="0"
+    r="55"
+    fill="url(#lens-center-glow)"
+    pointer-events="none"
+/>
     </svg>
+    
+    <div class="lens-glass"></div>
+    <div class="lens-bubble"></div>
+    <div class="lens-bubble lens-bubble-small"></div>
 </div>
 
     <div class="cinematic-flash"></div>
@@ -217,52 +267,48 @@
 <div class="hero-fixed">
 
     <div class="hero-parallax">
- 
 
         <div class="hero-image">
 
-            <!-- 1. Standalone Intro Video (00:00 - 00:05) Behind the Lens 
-    <video
-        class="cinematic-video"
-        muted
-        playsinline
-        preload="auto">
-        <source
-            src="assets/video/hero-intro.mp4" 
-            type="video/mp4">
-    </video>-->
+            <!-- Background Fill Video -->
+            <video
+                class="hero-bg"
+                muted
+                playsinline
+                preload="auto">
+                <source
+                    src="assets/video/hero-main.mp4"
+                    type="video/mp4">
+            </video>
 
-    <!-- 2. Main Full-Screen Video Sequence (00:06 - 00:23) -->
-    <video
-        class="hero-bts"
-        muted
-        playsinline
-        preload="auto">
-        <source
-            src="assets/video/hero-main.mp4"
-            type="video/mp4">
-    </video>
+            <!-- Main Hero Video -->
+            <video
+                class="hero-bts"
+                muted
+                playsinline
+                preload="auto">
+                <source
+                    src="assets/video/hero-main.mp4"
+                    type="video/mp4">
+            </video>
 
-<!--<img
-    src="assets/images/paoreel.webp"
-    alt="">-->
-     <img
-        id="hero-still"
-        src="assets/images/hero/hero-final.png"
-        alt=""
-    >
-    
+            <div class="hero-depth-vignette"></div>
+
+            <img
+                id="hero-still"
+                src="assets/images/hero/hero-final.png"
+                alt="">
+
         </div>
 
         <div class="hero-mask"></div>
 
-<div class="film-grain"></div>
+        <div class="film-grain"></div>
 
-<div class="hero-transition"></div>
+        <div class="hero-transition"></div>
 
     </div>
 
-    
 </div>
 
     <!-- ========================================

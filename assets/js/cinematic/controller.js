@@ -4,7 +4,7 @@ window.CinematicController = (() => {
     let started = false;
     let editorialUpdater = null;
     let overlay, flash, video, heroVideo, heroStill, header, editorial, heroImage, filmGrain, body;
-    let heroMask, heroAudio, soundToggle, apertureContainer, lensMask;
+    let heroMask, heroBg, heroAudio, soundToggle, apertureContainer, lensMask;
 
     const shutterConfig = { irisValue: 0 };
 
@@ -32,6 +32,7 @@ window.CinematicController = (() => {
         editorial = document.querySelector(".editorial-overlay");
         heroImage = document.querySelector(".hero-image img");
         heroMask = document.querySelector(".hero-mask");
+        heroBg = document.querySelector(".hero-bg");
         filmGrain = document.querySelector(".film-grain");
         apertureContainer = document.querySelector(".cinematic-aperture");
         lensMask = document.querySelector(".cinematic-lens-mask");
@@ -60,61 +61,137 @@ window.CinematicController = (() => {
     }
 
     function setupInitialState() {
-       
-        body.classList.add("cinematic-lock", "cursor-hidden");
 
-        shutterConfig.irisValue = 0; 
-        if (window.Shutter && typeof window.Shutter.init === "function") {
-            window.Shutter.init();
-            window.Shutter.update(0.20);
-        }
+    body.classList.add(
+        "cinematic-lock",
+        "cursor-hidden"
+    );
 
-        if (video) {
-            video.muted = true;
-            video.currentTime = 1;
-            gsap.set(video, { 
-                opacity: 0.95,
-                "--lens-blur": "18px",
-                scale: 0.4,
-                transformOrigin: "center center"
-            });
-            video.play().catch(err => console.warn("Autoplay block bypassed:", err.message));
+    shutterConfig.irisValue = 0;
 
-            video.ontimeupdate = () => {
+    if (
+        window.Shutter &&
+        typeof window.Shutter.init === "function"
+    ) {
+        window.Shutter.init();
+        window.Shutter.update(0.20);
+    }
 
-    const handoffPoint = video.duration - 0.80;
+    // Hero Perspective Setup
+    const heroParallax =
+        document.querySelector(".hero-parallax");
 
-    if (video.currentTime >= handoffPoint) {
+    if (heroParallax) {
 
-        video.ontimeupdate = null;
-
-        playVideoFullScreen();
+        gsap.set(heroParallax, {
+            transformPerspective: 1200,
+            transformStyle: "preserve-3d"
+        });
 
     }
 
-};
-        }
+    // Background Depth Layer
+    if (heroBg) {
 
-        if (heroVideo) {gsap.set(heroVideo,{
-        opacity:0,
-        "--lens-blur":"0px",
-        scale:1
-            });
+        gsap.set(heroBg, {
+            opacity: 0,
+            scale: 1.25,
+            transformOrigin: "center center"
+        });
 
-            heroVideo.pause();
-            heroVideo.currentTime = 0;
-            heroVideo.muted = true;
-            heroVideo.preload = "auto";
-            heroVideo.load();
+        heroBg.pause();
+        heroBg.currentTime = 0;
+        heroBg.muted = true;
+        heroBg.preload = "auto";
+        heroBg.load();
 
-        }
-
-        if (flash) gsap.set(flash, { opacity: 0 });
-        if (header) gsap.set(header, { opacity: 0, y: -20 });
-        if (heroImage) gsap.set(heroImage, { opacity: 0 });
-        if (heroMask) gsap.set(heroMask, { opacity: 0 });
-        if (filmGrain) gsap.set(filmGrain, { opacity: 0 });
     }
+
+    // Intro Lens Video
+    if (video) {
+
+        video.muted = true;
+        video.currentTime = 1;
+
+        gsap.set(video, {
+            opacity: 0.95,
+            "--lens-blur": "18px",
+            scale: 0.4,
+            filter: "blur(8px)",
+            transformOrigin: "center center"
+        });
+
+        video.play().catch(err =>
+            console.warn(
+                "Autoplay block bypassed:",
+                err.message
+            )
+        );
+
+        video.ontimeupdate = () => {
+
+            const handoffPoint =
+                video.duration - 0.80;
+
+            if (
+                video.currentTime >=
+                handoffPoint
+            ) {
+
+                video.ontimeupdate = null;
+
+                playVideoFullScreen();
+
+            }
+
+        };
+
+    }
+
+    // Main Hero Video
+    if (heroVideo) {
+
+        gsap.set(heroVideo, {
+            opacity: 0,
+            "--lens-blur": "0px",
+            scale: 1,
+            transformOrigin:
+                "center center"
+        });
+
+        heroVideo.pause();
+        heroVideo.currentTime = 0;
+        heroVideo.muted = true;
+        heroVideo.preload = "auto";
+        heroVideo.load();
+
+    }
+
+    if (flash)
+        gsap.set(flash, { opacity: 0 });
+
+    if (header)
+        gsap.set(header, {
+            opacity: 0,
+            y: -20
+        });
+
+    if (heroImage)
+        gsap.set(heroImage, {
+            opacity: 0
+        });
+
+    if (heroMask)
+        gsap.set(heroMask, {
+            opacity: 0
+        });
+
+    if (filmGrain)
+        gsap.set(filmGrain, {
+            opacity: 0
+        });
+
+}
 
     function showCursor() { body.classList.remove("cursor-hidden"); }
 
@@ -144,19 +221,21 @@ window.CinematicController = (() => {
 
     if (!heroVideo) return;
 
-    /*
-     * If hero-main contains overlap footage,
-     * start slightly into the file.
-     *
-     * Example:
-     * hero-intro : 00:00 → 00:06.0
-     * hero-main  : 00:05.5 → end
-     *
-     * Adjust 0.0 / 0.3 / 0.5 after testing.
-     */
     heroVideo.currentTime = 0;
 
+    if (heroBg) {
+
+        heroBg.currentTime = 0;
+
+    }
+
     const startMainVideo = () => {
+
+        if (heroBg) {
+
+            heroBg.play().catch(() => {});
+
+        }
 
         heroVideo.play()
             .then(() => {
@@ -165,18 +244,65 @@ window.CinematicController = (() => {
                     opacity: 1
                 });
 
+                if (heroBg) {
+
+                    gsap.to(heroBg, {
+                        opacity: 0.35,
+                        duration: 1
+                    });
+
+                    gsap.fromTo(
+                        heroBg,
+                        {
+                            scale: 1.25
+                        },
+                        {
+                            scale: 1.35,
+                            duration: heroVideo.duration || 9,
+                            ease: "none"
+                        }
+                    );
+
+                }
+
+                gsap.fromTo(
+                    heroVideo,
+                    {
+                        scale: 1.00
+                    },
+                    {
+                        scale: 1.08,
+                        duration: heroVideo.duration || 9,
+                        ease: "none"
+                    }
+                );
+
+                const heroParallax =
+                    document.querySelector(".hero-parallax");
+
+                if (heroParallax) {
+
+                    gsap.to(heroParallax, {
+
+                        rotationX: 1,
+
+                        duration:
+                            heroVideo.duration || 9,
+
+                        ease: "none"
+
+                    });
+
+                }
+
                 startEditorialScroll();
 
-                /*
-                 * Remove the entire lens overlay
-                 * immediately after hero-main
-                 * is already rendering.
-                 */
                 requestAnimationFrame(() => {
 
                     if (overlay) {
 
-                        overlay.style.display = "none";
+                        overlay.style.display =
+                            "none";
 
                     }
 
@@ -208,33 +334,22 @@ window.CinematicController = (() => {
 
     }
 
-    if (heroAudio) {
-
-        heroAudio.currentTime = 0;
-        heroAudio.volume = 1;
-
-        heroAudio.play().catch(err => {
-
-            console.warn(
-                "Hero audio play failed:",
-                err
-            );
-
-        });
-
-    }
-
     heroVideo.ontimeupdate = () => {
 
-        const revealPoint =
-            Math.max(
-                0,
-                heroVideo.duration - 0.8
-            );
+        const revealPoint = 8.75;
 
-        if (heroVideo.currentTime >= revealPoint) {
+        if (
+            heroVideo.currentTime >=
+            revealPoint
+        ) {
 
             heroVideo.ontimeupdate = null;
+
+            if (heroBg) {
+
+                heroBg.pause();
+
+            }
 
             heroVideo.pause();
 
@@ -272,8 +387,19 @@ window.CinematicController = (() => {
 }, "<");
 
         if (video) {
-            tl.to(video, { scale: 1.1, duration: 4.0, ease: "power1.inOut" }, "<");
-        }
+
+    tl.to(video, {
+
+        scale: 1.1,
+        filter: "blur(0px)",
+
+        duration: 4.0,
+
+        ease: "power1.inOut"
+
+    }, "<");
+
+}
         
         if (flash) {
             tl.fromTo(flash, { opacity: 0 }, { opacity: 1, duration: 0.05, ease: "none" }, "-=0.05")
@@ -291,76 +417,149 @@ window.CinematicController = (() => {
     }
 
     function finishSequence() {
-        stopEditorialScroll();
 
-        const endTL = gsap.timeline({
-            onComplete() {
-                if (heroAudio) {
-                    heroAudio.pause();
-                    heroAudio.currentTime = 0;
-                    heroAudio.volume = 1;
-                }
-                if (heroVideo) heroVideo.pause();
-                showCursor();
-                body.classList.remove("cinematic-lock");
-                startFilmGrain();
+    stopEditorialScroll();
+
+    const endTL = gsap.timeline({
+        onComplete() {
+
+            if (heroAudio) {
+                heroAudio.pause();
+                heroAudio.currentTime = 0;
+                heroAudio.volume = 1;
             }
+
+            if (heroVideo) heroVideo.pause();
+
+            showCursor();
+
+            body.classList.remove("cinematic-lock");
+
+            startFilmGrain();
+        }
+    });
+
+    if (heroVideo) {
+        endTL.set(heroVideo, {
+            opacity: 0
         });
+    }
+    if (heroBg) {
 
-        if (heroVideo) endTL.set(heroVideo, { opacity: 0 });
+    heroBg.pause();
 
-        if (heroAudio) {
-            endTL.to(heroAudio, { volume: 0, duration: 1.5, ease: "power2.out" }, "<");
-        }
+    gsap.set(heroBg, {
+        opacity: 0
+    });
 
-        if (soundToggle) {
-            endTL.to(soundToggle, {
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.out",
-                onComplete() { soundToggle.style.display = "none"; }
-            }, "<");
-        }
+}
+    if (heroAudio) {
+        endTL.to(heroAudio, {
+            volume: 0,
+            duration: 1.5,
+            ease: "power2.out"
+        }, "<");
+    }
 
-        if (editorial) endTL.to(editorial, { opacity: 0, duration: 2, ease: "power2.out" }, "<");
-        if (heroMask) endTL.to(heroMask, { opacity: 1, duration: 2.5, ease: "power2.out" }, "<");
-        if (heroStill) endTL.set(heroStill, { opacity: 1 }, "<");
-
-        if (filmGrain) {
-            endTL.to(filmGrain, { opacity: 0.08, duration: 1.5, ease: "power2.out" }, "<");
-        }
-
-        if (header) endTL.to(header, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" }, "<+0.3");
-        endTL.to(".hero-title", { opacity: 1, y: 0, duration: 1.4, ease: "power2.out" }, "<+0.2")
-             .to(".scroll-indicator", { opacity: 1, duration: 1, ease: "power2.out" }, "<+0.3");
-
-        endTL.add(() => {
-            if (window.Hero) {
-                setTimeout(() => {
-                    if (window.Hero) window.Hero.reveal();
-                }, 1000);
+    if (soundToggle) {
+        endTL.to(soundToggle, {
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            onComplete() {
+                soundToggle.style.display = "none";
             }
-        }, "-=0.5");
+        }, "<");
     }
 
-    function start() {
-        // Safe resets for hot-caching conditions
-        if (started) {
-            stopEditorialScroll();
-            started = false;
-        }
-        
-        started = true;
-        cacheElements();
-
-        if (!validateElements()) {
-            console.error("CinematicController: Missing required DOM elements.");
-            return;
-        }
-
-        setupInitialState();
-        playIntro();
+    if (editorial) {
+        endTL.to(editorial, {
+            opacity: 0,
+            duration: 2,
+            ease: "power2.out"
+        }, "<");
     }
+
+    if (heroMask) {
+        endTL.to(heroMask, {
+            opacity: 1,
+            duration: 2.5,
+            ease: "power2.out"
+        }, "<");
+    }
+
+    if (heroStill) {
+        endTL.set(heroStill, {
+            opacity: 1
+        }, "<");
+    }
+
+    if (filmGrain) {
+        endTL.to(filmGrain, {
+            opacity: 0.08,
+            duration: 1.5,
+            ease: "power2.out"
+        }, "<");
+    }
+
+    /* HEADER ONLY */
+
+    if (header) {
+        endTL.to(header, {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power2.out"
+        }, "<+0.3");
+    }
+
+    /* HAND OFF TO HERO.JS */
+
+    endTL.add(() => {
+
+    if (window.Hero) {
+        window.Hero.reveal();
+    }
+
+}, "-=0.5");
+
+}
+
+   function start() {
+
+    // Safe resets for hot-caching conditions
+    if (started) {
+        stopEditorialScroll();
+        started = false;
+    }
+
+    started = true;
+
+    cacheElements();
+
+    if (!validateElements()) {
+        console.error("CinematicController: Missing required DOM elements.");
+        return;
+    }
+
+    setupInitialState();
+
+    gsap.to("#lens-reflection", {
+        x: 1,
+        y: -0.5,
+        duration: 8,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true
+    });
+    gsap.to(video, {
+    scale: 1.03,
+    duration: 5,
+    ease: "sine.inOut"
+});
+
+    playIntro();
+}
 
     return { start };
 })();

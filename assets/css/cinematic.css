@@ -25,6 +25,9 @@ body.cursor-hidden * {
     object-position: center;
     z-index: 1;
     opacity: 1;
+    transform-origin:center center;
+
+    filter: contrast(1.05);
 }
 
 /* ==========================================================
@@ -207,4 +210,146 @@ body.cursor-hidden * {
 
 .scroll-indicator {
     opacity: 0;
+}
+.lens-glass {
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at 30% 25%,
+            rgba(255,255,255,.18),
+            rgba(255,255,255,.04) 15%,
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 70% 70%,
+            rgba(255,255,255,.05),
+            transparent 40%
+        );
+
+    mix-blend-mode: screen;
+
+    opacity: .8;
+
+}
+.lens-bubble {
+
+    position: absolute;
+
+    width: 42%;
+
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+
+    top: 18%;
+    left: 22%;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 35% 35%,
+            rgba(255,255,255,.20),
+            rgba(255,255,255,.06) 35%,
+            transparent 70%
+        );
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    mix-blend-mode: screen;
+
+    opacity: .22;
+
+    filter: blur(1px);
+
+}
+.lens-bubble-small {
+
+    width: 18%;
+
+    top: 58%;
+    left: 60%;
+
+    opacity: .10;
+
+}
+.hero-depth-vignette {
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 2;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,0,0,0) 25%,
+            rgba(0,0,0,0.04) 45%,
+            rgba(0,0,0,0.12) 70%,
+            rgba(0,0,0,0.25) 100%
+        );
+
+}
+.hero-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg {
+
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    filter: blur(35px);
+
+    transform: scale(1.25);
+
+    opacity: 0.35;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+}
+
+.hero-bts {
+
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    z-index: 2;
+
+}
+
+.hero-depth-vignette {
+
+    z-index: 3;
+
+}
+
+#hero-still {
+
+    z-index: 4;
+
 }
