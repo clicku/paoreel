@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrolly Images - GSAP Parallax</title>
+    <style>
+        
+        body {
+            margin: 0;
+            background-color: #1a1721;
+            overscroll-behavior: none;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        #content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .images {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            width: 40%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        img:nth-child(odd) {
+            margin-left: -200px;
+        }
+
+        img:nth-child(even) {
+            margin-right: -200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <section id="content">
+            <section class="images">
+                <img data-speed="0.7" src="https://i.pinimg.com/1200x/9c/ea/17/9cea17fac34f1ea77171da9a29d730ff.jpg" alt="Artistic image 1">
+                <img data-speed="0.9" src="https://i.pinimg.com/1200x/d3/d1/c5/d3d1c51ebfeee8833862d5cd4ba64ea6.jpg" alt="Artistic image 2">
+                <img data-speed="1.1" src="https://i.pinimg.com/1200x/70/c7/f7/70c7f7e0bab8801187abb27efc99b0b7.jpg" alt="Artistic image 3">
+                <img data-speed="0.8" src="https://i.pinimg.com/1200x/60/cc/87/60cc8744fb901d18eadd51dffba37043.jpg" alt="Artistic image 4">
+                <img data-speed="1.2" src="https://i.pinimg.com/1200x/a6/f5/e3/a6f5e31d358ecad617ec1134f8f2b844.jpg" alt="Artistic image 5">
+                <img data-speed="0.6" src="https://i.pinimg.com/736x/e7/bd/2d/e7bd2df2a890c50a56bb6fb02c41d928.jpg" alt="Artistic image 6">
+                <img data-speed="1.0" src="https://i.pinimg.com/1200x/2a/34/39/2a3439f4dbeca56e3e5676b142e17233.jpg" alt="Artistic image 7">
+                <img data-speed="0.85" src="https://i.pinimg.com/736x/b8/8a/1a/b88a1afe85286f19fce6147127aaabb0.jpg" alt="Artistic image 8">
+                <img data-speed="1.15" src="https://i.pinimg.com/1200x/6a/9e/23/6a9e232cc0cc845e620f9c981aad5d84.jpg" alt="Artistic image 9">
+                <img data-speed="0.75" src="https://i.pinimg.com/1200x/9a/fb/d8/9afbd88179776c2279a4a6f8ebf5e6e9.jpg" alt="Artistic image 10">
+                <img data-speed="1.05" src="https://i.pinimg.com/1200x/8f/14/9a/8f149a2257dfda719aac4b59d5e28952.jpg" alt="Artistic image 11">
+                <img data-speed="0.95" src="https://i.pinimg.com/1200x/1b/d9/4f/1bd94ffa9f880c1b89f454c49c89e908.jpg" alt="Artistic image 12">
+                <img data-speed="1.25" src="https://i.pinimg.com/736x/9a/cf/aa/9acfaa1d742a7d1915684db0d7970a11.jpg" alt="Artistic image 13">
+                <img data-speed="0.65" src="https://i.pinimg.com/736x/57/a7/26/57a726602da4ad3bb4bcb37ea29bce16.jpg" alt="Artistic image 14">
+            </section>
+        </section>
+    </div>
+
+    <!-- GSAP CDNs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollSmoother.min.js"></script>
+
+    <script>
+        let skewSetter = gsap.quickTo("img", "skewY"),
+            clamp = gsap.utils.clamp(-8, 8); 
+
+        ScrollSmoother.create({
+            wrapper: "#wrapper",
+            content: "#content",
+            smooth: 2,
+            speed: 3,
+            effects: true,
+            onUpdate: self => skewSetter(clamp(self.getVelocity() / -50)),
+        });
+    </script>
+</body>
+</html>

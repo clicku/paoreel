@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSAP 3D Moving Perspective Grid</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #020204;
+      color: #00f0ff;
+      font-family: monospace;
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .grid-container {
+      position: fixed;
+      inset: 0;
+      perspective: 600px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .grid-plane {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background-image: 
+        linear-gradient(to right, rgba(0, 240, 255, 0.15) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 240, 255, 0.15) 1px, transparent 1px);
+      background-size: 80px 80px;
+      transform: rotateX(75deg);
+    }
+    .horizon-fade {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 20%, #020204 90%);
+      pointer-events: none;
+    }
+    .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    h1 { font-size: 3rem; text-shadow: 0 0 10px #00f0ff; }
+  </style>
+</head>
+<body>
+
+  <div class="grid-container">
+    <div class="grid-plane"></div>
+  </div>
+  <div class="horizon-fade"></div>
+
+  <div class="content">
+    <h1>CYBERNETIC MATRIX</h1>
+    <p>Perspective transformation using GSAP infinite loop</p>
+  </div>
+
+  <script>
+    gsap.to(".grid-plane", {
+      backgroundPositionY: "80px",
+      duration: 1.2,
+      repeat: -1,
+      ease: "none"
+    });
+  </script>
+</body>
+</html>

@@ -1,33 +1,18 @@
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", () => {
+    if (!document.querySelector(".gallery-section")) return;
 
-    if(!document.querySelector(".gallery-section")) return;
-
-
-    if(window.PaoreelGalleryEngine){
-
+    if (window.PaoreelGalleryEngine) {
         window.PaoreelGalleryEngine();
-
     }
-
-
 });
 
-
-window.revealGallery = function(){
-
+window.revealGallery = function () {
     const overlay = document.querySelector(".gallery-overlay");
+    if (!overlay) return;
 
-    if(!overlay) return;
-
-
-    gsap.to(overlay,{
-
-        opacity:1,
-
-        duration:1.8,
-
-        ease:"power2.out"
-
+    gsap.to(overlay, {
+        opacity: 1,
+        duration: 1.8,
+        ease: "power2.out"
     });
-
 };

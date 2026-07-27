@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paoreel Studios - Combined Gallery & Intro Playground</title>
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --color-light-text: #aaa;
+            --content-padding: 2rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Playground Mode Selector Bar */
+        #playground-controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 12px 18px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        #playground-controls label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #888;
+            margin-right: 6px;
+        }
+
+        #playground-controls select {
+            background: #222;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* Top Spacer */
+        .scroll-spacer {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+        }
+
+        /* ==========================================================
+           PAOREEL STUDIOS V3 - GALLERY CSS
+           ========================================================== */
+
+        .gallery-section {
+            position: relative;
+            z-index: 20;
+            background: transparent;
+            padding: 4rem 0 8rem;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: #fff;
+            opacity: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .gallery-intro,
+        .gallery-viewport {
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-intro {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.4fr .9fr;
+            align-items: end;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 3.5rem;
+            padding: 0 var(--content-padding);
+        }
+
+        .gallery-intro-left {
+            max-width: 620px;
+        }
+
+        .gallery-copy {
+            font-size: 1.05rem;
+            line-height: 2;
+            letter-spacing: .01em;
+            color: var(--color-light-text);
+            will-change: transform, opacity;
+        }
+
+        .gallery-intro-right {
+            justify-self: end;
+            text-align: left;
+        }
+
+        .gallery-title {
+            font-size: clamp(2.8rem, 5vw, 5rem);
+            font-weight: 300;
+            line-height: 1.08;
+            letter-spacing: -.05em;
+        }
+
+        .gallery-title .word {
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            vertical-align: bottom;
+        }
+
+        .gallery-title .word span {
+            display: inline-block;
+            will-change: transform, opacity, filter;
+            transform-origin: center bottom;
+        }
+
+        .gallery-viewport {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            user-select: none;
+            cursor: grab;
+            touch-action: pan-y;
+            padding-left: 0;
+        }
+
+        .gallery-viewport:active {
+            cursor: grabbing;
+        }
+
+        .gallery-track {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            align-items: center;
+            width: max-content !important;
+            gap: 16px !important;
+            will-change: transform;
+        }
+
+        .gallery-item {
+            position: relative;
+            flex: 0 0 320px !important;
+            width: 320px !important;
+            max-width: 320px;
+            height: 440px;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            box-sizing: border-box;
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+
+        .gallery-card {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #1a1a1a;
+            box-shadow: -8px 8px 25px rgba(0, 0, 0, .60);
+            transform-origin: center center;
+            will-change: transform;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #333;
+            border: 1px solid #282828;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .gallery-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.7) 100%);
+        }
+
+        .gallery-item span {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            font-size: .75rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CONTROL PANEL TO TEST 6 INTRO OPTIONS -->
+    <div id="playground-controls">
+        <label for="effect-select">Intro Effect:</label>
+        <select id="effect-select">
+            <option value="1">1. Kinematic Title Reveal (Up-Mask)</option>
+            <option value="2">2. Depth Parallax & Background Fade</option>
+            <option value="3">3. Magnetic Kinetic Cursor Tilt</option>
+            <option value="4">4. Staggered Blur-To-Focus Wave</option>
+            <option value="5">5. Editorial Horizontal Split</option>
+            <option value="6">6. Minimal Counter-Scale Scrub</option>
+        </select>
+    </div>
+
+    <div class="scroll-spacer">Scroll Down to Unroll Stacked Deck ↓</div>
+
+    <section class="gallery-section">
+        <div class="gallery-overlay"></div>
+        <div class="gallery-intro">
+            <div class="gallery-intro-left">
+                <p class="gallery-copy">
+                    Paoreel Studios crafts bespoke visual identity, motion narrative, and spatial installations. Our gallery deck unrolls from a stacked core into an expansive showcase of curated works.
+                </p>
+            </div>
+            <div class="gallery-intro-right">
+                <h2 class="gallery-title">
+                    <span class="word"><span>PAOREEL</span></span>
+                    <span class="word"><span>STUDIOS</span></span>
+                </h2>
+            </div>
+        </div>
+
+        <div class="gallery-viewport">
+            <div class="gallery-track">
+                <div class="gallery-item"><div class="gallery-card" style="background-image: url('https://picsum.photos/600/800?random=1');"></div><span>Project 01</span></div>
+                <div class="gallery-item"><div class="gallery-card" style="background-image: url('https://picsum.photos/600/800?random=2');"></div><span>Project 02</span></div>
+                <div class="gallery-item"><div class="gallery-card" style="background-image: url('https://picsum.photos/600/800?random=3');"></div><span>Project 03</span></div>
+                <div class="gallery-item"><div class="gallery-card" style="background-image: url('https://picsum.photos/600/800?random=4');"></div><span>Project 04</span></div>
+                <div class="gallery-item"><div class="gallery-card" style="background-image: url('https://picsum.photos/600/800?random=5');"></div><span>Project 05</span></div>
+                <div class="gallery-item"><div class="gallery-card" style="background-image: url('https://picsum.photos/600/800?random=6');"></div><span>Project 06</span></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="scroll-spacer" style="height: 120vh;">End of Showcase</div>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const introSection = document.querySelector(".gallery-intro");
+            const titleSpans = document.querySelectorAll(".gallery-title .word span");
+            const copyText = document.querySelector(".gallery-copy");
+            const overlay = document.querySelector(".gallery-overlay");
+            const select = document.getElementById("effect-select");
+
+            const gallerySection = document.querySelector(".gallery-section");
+            const items = document.querySelectorAll(".gallery-item");
+            const cards = document.querySelectorAll(".gallery-card");
+
+            let activeCleanups = [];
+
+            /* ======================================================
+               STACKED UNROLL & HORIZONTAL SCROLL ENGINE
+               Pins the section, unrolls stacked cards into line,
+               and scrubs track horizontally.
+            ====================================================== */
+            function initGalleryUnrollEngine() {
+                // Initial Stack Setup: Position cards over each other with slight offset rot
+                items.forEach((item, index) => {
+                    if (index > 0) {
+                        gsap.set(item, {
+                            xPercent: -100 * index,
+                            rotation: (index % 2 === 0 ? 1 : -1) * (index * 2.5),
+                            scale: 1 - index * 0.04,
+                            transformOrigin: "center center"
+                        });
+                    }
+                });
+
+                const mainTimeline = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: gallerySection,
+                        start: "top top",
+                        end: "+=250%",
+                        pin: true,
+                        scrub: 1,
+                        anticipatePin: 1
+                    }
+                });
+
+                // Phase 1: Unroll stacked cards into a horizontal track
+                items.forEach((item, index) => {
+                    if (index > 0) {
+                        mainTimeline.to(item, {
+                            xPercent: 0,
+                            rotation: 0,
+                            scale: 1,
+                            ease: "power2.out",
+                            duration: 1
+                        }, index * 0.15);
+                    }
+                });
+
+                // Phase 2: Translate track leftward to browse all images
+                const totalShift = -336 * (items.length - 2); // (320px item + 16px gap)
+                mainTimeline.to(".gallery-track", {
+                    x: totalShift,
+                    ease: "none",
+                    duration: 2
+                }, ">-0.2");
+            }
+
+            initGalleryUnrollEngine();
+
+            /* ======================================================
+               INTRO EFFECTS CONTROLLER (OPTIONS 1-6)
+            ====================================================== */
+            function resetIntroElements() {
+                activeCleanups.forEach(fn => fn());
+                activeCleanups = [];
+
+                gsap.killTweensOf([titleSpans, copyText, overlay]);
+                gsap.set([titleSpans, copyText, overlay], { clearProps: "all" });
+            }
+
+            function applyIntroEffect(option) {
+                resetIntroElements();
+
+                switch (option) {
+                    case "1": { // Kinematic Up-Mask
+                        const tween = gsap.fromTo(titleSpans, 
+                            { yPercent: 120, opacity: 0, rotateX: -30 },
+                            { 
+                                yPercent: 0, 
+                                opacity: 1, 
+                                rotateX: 0, 
+                                stagger: 0.1,
+                                ease: "power3.out",
+                                scrollTrigger: {
+                                    trigger: introSection,
+                                    start: "top 85%",
+                                    end: "top 35%",
+                                    scrub: 1
+                                }
+                            }
+                        );
+                        activeCleanups.push(() => tween.scrollTrigger?.kill());
+                        break;
+                    }
+                    case "2": { // Depth Parallax
+                        const tl = gsap.timeline({
+                            scrollTrigger: {
+                                trigger: gallerySection,
+                                start: "top top",
+                                end: "+=100%",
+                                scrub: 1
+                            }
+                        });
+                        tl.to(copyText, { y: -50, opacity: 0, ease: "power1.in" }, 0)
+                          .to(titleSpans, { y: -100, opacity: 0.1, scale: 0.9, ease: "power1.in" }, 0)
+                          .to(overlay, { opacity: 0.9, ease: "power1.inOut" }, 0);
+
+                        activeCleanups.push(() => tl.scrollTrigger?.kill());
+                        break;
+                    }
+                    case "3": { // Magnetic Cursor Tilt
+                        const xTo = Array.from(titleSpans).map(s => gsap.quickTo(s, "x", { duration: 0.4, ease: "power3.out" }));
+                        const yTo = Array.from(titleSpans).map(s => gsap.quickTo(s, "y", { duration: 0.4, ease: "power3.out" }));
+
+                        const handleMouseMove = (e) => {
+                            const { left, top, width, height } = introSection.getBoundingClientRect();
+                            const relX = (e.clientX - left) / width - 0.5;
+                            const relY = (e.clientY - top) / height - 0.5;
+
+                            titleSpans.forEach((_, i) => {
+                                const factor = (i + 1) * 20;
+                                xTo[i](relX * factor);
+                                yTo[i](relY * factor);
+                            });
+                        };
+
+                        const handleMouseLeave = () => {
+                            titleSpans.forEach((_, i) => { xTo[i](0); yTo[i](0); });
+                        };
+
+                        introSection.addEventListener("mousemove", handleMouseMove);
+                        introSection.addEventListener("mouseleave", handleMouseLeave);
+
+                        activeCleanups.push(() => {
+                            introSection.removeEventListener("mousemove", handleMouseMove);
+                            introSection.removeEventListener("mouseleave", handleMouseLeave);
+                        });
+                        break;
+                    }
+                    case "4": { // Blur-To-Focus Wave
+                        const tween = gsap.fromTo([titleSpans, copyText],
+                            { filter: "blur(12px)", opacity: 0, y: 30 },
+                            {
+                                filter: "blur(0px)",
+                                opacity: 1,
+                                y: 0,
+                                stagger: 0.15,
+                                scrollTrigger: {
+                                    trigger: introSection,
+                                    start: "top 80%",
+                                    end: "top 30%",
+                                    scrub: 1
+                                }
+                            }
+                        );
+                        activeCleanups.push(() => tween.scrollTrigger?.kill());
+                        break;
+                    }
+                    case "5": { // Editorial Horizontal Split
+                        const tl = gsap.timeline({
+                            scrollTrigger: {
+                                trigger: introSection,
+                                start: "top 80%",
+                                end: "top 20%",
+                                scrub: 1
+                            }
+                        });
+                        tl.fromTo(copyText, { x: -60, opacity: 0 }, { x: 0, opacity: 1 }, 0)
+                          .fromTo(titleSpans, { x: 60, opacity: 0 }, { x: 0, opacity: 1, stagger: 0.1 }, 0);
+
+                        activeCleanups.push(() => tl.scrollTrigger?.kill());
+                        break;
+                    }
+                    case "6": { // Minimal Counter-Scale Scrub
+                        const tl = gsap.timeline({
+                            scrollTrigger: {
+                                trigger: gallerySection,
+                                start: "top 90%",
+                                end: "top top",
+                                scrub: 1
+                            }
+                        });
+                        tl.fromTo(titleSpans, 
+                            { scale: 1.25, letterSpacing: "-0.08em" }, 
+                            { scale: 1, letterSpacing: "-0.05em", stagger: 0.05 }, 
+                            0
+                        ).fromTo(copyText, 
+                            { opacity: 0.3, y: 20 }, 
+                            { opacity: 1, y: 0 }, 
+                            0
+                        );
+
+                        activeCleanups.push(() => tl.scrollTrigger?.kill());
+                        break;
+                    }
+                }
+            }
+
+            select.addEventListener("change", (e) => applyIntroEffect(e.target.value));
+            applyIntroEffect("1");
+        });
+    </script>
+</body>
+</html>
