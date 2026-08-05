@@ -1,233 +1,399 @@
 /* ==========================================================
-   PAOREEL STUDIOS V3
-   GALLERY
+   PAOREEL STUDIOS V5
+   CONSOLIDATED GALLERY & INTRO STYLES (GSAP PIN & WIPESAFE)
 ========================================================== */
 
-/* Stack Boundary Fix: Establishes a clean stacking context for GSAP pinning */
-.gallery-section {
-    position: relative;
-    z-index: 2;
-    background: transparent;
-    width: 100%;
-    overflow: hidden; /* Allows pin-spacer to measure accurate heights */
+:root {
+  --nav-height: 96px; /* Desktop navbar height */
 }
 
-/* Disable inner card scale recalculations while actively dragging */
-.gallery-section.is-dragging .gallery-card,
-.gallery-section.is-dragging .gallery-image img {
-    transform: none !important;
-    cursor: grabbing !important;
-}
-
-.gallery-overlay {
-    position: absolute;
-    inset: 0;
-    background: #fff;
-    opacity: 0;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.gallery-intro,
-.gallery-viewport {
-    position: relative;
-    z-index: 2;
-}
-
-/* Ensure GSAP Pin-Spacer matches section layering */
-.pin-spacer {
-    z-index: 2 !important;
+@media (max-width: 500px) {
+  :root {
+    --nav-height: 80px; /* Mobile navbar height */
+  }
 }
 
 /* ==========================================================
-   GALLERY INTRO
+   1. GALLERY INTRO SECTION & LAYOUT (PIN & SCRUB OPTIMIZED)
 ========================================================== */
 
 .gallery-intro {
-    position: relative;
-    z-index: 1; /* Kept strictly under gallery-viewport layer when unrolling */
-    display: grid;
-    grid-template-columns: 1.4fr .9fr;
-    align-items: end;
-    gap: 3rem;
-    max-width: 1200px;
-    margin: 0 auto 2.5rem;
-    padding: 0 var(--content-padding, 2rem);
-    perspective: 1000px; /* Required for intro title 3D rotateX transforms */
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+  width: 100%;
+  min-height: 180vh !important; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-top: 0 !important; 
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  background: transparent; /* Keep intro transparent to see hero-still behind text */
+  clear: both;
+}
+.gallery-intro-container {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  align-items: center; /* Changed from 'end' to 'center' for steady pinned alignment */
+  gap: 3rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  box-sizing: border-box;
+  padding: 0 2rem;
+}
+.gallery-bg-gradient{
+
+    position:absolute;
+    inset:-20%;
+
+    background:
+        radial-gradient(circle at 30% 40%,
+            rgba(255,170,80,.10),
+            transparent 60%),
+
+        radial-gradient(circle at 80% 20%,
+            rgba(255,255,255,.05),
+            transparent 55%),
+
+        linear-gradient(
+            180deg,
+            #090909,
+            #111111 40%,
+            #080808
+        );
+
+    z-index:0;
+
+    transform:scale(1.2);
+
+}
+.gallery-bg-light{
+
+    position:absolute;
+
+    width:900px;
+    height:900px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(circle,
+            rgba(255,255,255,.12),
+            transparent 70%);
+
+    filter:blur(80px);
+
+    right:-250px;
+    top:-200px;
+
+    opacity:.55;
+
+    pointer-events:none;
+
+    z-index:0;
+
+}
+.gallery-bg-noise{
+
+    position:absolute;
+
+    inset:-25%;
+
+    opacity:.04;
+
+   /* background-image:url("../images/noise.png");*/
+
+    background-size:350px;
+
+    mix-blend-mode:soft-light;
+
+    z-index:0;
+
 }
 
-/* ==========================================================
-   LEFT
-========================================================== */
+/* Ensure pin-spacer matches background flow */
+.pin-spacer {
+  background: transparent !important;
+  z-index: 10 !important;
+}
+
+
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+}
 
 .gallery-intro-left {
-    max-width: 620px;
+  max-width: 620px;
 }
 
 .gallery-copy {
-    font-size: 1.05rem;
-    line-height: 2;
-    letter-spacing: .01em;
-    color: var(--color-light-text, #ccc);
+  font-size: clamp(1.5rem, 2.2vw, 1rem);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--color-light-text, #e0e0e0);
+  will-change: transform, opacity, filter;
 }
 
-/* ==========================================================
-   RIGHT
-========================================================== */
+/* Curtain Reveal Line Settings - Optimized for Extended ClipPath Scrubbing */
+.gallery-copy .line {
+  display: block !important;
+  overflow: hidden; /* Prevents text overflow during clipPath center-insets */
+  will-change: clip-path, opacity, transform;
+  transform: translateZ(0); /* Force GPU acceleration for smooth 60fps scrubbing */
+  backface-visibility: hidden;
+  transform-style: flat;
+}
 
 .gallery-intro-right {
-    justify-self: end;
-    text-align: left;
+  justify-self: end;
+  text-align: left;
 }
 
 .gallery-title {
-    font-size: clamp(2.8rem, 5vw, 5rem);
-    font-weight: 300;
-    line-height: 1.08;
-    letter-spacing: -.05em;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -.05em;
+  perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
-.gallery-title .word {
-    display: inline-block;
-    white-space: nowrap;
+.gallery-title-line,
+.title-line {
+  position: relative;
+  display: block !important;
+  overflow: visible;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transform-origin: 50% 50% 0px !important;
+  will-change: transform, opacity, filter;
 }
 
-.gallery-title .word span {
-    display: inline-block;
-    will-change: transform, opacity;
-    transform-style: preserve-3d;
+/* Center transform-origin fixes the bottom-left fly-in swipe bug */
+.gallery-title-char {
+  display: inline-block !important;
+  transform-origin: 50% 50% 0px !important;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity, filter;
 }
 
 /* ==========================================================
-   VIEWPORT
+   2. PARALLAX INTRO DEPTH LAYERS
 ========================================================== */
 
-.gallery-viewport {
-    position: relative;
-    z-index: 3;
-    width: 100%;
-    height: 580px; /* Increased from 480px to accommodate taller cards + captions */
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    cursor: grab;
-    user-select: none;
-    touch-action: pan-y;
-    padding-left: 5vw;
+.parallax-layers {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
-.gallery-marquee {
-    display: flex;
-    flex-wrap: nowrap;
-    width: max-content;
-    will-change: transform;
+.parallax-layer {
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+}
+
+/* Back Layer: Large faded watermark header */
+.parallax-layer.back {
+  position: absolute;
+  top: -2.5rem;
+  left: -1rem;
+  font-size: clamp(4.5rem, 8vw, 8.5rem);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-white, #ffffff);
+  opacity: 0.06;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  margin: 0;
+  line-height: 1;
+}
+
+/* Mid Layer: Primary paragraph text */
+.parallax-layer.mid {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+/* Front Layer: Accent tag line */
+.parallax-layer.front {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold, #d4af37);
+  opacity: 0.75;
+}
+
+/* ==========================================================
+   3. GALLERY UNROLL & MARQUEE SECTION
+========================================================== */
+
+.gallery-section {
+  position: relative;
+  /* 1. Elevate z-index so it slides ABOVE hero-still and intro when unpinned */
+  z-index: 20 !important; 
+  
+  width: 100vw;
+  height: calc(100vh - var(--nav-height));
+  max-height: 720px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: hidden;
+  clear: both;
+  margin-top: 0;
+  padding-top: 0;
+  box-sizing: border-box;
+
+  /* 2. Explicit solid background color so hero-still DOES NOT bleed through */
+  background-color: #ffffff; /* Change to #000000 if your gallery background is dark */
+}
+
+.gallery-section.is-dragging .gallery-card,
+.gallery-section.is-dragging .gallery-image img {
+  transform: none !important;
+  cursor: grabbing !important;
+}
+
+/* Keep viewport fixed height */
+.gallery-viewport {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+  padding-left: 5vw;
 }
 
 .gallery-viewport:active {
-    cursor: grabbing;
+  cursor: grabbing;
 }
 
-/* ==========================================================
-   TRACK
-========================================================== */
-
-.gallery-track {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 24px; /* Increased from 16px to match JS gap variable */
-    flex: none;
-    margin-right: 24px;
+.gallery-marquee {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  will-change: transform;
 }
 
+/* Tracks */
 .gallery-track,
 .gallery-track-clone {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 24px; /* Increased from 16px to match JS gap variable */
-    flex: none;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 24px;
+  flex: none;
+  margin-right: 24px;
 }
 
-/* ==========================================================
-   ITEM
-========================================================== */
-
+/* Items */
 .gallery-item {
-    position: relative;
-    flex: 0 0 400px !important; /* Increased from 320px to match JS itemWidth */
-    width: 400px !important;
-    max-width: 400px;
-    height: 550px; /* Increased total item container height */
-    display: block;
-    text-decoration: none;
-    color: inherit;
-    cursor: grab;
-    /* Allows GSAP to stack items neatly without z-index collisions */
-    transform-origin: center center;
+  position: relative;
+  flex: 0 0 400px !important;
+  width: 400px !important;
+  max-width: 400px;
+  height: 550px;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: grab;
+  transform-origin: center bottom;
 }
 
-/* ==========================================================
-   CARD
-========================================================== */
-
+/* Cards */
 .gallery-card {
-    position: relative;
-    width: 100%;
-    height: 510px; /* Increased card height (leaves ~40px for caption) */
-    overflow: hidden;
-    border-radius: 12px;
-    background: #222;
-    box-shadow: -8px 8px 25px rgba(0, 0, 0, .60);
-    transform-origin: center center;
-    will-change: transform, filter;
-    /* Smooth transition for hover/active scale on the card */
-    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
-                box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-                filter 0.3s ease;
+  position: relative;
+  width: 100%;
+  height: 510px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #222;
+  box-shadow: -8px 8px 25px rgba(0, 0, 0, .60);
+  transform-origin: center center;
+  will-change: transform, filter;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              filter 0.3s ease;
 }
 
-/* Hover: Depresses/minimizes the card and changes cursor */
 .gallery-item:hover .gallery-card {
-    cursor: grab;
-    transform: scale(0.95);
-    filter: brightness(0.95);
-    box-shadow: -4px 4px 15px rgba(0, 0, 0, .40);
+  cursor: grab;
+  transform: scale(0.95);
+  filter: brightness(0.95);
+  box-shadow: -4px 4px 15px rgba(0, 0, 0, .40);
 }
 
-/* Active / Click: Depresses further when held down */
 .gallery-item:active .gallery-card {
-    cursor: grabbing;
-    transform: scale(0.92);
+  cursor: grabbing;
+  transform: scale(0.92);
 }
 
-/* ==========================================================
-   IMAGE
-========================================================== */
-
+.gallery-item, #parallax-container, #layer-bg, #layer-fg {
+    will-change: transform;
+    backface-visibility: hidden;
+}
 .gallery-image {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .gallery-image img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    pointer-events: none;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
 }
 
-/* ==========================================================
-   CAPTION
-========================================================== */
-
 .gallery-item span {
-    display: block;
-    margin-top: 10px;
-    text-align: center;
-    font-size: .75rem;
-    font-weight: 600;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: #888;
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+/* Responsive Grid Adjustments */
+@media (max-width: 900px) {
+  .gallery-intro-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .gallery-intro-right {
+    justify-self: start;
+  }
 }

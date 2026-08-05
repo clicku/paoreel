@@ -11,6 +11,11 @@ let mainTimeline = null;
 let tickerActive = false;
 let autoScrollSpeed = 1; // Speed in pixels per frame
 let isMarqueeActive = false;
+/* ==========================================================
+   MASTER STORY SCENE
+========================================================== */
+
+let storyTimeline = null;
 
 /**
  * Main Gallery Unroll Engine
@@ -23,10 +28,176 @@ export function initGalleryUnrollEngine(
   const gallerySection = document.querySelector(gallerySectionSelector);
   const items = Array.from(document.querySelectorAll(itemSelector));
   const track = document.querySelector(trackSelector);
+  const heroStill = document.querySelector("#hero-still");
+  const heroParallax = document.querySelector(".hero-parallax");
+  const galleryGradient = document.querySelector(".gallery-bg-gradient");
+  const galleryNoise = document.querySelector(".gallery-bg-noise");
+  const galleryLight = document.querySelector(".gallery-bg-light");
+  const galleryIntro = document.querySelector(".gallery-intro");
+  const galleryCopy = document.querySelector(".gallery-copy");
+  const galleryTitle = document.querySelector(".gallery-title");
 
   if (!gallerySection || items.length === 0 || !track) return null;
 
   stopMarqueeLoop();
+  /* ==========================================================
+   STORY TIMELINE
+========================================================== */
+
+storyTimeline = gsap.timeline({
+
+    scrollTrigger: {
+
+        trigger: galleryIntro,
+
+        start: "top bottom",
+
+        end: "bottom top",
+
+        scrub: 1,
+
+        invalidateOnRefresh: true
+
+    }
+
+});
+/* ===========================
+   NEW BACKGROUND ANIMATION
+=========================== */
+
+if (galleryGradient){
+
+    storyTimeline.to(galleryGradient,{
+
+        y:-120,
+
+        scale:1,
+
+        rotation:-2,
+
+        ease:"none"
+
+    },0);
+
+}
+
+if (galleryNoise){
+
+    storyTimeline.to(galleryNoise,{
+
+        y:-220,
+
+        ease:"none"
+
+    },0);
+
+}
+
+if (galleryLight){
+
+    storyTimeline.to(galleryLight,{
+
+        x:-140,
+
+        y:-90,
+
+        scale:1.15,
+
+        ease:"none"
+
+    },0);
+
+}
+
+  /* ----------------------------------------------------------
+   HERO CONTINUES MOVING
+---------------------------------------------------------- */
+
+if (heroStill) {
+
+    storyTimeline.to(heroStill, {
+
+        y: -120,
+
+        scale: 1.08,
+
+        ease: "none"
+
+    }, 0);
+
+}
+
+if (heroParallax) {
+
+    storyTimeline.to(heroParallax, {
+
+        y: -80,
+
+        ease: "none"
+
+    }, 0);
+
+}
+if (galleryCopy) {
+
+    storyTimeline.fromTo(
+
+        galleryCopy,
+
+        {
+
+            y: 120,
+
+            opacity: 0
+
+        },
+
+        {
+
+            y: -40,
+
+            opacity: 1,
+
+            ease: "none"
+
+        },
+
+        0
+
+    );
+
+}
+if (galleryTitle) {
+
+    storyTimeline.fromTo(
+
+        galleryTitle,
+
+        {
+
+            y: 180,
+
+            opacity: 0
+
+        },
+
+        {
+
+            y: -80,
+
+            opacity: 1,
+
+            ease: "none"
+
+        },
+
+        0
+
+    );
+
+}
+
+  
 
   const itemWidth = 400; 
   const gap = 24;          

@@ -1,0 +1,117 @@
+/* ==========================================================
+   PAOREEL STUDIOS V5 - SEQUENTIAL ONE-BY-ONE PARAGRAPH WIPE
+========================================================== */
+
+window.GalleryIntro = (() => {
+  "use strict";
+
+  let initialized = false;
+
+  function init() {
+    if (initialized) return;
+
+    if (!window.gsap || !window.ScrollTrigger) {
+      console.warn("GalleryIntro: GSAP or ScrollTrigger not found.");
+      return;
+    }
+
+    /* ==================================================
+       1. DOM ELEMENTS
+    ================================================== */
+    const section = document.querySelector(".gallery-intro");
+    const midLayer = document.querySelector(".parallax-layer.mid .gallery-copy");
+
+    if (!section || !midLayer) return;
+
+    initialized = true;
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* ==================================================
+       2. FAILSAFE PARAGRAPH SPLITTER 
+       Splits raw text into distinct paragraph blocks.
+    ================================================== */
+    const lines = gsap.utils.toArray(".gallery-copy .line");
+
+    console.log("GalleryIntro Lines:", lines.length);
+    console.log(lines);
+    
+    if (copyParagraphs.length === 0) {
+      const text = midLayer.textContent.trim();
+      const paragraphs = text.split(/(?<=[.!?])\s+(?=[A-Z])/); // Split cleanly by sentence boundaries or paragraph groupings
+      
+      if (paragraphs.length <= 1) {
+        // Fallback chunking if it's one continuous block
+        const sentences = text.split(/(?<=[.!?])\s+/);
+        const chunks = [];
+        for (let i = 0; i < sentences.length; i += 2) {
+          chunks.push(sentences.slice(i, i + 2).join(" "));
+        }
+        
+        midLayer.innerHTML = chunks
+          .map((chunk) => `<span class="paragraph-block" style="display: block; width: 100%; margin-bottom: 1.5em; white-space: normal;">${chunk}</span>`)
+          .join("");
+      } else {
+        midLayer.innerHTML = paragraphs
+          .map((p) => `<span class="paragraph-block" style="display: block; width: 100%; margin-bottom: 1.5em; white-space: normal;">${p.trim()}</span>`)
+          .join("");
+      }
+
+      copyParagraphs = gsap.utils.toArray(".gallery-copy .paragraph-block");
+    } else {
+      copyParagraphs.forEach(p => {
+        p.style.display = "block";
+        p.style.width = "100%";
+        p.style.whiteSpace = "normal";
+        p.style.marginBottom = "1.5em";
+      });
+    }
+
+    /* ==================================================
+       3. INITIAL CURTAIN WIPE STATE FOR EACH PARAGRAPH
+    ================================================== */
+    gsap.set(copyParagraphs, {
+      clipPath: "inset(0 50% 0 50%)",
+      opacity: 0,
+      willChange: "clip-path, opacity"
+    });
+
+    /* ==================================================
+       4. PINNED SCROLLTRIGGER TIMELINE WITH WIDE SCRUB TRACK
+       Extended scroll distance (`+=1800`) ensures plenty of 
+       scroll range for slow, individual paragraph reveals.
+    ================================================== */
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",           
+        end: "+=1800",              // Extra long track for maximum control space
+        pin: true,                  
+        scrub: 1.5,                 
+        anticipatePin: 1,           
+        fastScrollEnd: true,        
+        preventOverlaps: true,      
+        markers: false              
+      }
+    });
+
+    /* ==================================================
+       5. EXPLICIT ONE-BY-ONE SEQUENTIAL ANIMATION
+       Looping through each paragraph block individually 
+       and adding them to the timeline sequentially so they 
+       never trigger simultaneously.
+    ================================================== */
+    copyParagraphs.forEach((paragraph, index) => {
+      timeline.to(paragraph, {
+        clipPath: "inset(0 0% 0 0%)",
+        opacity: 1,
+        duration: 1,
+        ease: "none",
+        immediateRender: false
+      }, index * 1.2); // Creates a clear, separated time gap for each paragraph
+    });
+
+    ScrollTrigger.refresh();
+  }
+
+  return { init };
+})();

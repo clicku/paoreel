@@ -33,24 +33,42 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     /* ======================================================
-       GALLERY INTRO ENGINE
+   GALLERY INTRO
     ====================================================== */
-    if (typeof window.initGalleryIntroEngine === "function") {
-        window.initGalleryIntroEngine();
-        console.log("[App] Gallery Intro Engine initialized.");
-    } else {
-        console.warn("[App] initGalleryIntroEngine not found on window.");
-    }
 
+    if (window.GalleryIntro) {
+
+        GalleryIntro.init();
+
+    } else {
+
+        console.warn(
+            "GalleryIntro not found."
+        );
+
+    }
+    /* ======================================================
+   MASTER SCROLL
+====================================================== */
+
+if (window.MasterScroll) {
+
+    MasterScroll.init();
+
+} else {
+
+    console.warn("[App] MasterScroll not found.");
+
+}
     /* ======================================================
        GALLERY SCROLL (UNROLL) ENGINE
-    ====================================================== */
+    ====================================================== 
     if (typeof window.initGalleryUnrollEngine === "function") {
         window.initGalleryUnrollEngine();
         console.log("[App] Gallery Unroll Engine initialized.");
     } else {
         console.warn("[App] initGalleryUnrollEngine not found on window.");
-    }
+    }*/
 });
 
 /* ==========================================================

@@ -42,8 +42,6 @@
     ========================== -->
     <link rel="stylesheet"
       href="assets/css/cinematic.css">
-    
-    <link rel="stylesheet" href="assets/css/parallax-2.5d.css">
 
     <link rel="stylesheet"
           href="assets/css/variables.css">
@@ -246,159 +244,234 @@
              Hero
         ========================================= -->
 
-      <section class="hero">
+       <section class="hero">
 
-    <!-- ========================================
-     Hero Background & Cinematic Layer
+   <!-- ========================================
+     Hero Background
     ========================================= -->
-    <!-- Added cinematic-overlay container referenced by JS -->
-    <div class="cinematic-overlay" style="position:fixed; inset:0; z-index:999; pointer-events:none;"></div>
 
-    <div class="hero-fixed">
-        <div class="hero-parallax">
-            <div class="hero-image">
-                <div class="hero-camera" id="parallax-stage">
-                    
-                    <!-- Background Fill Video -->
-                    <video class="hero-bg" muted playsinline preload="auto">
-                        <source src="assets/video/hero-main.mp4" type="video/mp4">
-                    </video>
-                    
-                    <!-- Main Hero Video -->
-                    <video class="hero-bts" muted playsinline preload="auto">
-                        <source src="assets/video/hero-main.mp4" type="video/mp4">
-                    </video>
+<div class="hero-fixed">
 
-                    <div class="hero-depth-vignette"></div>
+    <div class="hero-parallax">
 
-                    <div id="parallax-container">
-                        <!-- Background Layer -->
-                        <img id="layer-bg" class="layer layer-full" src="assets/images/hero/studiowall.png" alt="Studio Background" draggable="false">
-                        
-                        <img id="layer-far-right" class="layer" src="assets/images/hero/photoequipment.png" alt="Photography Equipment Setup">
-                        <!-- Background Smoke Fume Animation Canvas -->
-                        <canvas id="smoke-canvas"></canvas>
+        <div class="hero-image">
 
-                        <!-- Ceiling Spotlight Glow with Flicker -->
-                        <div id="glow-ceiling"></div>
+    <div class="hero-camera" id="parallax-stage">
 
-                        <!-- Wall Lighting Depth Mask -->
-                        <div class="wall-lighting" id="wall-lighting"></div>
+        <!-- Background Fill Video -->
+        <video
+            class="hero-bg"
+            muted
+            playsinline
+            preload="auto">
+            <source
+                src="assets/video/hero-main.mp4"
+                type="video/mp4">
+        </video>
 
-                        <!-- Floor Contact Shadows -->
-                        <div class="floor-shadow" id="floor-shadow"></div>
-                        <div class="floor-contact-shadow" id="shadow-left"></div>
-                        <div class="floor-contact-shadow" id="shadow-right"></div>
+        <!-- Main Hero Video -->
+        <video
+            class="hero-bts"
+            muted
+            playsinline
+            preload="auto">
+            <source
+                src="assets/video/hero-main.mp4"
+                type="video/mp4">
+        </video>
 
-                        <!-- VOLUMETRIC 3D SANDBAG WRAPPER -->
-                        <div class="sandbag-container" id="sandbag-wrapper">
-                            <div id="shadow-bag"></div>
-                            <img id="layer-sandbag-left" src="assets/images/hero/sandbag2.png" alt="Equipment Bag & Reflector" draggable="false">
-                        </div>
+        <div class="hero-depth-vignette"></div>
 
-                        <!-- Midground Softboxes -->
-                        <img id="layer-mid-left" class="layer" src="assets/images/hero/softbox_left.png" alt="Left Softbox" draggable="false">
-                        <img id="layer-mid-right" class="layer" src="assets/images/hero/softbox_right.png" alt="Right Softbox" draggable="false">
+        <img
+            id="hero-still"
+            src="assets/images/hero/hero-final.png"
+            alt="">
+            
+            <div class="hero-depth">
 
-                        <!-- Foreground Hero Layer -->
-                        <img id="layer-fg" class="layer layer-full" src="assets/images/hero/hero-final.png" alt="Photographer Hero" draggable="false">
+    <img
+        class="hero-layer hero-layer-bg"
+        src="assets/images/hero/hero-bg.png"
+        alt="">
 
-                        <!-- Tracked Lens Glint -->
-                        <div class="lens-glint" id="lens-glint"></div>
+    <img
+        class="hero-layer hero-layer-subject"
+        src="assets/images/hero/hero-subject.png"
+        alt="">
 
-                        <!-- Light Sweep -->
-                        <div class="light-sweep" id="light-sweep"></div>
+</div>
 
-                        <!-- Near-field Dust Canvas -->
-                        <canvas id="dust-canvas"></canvas>
-                    </div>
-
-                    <!-- Super-Close Extreme Foreground Dust Canvas -->
-                    <canvas id="fg-dust-canvas"></canvas>
-
-                    <!-- Framing Vignette -->
-                    <div class="vignette"></div>
-
-                    <!-- Camera Strobe Flash -->
-                    <div id="strobe-flash"></div>
-
-                    <!-- UI Hint 
-                    <div class="click-hint">⚡ Click anywhere to trigger camera strobe flash</div>-->
-                </div>
-            </div>
-        </div>
-
-        <!-- Hidden Hero Still required by startHeroReveal() -->
-       <div id="hero-still" style="opacity:0; position:absolute; inset:0; pointer-events:none; background:url('assets/images/hero/hero-final.png') center/center;"></div>
-
-        <!--<div class="hero-mask"></div>
-        <div class="film-grain"></div>-->
-        <div class="hero-transition"></div>
     </div>
+
+</div>
+
+        <div class="hero-mask"></div>
+
+        <div class="film-grain"></div>
+
+        <div class="hero-transition"></div>
+
+    </div>
+
+</div>
 
     <!-- ========================================
      BTS Editorial Overlay
-    ========================================= -->
-    <div class="editorial-overlay">
-        <!-- Left Credits -->
-        <div class="editorial-left">
-            <div class="credit-group">
-                <p class="credit-small">PAOREEL</p>
-                <h3>STUDIOS</h3>
-            </div>
-            <div class="credit-group">
-                <p class="credit-small">COMMERCIAL</p>
-                <h3>PHOTOGRAPHY</h3>
-            </div>
-            <div class="credit-group">
-                <p class="credit-small">ART</p>
-                <h3>Paoreel</h3>
-            </div>
+========================================= -->
+
+<div class="editorial-overlay">
+
+    <!-- Left Credits -->
+
+    <div class="editorial-left">
+
+        <div class="credit-group">
+
+            <p class="credit-small">PAOREEL</p>
+
+            <h3>STUDIOS</h3>
+
         </div>
 
-        <!-- Right Typography -->
-        <div class="editorial-right">
-            <div class="editorial-scroll">
-                <div class="editorial-copy">
-                    <span>F</span><span>O</span><span>O</span><span>D</span>
-                    <span class="gap"></span>
-                    <span>B</span><span>R</span><span>A</span><span>N</span><span>D</span><span>S</span>
-                    <span class="gap"></span>
-                    <span>P</span><span>E</span><span>O</span><span>P</span><span>L</span><span>E</span>
-                </div>
-                <div class="editorial-copy">
-                    <span>F</span><span>O</span><span>O</span><span>D</span>
-                    <span class="gap"></span>
-                    <span>B</span><span>R</span><span>A</span><span>N</span><span>D</span><span>S</span>
-                    <span class="gap"></span>
-                    <span>P</span><span>E</span><span>O</span><span>P</span><span>L</span><span>E</span>
-                </div>
-                <div class="editorial-copy">
-                    <span>F</span><span>O</span><span>O</span><span>D</span>
-                    <span class="gap"></span>
-                    <span>B</span><span>R</span><span>A'</span><span>N</span><span>D</span><span>S</span>
-                    <span class="gap"></span>
-                    <span>P</span><span>E</span><span>O</span><span>P</span><span>L</span><span>E</span>
-                </div>
-            </div>
+        <div class="credit-group">
+
+            <p class="credit-small">COMMERCIAL</p>
+
+            <h3>PHOTOGRAPHY</h3>
+
         </div>
+
+        <div class="credit-group">
+
+            <p class="credit-small">ART</p>
+
+            <h3>Paoreel</h3>
+
+        </div>
+
     </div>
 
-    <!-- Hero Content -->
+    <!-- Right Typography -->
+
+    <div class="editorial-right">
+
+    <div class="editorial-scroll">
+
+        <div class="editorial-copy">
+
+            <span>F</span>
+            <span>O</span>
+            <span>O</span>
+            <span>D</span>
+
+            <span class="gap"></span>
+
+            <span>B</span>
+            <span>R</span>
+            <span>A</span>
+            <span>N</span>
+            <span>D</span>
+            <span>S</span>
+
+            <span class="gap"></span>
+
+            <span>P</span>
+            <span>E</span>
+            <span>O</span>
+            <span>P</span>
+            <span>L</span>
+            <span>E</span>
+            
+        </div>
+
+        <div class="editorial-copy">
+
+            <span>F</span>
+            <span>O</span>
+            <span>O</span>
+            <span>D</span>
+
+            <span class="gap"></span>
+
+            <span>B</span>
+            <span>R</span>
+            <span>A</span>
+            <span>N</span>
+            <span>D</span>
+            <span>S</span>
+
+            <span class="gap"></span>
+
+            <span>P</span>
+            <span>E</span>
+            <span>O</span>
+            <span>P</span>
+            <span>L</span>
+            <span>E</span>
+
+        </div>
+             <div class="editorial-copy">
+
+            <span>F</span>
+            <span>O</span>
+            <span>O</span>
+            <span>D</span>
+
+            <span class="gap"></span>
+
+            <span>B</span>
+            <span>R</span>
+            <span>A</span>
+            <span>N</span>
+            <span>D</span>
+            <span>S</span>
+
+            <span class="gap"></span>
+
+            <span>P</span>
+            <span>E</span>
+            <span>O</span>
+            <span>P</span>
+            <span>L</span>
+            <span>E</span>
+        </div>
+
+    </div>
+
+</div>
+    </div>
+
     <div class="hero-content">
-        <h1 class="hero-title">
-            <span class="hero-line"><span class="hero-line-inner">Photography</span></span>
-            <span class="hero-line"><span class="hero-line-inner">that elevates</span></span>
-            <span class="hero-line"><span class="hero-line-inner">brands.</span></span>
-        </h1>
-    </div>
 
-    <div class="scroll-indicator">
-        <span></span>
-        <p>Scroll</p>
+       
+        <h1 class="hero-title">
+
+    <span class="hero-line">
+        <span class="hero-line-inner">Photography</span>
+    </span>
+
+    <span class="hero-line">
+        <span class="hero-line-inner">that elevates</span>
+    </span>
+
+    <span class="hero-line">
+        <span class="hero-line-inner">brands.</span>
+    </span>
+
+</h1>
+
     </div>
+    <div class="scroll-indicator">
+
+    <span></span>
+
+    <p>Scroll</p>
+
+</div>
+
 
 </section>
+
 
 
        <!-- ========================================
@@ -606,7 +679,6 @@
    <!--<script src="assets/js/cinematic/video.js"></script>-->
     <script src="assets/js/cinematic/audio.js"></script>
     <script src="assets/js/cinematic/controller.js"></script>
-    <script src="assets/js/parallax-2.5d.js"></script>
     <script src="assets/js/cinematic/shutter.js"></script>
     
     <!-- ========================================
@@ -621,7 +693,7 @@
     <script src="assets/js/gallery-intro.js"></script>    
     <!-- Add type="module" -->
     <script type="module" src="assets/js/gallery-scroll.js"></script>
-    
+    <script src="assets/js/master-scroll.js"></script>
     <script src="assets/js/gallery.js"></script>
     <!-- Entry Point -->
     <script type="module" src="assets/js/app.js"></script>

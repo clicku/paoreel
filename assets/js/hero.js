@@ -12,7 +12,7 @@ window.Hero = (() => {
     let initialized = false;
 
     /* ==========================================
-       Cached Elements
+        Cached Elements
     ========================================== */
 
     let hero;
@@ -23,7 +23,7 @@ window.Hero = (() => {
 
     let scrollIndicator;
     /* ==========================================
-       Cache DOM
+        Cache DOM
     ========================================== */
 
     function cacheElements() {
@@ -43,7 +43,7 @@ window.Hero = (() => {
 
     }
         /* ==========================================
-       Validate
+        Validate
     ========================================== */
 
     function validateElements() {
@@ -51,7 +51,7 @@ window.Hero = (() => {
         if (!hero) return false;
 
         if (!content) return false;
-  
+ 
         if (!title) return false;
 
         if (!lines.length) return false;
@@ -62,7 +62,7 @@ window.Hero = (() => {
 
     }
        /* ==========================================
-   Initial State
+    Initial State
 ========================================== */
 
 function setupInitialState() {
@@ -90,7 +90,7 @@ function setupInitialState() {
 
 }
         /* ==========================================
-       Init
+        Init
     ========================================== */
 
     function init() {
@@ -116,7 +116,7 @@ function setupInitialState() {
     }
    
 /* ==========================================
-   Reveal
+    Reveal
 ========================================== */
 
 function reveal() {
@@ -175,6 +175,11 @@ function reveal() {
 
 .call(()=>{
 
+    // Initialize 2.5D parallax tracking and canvas particle systems
+    if (window.Parallax25D) {
+        window.Parallax25D.init();
+    }
+
     startCameraBreathing();
 
     setupHeroExit();
@@ -191,7 +196,7 @@ function reveal() {
 }
 
 /* ==========================================
-   Camera Breathing
+    Camera Breathing
 ========================================== */
 
 function startCameraBreathing() {
