@@ -1,0 +1,11 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.content.folderTemplate": [
+    {
+      "name": "Default",
+      "folder": ""
+    }
+  ],
+  "frontMatter.taxonomy.type": ["tags", "categories"],
+  "frontMatter.framework.id": "other"
+}
