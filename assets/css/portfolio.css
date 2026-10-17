@@ -1,0 +1,355 @@
+/* ==========================================================================
+   PORTFOLIO HERO
+========================================================================== */
+
+.portfolio-hero{
+
+    position:relative;
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    background:#000;
+
+}
+
+.portfolio-hero-image{
+
+    position:absolute;
+
+    inset:0;
+
+}
+
+.portfolio-hero-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transform:scale(1.05);;
+
+    filter:brightness(.45);
+
+}
+
+.portfolio-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        to right,
+        rgba(0,0,0,.82),
+        rgba(0,0,0,.40)
+    );
+
+}
+
+.portfolio-hero .container{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.portfolio-content{
+
+    max-width:650px;
+
+}
+
+.portfolio-content span{
+
+    color:#c7a86d;
+
+    text-transform:uppercase;
+
+    letter-spacing:.35em;
+
+    font-size:.85rem;
+
+}
+
+.portfolio-content h1{
+
+    margin:25px 0;
+
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(3.5rem,7vw,6rem);
+
+    line-height:1.05;
+
+}
+
+.portfolio-content p{
+
+    color:#d6d6d6;
+
+    line-height:2;
+
+    font-size:1.1rem;
+
+    max-width:600px;
+
+}
+
+/* Initial animation state */
+
+.portfolio-content span,
+.portfolio-content h1,
+.portfolio-content p{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+}
+/* ==========================================================================
+   CATEGORY SECTION
+========================================================================== */
+
+.portfolio-categories{
+
+    padding:var(--space-md) 0;
+
+    background:#050505;
+
+}
+
+.category-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:35px;
+
+}
+
+.category-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:var(--radius);
+
+    background:#0b0b0b;
+
+    height:650px;
+
+}
+
+.category-card img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:transform .8s cubic-bezier(.2,.8,.2,1);
+
+}
+
+.category-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    padding:45px;
+
+    background:linear-gradient(
+
+        transparent,
+
+        rgba(0,0,0,.82)
+
+    );
+
+}
+
+.category-overlay h3{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:2.2rem;
+
+    margin-bottom:15px;
+
+}
+
+.category-overlay span{
+
+    color:#c7a86d;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+
+    font-size:.8rem;
+
+}
+
+.category-card:hover img{
+
+    transform:scale(1.05);;
+
+}
+
+.category-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:var(--radius);
+
+    background:#0b0b0b;
+
+    height:650px;
+
+}
+/* ==========================================================================
+   SELECTED WORKS
+========================================================================== */
+
+.selected-works{
+
+    padding:var(--space-md) 0;
+
+    background:#000;
+
+}
+
+.works-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:25px;
+
+}
+
+.work-item{
+
+    overflow:hidden;
+
+    border-radius:var(--radius);
+
+    background:#0b0b0b;
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+}
+
+.work-item.large{
+
+    grid-column:span 2;
+
+}
+
+.work-item img{
+
+    width:100%;
+
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+    transition:transform .8s ease;
+
+}
+
+.work-item:hover img{
+
+    transform:scale(1.06);
+
+}
+/* ==========================================================================
+   PORTFOLIO CTA
+========================================================================== */
+
+.portfolio-cta{
+
+    padding:180px 0;
+
+    background:#050505;
+
+    text-align:center;
+
+}
+
+.portfolio-cta span{
+
+    display:block;
+
+    margin-bottom:20px;
+
+    color:#c7a86d;
+
+    letter-spacing:.35em;
+
+    text-transform:uppercase;
+
+    font-size:.85rem;
+
+}
+
+.portfolio-cta h2{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(3rem,6vw,5.5rem);
+
+    line-height:1.1;
+
+    margin-bottom:30px;
+
+}
+
+.portfolio-cta p{
+
+    max-width:720px;
+
+    margin:0 auto 50px;
+
+    color:#d6d6d6;
+
+    line-height:2;
+
+    font-size:1.1rem;
+
+}
+
+.portfolio-cta{
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+}
