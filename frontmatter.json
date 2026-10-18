@@ -48,5 +48,17 @@
   ],
   "frontMatter.framework.id": "other",
   "frontMatter.content.publicFolder": "",
-  "frontMatter.preview.host": "http://localhost:4321"
+  "frontMatter.content.fileExtensions": [
+    "html",
+    "js",
+    "css",
+    "md"
+  ],
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "Project Root",
+      "path": "[[workspace]]"
+    }
+  ],
+  "frontMatter.preview.host": null
 }
