@@ -1,183 +1,99 @@
 /* ==========================================================
    PAOREEL V2
-   HERO INTERACTIONS
+   HERO SCROLL LOCK (Extended Duration)
 ========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
     const hero = document.querySelector(".hero");
     if (!hero) return;
-    const bg = document.querySelector(".bg-image");
+    const bg = document.querySelector(".hero-bg");
     const bloom = document.querySelector(".light-bloom");
     const cursor = document.querySelector(".cursor-light");
 
-    if (!hero || !bg) return;
-
-    /* ======================================================
-       MOUSE PARALLAX
-    ====================================================== */
-
-    let mouseX = 0;
-    let mouseY = 0;
-
-    let currentX = 0;
-    let currentY = 0;
+    // Mouse parallax logic...
+    let mouseX = 0, mouseY = 0, currentX = 0, currentY = 0;
 
     hero.addEventListener("mousemove", (e) => {
-
         const rect = hero.getBoundingClientRect();
-
         mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
         mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
 
+        // Calculate cursor position relative to the hero container in pixels or percentages
+        const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
+        const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
+
+        // Update CSS variables for the color reveal mask
+        hero.style.setProperty('--x', `${xPercent}%`);
+        hero.style.setProperty('--y', `${yPercent}%`);
+
         if (cursor) {
-
-            gsap.to(cursor, {
-
-                x: e.clientX,
-                y: e.clientY,
-                opacity: 1,
-                duration: 0.4,
-                ease: "power2.out"
-
-            });
-
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, opacity: 1, duration: 0.4, ease: "power2.out" });
         }
-
     });
 
     hero.addEventListener("mouseleave", () => {
+        // Move mask off-screen or fade out color layer when mouse leaves
+        hero.style.setProperty('--x', `-500px`);
+        hero.style.setProperty('--y', `-500px`);
 
         if (cursor) {
-
-            gsap.to(cursor, {
-
-                opacity: 0,
-                duration: 0.5
-
-            });
-
+            gsap.to(cursor, { opacity: 0, duration: 0.5 });
         }
-
     });
 
-    /* ======================================================
-       SMOOTH PARALLAX LOOP
-    ====================================================== */
+    hero.addEventListener("mouseleave", () => {
+        if (cursor) {
+            gsap.to(cursor, { opacity: 0, duration: 0.5 });
+        }
+    });
 
     function animateHero() {
-
         currentX += (mouseX - currentX) * 0.05;
         currentY += (mouseY - currentY) * 0.05;
 
-        gsap.set(bg, {
-
-            x: currentX,
-            y: currentY
-
-        });
-
-        if (bloom) {
-
-            gsap.set(bloom, {
-
-                x: currentX * 0.5,
-                y: currentY * 0.5
-
-            });
-
-        }
+        if (bg) gsap.set(bg, { x: currentX, y: currentY });
+        if (bloom) gsap.set(bloom, { x: currentX * 0.5, y: currentY * 0.5 });
 
         requestAnimationFrame(animateHero);
-
     }
-
     animateHero();
 
     /* ======================================================
-       SCROLL PARALLAX
+       SCROLL LOCK PINNING (Extended Length)
     ====================================================== */
+    gsap.registerPlugin(ScrollTrigger);
 
-    window.addEventListener("scroll", () => {
-
-        const scroll = window.scrollY;
-
-        gsap.to(bg, {
-
-            y: currentY + scroll * 0.12,
-            duration: 0.5,
-            overwrite: true,
-            ease: "none"
-
-        });
-
+    // Increased duration: "+=250%" means the user scrolls 2.5 screens worth of 
+    // movement while locked inside the hero section before it unlocks.
+    ScrollTrigger.create({
+        trigger: hero,
+        start: "top top",
+        end: "+=250%", 
+        pin: true,
+        pinSpacing: true,
+        scrub: true,
     });
 
-    /* ======================================================
-       HEADER GLASS EFFECT
-    ====================================================== */
-
-    const header = document.getElementById("header");
-
-    function updateHeader() {
-
-        if (!header) return;
-
-        if (window.scrollY > 60) {
-
-            header.classList.add("scrolled");
-
-        } else {
-
-            header.classList.remove("scrolled");
-
+    // Spread out the fade animations to match the longer lock duration
+    gsap.to(".scroll-indicator", {
+        opacity: 0,
+        y: 30,
+        scrollTrigger: {
+            trigger: hero,
+            start: "top top",
+            end: "+=40%",
+            scrub: true
         }
-
-    }
-
-    updateHeader();
-
-    window.addEventListener("scroll", updateHeader);
-
-    /* ======================================================
-       HERO BREATHING (VERY SUBTLE)
-    ====================================================== */
-
-    gsap.to(bg, {
-
-        scale: 1.14,
-
-        duration: 12,
-
-        repeat: -1,
-
-        yoyo: true,
-
-        ease: "sine.inOut"
-
     });
 
-    /* ======================================================
-       LIGHT BLOOM FLOAT
-    ====================================================== */
-
-    if (bloom) {
-
-        gsap.to(bloom, {
-
-            x: 20,
-
-            y: -15,
-
-            duration: 10,
-
-            repeat: -1,
-
-            yoyo: true,
-
-            ease: "sine.inOut"
-
-        });
-
-    }
-
+    gsap.to(".hero-content", {
+        opacity: 0,
+        y: -40,
+        scrollTrigger: {
+            trigger: hero,
+            start: "top top",
+            end: "+=150%",
+            scrub: true
+        }
+    });
 });
