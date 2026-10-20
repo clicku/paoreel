@@ -26,6 +26,10 @@
    BACKGROUND
 ========================================================== */
 
+/* ==========================================================
+   BACKGROUND LAYERS (B&W Base + Color Reveal Layer)
+========================================================== */
+
 .hero-bg{
 
     position:absolute;
@@ -39,17 +43,41 @@
 
     opacity:.55;
 
-   /* filter:blur(40px);*/
+    filter: grayscale(100%); /* Makes the base background black and white */
 
     transform:scale(1.12);
 
-    will-change:
-        transform,
-        opacity,
-        filter;
+    will-change: transform, filter, opacity;
 
     z-index:1;
 
+}
+
+/* Full color reveal layer controlled by mouse coordinates */
+.hero-bg-color{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    url("../images/paoreel.webp")
+    center center / cover
+    no-repeat;
+
+    opacity:.65;
+
+    transform:scale(1.12);
+
+    z-index:2; /* Sits above the grayscale background */
+
+    pointer-events:none;
+
+    /* Dynamic CSS mask that tracks mouse via custom properties (--x and --y) */
+    -webkit-mask-image: radial-gradient(circle 220px at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
+    mask-image: radial-gradient(circle 220px at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
+    
+    transition: opacity 0.4s ease;
 }
 
 /* ==========================================================
