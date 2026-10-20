@@ -1,25 +1,28 @@
 /* ==========================================================================
-   Initial Scroll Lock & Scrollbar Hiding
+   Initial Scroll Lock (Homepage Only)
 ========================================================== */
 
-html, body {
+/* Only lock scroll and hide scrollbar on the homepage before it loads */
+html:has(body.home-page:not(.loaded)), 
+body.home-page:not(.loaded) {
     overflow: hidden !important;
     height: 100vh !important;
 }
 
-.scroll-indicator {
+/* Scroll indicator hidden initially on homepage */
+.home-page .scroll-indicator {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
-/* Unlocked state once loaded is applied to html and body */
+/* Unlocked state once homepage preloader finishes */
 html.loaded, body.loaded {
     overflow-y: auto !important;
     height: auto !important;
 }
 
-body.loaded .scroll-indicator {
+body.home-page.loaded .scroll-indicator {
     opacity: 1;
     visibility: visible;
 }
