@@ -122,6 +122,23 @@
       letter-spacing: -1px;
     }
 
+     /* --- Navigation Bar --- */
+        .modern-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 60px;
+            z-index: 1000;
+            background: rgba(7, 7, 7, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+
     .nav-links {
       display: flex;
       align-items: center;
@@ -736,7 +753,7 @@
 
   <!-- Navigation -->
   <header class="contact-header">
-    <nav class="navbar" aria-label="Main navigation">
+    <nav class="modern-nav">
       <a class="logo" href="index.html" aria-label="Paoreel Studios home">
         <img
           src="assets/images/logo.png"
