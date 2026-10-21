@@ -1,14 +1,8 @@
 /* ==========================================================================
-   Initial Scroll Lock (Homepage Preloader Only)
+   Initial Scroll Lock (Homepage Only)
 ========================================================== */
 
-/* Default state for all standard pages: fully scrollable */
-html, body {
-    overflow-y: auto;
-    height: auto;
-}
-
-/* Lock scroll and hide scrollbar ONLY on the homepage before it loads */
+/* Only lock scroll and hide scrollbar on the homepage before it loads */
 html:has(body.home-page:not(.loaded)), 
 body.home-page:not(.loaded) {
     overflow: hidden !important;
@@ -23,8 +17,7 @@ body.home-page:not(.loaded) {
 }
 
 /* Unlocked state once homepage preloader finishes */
-html:has(body.home-page.loaded), 
-body.home-page.loaded {
+html.loaded, body.loaded {
     overflow-y: auto !important;
     height: auto !important;
 }

@@ -1,0 +1,97 @@
+/* ==========================================================
+   UPDATED FOOTER STYLES (LARGER TYPOGRAPHY)
+========================================================== */
+
+.footer {
+  border-top: 1px solid var(--line);
+  background: #0c0c0b;
+  color: var(--text);
+  padding-top: 70px;
+}
+
+.footer-inner {
+  width: min(1500px, 100%);
+  margin: auto;
+  padding: 0 6% 60px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+
+.footer-brand img {
+  max-width: 150px; /* Slightly larger logo */
+  height: auto;
+  margin-bottom: 20px;
+ /* filter: brightness(0) invert(1);*/
+}
+
+.footer-brand p {
+  color: var(--muted);
+  font-size: 14px; /* Increased from 12px */
+  line-height: 1.8;
+  max-width: 320px;
+}
+
+.footer-links,
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Increased gap for better touch targets */
+}
+
+.footer-col-title {
+  color: var(--accent);
+  font-size: 12px; /* Increased from 10px */
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.footer-links a,
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px; /* Increased from 12px */
+  transition: color 0.2s ease;
+  width: fit-content;
+}
+
+.footer-social a i {
+  font-size: 16px; /* Increased icon size from 14px */
+  width: 20px;
+  text-align: center;
+  color: var(--accent);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.footer-links a:hover,
+.footer-social a:hover {
+  color: #ffffff;
+}
+
+.footer-social a:hover i {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--line);
+  padding: 30px 6%;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px; /* Increased from 10px */
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
