@@ -1083,7 +1083,11 @@
     const CONTACT_EMAIL = "pao@paoreel.com";
 
     const APPS_SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycby0ubpeeTKw2UHs4yfPA4xUlW2VHGuTU8rKxmwjZNA589P7k07LJYvNL7xdlpOCQwI/exec";
+      "https://script.google.com/macros/s/AKfycbw43Gwld358DGVM3cvcXu7jp_9mvKsvlRTCBD7oZGPVjYJ_Tpf94wzvobCu3NGaWP3t/exec";
+
+    // Rate limiting configuration
+    let lastSubmissionTime = 0;
+    const COOLDOWN_PERIOD_MS = 60000; // 60 seconds cooldown
 
     // Footer year.
     document.getElementById("current-year").textContent =
@@ -1104,6 +1108,18 @@
       event.preventDefault();
 
       if (!form.reportValidity()) {
+        return;
+      }
+
+      // Check client-side rate limiting cooldown
+      const now = Date.now();
+      const timeElapsed = now - lastSubmissionTime;
+      if (timeElapsed < COOLDOWN_PERIOD_MS) {
+        const secondsRemaining = Math.ceil((COOLDOWN_PERIOD_MS - timeElapsed) / 1000);
+        showStatus(
+          `Please wait ${secondsRemaining} seconds before submitting another inquiry.`,
+          "error"
+        );
         return;
       }
 
@@ -1173,6 +1189,9 @@
           mode: "no-cors",
           body: new URLSearchParams(data)
         });
+
+        // Record successful submission time for rate limiting
+        lastSubmissionTime = Date.now();
 
         showStatus(
           "Your request was submitted by your browser, but delivery " +
