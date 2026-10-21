@@ -18,6 +18,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link 
+  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
     <!-- ==========================================================
          FAVICON
     ========================================================== -->
@@ -338,7 +340,7 @@
 
       <!-- Item 06 -->
       <article class="portfolio-card">
-        <a href="portrait.html" class="card-inner">
+        <a href="portraits.html" class="card-inner">
           <div class="image-wrapper">
             <img src="assets/images/gallery/thumbs/06.webp" alt="Professional Studio Portraits" loading="lazy">
           </div>
@@ -461,53 +463,52 @@
 <!-- ==========================================================
      FOOTER
 ========================================================== -->
-
 <footer class="footer">
 
     <div class="footer-inner">
 
         <div class="footer-brand">
-
             <img
                 src="assets/images/logo.webp"
-                alt="Paoreel Studios">
-
+                alt="Paoreel Studios"
+                onerror="this.style.display='none';">
             <p>
-
-                Cinematic Food, Product & Portrait Photography
-
+                Cinematic Food, Product &amp; Portrait Photography
             </p>
-
         </div>
 
         <div class="footer-links">
-
+            <span class="footer-col-title">Navigation</span>
             <a href="index.html">Home</a>
-
             <a href="about.html">About</a>
-
             <a href="portfolio.html">Portfolio</a>
-
             <a href="contact.html">Contact</a>
-
         </div>
 
         <div class="footer-social">
-
-            <a href="#">Facebook</a>
-
-            <a href="#">Instagram</a>
-
-            <a href="#">YouTube</a>
-
+            <span class="footer-col-title">Connect</span>
+            <a href="https://facebook.com/paoreelph" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+                <span>Facebook</span>
+            </a>
+            <a href="https://instagram.com/paoreelph" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                <span>Instagram</span>
+            </a>
+            <a href="https://linkedin.com/in/pao-lee-7467a0384" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+                <span>LinkedIn</span>
+            </a>
+            <a href="viber://chat?number=639260218440" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-viber" aria-hidden="true"></i>
+                <span>Viber</span>
+            </a>
         </div>
 
     </div>
 
     <div class="footer-bottom">
-
-        &copy; 2026 Paoreel Studios. All Rights Reserved.
-
+        &copy; <span id="footer-year">2026</span> Paoreel Studios. All Rights Reserved.
     </div>
 
 </footer>

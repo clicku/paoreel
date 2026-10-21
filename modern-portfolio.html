@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Photography Portfolio | Paoreel Studios</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Lightbox CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css">
+
+    <style>
+        :root {
+            --bg-color: #080808;
+            --surface-color: #121212;
+            --text-primary: #ffffff;
+            --text-secondary: #999999;
+            --accent-color: #e5c158;
+            --font-serif: 'Instrument Serif', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Navigation --- */
+        .modern-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 60px;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(8,8,8,0.9), transparent);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--text-primary);
+        }
+
+        /* --- Hero Section --- */
+        .modern-hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 60px 80px 60px;
+            position: relative;
+        }
+
+        .hero-title-wrapper h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(4rem, 10vw, 11rem);
+            line-height: 0.85;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: -0.02em;
+            margin-bottom: 30px;
+        }
+
+        .hero-bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: flex-end;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+        }
+
+        .hero-desc {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 450px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .hero-meta {
+            text-align: right;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-color);
+        }
+
+        /* --- Filter Tabs --- */
+        .filter-section {
+            padding: 40px 60px;
+            display: flex;
+            gap: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: var(--text-secondary);
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--text-primary);
+            color: var(--bg-color);
+            border-color: var(--text-primary);
+        }
+
+        /* --- Modern Asymmetric Bento Gallery --- */
+        .gallery-container {
+            padding: 60px;
+        }
+
+        .modern-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+
+        .gallery-card {
+            position: relative;
+            background-color: var(--surface-color);
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* Bento Proportions */
+        .gallery-card.span-8 { grid-column: span 8; height: 600px; }
+        .gallery-card.span-4 { grid-column: span 4; height: 600px; }
+        .gallery-card.span-5 { grid-column: span 5; height: 480px; }
+        .gallery-card.span-7 { grid-column: span 7; height: 480px; }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+            filter: brightness(0.9);
+        }
+
+        .gallery-card:hover img {
+            transform: scale(1.04);
+            filter: brightness(1);
+        }
+
+        .card-overlay-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-card:hover .card-overlay-info {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 400;
+        }
+
+        .card-category {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-color);
+        }
+
+        /* --- Footer --- */
+        .modern-footer {
+            padding: 80px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            margin-top: 60px;
+        }
+
+        .modern-footer p {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* --- Responsive Design --- */
+        @media(max-width: 1024px) {
+            .modern-nav, .modern-hero, .filter-section, .gallery-container, .modern-footer { padding-left: 30px; padding-right: 30px; }
+            .hero-bottom-grid { grid-template-columns: 1fr; gap: 20px; }
+            .hero-meta { text-align: left; }
+            .gallery-card.span-8, .gallery-card.span-4, .gallery-card.span-5, .gallery-card.span-7 { grid-column: span 12; height: 400px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="modern-nav">
+        <a href="index.html" class="nav-logo">Paoreel.</a>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html" class="active">Portfolio</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Header -->
+    <header class="modern-hero">
+        <div class="hero-title-wrapper">
+            <h1>Selected<br>Visual Archive</h1>
+        </div>
+        <div class="hero-bottom-grid">
+            <p class="hero-desc">Commercial architectural, culinary, and product photography driven by meticulous lighting and editorial composition.</p>
+            <div class="hero-meta">2026 Collection / Edition 02</div>
+        </div>
+    </header>
+
+    <!-- Filter Buttons -->
+    <div class="filter-section">
+        <button class="filter-btn active">All Work</button>
+        <button class="filter-btn">Food & Beverage</button>
+        <button class="filter-btn">Product</button>
+        <button class="filter-btn">Portraits</button>
+    </div>
+
+    <!-- Modern Bento Gallery Grid -->
+    <main class="gallery-container">
+        <div class="modern-grid">
+            
+            <article class="gallery-card span-8">
+                <a href="assets/images/products/product1.webp" data-lightbox="archive" data-title="Commercial Restaurant Series">
+                    <img src="assets/images/products/product1.webp" alt="Work 1" loading="lazy">
+                    <div class="card-overlay-info">
+                        <div>
+                            <span class="card-category">Food & Beverage</span>
+                            <h3 class="card-title">Commercial Restaurant Series</h3>
+                        </div>
+                        <span class="card-accent">Explore →</span>
+                    </div>
+                </a>
+            </article>
+
+            <article class="gallery-card span-4">
+                <a href="assets/images/products/product2.webp" data-lightbox="archive" data-title="Signature Product Studio">
+                    <img src="assets/images/products/product2.webp" alt="Work 2" loading="lazy">
+                    <div class="card-overlay-info">
+                        <div>
+                            <span class="card-category">Product</span>
+                            <h3 class="card-title">Signature Studio</h3>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <article class="gallery-card span-5">
+                <a href="assets/images/products/product3.webp" data-lightbox="archive" data-title="Minimalist Campaign">
+                    <img src="assets/images/products/product3.webp" alt="Work 3" loading="lazy">
+                    <div class="card-overlay-info">
+                        <div>
+                            <span class="card-category">Commercial</span>
+                            <h3 class="card-title">Minimalist Campaign</h3>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <article class="gallery-card span-7">
+                <a href="assets/images/products/product4.webp" data-lightbox="archive" data-title="Culinary Masterpiece">
+                    <img src="assets/images/products/product4.webp" alt="Work 4" loading="lazy">
+                    <div class="card-overlay-info">
+                        <div>
+                            <span class="card-category">Food & Beverage</span>
+                            <h3 class="card-title">Culinary Masterpiece</h3>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="modern-footer">
+        <p>&copy; 2026 Paoreel Studios. All Rights Reserved.</p>
+        <p>Designed for High-End Visuals</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
+</body>
+</html>
