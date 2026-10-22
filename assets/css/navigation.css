@@ -40,17 +40,17 @@
 
 .navbar{
 
-    width:min(var(--container),92%);
+    width: min(var(--container), 92%);
 
-    height:90px;
+    height: 90px;
 
-    margin:auto;
+    margin: auto;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
 
-    justify-content:space-between;
+    justify-content: space-between; /* This pushes Logo to the left and .nav-links to the right */
 
 }
 
