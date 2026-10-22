@@ -8,12 +8,6 @@ media:
     output: /assets/images
     categories: [image]
 
-  - name: fnb
-    label: Food & Beverage
-    input: assets/images/fnb
-    output: /assets/images/fnb
-    categories: [image]
-
   - name: food
     label: Food
     input: assets/images/food
