@@ -1,0 +1,31 @@
+# .pages.yml
+media:
+  - name: fnb
+    label: Food & Beverage (fnb)
+    input: assets/fnb
+    output: /assets/fnb
+    categories: [image]
+
+  - name: food
+    label: Food
+    input: assets/food
+    output: /assets/food
+    categories: [image]
+
+  - name: gallery
+    label: Gallery
+    input: assets/gallery
+    output: /assets/gallery
+    categories: [image]
+
+  - name: portraits
+    label: Portraits
+    input: assets/portraits
+    output: /assets/portraits
+    categories: [image]
+
+  - name: products
+    label: Products
+    input: assets/products
+    output: /assets/products
+    categories: [image]
