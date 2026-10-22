@@ -2,6 +2,12 @@
 branch: v2-redesign
 
 media:
+  - name: images
+    label: Images
+    input: assets/images
+    output: /assets/images
+    categories: [image]
+
   - name: fnb
     label: Food & Beverage
     input: assets/images/fnb
