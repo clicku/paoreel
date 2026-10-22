@@ -46,9 +46,10 @@ content:
     fields:
       - name: items
         label: Homepage Selected Works
-        type: list
-        view:
-          fields: [title, category]
+        type: object
+        list:
+          collapsible:
+            summary: "{title} — {category}"
         fields:
           - name: title
             label: Title
@@ -65,9 +66,10 @@ content:
 
       - name: works
         label: Portfolio Page Gallery
-        type: list
-        view:
-          fields: [caption, image]
+        type: object
+        list:
+          collapsible:
+            summary: "{caption} ({image})"
         fields:
           - name: image
             label: Image Path
