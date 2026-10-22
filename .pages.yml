@@ -1,5 +1,5 @@
 # .pages.yml
-branch: main   # Or whatever your default branch name is (e.g., master)
+branch: v2-redesign   # Or whatever your default branch name is (e.g., master)
 
 media:
   input: assets
