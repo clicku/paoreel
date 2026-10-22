@@ -108,35 +108,6 @@
             margin-bottom: 30px;
         }
 
-        /* --- Interactive Filter Bar --- */
-        .filter-container {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 30px;
-        }
-
-        .filter-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: var(--text-secondary);
-            padding: 10px 22px;
-            border-radius: 100px;
-            font-family: var(--font-sans);
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--text-primary);
-            color: var(--bg-color);
-            border-color: var(--text-primary);
-        }
-
         /* --- Asymmetric Bento Product Gallery --- */
         .gallery-section {
             padding: 40px 60px 120px 60px;
@@ -150,7 +121,6 @@
             gap: 24px;
         }
 
-        /* Dynamic Asymmetric Layout Rules */
         .bento-item {
             position: relative;
             background-color: var(--surface-color);
@@ -160,7 +130,7 @@
             text-decoration: none;
         }
 
-        /* Alternating rhythm for modern editorial look */
+        /* Modern editorial rhythm layout mapping */
         .bento-item:nth-of-type(4n-3) { grid-column: span 8; height: 580px; }
         .bento-item:nth-of-type(4n-2) { grid-column: span 4; height: 580px; }
         .bento-item:nth-of-type(4n-1) { grid-column: span 5; height: 480px; }
@@ -180,7 +150,6 @@
             filter: brightness(1);
         }
 
-        /* Glassmorphism Info Overlay */
         .bento-overlay {
             position: absolute;
             inset: 0;
@@ -214,6 +183,14 @@
             color: var(--text-primary);
         }
 
+        .pa-empty {
+            grid-column: span 12;
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 60px;
+            font-size: 1rem;
+        }
+
         /* --- Footer --- */
         .modern-footer {
             padding: 60px;
@@ -228,16 +205,9 @@
             margin: 0 auto;
         }
 
-        /* --- Responsive Design --- */
         @media (max-width: 1024px) {
             .modern-nav, .product-hero, .gallery-section, .modern-footer { padding-left: 30px; padding-right: 30px; }
-            .bento-item:nth-of-type(4n-3),
-            .bento-item:nth-of-type(4n-2),
-            .bento-item:nth-of-type(4n-1),
-            .bento-item:nth-of-type(4n) {
-                grid-column: span 12;
-                height: 420px;
-            }
+            .bento-item { grid-column: span 12 !important; height: 420px !important; }
         }
     </style>
 </head>
@@ -258,19 +228,12 @@
     <header class="product-hero">
         <span class="hero-top-meta">Commercial Archive / 2026</span>
         <h1 class="hero-title">Product Visuals</h1>
-        
-        <div class="filter-container">
-            <button class="filter-btn active">All Work</button>
-            <button class="filter-btn">Studio Series</button>
-            <button class="filter-btn">E-Commerce</button>
-            <button class="filter-btn">Lighting Studies</button>
-        </div>
     </header>
 
-    <!-- Gallery Grid (Dynamically Populated via JS Loop) -->
+    <!-- Gallery Grid -->
     <main class="gallery-section">
         <div class="bento-grid" id="dynamic-product-grid">
-            <!-- Dynamic product cards populate here -->
+            <!-- Dynamically populated via GitHub API -->
         </div>
     </main>
 
@@ -287,48 +250,42 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const gridContainer = document.getElementById('dynamic-product-grid');
-            let index = 1;
 
-            // Automated relative loop loader for product assets
-            function loadNextProduct() {
-                const imagePath = `assets/images/products/product${index}.webp`;
-                const tester = new Image();
+            const owner = "clicku";
+            const repo = "paoreel";
+            const branch = "v2-redesign";
+            const folderPath = "assets/images/products";
 
-                tester.onload = function() {
-                    const anchor = document.createElement('a');
-                    anchor.href = imagePath;
-                    anchor.className = 'bento-item';
-                    anchor.setAttribute('data-lightbox', 'product-archive');
-                    anchor.setAttribute('data-title', `Commercial Product Campaign — Shot 0${index}`);
+            fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folderPath}?ref=${branch}`)
+                .then(res => {
+                    if (!res.ok) throw new Error("Failed to fetch products folder");
+                    return res.json();
+                })
+                .then(files => {
+                    const imageFiles = files.filter(f => f.type === "file" && /\.(webp|jpg|jpeg|png)$/i.test(f.name));
 
-                    const img = document.createElement('img');
-                    img.src = imagePath;
-                    img.alt = `Product Photography Shot ${index}`;
-                    img.loading = 'lazy';
+                    if (imageFiles.length === 0) {
+                        gridContainer.innerHTML = `<p class="pa-empty">No products found. Upload images via Pages CMS.</p>`;
+                        return;
+                    }
 
-                    const overlay = document.createElement('div');
-                    overlay.className = 'bento-overlay';
-                    overlay.innerHTML = `
-                        <span class="bento-tag">Series Item 0${index}</span>
-                        <h3 class="bento-title">Refined Studio Geometry</h3>
-                    `;
-
-                    anchor.appendChild(img);
-                    anchor.appendChild(overlay);
-                    gridContainer.appendChild(anchor);
-
-                    index++;
-                    loadNextProduct();
-                };
-
-                tester.onerror = function() {
-                    console.log(`All available product shots loaded successfully. Total found: ${index - 1}`);
-                };
-
-                tester.src = imagePath;
-            }
-
-            loadNextProduct();
+                    gridContainer.innerHTML = imageFiles.map((file, index) => {
+                        const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+                        return `
+                            <a href="${file.download_url}" class="bento-item" data-lightbox="product-archive" data-title="Product: ${cleanName}">
+                                <img src="${file.download_url}" alt="${cleanName}" loading="lazy">
+                                <div class="bento-overlay">
+                                    <span class="bento-tag">Series Item 0${index + 1}</span>
+                                    <h3 class="bento-title">${cleanName}</h3>
+                                </div>
+                            </a>
+                        `;
+                    }).join('');
+                })
+                .catch(err => {
+                    console.error("Error loading products:", err);
+                    gridContainer.innerHTML = `<p class="pa-empty">Unable to load product images dynamically.</p>`;
+                });
         });
     </script>
 </body>

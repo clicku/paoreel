@@ -154,7 +154,7 @@ texture and atmosphere that inspires customers.
     </div>
 
 </section>
-    <!-- ==========================================================
+ <!-- ==========================================================
      SIGNATURE GALLERY
 ========================================================== -->
 
@@ -170,89 +170,10 @@ texture and atmosphere that inspires customers.
 
         </div>
 
-        <div class="food-grid">
-
-    <div class="food-item tall">
-
-        <img
-            src="assets/images/food/food-01.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Signature Dish">
-
-    </div>
-
-    <div class="food-item">
-
-        <img
-            src="assets/images/food/food-02.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Artisan Beverage">
-
-    </div>
-
-    <div class="food-item wide">
-
-        <img
-            src="assets/images/food/food-03.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Restaurant Experience">
-
-    </div>
-
-    <div class="food-item">
-
-        <img
-            src="assets/images/food/food-04.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Chef's Special">
-
-    </div>
-
-    <div class="food-item">
-
-        <img
-            src="assets/images/food/food-05.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Fresh Ingredients">
-
-    </div>
-
-    <div class="food-item tall">
-
-        <img
-            src="assets/images/food/food-06.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Food Presentation">
-
-    </div>
-
-    <div class="food-item wide">
-
-        <img
-            src="assets/images/food/food-07.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Restaurant Signature Menu">
-
-    </div>
-
-    <div class="food-item">
-
-        <img
-            src="assets/images/food/food-08.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Crafted Dessert">
-
-    </div>
-
-</div>
+        <!-- Dynamic Food Grid -->
+        <div class="food-grid" id="dynamic-food-grid">
+            <!-- Dynamically populated via GitHub API -->
+        </div>
 
     </div>
 
@@ -388,7 +309,41 @@ texture and atmosphere that inspires customers.
 <script src="assets/js/food.js"></script>
 <!-- Global -->
 <script src="assets/js/main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const gridContainer = document.getElementById('dynamic-food-grid');
+        if (!gridContainer) return;
 
+        const owner = "clicku";
+        const repo = "paoreel";
+        const branch = "v2-redesign";
+        const folderPath = "assets/images/food";
+
+        fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folderPath}?ref=${branch}`)
+            .then(res => res.json())
+            .then(files => {
+                const imageFiles = files.filter(f => f.type === "file" && /\.(webp|jpg|jpeg|png)$/i.test(f.name));
+
+                if (imageFiles.length === 0) {
+                    gridContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #888;">No food images found.</p>`;
+                    return;
+                }
+
+                gridContainer.innerHTML = imageFiles.map((file, index) => {
+                    const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+                    const isTall = index % 3 === 0 ? 'tall' : index % 4 === 0 ? 'wide' : '';
+                    return `
+                        <div class="food-item ${isTall}">
+                            <img src="${file.download_url}" loading="lazy" alt="${cleanName}" data-caption="${cleanName}">
+                        </div>
+                    `;
+                }).join('');
+
+                if (typeof initLightbox === 'function') initLightbox();
+            })
+            .catch(err => console.error("Error loading food gallery:", err));
+    });
+</script>
 </body>
 
 </html>
