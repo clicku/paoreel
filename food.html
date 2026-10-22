@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="assets/css/lightbox.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
+    
 </head>
 
 <body>
@@ -324,37 +325,73 @@ texture and atmosphere that inspires customers.
             .then(files => {
                 if (!Array.isArray(files)) return;
 
-                // Filter for webp, jpg, jpeg, png
+                // Filter for valid image formats
                 const imageFiles = files.filter(f => f.type === "file" && /\.(webp|jpg|jpeg|png)$/i.test(f.name));
 
                 if (imageFiles.length === 0) {
-                    gridContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #888;">No food images found.</p>`;
+                    gridContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #888;">No food images found in repository.</p>`;
                     return;
                 }
 
-                // Render using local relative path so it loads locally and on GitHub Pages
+                // Render dynamic images following the exact HTML structure
                 gridContainer.innerHTML = imageFiles.map((file, index) => {
                     const relativePath = `assets/images/food/${file.name}`;
-                    const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
-                    const aspectClass = (index % 5 === 0) ? 'tall' : (index % 3 === 0) ? 'wide' : '';
+                    
+                    // Clean filename for alt and caption (e.g., "artisan-dessert.webp" -> "Artisan Dessert")
+                    const cleanCaption = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+
+                    // Rhythm mapping to cycle through normal, tall, and wide grid layouts
+                    let layoutClass = "";
+                    const cycleIndex = index % 8;
+                    if (cycleIndex === 0 || cycleIndex === 5) {
+                        layoutClass = "tall";
+                    } else if (cycleIndex === 2 || cycleIndex === 6) {
+                        layoutClass = "wide";
+                    }
 
                     return `
-                        <div class="food-item ${aspectClass}">
-                            <img src="${relativePath}" 
-                                 loading="lazy" 
-                                 alt="${cleanName}" 
-                                 data-caption="${cleanName}"
-                                 style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        <div class="food-item ${layoutClass}".trim()>
+                            <img
+                                src="${relativePath}"
+                                loading="lazy"
+                                alt="${cleanCaption}"
+                                data-caption="${cleanCaption}">
                         </div>
                     `;
                 }).join('');
 
-                // Re-initialize lightbox if available
+                // 1. Re-initialize Lightbox listeners if lightbox.js is loaded
                 if (typeof initLightbox === 'function') {
                     initLightbox();
                 }
+
+                // 2. Attach GSAP ScrollTrigger animations to dynamic elements
+                setTimeout(() => {
+                    if (typeof gsap !== 'undefined' && window.ScrollTrigger) {
+                        gsap.utils.toArray(".food-item").forEach((item, index) => {
+                            gsap.to(item, {
+                                scrollTrigger: {
+                                    trigger: item,
+                                    start: "top 85%"
+                                },
+                                opacity: 1,
+                                y: 0,
+                                duration: 1,
+                                delay: index * 0.08,
+                                ease: "power3.out"
+                            });
+                        });
+                        ScrollTrigger.refresh();
+                    } else {
+                        // Fallback visibility fix
+                        document.querySelectorAll('.food-item').forEach(el => {
+                            el.style.opacity = '1';
+                            el.style.transform = 'translateY(0)';
+                        });
+                    }
+                }, 100);
             })
-            .catch(err => console.error("Error loading food gallery:", err));
+            .catch(err => console.error("Error loading dynamic food gallery:", err));
     });
 </script>
 </body>
