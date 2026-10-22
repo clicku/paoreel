@@ -1,32 +1,33 @@
 # .pages.yml
-branch: v2-redesign   # Or whatever your default branch name is (e.g., master)
+branch: v2-redesign
 
 media:
-  input: assets
-  output: /assets
-
-content:
   - name: fnb
-    label: Food & Beverage Images
-    type: media
-    path: assets/fnb
+    label: Food & Beverage
+    input: assets/fnb
+    output: /assets/fnb
+    categories: [image]
 
   - name: food
-    label: Food Images
-    type: media
-    path: assets/food
+    label: Food
+    input: assets/food
+    output: /assets/food
+    categories: [image]
 
   - name: gallery
-    label: Gallery Images
-    type: media
-    path: assets/gallery
+    label: Gallery
+    input: assets/gallery
+    output: /assets/gallery
+    categories: [image]
 
   - name: portraits
-    label: Portraits Images
-    type: media
-    path: assets/portraits
+    label: Portraits
+    input: assets/portraits
+    output: /assets/portraits
+    categories: [image]
 
   - name: products
-    label: Products Images
-    type: media
-    path: assets/products
+    label: Products
+    input: assets/products
+    output: /assets/products
+    categories: [image]
