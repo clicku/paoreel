@@ -322,6 +322,9 @@ texture and atmosphere that inspires customers.
         fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folderPath}?ref=${branch}`)
             .then(res => res.json())
             .then(files => {
+                if (!Array.isArray(files)) return;
+
+                // Filter for webp, jpg, jpeg, png
                 const imageFiles = files.filter(f => f.type === "file" && /\.(webp|jpg|jpeg|png)$/i.test(f.name));
 
                 if (imageFiles.length === 0) {
@@ -329,17 +332,27 @@ texture and atmosphere that inspires customers.
                     return;
                 }
 
+                // Render using local relative path so it loads locally and on GitHub Pages
                 gridContainer.innerHTML = imageFiles.map((file, index) => {
+                    const relativePath = `assets/images/food/${file.name}`;
                     const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
-                    const isTall = index % 3 === 0 ? 'tall' : index % 4 === 0 ? 'wide' : '';
+                    const aspectClass = (index % 5 === 0) ? 'tall' : (index % 3 === 0) ? 'wide' : '';
+
                     return `
-                        <div class="food-item ${isTall}">
-                            <img src="${file.download_url}" loading="lazy" alt="${cleanName}" data-caption="${cleanName}">
+                        <div class="food-item ${aspectClass}">
+                            <img src="${relativePath}" 
+                                 loading="lazy" 
+                                 alt="${cleanName}" 
+                                 data-caption="${cleanName}"
+                                 style="width: 100%; height: 100%; object-fit: cover; display: block;">
                         </div>
                     `;
                 }).join('');
 
-                if (typeof initLightbox === 'function') initLightbox();
+                // Re-initialize lightbox if available
+                if (typeof initLightbox === 'function') {
+                    initLightbox();
+                }
             })
             .catch(err => console.error("Error loading food gallery:", err));
     });
