@@ -1,30 +1,32 @@
 # .pages.yml
+branch: main   # Or whatever your default branch name is (e.g., master)
+
 media:
-  input: assets                  # The folder where CMS uploads files
-  output: /assets                # The public URL path referenced on your site
+  input: assets
+  output: /assets
 
 content:
-  - name: fnb-images
+  - name: fnb
     label: Food & Beverage Images
     type: media
     path: assets/fnb
 
-  - name: food-images
+  - name: food
     label: Food Images
     type: media
     path: assets/food
 
-  - name: gallery-images
+  - name: gallery
     label: Gallery Images
     type: media
     path: assets/gallery
 
-  - name: portraits-images
+  - name: portraits
     label: Portraits Images
     type: media
     path: assets/portraits
 
-  - name: products-images
+  - name: products
     label: Products Images
     type: media
     path: assets/products
