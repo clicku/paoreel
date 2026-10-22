@@ -36,5 +36,43 @@
       "image": "assets/images/portraits/sample-6.webp",
       "link": "portraits.html"
     }
+  ],
+  "works": [
+    {
+      "image": "assets/images/gallery/work-01.webp",
+      "alt": "Food Photography",
+      "caption": "Signature Fine Dining Collection",
+      "large": true
+    },
+    {
+      "image": "assets/images/gallery/work-02.webp",
+      "alt": "Product Photography",
+      "caption": "Premium Commercial Product",
+      "large": false
+    },
+    {
+      "image": "assets/images/gallery/work-03.webp",
+      "alt": "Portrait Photography",
+      "caption": "Editorial Portrait Session",
+      "large": false
+    },
+    {
+      "image": "assets/images/gallery/work-04.webp",
+      "alt": "Food Photography",
+      "caption": "Chef's Signature Creation",
+      "large": false
+    },
+    {
+      "image": "assets/images/gallery/work-05.webp",
+      "alt": "Commercial Photography",
+      "caption": "Featured Commercial Photography",
+      "large": true
+    },
+    {
+      "image": "assets/images/gallery/work-06.webp",
+      "alt": "Portrait Photography",
+      "caption": "Professional Portrait Collection",
+      "large": false
+    }
   ]
 }

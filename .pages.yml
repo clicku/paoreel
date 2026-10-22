@@ -39,24 +39,41 @@ media:
     categories: [image]
 
 content:
-  - name: portfolio-items
-    label: Selected Works Manager
+  - name: portfolio-data
+    label: Portfolio Content Manager
     type: file
     path: data/portfolio.json
     fields:
       - name: items
-        label: Portfolio Grid Items
+        label: Homepage Selected Works
         type: list
         fields:
           - name: title
-            label: Project Title
+            label: Title
             type: string
           - name: category
-            label: Category Label
+            label: Category
             type: string
           - name: image
-            label: Image Path (e.g. assets/images/fnb/my-custom-name.webp)
+            label: Image Path
             type: string
           - name: link
-            label: Link Target (e.g. food.html)
+            label: Target Page Link
             type: string
+
+      - name: works
+        label: Portfolio Page Gallery
+        type: list
+        fields:
+          - name: image
+            label: Image Path
+            type: string
+          - name: alt
+            label: Alt Text
+            type: string
+          - name: caption
+            label: Caption
+            type: string
+          - name: large
+            label: Large Span Layout
+            type: boolean
