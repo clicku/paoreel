@@ -1,31 +1,30 @@
 # .pages.yml
 media:
-  - name: fnb
-    label: Food & Beverage (fnb)
-    input: assets/fnb
-    output: /assets/fnb
-    categories: [image]
+  input: assets                  # The folder where CMS uploads files
+  output: /assets                # The public URL path referenced on your site
 
-  - name: food
-    label: Food
-    input: assets/food
-    output: /assets/food
-    categories: [image]
+content:
+  - name: fnb-images
+    label: Food & Beverage Images
+    type: media
+    path: assets/fnb
 
-  - name: gallery
-    label: Gallery
-    input: assets/gallery
-    output: /assets/gallery
-    categories: [image]
+  - name: food-images
+    label: Food Images
+    type: media
+    path: assets/food
 
-  - name: portraits
-    label: Portraits
-    input: assets/portraits
-    output: /assets/portraits
-    categories: [image]
+  - name: gallery-images
+    label: Gallery Images
+    type: media
+    path: assets/gallery
 
-  - name: products
-    label: Products
-    input: assets/products
-    output: /assets/products
-    categories: [image]
+  - name: portraits-images
+    label: Portraits Images
+    type: media
+    path: assets/portraits
+
+  - name: products-images
+    label: Products Images
+    type: media
+    path: assets/products
