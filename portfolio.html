@@ -36,7 +36,6 @@
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/layout.css">
-    <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/about.css">
     <link rel="stylesheet" href="assets/css/portfolio.css">
     <link rel="stylesheet" href="assets/css/food.css">
@@ -322,20 +321,43 @@
                 const grid = document.getElementById('dynamic-works-grid');
                 if (!grid || !data.works) return;
 
+                // 1. Render the dynamic grid items with starting opacity 0 for GSAP
                 grid.innerHTML = data.works.map(item => `
-                    <div class="work-item ${item.large ? 'large' : ''}">
+                    <div class="work-item ${item.large ? 'large' : ''}" style="opacity: 0; transform: translateY(30px);">
                         <img
                             src="${item.image}"
                             loading="lazy"
-                            alt="${item.alt || item.caption}"
-                            data-caption="${item.caption}">
+                            alt="${item.alt || item.caption || 'Portfolio Image'}"
+                            data-caption="${item.caption || ''}"
+                            style="width: 100%; height: 100%; object-fit: cover; display: block;">
                     </div>
                 `).join('');
 
-                // Re-initialize lightbox listeners if available
-                if (typeof initLightbox === 'function') {
-                    initLightbox();
-                }
+                // 2. Tell GSAP and ScrollTrigger to animate the newly inserted items
+                setTimeout(() => {
+                    if (typeof gsap !== 'undefined' && window.ScrollTrigger) {
+                        gsap.utils.toArray(".work-item").forEach((item, index) => {
+                            gsap.to(item, {
+                                scrollTrigger: {
+                                    trigger: item,
+                                    start: "top 85%"
+                                },
+                                opacity: 1,
+                                y: 0,
+                                duration: 1,
+                                delay: index * 0.08,
+                                ease: "power3.out"
+                            });
+                        });
+                        ScrollTrigger.refresh();
+                    } else {
+                        // Fallback if GSAP is missing
+                        document.querySelectorAll('.work-item').forEach(el => {
+                            el.style.opacity = '1';
+                            el.style.transform = 'translateY(0)';
+                        });
+                    }
+                }, 100);
             })
             .catch(err => console.error("Error loading portfolio items:", err));
     });

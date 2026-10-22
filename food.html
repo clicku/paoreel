@@ -333,14 +333,11 @@ texture and atmosphere that inspires customers.
                     return;
                 }
 
-                // Render dynamic images following the exact HTML structure
+                // Render dynamic images following your exact HTML layout structure
                 gridContainer.innerHTML = imageFiles.map((file, index) => {
                     const relativePath = `assets/images/food/${file.name}`;
-                    
-                    // Clean filename for alt and caption (e.g., "artisan-dessert.webp" -> "Artisan Dessert")
                     const cleanCaption = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
 
-                    // Rhythm mapping to cycle through normal, tall, and wide grid layouts
                     let layoutClass = "";
                     const cycleIndex = index % 8;
                     if (cycleIndex === 0 || cycleIndex === 5) {
@@ -360,12 +357,10 @@ texture and atmosphere that inspires customers.
                     `;
                 }).join('');
 
-                // 1. Re-initialize Lightbox listeners if lightbox.js is loaded
-                if (typeof initLightbox === 'function') {
-                    initLightbox();
-                }
+                // FIX 1: Attach Lightbox Click Event to Dynamically Rendered Images
+                bindLightboxToImages();
 
-                // 2. Attach GSAP ScrollTrigger animations to dynamic elements
+                // FIX 2: Attach GSAP ScrollTrigger Animations
                 setTimeout(() => {
                     if (typeof gsap !== 'undefined' && window.ScrollTrigger) {
                         gsap.utils.toArray(".food-item").forEach((item, index) => {
@@ -383,7 +378,6 @@ texture and atmosphere that inspires customers.
                         });
                         ScrollTrigger.refresh();
                     } else {
-                        // Fallback visibility fix
                         document.querySelectorAll('.food-item').forEach(el => {
                             el.style.opacity = '1';
                             el.style.transform = 'translateY(0)';
@@ -393,6 +387,34 @@ texture and atmosphere that inspires customers.
             })
             .catch(err => console.error("Error loading dynamic food gallery:", err));
     });
+
+    // Helper function to bind click events to newly created images for Lightbox zoom
+    function bindLightboxToImages() {
+        const images = document.querySelectorAll('.food-item img');
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.querySelector('.lightbox-image');
+        const lightboxCaption = document.querySelector('.lightbox-caption');
+
+        if (!lightbox || !lightboxImg) {
+            // Re-call initLightbox if globally available
+            if (typeof initLightbox === 'function') {
+                initLightbox();
+            }
+            return;
+        }
+
+        images.forEach((img, idx) => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                if (lightboxCaption) {
+                    lightboxCaption.textContent = img.getAttribute('data-caption') || img.alt;
+                }
+                lightbox.classList.add('active');
+            });
+        });
+    }
 </script>
 </body>
 
