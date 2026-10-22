@@ -113,7 +113,8 @@
     </div>
 
 </section>
-            <!-- ==========================================================
+
+<!-- ==========================================================
      FEATURED CATEGORIES
 ========================================================== -->
 
@@ -188,8 +189,9 @@
     </div>
 
 </section>
-        <!-- ==========================================================
-     SELECTED WORKS
+
+<!-- ==========================================================
+     SELECTED WORKS (DYNAMIC GALLERY)
 ========================================================== -->
 
 <section class="selected-works">
@@ -204,75 +206,16 @@
 
         </div>
 
-        <div class="works-grid">
-
-    <div class="work-item large">
-
-        <img
-            src="assets/images/gallery/work-01.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Signature Fine Dining Collection">
-
-    </div>
-
-    <div class="work-item">
-
-        <img
-            src="assets/images/gallery/work-02.webp"
-            loading="lazy"
-            alt="Product Photography"
-            data-caption="Premium Commercial Product">
-
-    </div>
-
-    <div class="work-item">
-
-        <img
-            src="assets/images/gallery/work-03.webp"
-            loading="lazy"
-            alt="Portrait Photography"
-            data-caption="Editorial Portrait Session">
-
-    </div>
-
-    <div class="work-item">
-
-        <img
-            src="assets/images/gallery/work-04.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Chef's Signature Creation">
-
-    </div>
-
-    <div class="work-item large">
-
-        <img
-            src="assets/images/gallery/work-05.webp"
-            loading="lazy"
-            alt="Commercial Photography"
-            data-caption="Featured Commercial Photography">
-
-    </div>
-
-    <div class="work-item">
-
-        <img
-            src="assets/images/gallery/work-06.webp"
-            loading="lazy"
-            alt="Portrait Photography"
-            data-caption="Professional Portrait Collection">
-
-    </div>
-
-</div>
+        <!-- Dynamic Grid Container -->
+        <div class="works-grid" id="dynamic-works-grid">
+            <!-- Dynamically populated via JavaScript from data/portfolio.json -->
+        </div>
 
     </div>
 
 </section>
 
-    <!-- ==========================================================
+<!-- ==========================================================
      PORTFOLIO CTA
 ========================================================== -->
 
@@ -309,8 +252,12 @@
     </div>
 
 </section>
-<!-- CATEGORY SECTION STARTS BELOW -->
- <div class="lightbox">
+
+<!-- ==========================================================
+     LIGHTBOX
+========================================================== -->
+
+<div class="lightbox">
 
     <span class="lightbox-close">
 
@@ -337,23 +284,21 @@
 
     <div class="lightbox-info">
 
-    <div class="lightbox-counter">
+        <div class="lightbox-counter">
 
-        1 / 1
+            1 / 1
 
-    </div>
+        </div>
 
-    <div class="lightbox-caption">
+        <div class="lightbox-caption">
+
+        </div>
 
     </div>
 
 </div>
 
-</div>
-
-
-
-<!-- GSAP -->
+<!-- GSAP & Libraries -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
@@ -367,6 +312,34 @@
 <script src="assets/js/portfolio.js"></script>
 <!-- Global -->
 <script src="assets/js/main.js"></script>
+
+<!-- Dynamic Portfolio Loader Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch('data/portfolio.json')
+            .then(response => response.json())
+            .then(data => {
+                const grid = document.getElementById('dynamic-works-grid');
+                if (!grid || !data.works) return;
+
+                grid.innerHTML = data.works.map(item => `
+                    <div class="work-item ${item.large ? 'large' : ''}">
+                        <img
+                            src="${item.image}"
+                            loading="lazy"
+                            alt="${item.alt || item.caption}"
+                            data-caption="${item.caption}">
+                    </div>
+                `).join('');
+
+                // Re-initialize lightbox listeners if available
+                if (typeof initLightbox === 'function') {
+                    initLightbox();
+                }
+            })
+            .catch(err => console.error("Error loading portfolio items:", err));
+    });
+</script>
 
 </body>
 

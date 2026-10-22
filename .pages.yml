@@ -1,0 +1,85 @@
+# .pages.yml
+branch: v2-redesign
+
+media:
+  - name: images
+    label: All Images
+    input: assets/images
+    output: /assets/images
+    categories: [image]
+
+  - name: fnb
+    label: Food & Beverage
+    input: assets/images/fnb
+    output: /assets/images/fnb
+    categories: [image]
+
+  - name: food
+    label: Food
+    input: assets/images/food
+    output: /assets/images/food
+    categories: [image]
+
+  - name: gallery
+    label: Gallery
+    input: assets/images/gallery
+    output: /assets/images/gallery
+    categories: [image]
+
+  - name: portraits
+    label: Portraits
+    input: assets/images/portraits
+    output: /assets/images/portraits
+    categories: [image]
+
+  - name: products
+    label: Products
+    input: assets/images/products
+    output: /assets/images/products
+    categories: [image]
+
+content:
+  - name: portfolio-data
+    label: Portfolio Content Manager
+    type: file
+    path: data/portfolio.json
+    fields:
+      - name: items
+        label: Homepage Selected Works
+        type: object
+        list:
+          collapsible:
+            summary: "{title} — {category}"
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: category
+            label: Category
+            type: string
+          - name: image
+            label: Image Path
+            type: string
+          - name: link
+            label: Target Page Link
+            type: string
+
+      - name: works
+        label: Portfolio Page Gallery
+        type: object
+        list:
+          collapsible:
+            summary: "{caption} ({image})"
+        fields:
+          - name: image
+            label: Image Path
+            type: string
+          - name: alt
+            label: Alt Text
+            type: string
+          - name: caption
+            label: Caption
+            type: string
+          - name: large
+            label: Large Span Layout
+            type: boolean

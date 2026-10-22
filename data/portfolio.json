@@ -1,0 +1,78 @@
+{
+  "items": [
+    {
+      "title": "Commercial Restaurant Photography",
+      "category": "FOOD & BEVERAGE",
+      "image": "assets/images/fnb/sample-1.webp",
+      "link": "food.html"
+    },
+    {
+      "title": "Signature Product Photography",
+      "category": "PRODUCT PHOTOGRAPHY",
+      "image": "assets/images/products/sample-2.webp",
+      "link": "products.html"
+    },
+    {
+      "title": "Premium Portrait Session",
+      "category": "PORTRAIT PHOTOGRAPHY",
+      "image": "assets/images/portraits/sample-3.webp",
+      "link": "portraits.html"
+    },
+    {
+      "title": "Creative Food Photography",
+      "category": "FOOD PHOTOGRAPHY",
+      "image": "assets/images/food/sample-4.webp",
+      "link": "food.html"
+    },
+    {
+      "title": "Luxury Brand Photography",
+      "category": "COMMERCIAL",
+      "image": "assets/images/gallery/sample-5.webp",
+      "link": "portfolio.html"
+    },
+    {
+      "title": "Professional Studio Portraits",
+      "category": "PORTRAIT",
+      "image": "assets/images/portraits/sample-6.webp",
+      "link": "portraits.html"
+    }
+  ],
+  "works": [
+    {
+      "image": "assets/images/gallery/work-01.webp",
+      "alt": "Food Photography",
+      "caption": "Signature Fine Dining Collection",
+      "large": true
+    },
+    {
+      "image": "assets/images/gallery/work-02.webp",
+      "alt": "Product Photography",
+      "caption": "Premium Commercial Product",
+      "large": false
+    },
+    {
+      "image": "assets/images/gallery/work-03.webp",
+      "alt": "Portrait Photography",
+      "caption": "Editorial Portrait Session",
+      "large": false
+    },
+    {
+      "image": "assets/images/gallery/work-04.webp",
+      "alt": "Food Photography",
+      "caption": "Chef's Signature Creation",
+      "large": false
+    },
+    {
+      "image": "assets/images/gallery/work-05.webp",
+      "alt": "Commercial Photography",
+      "caption": "Featured Commercial Photography",
+      "large": true
+    },
+    {
+      "image": "assets/images/gallery/work-06.webp",
+      "alt": "Portrait Photography",
+      "caption": "Professional Portrait Collection",
+      "large": false
+    }
+  ]
+}

@@ -9,6 +9,26 @@
     name="description"
     content="Discover the portrait photography archive of Paoreel Studios."
   >
+   <!-- ==========================================================
+         FAVICON
+    ========================================================== -->
+
+    <link rel="icon"
+          href="assets/images/favicon.ico"
+          sizes="any">
+
+    <link rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="assets/images/favicon-32.png">
+
+    <link rel="apple-touch-icon"
+          href="assets/images/apple-touch-icon.png">
+
+    <link rel="icon"
+          type="image/png"
+          sizes="192x192"
+          href="assets/images/favicon-192.png">
 
   <link
     rel="stylesheet"
@@ -98,8 +118,8 @@
       max-height: 48px;
       object-fit: contain;
 
-      /* Remove this filter if your logo already has a light version. */
-      filter: brightness(0) invert(1);
+      /* Remove this filter if your logo already has a light version. 
+      filter: brightness(0) invert(1);*/
     }
 
     .pa-nav {
@@ -748,7 +768,7 @@
   
 
   <script>
-    // Keep the existing Lightbox2 configuration.
+    // Keep existing Lightbox2 configuration
     if (typeof lightbox !== "undefined") {
       lightbox.option({
         resizeDuration: 200,
@@ -763,76 +783,72 @@
       const count = document.getElementById("portrait-gallery-count");
       const year = document.getElementById("pa-year");
 
-      let index = 1;
-      let loadedCount = 0;
-
       year.textContent = new Date().getFullYear();
 
-      function finishLoading() {
-        count.textContent =
-          `${loadedCount} ${loadedCount === 1 ? "portrait" : "portraits"}`;
+      // Automatically fetch the list of files directly from your GitHub repository folder
+      // Replace 'clicku', 'paoreel', and 'v2-redesign' with your actual GitHub username, repo name, and branch if different
+      const owner = "clicku";
+      const repo = "paoreel";
+      const branch = "v2-redesign";
+      const folderPath = "assets/images/portraits";
 
-        if (loadedCount === 0) {
+      fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folderPath}?ref=${branch}`)
+        .then(response => {
+          if (!response.ok) throw new Error("Could not fetch folder contents from GitHub API");
+          return response.json();
+        })
+        .then(files => {
+          // Filter for image files only (.webp, .jpg, .png)
+          const imageFiles = files.filter(file => 
+            file.type === "file" && /\.(webp|jpg|jpeg|png)$/i.test(file.name)
+          );
+
+          const loadedCount = imageFiles.length;
+          count.textContent = `${loadedCount} ${loadedCount === 1 ? "portrait" : "portraits"}`;
+
+          if (loadedCount === 0) {
+            grid.innerHTML = `
+              <p class="pa-empty">
+                No portraits found in this folder.<br>
+                Upload images via Pages CMS to see them here.
+              </p>
+            `;
+            return;
+          }
+
+          // Build the grid dynamically using whatever filenames exist in the folder
+          grid.innerHTML = imageFiles.map((file, index) => {
+            const delay = Math.min(index * 45, 500);
+            const numStr = String(index + 1).padStart(2, "0");
+            // Clean up filename for caption display (e.g. "my-custom-portrait.webp" -> "My Custom Portrait")
+            const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+
+            return `
+              <div class="grid-item" style="--pa-delay: ${delay}ms;">
+                <a href="${file.download_url}" 
+                   data-lightbox="portrait-archive" 
+                   data-title="Portrait: ${cleanName}"
+                   aria-label="View portrait ${index + 1}">
+                  <img src="${file.download_url}" 
+                       alt="Portrait photography - ${cleanName}" 
+                       decoding="async" 
+                       loading="${index < 4 ? 'eager' : 'lazy'}">
+                </a>
+              </div>
+            `;
+          }).join('');
+
+          console.log(`Dynamic portrait archive loaded successfully. Total: ${loadedCount}`);
+        })
+        .catch(err => {
+          console.error("Error loading GitHub folder contents:", err);
           grid.innerHTML = `
             <p class="pa-empty">
-              No portraits found.<br>
-              Please check your portrait image directory.
+              Unable to load portrait images dynamically.
             </p>
           `;
-        }
-
-        console.log(
-          `Portrait archive loaded completely. Total: ${loadedCount}`
-        );
-      }
-
-      function tryNextImage() {
-        const currentIndex = index;
-        const fullPath =
-          `/assets/images/portraits/portrait${currentIndex}.webp`;
-
-        const imgTest = new Image();
-
-        imgTest.onload = function () {
-          const item = document.createElement("div");
-          item.className = "grid-item";
-          item.style.setProperty(
-            "--pa-delay",
-            `${Math.min(loadedCount * 45, 500)}ms`
-          );
-
-          const anchor = document.createElement("a");
-          anchor.href = fullPath;
-          anchor.dataset.lightbox = "portrait-archive";
-          anchor.dataset.title =
-            `Portrait Shot ${String(currentIndex).padStart(2, "0")}`;
-          anchor.setAttribute(
-            "aria-label",
-            `View portrait ${currentIndex}`
-          );
-
-          const img = document.createElement("img");
-          img.src = fullPath;
-          img.alt = `Portrait photography, image ${currentIndex}`;
-          img.decoding = "async";
-          img.loading = currentIndex <= 4 ? "eager" : "lazy";
-
-           anchor.appendChild(img);
-        item.appendChild(anchor);
-        grid.appendChild(item);
-
-        loadedCount++;
-        index++;
-
-        tryNextImage();
-      };
-
-      imgTest.onerror = finishLoading;
-      imgTest.src = fullPath;
-    }
-
-    tryNextImage();
-  });
-  </script>
+        });
+    });
+</script>
 </body>
 </html>

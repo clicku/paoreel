@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="assets/css/lightbox.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
+    
 </head>
 
 <body>
@@ -154,7 +155,7 @@ texture and atmosphere that inspires customers.
     </div>
 
 </section>
-    <!-- ==========================================================
+ <!-- ==========================================================
      SIGNATURE GALLERY
 ========================================================== -->
 
@@ -170,89 +171,10 @@ texture and atmosphere that inspires customers.
 
         </div>
 
-        <div class="food-grid">
-
-    <div class="food-item tall">
-
-        <img
-            src="assets/images/food/food-01.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Signature Dish">
-
-    </div>
-
-    <div class="food-item">
-
-        <img
-            src="assets/images/food/food-02.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Artisan Beverage">
-
-    </div>
-
-    <div class="food-item wide">
-
-        <img
-            src="assets/images/food/food-03.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Restaurant Experience">
-
-    </div>
-
-    <div class="food-item">
-
-        <img
-            src="assets/images/food/food-04.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Chef's Special">
-
-    </div>
-
-    <div class="food-item">
-
-        <img
-            src="assets/images/food/food-05.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Fresh Ingredients">
-
-    </div>
-
-    <div class="food-item tall">
-
-        <img
-            src="assets/images/food/food-06.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Food Presentation">
-
-    </div>
-
-    <div class="food-item wide">
-
-        <img
-            src="assets/images/food/food-07.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Restaurant Signature Menu">
-
-    </div>
-
-    <div class="food-item">
-
-        <img
-            src="assets/images/food/food-08.webp"
-            loading="lazy"
-            alt="Food Photography"
-            data-caption="Crafted Dessert">
-
-    </div>
-
-</div>
+        <!-- Dynamic Food Grid -->
+        <div class="food-grid" id="dynamic-food-grid">
+            <!-- Dynamically populated via GitHub API -->
+        </div>
 
     </div>
 
@@ -388,7 +310,112 @@ texture and atmosphere that inspires customers.
 <script src="assets/js/food.js"></script>
 <!-- Global -->
 <script src="assets/js/main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const gridContainer = document.getElementById('dynamic-food-grid');
+        if (!gridContainer) return;
 
+        const owner = "clicku";
+        const repo = "paoreel";
+        const branch = "v2-redesign";
+        const folderPath = "assets/images/food";
+
+        fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folderPath}?ref=${branch}`)
+            .then(res => res.json())
+            .then(files => {
+                if (!Array.isArray(files)) return;
+
+                // Filter for valid image formats
+                const imageFiles = files.filter(f => f.type === "file" && /\.(webp|jpg|jpeg|png)$/i.test(f.name));
+
+                if (imageFiles.length === 0) {
+                    gridContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #888;">No food images found in repository.</p>`;
+                    return;
+                }
+
+                // Render dynamic images following your exact HTML layout structure
+                gridContainer.innerHTML = imageFiles.map((file, index) => {
+                    const relativePath = `assets/images/food/${file.name}`;
+                    const cleanCaption = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+
+                    let layoutClass = "";
+                    const cycleIndex = index % 8;
+                    if (cycleIndex === 0 || cycleIndex === 5) {
+                        layoutClass = "tall";
+                    } else if (cycleIndex === 2 || cycleIndex === 6) {
+                        layoutClass = "wide";
+                    }
+
+                    return `
+                        <div class="food-item ${layoutClass}".trim()>
+                            <img
+                                src="${relativePath}"
+                                loading="lazy"
+                                alt="${cleanCaption}"
+                                data-caption="${cleanCaption}">
+                        </div>
+                    `;
+                }).join('');
+
+                // FIX 1: Attach Lightbox Click Event to Dynamically Rendered Images
+                bindLightboxToImages();
+
+                // FIX 2: Attach GSAP ScrollTrigger Animations
+                setTimeout(() => {
+                    if (typeof gsap !== 'undefined' && window.ScrollTrigger) {
+                        gsap.utils.toArray(".food-item").forEach((item, index) => {
+                            gsap.to(item, {
+                                scrollTrigger: {
+                                    trigger: item,
+                                    start: "top 85%"
+                                },
+                                opacity: 1,
+                                y: 0,
+                                duration: 1,
+                                delay: index * 0.08,
+                                ease: "power3.out"
+                            });
+                        });
+                        ScrollTrigger.refresh();
+                    } else {
+                        document.querySelectorAll('.food-item').forEach(el => {
+                            el.style.opacity = '1';
+                            el.style.transform = 'translateY(0)';
+                        });
+                    }
+                }, 100);
+            })
+            .catch(err => console.error("Error loading dynamic food gallery:", err));
+    });
+
+    // Helper function to bind click events to newly created images for Lightbox zoom
+    function bindLightboxToImages() {
+        const images = document.querySelectorAll('.food-item img');
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.querySelector('.lightbox-image');
+        const lightboxCaption = document.querySelector('.lightbox-caption');
+
+        if (!lightbox || !lightboxImg) {
+            // Re-call initLightbox if globally available
+            if (typeof initLightbox === 'function') {
+                initLightbox();
+            }
+            return;
+        }
+
+        images.forEach((img, idx) => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                if (lightboxCaption) {
+                    lightboxCaption.textContent = img.getAttribute('data-caption') || img.alt;
+                }
+                lightbox.classList.add('active');
+            });
+        });
+    }
+</script>
 </body>
 
 </html>
