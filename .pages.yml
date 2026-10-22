@@ -4,30 +4,30 @@ branch: v2-redesign
 media:
   - name: fnb
     label: Food & Beverage
-    input: assets/fnb
+    input: assets/images/fnb
     output: /assets/fnb
     categories: [image]
 
   - name: food
     label: Food
-    input: assets/food
+    input: assets/images/food
     output: /assets/food
     categories: [image]
 
   - name: gallery
     label: Gallery
-    input: assets/gallery
+    input: assets/images/gallery
     output: /assets/gallery
     categories: [image]
 
   - name: portraits
     label: Portraits
-    input: assets/portraits
+    input: assets/images/portraits
     output: /assets/portraits
     categories: [image]
 
   - name: products
     label: Products
-    input: assets/products
+    input: assets/images/products
     output: /assets/products
     categories: [image]
