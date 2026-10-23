@@ -333,9 +333,8 @@ texture and atmosphere that inspires customers.
                     return;
                 }
 
-                // Render dynamic images following your exact HTML layout structure
+                // Render dynamic images using file.download_url for the main branch path
                 gridContainer.innerHTML = imageFiles.map((file, index) => {
-                    const relativePath = `assets/images/food/${file.name}`;
                     const cleanCaption = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
 
                     let layoutClass = "";
@@ -346,10 +345,12 @@ texture and atmosphere that inspires customers.
                         layoutClass = "wide";
                     }
 
+                    const itemClass = `food-item ${layoutClass}`.trim();
+
                     return `
-                        <div class="food-item ${layoutClass}".trim()>
+                        <div class="${itemClass}">
                             <img
-                                src="${relativePath}"
+                                src="${file.download_url}"
                                 loading="lazy"
                                 alt="${cleanCaption}"
                                 data-caption="${cleanCaption}">
