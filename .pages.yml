@@ -1,5 +1,5 @@
 # .pages.yml
-branch: v2-redesign
+branch: main
 
 media:
   - name: images
