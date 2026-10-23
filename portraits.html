@@ -786,10 +786,9 @@
       year.textContent = new Date().getFullYear();
 
       // Automatically fetch the list of files directly from your GitHub repository folder
-      // Replace 'clicku', 'paoreel', and 'v2-redesign' with your actual GitHub username, repo name, and branch if different
       const owner = "clicku";
       const repo = "paoreel";
-      const branch = "v2-redesign";
+      const branch = "main"; // Updated to the main branch
       const folderPath = "assets/images/portraits";
 
       fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folderPath}?ref=${branch}`)
