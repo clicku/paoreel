@@ -32,10 +32,9 @@
     <link rel="stylesheet" href="assets/css/about.css">
     <link rel="stylesheet" href="assets/css/portfolio.css">
     <link rel="stylesheet" href="assets/css/food.css">
-    <link rel="stylesheet" href="assets/css/lightbox.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css">
 </head>
 
 <body>
@@ -258,59 +257,30 @@ texture and atmosphere that inspires customers.
     </div>
 
 </section>
-<!-- Introduction starts below -->
- <div class="lightbox">
 
-    <span class="lightbox-close">
-
-        &times;
-
-    </span>
-
-    <button class="lightbox-prev">
-
-        &#10094;
-
-    </button>
-
-    <img
-        class="lightbox-image"
-        src=""
-        alt="">
-
-    <button class="lightbox-next">
-
-        &#10095;
-
-    </button>
-
-    <div class="lightbox-info">
-
-    <div class="lightbox-counter">
-
-        1 / 1
-
-    </div>
-
-    <div class="lightbox-caption">
-
-    </div>
-
-</div>
-
-</div>
-
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.3.13/dist/lenis.min.js"></script>
 <script src="assets/js/main.js"></script>
-<script src="assets/js/lightbox.js"></script>
 <script src="assets/js/loader.js"></script>
 <script src="assets/js/navigation.js"></script>
 <script src="assets/js/food.js"></script>
-<!-- Global -->
-<script src="assets/js/main.js"></script>
+<!-- 1. Load the centralized watermark script first -->
+<script src="assets/js/watermark.js"></script>
 <script>
+    // Keep existing Lightbox2 configuration
+    if (typeof lightbox !== "undefined") {
+        lightbox.option({
+            resizeDuration: 200,
+            fadeDuration: 200,
+            wrapAround: true,
+            disableScrolling: true
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         const gridContainer = document.getElementById('dynamic-food-grid');
         if (!gridContainer) return;
@@ -325,7 +295,6 @@ texture and atmosphere that inspires customers.
             .then(files => {
                 if (!Array.isArray(files)) return;
 
-                // Filter for valid image formats
                 const imageFiles = files.filter(f => f.type === "file" && /\.(webp|jpg|jpeg|png)$/i.test(f.name));
 
                 if (imageFiles.length === 0) {
@@ -333,48 +302,37 @@ texture and atmosphere that inspires customers.
                     return;
                 }
 
-                // Render dynamic images using file.download_url for the main branch path
+                // Render dynamic images wrapped in Lightbox2 anchor tags
                 gridContainer.innerHTML = imageFiles.map((file, index) => {
                     const cleanCaption = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
-
                     let layoutClass = "";
                     const cycleIndex = index % 8;
-                    if (cycleIndex === 0 || cycleIndex === 5) {
-                        layoutClass = "tall";
-                    } else if (cycleIndex === 2 || cycleIndex === 6) {
-                        layoutClass = "wide";
-                    }
+                    if (cycleIndex === 0 || cycleIndex === 5) layoutClass = "tall";
+                    else if (cycleIndex === 2 || cycleIndex === 6) layoutClass = "wide";
 
                     const itemClass = `food-item ${layoutClass}`.trim();
 
                     return `
                         <div class="${itemClass}">
-                            <img
-                                src="${file.download_url}"
-                                loading="lazy"
-                                alt="${cleanCaption}"
-                                data-caption="${cleanCaption}">
+                            <a href="${file.download_url}" 
+                               data-lightbox="food-archive" 
+                               data-title="Food: ${cleanCaption} — © Paoreel Studios"
+                               aria-label="View food image ${index + 1}">
+                                <img src="${file.download_url}" 
+                                     alt="Food photography - ${cleanCaption}" 
+                                     loading="lazy">
+                            </a>
                         </div>
                     `;
                 }).join('');
 
-                // FIX 1: Attach Lightbox Click Event to Dynamically Rendered Images
-                bindLightboxToImages();
-
-                // FIX 2: Attach GSAP ScrollTrigger Animations
+                // GSAP Animations
                 setTimeout(() => {
                     if (typeof gsap !== 'undefined' && window.ScrollTrigger) {
                         gsap.utils.toArray(".food-item").forEach((item, index) => {
                             gsap.to(item, {
-                                scrollTrigger: {
-                                    trigger: item,
-                                    start: "top 85%"
-                                },
-                                opacity: 1,
-                                y: 0,
-                                duration: 1,
-                                delay: index * 0.08,
-                                ease: "power3.out"
+                                scrollTrigger: { trigger: item, start: "top 85%" },
+                                opacity: 1, y: 0, duration: 1, delay: index * 0.08, ease: "power3.out"
                             });
                         });
                         ScrollTrigger.refresh();
@@ -388,36 +346,7 @@ texture and atmosphere that inspires customers.
             })
             .catch(err => console.error("Error loading dynamic food gallery:", err));
     });
-
-    // Helper function to bind click events to newly created images for Lightbox zoom
-    function bindLightboxToImages() {
-        const images = document.querySelectorAll('.food-item img');
-        const lightbox = document.querySelector('.lightbox');
-        const lightboxImg = document.querySelector('.lightbox-image');
-        const lightboxCaption = document.querySelector('.lightbox-caption');
-
-        if (!lightbox || !lightboxImg) {
-            // Re-call initLightbox if globally available
-            if (typeof initLightbox === 'function') {
-                initLightbox();
-            }
-            return;
-        }
-
-        images.forEach((img, idx) => {
-            img.style.cursor = 'pointer';
-            img.addEventListener('click', () => {
-                lightboxImg.src = img.src;
-                lightboxImg.alt = img.alt;
-                if (lightboxCaption) {
-                    lightboxCaption.textContent = img.getAttribute('data-caption') || img.alt;
-                }
-                lightbox.classList.add('active');
-            });
-        });
-    }
 </script>
-<script src="assets/js/watermark.js"></script>
 </body>
 
 </html>

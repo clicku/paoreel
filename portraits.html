@@ -352,7 +352,7 @@
       overflow: hidden;
       background: #252522;
       text-decoration: none;
-      cursor: zoom-in;
+      cursor: pointer;
     }
 
     #portrait-archive-grid .grid-item img {
@@ -766,8 +766,11 @@
   <script src="https://unpkg.com/lenis@1.3.13/dist/lenis.min.js"></script>
   <script src="assets/js/main.js"></script>
   
+<!-- 1. Load the centralized watermark and protection script -->
+<script src="assets/js/watermark.js"></script>
 
-  <script>
+<!-- 2. Dynamic Portrait Archive Loader -->
+<script>
     // Keep existing Lightbox2 configuration
     if (typeof lightbox !== "undefined") {
       lightbox.option({
@@ -783,12 +786,14 @@
       const count = document.getElementById("portrait-gallery-count");
       const year = document.getElementById("pa-year");
 
-      year.textContent = new Date().getFullYear();
+      if (year) {
+        year.textContent = new Date().getFullYear();
+      }
 
       // Automatically fetch the list of files directly from your GitHub repository folder
       const owner = "clicku";
       const repo = "paoreel";
-      const branch = "main"; // Updated to the main branch
+      const branch = "main";
       const folderPath = "assets/images/portraits";
 
       fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folderPath}?ref=${branch}`)
@@ -803,49 +808,55 @@
           );
 
           const loadedCount = imageFiles.length;
-          count.textContent = `${loadedCount} ${loadedCount === 1 ? "portrait" : "portraits"}`;
+          if (count) {
+            count.textContent = `${loadedCount} ${loadedCount === 1 ? "portrait" : "portraits"}`;
+          }
 
           if (loadedCount === 0) {
-            grid.innerHTML = `
-              <p class="pa-empty">
-                No portraits found in this folder.<br>
-                Upload images via Pages CMS to see them here.
-              </p>
-            `;
+            if (grid) {
+              grid.innerHTML = `
+                <p class="pa-empty">
+                  No portraits found in this folder.<br>
+                  Upload images via Pages CMS to see them here.
+                </p>
+              `;
+            }
             return;
           }
 
           // Build the grid dynamically using whatever filenames exist in the folder
-          grid.innerHTML = imageFiles.map((file, index) => {
-            const delay = Math.min(index * 45, 500);
-            const numStr = String(index + 1).padStart(2, "0");
-            // Clean up filename for caption display (e.g. "my-custom-portrait.webp" -> "My Custom Portrait")
-            const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+          if (grid) {
+            grid.innerHTML = imageFiles.map((file, index) => {
+              const delay = Math.min(index * 45, 500);
+              const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
 
-            return `
-              <div class="grid-item" style="--pa-delay: ${delay}ms;">
-                <a href="${file.download_url}" 
-                   data-lightbox="portrait-archive" 
-                   data-title="Portrait: ${cleanName}"
-                   aria-label="View portrait ${index + 1}">
-                  <img src="${file.download_url}" 
-                       alt="Portrait photography - ${cleanName}" 
-                       decoding="async" 
-                       loading="${index < 4 ? 'eager' : 'lazy'}">
-                </a>
-              </div>
-            `;
-          }).join('');
+              return `
+                <div class="grid-item" style="--pa-delay: ${delay}ms;">
+                  <a href="${file.download_url}" 
+                     data-lightbox="portrait-archive" 
+                     data-title="Portrait: ${cleanName} — © Paoreel Studios"
+                     aria-label="View portrait ${index + 1}">
+                    <img src="${file.download_url}" 
+                         alt="Portrait photography - ${cleanName}" 
+                         decoding="async" 
+                         loading="${index < 4 ? 'eager' : 'lazy'}">
+                  </a>
+                </div>
+              `;
+            }).join('');
+          }
 
           console.log(`Dynamic portrait archive loaded successfully. Total: ${loadedCount}`);
         })
         .catch(err => {
           console.error("Error loading GitHub folder contents:", err);
-          grid.innerHTML = `
-            <p class="pa-empty">
-              Unable to load portrait images dynamically.
-            </p>
-          `;
+          if (grid) {
+            grid.innerHTML = `
+              <p class="pa-empty">
+                Unable to load portrait images dynamically.
+              </p>
+            `;
+          }
         });
     });
 </script>

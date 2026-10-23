@@ -247,7 +247,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
     
+    <!-- 1. Centralized Watermark & Protection Utility -->
+    <script src="assets/js/watermark.js"></script>
+
+    <!-- 2. Dynamic Product Gallery Loader -->
     <script>
+        // Lightbox2 options
+        if (typeof lightbox !== "undefined") {
+            lightbox.option({
+                resizeDuration: 200,
+                fadeDuration: 200,
+                wrapAround: true,
+                disableScrolling: true
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const gridContainer = document.getElementById('dynamic-product-grid');
 
@@ -272,7 +286,7 @@
                     gridContainer.innerHTML = imageFiles.map((file, index) => {
                         const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
                         return `
-                            <a href="${file.download_url}" class="bento-item" data-lightbox="product-archive" data-title="Product: ${cleanName}">
+                            <a href="${file.download_url}" class="bento-item" data-lightbox="product-archive" data-title="Product: ${cleanName} — © Paoreel Studios">
                                 <img src="${file.download_url}" alt="${cleanName}" loading="lazy">
                                 <div class="bento-overlay">
                                     <span class="bento-tag">Series Item 0${index + 1}</span>
