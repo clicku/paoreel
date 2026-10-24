@@ -259,42 +259,38 @@
 <div class="lightbox">
 
     <span class="lightbox-close">
-
         &times;
-
     </span>
 
     <button class="lightbox-prev">
-
         &#10094;
-
     </button>
 
-    <img
-        class="lightbox-image"
-        src=""
-        alt="">
+    <!-- Image & Watermark Container -->
+    <div class="lightbox-image-container" style="position: relative; display: inline-block; max-width: 90vw; max-height: 85vh;">
+        <img
+            class="lightbox-image"
+            src=""
+            alt=""
+            style="display: block; max-width: 100%; max-height: 85vh; object-fit: contain;">
+        
+        <div class="lightbox-watermark" style="position: absolute; bottom: 20px; right: 25px; color: rgba(255, 255, 255, 0.75); font-family: 'Playfair Display', serif; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; pointer-events: none; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85); z-index: 5;">
+            Paoreel Studios
+        </div>
+    </div>
 
     <button class="lightbox-next">
-
         &#10095;
-
     </button>
 
     <div class="lightbox-info">
-
         <div class="lightbox-counter">
-
             1 / 1
-
         </div>
-
-        <div class="lightbox-caption">
-
-        </div>
-
+        <div class="lightbox-caption"></div>
     </div>
 
+</div>
 </div>
 
 <!-- GSAP & Libraries -->
@@ -313,37 +309,69 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/watermark.js"></script>
 
-<!-- Dynamic Portfolio Loader Script -->
+<!-- Dynamic Portfolio Loader Script with Error Logging -->
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        console.log("[Portfolio Debug] DOMContentLoaded fired. Fetching data/portfolio.json...");
+        
         fetch('data/portfolio.json')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
+                console.log("[Portfolio Debug] JSON data successfully loaded:", data);
+                
                 const grid = document.getElementById('dynamic-works-grid');
-                if (!grid || !data.works) return;
+                if (!grid) {
+                    console.error("[Portfolio Error] Element #dynamic-works-grid not found in DOM!");
+                    return;
+                }
+                
+                if (!data.works) {
+                    console.error("[Portfolio Error] 'works' array missing in JSON data!", data);
+                    return;
+                }
 
-                // 1. Render the dynamic grid items with cursor pointer
-                grid.innerHTML = data.works.map(item => `
-                    <div class="work-item ${item.large ? 'large' : ''}" style="opacity: 0; transform: translateY(30px);">
-                        <img
-                            src="${item.image}"
-                            loading="lazy"
-                            alt="${item.alt || item.caption || 'Portfolio Image'}"
-                            data-caption="${item.caption || ''}"
-                            style="width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer;">
-                    </div>
-                `).join('');
+                console.log(`[Portfolio Debug] Rendering ${data.works.length} works into grid...`);
 
-                // 2. Initialize GSAP animations and re-run watermarks for dynamic elements
+                // Render dynamic items with inline watermark overlay and image error tracking
+                grid.innerHTML = data.works.map((item, index) => {
+                    return `
+                        <div class="work-item ${item.large ? 'large' : ''}" style="opacity: 0; transform: translateY(30px); position: relative; overflow: hidden;">
+                            <img
+                                src="${item.image}"
+                                loading="lazy"
+                                alt="${item.alt || item.caption || 'Portfolio Image'}"
+                                data-caption="${item.caption || ''}"
+                                style="width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer;"
+                                onerror="console.error('[Portfolio Error] Image failed to load:', '${item.image}')">
+                            <div class="watermark-overlay" style="position: absolute; bottom: 18px; right: 22px; pointer-events: none; opacity: 0.65; z-index: 2;">
+                                <span style="font-family: 'Playfair Display', serif; font-size: 0.8rem; letter-spacing: 0.15em; color: #ffffff; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">Paoreel Studios</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                console.log("[Portfolio Debug] Grid HTML populated. Initializing GSAP and checking watermarks...");
+
                 setTimeout(() => {
-                    // If watermark.js exposes a global re-init function, call it here
+                    // Check if an external watermark function exists
                     if (typeof window.initWatermarks === 'function') {
+                        console.log("[Portfolio Debug] Calling window.initWatermarks()");
                         window.initWatermarks();
                     } else if (typeof applyWatermark === 'function') {
+                        console.log("[Portfolio Debug] Calling applyWatermark()");
                         applyWatermark();
+                    } else {
+                        console.log("[Portfolio Debug] External watermark function not found; relying on inline watermark HTML overlay.");
                     }
 
+                    // Initialize GSAP animations
                     if (typeof gsap !== 'undefined' && window.ScrollTrigger) {
+                        console.log("[Portfolio Debug] Initializing GSAP ScrollTrigger animations.");
                         gsap.utils.toArray(".work-item").forEach((item, index) => {
                             gsap.to(item, {
                                 scrollTrigger: {
@@ -359,7 +387,7 @@
                         });
                         ScrollTrigger.refresh();
                     } else {
-                        // Fallback if GSAP is missing
+                        console.warn("[Portfolio Warning] GSAP or ScrollTrigger not available. Forcing elements visible.");
                         document.querySelectorAll('.work-item').forEach(el => {
                             el.style.opacity = '1';
                             el.style.transform = 'translateY(0)';
@@ -367,7 +395,9 @@
                     }
                 }, 100);
             })
-            .catch(err => console.error("Error loading portfolio items:", err));
+            .catch(err => {
+                console.error("[Portfolio Critical Error] Failed to fetch or process portfolio.json:", err);
+            });
     });
 </script>
 </body>

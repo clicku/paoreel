@@ -48,11 +48,16 @@
 <img src="assets/images/logo.webp" alt="Paoreel Studios">
 
 </a>
-
+<!-- Hamburger Button -->
+  <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
 <ul class="nav-links">
 
 <li><a href="about.html">About</a></li>
-
+<li><a href="food.html" class="active">Food & Beverage</a></li>
 <li><a href="portfolio.html">Portfolio</a></li>
 
 <li><a href="contact.html">Contact</a></li>
@@ -268,26 +273,73 @@ texture and atmosphere that inspires customers.
 <script src="assets/js/loader.js"></script>
 <script src="assets/js/navigation.js"></script>
 <script src="assets/js/food.js"></script>
-<!-- 1. Load the centralized watermark script first -->
+
+<!-- Centralized Watermark Script -->
 <script src="assets/js/watermark.js"></script>
+
 <script>
     // Keep existing Lightbox2 configuration
     if (typeof lightbox !== "undefined") {
         lightbox.option({
-            resizeDuration: 200,
-            fadeDuration: 200,
+            resizeDuration: 150,
+            fadeDuration: 150,
             wrapAround: true,
             disableScrolling: true
         });
     }
 
+    // Ultra-Lightweight & Robust Lightbox Watermark Manager
+    document.addEventListener("DOMContentLoaded", () => {
+        function stampWatermark() {
+            const lbContainer = document.querySelector('.lb-container');
+            if (!lbContainer) return;
+
+            if (window.getComputedStyle(lbContainer).position === 'static') {
+                lbContainer.style.position = 'relative';
+            }
+
+            // Purge any existing watermarks to prevent duplication
+            lbContainer.querySelectorAll('.lightbox-watermark').forEach(el => el.remove());
+
+            const watermark = document.createElement('div');
+            watermark.className = 'lightbox-watermark';
+            watermark.innerHTML = '@Paoreel Studios - All right reserved';
+            watermark.style.cssText = `
+                position: absolute;
+                bottom: 25px;
+                right: 30px;
+                color: rgba(255, 255, 255, 0.85);
+                font-family: 'Playfair Display', serif;
+                font-size: 0.85rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                pointer-events: none;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85);
+                z-index: 9999;
+            `;
+            lbContainer.appendChild(watermark);
+        }
+
+        // Continuously monitors only when Lightbox is open (0% CPU overhead when closed)
+        setInterval(() => {
+            const lightboxEl = document.querySelector('.lightbox');
+            if (lightboxEl && window.getComputedStyle(lightboxEl).display !== 'none') {
+                const lbContainer = lightboxEl.querySelector('.lb-container');
+                if (lbContainer && !lbContainer.querySelector('.lightbox-watermark')) {
+                    stampWatermark();
+                }
+            }
+        }, 100);
+    });
+
+    // Dynamic Food Gallery Loader
     document.addEventListener('DOMContentLoaded', () => {
         const gridContainer = document.getElementById('dynamic-food-grid');
         if (!gridContainer) return;
 
         const owner = "clicku";
         const repo = "paoreel";
-        const branch = "main";
+        const branch = "v2-redesign"; // Target working branch
         const folderPath = "assets/images/food";
 
         fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folderPath}?ref=${branch}`)
@@ -302,7 +354,7 @@ texture and atmosphere that inspires customers.
                     return;
                 }
 
-                // Render dynamic images wrapped in Lightbox2 anchor tags
+                // Render dynamic images wrapped in Lightbox2 anchor tags using root-relative paths
                 gridContainer.innerHTML = imageFiles.map((file, index) => {
                     const cleanCaption = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
                     let layoutClass = "";
@@ -311,14 +363,15 @@ texture and atmosphere that inspires customers.
                     else if (cycleIndex === 2 || cycleIndex === 6) layoutClass = "wide";
 
                     const itemClass = `food-item ${layoutClass}`.trim();
+                    const relativePath = `/${folderPath}/${file.name}`; // Root-relative path to prevent loading spirals
 
                     return `
-                        <div class="${itemClass}">
-                            <a href="${file.download_url}" 
+                        <div class="${itemClass}" style="opacity: 0; transform: translateY(30px);">
+                            <a href="${relativePath}" 
                                data-lightbox="food-archive" 
-                               data-title="Food: ${cleanCaption} — © Paoreel Studios"
+                               data-title="Food: ${cleanCaption}"
                                aria-label="View food image ${index + 1}">
-                                <img src="${file.download_url}" 
+                                <img src="${relativePath}" 
                                      alt="Food photography - ${cleanCaption}" 
                                      loading="lazy">
                             </a>
