@@ -2,11 +2,6 @@
    GLOBAL MOBILE HAMBURGER MENU
 ========================================================== */
 
-/* Prevent body scrolling when the mobile menu drawer is open */
-body.menu-open {
-    overflow: hidden;
-}
-
 /* Hamburger Button */
 .hamburger {
     display: none;
@@ -40,46 +35,59 @@ body.menu-open {
     transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Mobile Breakpoint Overlay */
+/* Mobile Breakpoint Dropdown Navigation */
 @media (max-width: 900px) {
     .hamburger {
         display: flex;
+    }
+
+    /* Ensure navbar maintains a relative positioning context for the dropdown */
+    .navbar {
+        position: relative;
     }
 
     /* Target all navigation list variations across your pages */
     .nav-links, 
     .pa-nav, 
     .nav-menu {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(10, 10, 10, 0.96);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(17, 17, 16, 0.98);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        gap: 36px;
-        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        padding: 28px 0;
+        gap: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+        
+        /* Hidden state */
+        display: none;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
         z-index: 1001;
         margin: 0;
-        padding: 0;
         list-style: none;
     }
 
-    /* Slide in state */
+    /* Active dropdown state */
     .nav-links.active, 
     .pa-nav.active, 
     .nav-menu.active {
-        right: 0;
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .nav-links a, 
     .pa-nav a, 
     .nav-menu a {
-        font-size: 1.1rem !important;
-        letter-spacing: 0.2em !important;
+        font-size: 0.95rem !important;
+        letter-spacing: 0.15em !important;
+        padding: 8px 0;
     }
 }
