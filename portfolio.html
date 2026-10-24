@@ -121,4 +121,94 @@
 <!-- PORTFOLIO CTA -->
 <section class="portfolio-cta">
     <div class="container">
-        <span>LET'S WORK TOG
+        <span>LET'S WORK TOGETHER</span>
+        <h2>Ready to create visuals that elevate your brand?</h2>
+        <p>Whether you're launching a new menu, introducing a product, or building a personal brand, let's create imagery that leaves a lasting impression.</p>
+        <a href="contact.html" class="btn-primary">Start Your Project</a>
+    </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <button class="lightbox-prev">&#10094;</button>
+
+    <div class="lightbox-image-container" style="position: relative; display: inline-block; max-width: 90vw; max-height: 85vh;">
+        <img class="lightbox-image" src="" alt="" style="display: block; max-width: 100%; max-height: 85vh; object-fit: contain;">
+        <div class="lightbox-watermark" style="position: absolute; bottom: 20px; right: 25px; color: rgba(255, 255, 255, 0.75); font-family: 'Playfair Display', serif; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; pointer-events: none; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85); z-index: 5;">
+            Paoreel Studios
+        </div>
+    </div>
+
+    <button class="lightbox-next">&#10095;</button>
+
+    <div class="lightbox-info">
+        <div class="lightbox-counter">1 / 1</div>
+        <div class="lightbox-caption"></div>
+    </div>
+</div>
+
+<!-- Libraries & Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.3.13/dist/lenis.min.js"></script>
+<script src="assets/js/lightbox.js"></script>
+<script src="assets/js/loader.js"></script>
+<script src="assets/js/navigation.js"></script>
+<script src="assets/js/portfolio.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/watermark.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch('data/portfolio.json')
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+                const grid = document.getElementById('dynamic-works-grid');
+                if (!grid || !data.works) return;
+
+                grid.innerHTML = data.works.map((item) => {
+                    return `
+                        <div class="work-item ${item.large ? 'large' : ''}" style="opacity: 0; transform: translateY(30px); position: relative; overflow: hidden;">
+                            <img src="${item.image}"
+                                 loading="lazy"
+                                 decoding="async"
+                                 alt="${item.alt || item.caption || 'Portfolio Image'}"
+                                 data-caption="${item.caption || ''}"
+                                 style="width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer;">
+                            <div class="watermark-overlay" style="position: absolute; bottom: 18px; right: 22px; pointer-events: none; opacity: 0.65; z-index: 2;">
+                                <span style="font-family: 'Playfair Display', serif; font-size: 0.8rem; letter-spacing: 0.15em; color: #ffffff; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">Paoreel Studios</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                setTimeout(() => {
+                    if (typeof gsap !== 'undefined' && window.ScrollTrigger) {
+                        gsap.utils.toArray(".work-item").forEach((item, index) => {
+                            gsap.to(item, {
+                                scrollTrigger: { trigger: item, start: "top 85%" },
+                                opacity: 1,
+                                y: 0,
+                                duration: 1,
+                                delay: index * 0.08,
+                                ease: "power3.out"
+                            });
+                        });
+                        ScrollTrigger.refresh();
+                    } else {
+                        document.querySelectorAll('.work-item').forEach(el => {
+                            el.style.opacity = '1';
+                            el.style.transform = 'translateY(0)';
+                        });
+                    }
+                }, 100);
+            })
+            .catch(err => console.error("Portfolio loader error:", err));
+    });
+</script>
+</body>
+</html>

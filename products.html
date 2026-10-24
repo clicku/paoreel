@@ -10,14 +10,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
-    <!-- Lightbox CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
 
     <style>
         :root {
             --bg-color: #070707;
             --surface-color: #111111;
-            --surface-hover: #181818;
             --text-primary: #ffffff;
             --text-secondary: #888888;
             --accent-color: #d4af37;
@@ -39,7 +40,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- Navigation Bar --- */
+        /* Navigation Bar */
         .modern-nav {
             position: fixed;
             top: 0;
@@ -48,7 +49,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 28px 60px;
+            padding: 20px 5%;
             z-index: 1000;
             background: rgba(7, 7, 7, 0.85);
             backdrop-filter: blur(12px);
@@ -63,28 +64,8 @@
             text-decoration: none;
         }
 
-        .nav-menu {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-
-        .nav-menu a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-        }
-
-        .nav-menu a:hover, .nav-menu a.active {
-            color: var(--text-primary);
-        }
-
-        /* --- Page Hero & Header --- */
         .product-hero {
-            padding: 160px 60px 40px 60px;
+            padding: 120px 5% 30px 5%;
             max-width: 1440px;
             margin: 0 auto;
         }
@@ -100,17 +81,17 @@
 
         .hero-title {
             font-family: var(--font-serif);
-            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-size: clamp(3rem, 7vw, 6rem);
             font-weight: 400;
-            line-height: 0.9;
+            line-height: 0.95;
             font-style: italic;
             letter-spacing: -0.02em;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
-        /* --- Asymmetric Bento Product Gallery --- */
+        /* Gallery */
         .gallery-section {
-            padding: 40px 60px 120px 60px;
+            padding: 20px 5% 80px 5%;
             max-width: 1440px;
             margin: 0 auto;
         }
@@ -118,7 +99,7 @@
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
-            gap: 24px;
+            gap: 20px;
         }
 
         .bento-item {
@@ -128,226 +109,127 @@
             overflow: hidden;
             display: block;
             text-decoration: none;
-            cursor: pointer;
         }
 
-        /* Modern editorial rhythm layout mapping */
-        .bento-item:nth-of-type(4n-3) { grid-column: span 8; height: 580px; }
-        .bento-item:nth-of-type(4n-2) { grid-column: span 4; height: 580px; }
-        .bento-item:nth-of-type(4n-1) { grid-column: span 5; height: 480px; }
-        .bento-item:nth-of-type(4n)   { grid-column: span 7; height: 480px; }
+        .bento-item:nth-of-type(4n-3) { grid-column: span 8; height: 500px; }
+        .bento-item:nth-of-type(4n-2) { grid-column: span 4; height: 500px; }
+        .bento-item:nth-of-type(4n-1) { grid-column: span 5; height: 420px; }
+        .bento-item:nth-of-type(4n)   { grid-column: span 7; height: 420px; }
 
         .bento-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
-            filter: brightness(0.85);
-        }
-
-        .bento-item:hover img {
-            transform: scale(1.04);
-            filter: brightness(1);
+            transition: transform 0.8s ease;
         }
 
         .bento-overlay {
             position: absolute;
             inset: 0;
-            padding: 36px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.85) 100%);
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .bento-item:hover .bento-overlay {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .bento-tag {
-            font-size: 0.7rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--accent-color);
-            margin-bottom: 6px;
-        }
-
-        .bento-title {
-            font-family: var(--font-serif);
-            font-size: 1.85rem;
-            font-weight: 400;
-            color: var(--text-primary);
-        }
-
-        .pa-empty {
-            grid-column: span 12;
-            color: var(--text-secondary);
-            text-align: center;
-            padding: 60px;
-            font-size: 1rem;
-        }
-
-        /* --- Footer --- */
         .modern-footer {
-            padding: 60px;
+            padding: 40px 5%;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 0.8rem;
             color: var(--text-secondary);
-            letter-spacing: 0.1em;
-            max-width: 1440px;
-            margin: 0 auto;
         }
 
-        @media (max-width: 1024px) {
-            .modern-nav, .product-hero, .gallery-section, .modern-footer { padding-left: 30px; padding-right: 30px; }
-            .bento-item { grid-column: span 12 !important; height: 420px !important; }
+        @media (max-width: 900px) {
+            .bento-item { grid-column: span 12 !important; height: 350px !important; }
+            .modern-footer { flex-direction: column; gap: 10px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
     <!-- Navigation -->
-    <nav class="modern-nav">
-        <a href="index.html" class="nav-logo">Paoreel.</a>
-        <ul class="nav-menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html" class="active">Products</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
+    <header>
+      <nav class="modern-nav navbar">
+          <a href="index.html" class="nav-logo">Paoreel.</a>
+          <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+          </button>
+          <ul class="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="products.html" class="active">Products</a></li>
+              <li><a href="portfolio.html">Portfolio</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+          </ul>
+      </nav>
+    </header>
 
     <!-- Header Section -->
     <header class="product-hero">
-        <span class="hero-top-meta">Commercial Archive / 2026</span>
+        <span class="hero-top-meta">Commercial Archive</span>
         <h1 class="hero-title">Product Visuals</h1>
     </header>
 
     <!-- Gallery Grid -->
     <main class="gallery-section">
-        <div class="bento-grid" id="dynamic-product-grid">
-            <!-- Dynamically populated via GitHub API -->
-        </div>
+        <div class="bento-grid" id="dynamic-product-grid"></div>
     </main>
 
     <!-- Footer -->
     <footer class="modern-footer">
-        <p>&copy; 2026 Paoreel Studios. All Rights Reserved.</p>
+        <p>&copy; <span id="year">2026</span> Paoreel Studios. All Rights Reserved.</p>
         <p>Designed with Modern Editorial Aesthetics</p>
     </footer>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
-    
-    <!-- Centralized Watermark & Protection Utility -->
+    <script src="assets/js/navigation.js"></script>
     <script src="assets/js/watermark.js"></script>
 
-    <!-- Dynamic Product Gallery Loader & Persistent Watermark Manager -->
     <script>
-        // Lightbox2 options
-        if (typeof lightbox !== "undefined") {
-            lightbox.option({
-                resizeDuration: 150,
-                fadeDuration: 150,
-                wrapAround: true,
-                disableScrolling: true
-            });
-        }
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Ultra-Lightweight & Robust Lightbox Watermark Manager
-        document.addEventListener("DOMContentLoaded", () => {
-            function stampWatermark() {
-                const lbContainer = document.querySelector('.lb-container');
-                if (!lbContainer) return;
-
-                if (window.getComputedStyle(lbContainer).position === 'static') {
-                    lbContainer.style.position = 'relative';
-                }
-
-                // Purge any existing watermarks to prevent duplication
-                lbContainer.querySelectorAll('.lightbox-watermark').forEach(el => el.remove());
-
-                const watermark = document.createElement('div');
-                watermark.className = 'lightbox-watermark';
-                watermark.innerHTML = '@Paoreel Studios - All right reserved';
-                watermark.style.cssText = `
-                    position: absolute;
-                    bottom: 25px;
-                    right: 30px;
-                    color: rgba(255, 255, 255, 0.85);
-                    font-family: 'Playfair Display', serif;
-                    font-size: 0.85rem;
-                    letter-spacing: 0.15em;
-                    text-transform: uppercase;
-                    pointer-events: none;
-                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85);
-                    z-index: 9999;
-                `;
-                lbContainer.appendChild(watermark);
-            }
-
-            // Continuously monitors only when Lightbox is open (0% CPU overhead when closed)
-            setInterval(() => {
-                const lightboxEl = document.querySelector('.lightbox');
-                if (lightboxEl && window.getComputedStyle(lightboxEl).display !== 'none') {
-                    const lbContainer = lightboxEl.querySelector('.lb-container');
-                    if (lbContainer && !lbContainer.querySelector('.lightbox-watermark')) {
-                        stampWatermark();
-                    }
-                }
-            }, 100);
-        });
-
-        // Dynamic Product Gallery Loader
         document.addEventListener('DOMContentLoaded', () => {
             const gridContainer = document.getElementById('dynamic-product-grid');
-
             const owner = "clicku";
             const repo = "paoreel";
-            const branch = "v2-redesign"; // Target working branch
+            const branch = "v2-redesign";
             const folderPath = "assets/images/products";
 
             fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folderPath}?ref=${branch}`)
-                .then(res => {
-                    if (!res.ok) throw new Error("Failed to fetch products folder");
-                    return res.json();
-                })
+                .then(res => res.json())
                 .then(files => {
+                    if (!Array.isArray(files)) return;
                     const imageFiles = files.filter(f => f.type === "file" && /\.(webp|jpg|jpeg|png)$/i.test(f.name));
 
                     if (imageFiles.length === 0) {
-                        gridContainer.innerHTML = `<p class="pa-empty">No products found. Upload images via Pages CMS.</p>`;
+                        gridContainer.innerHTML = `<p style="grid-column: span 12; text-align: center; color: #888;">No product images found.</p>`;
                         return;
                     }
 
                     gridContainer.innerHTML = imageFiles.map((file, index) => {
                         const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
-                        const relativePath = `/${folderPath}/${file.name}`; // Root-relative path to prevent loading spirals
+                        const relativePath = `${folderPath}/${file.name}`;
 
                         return `
                             <a href="${relativePath}" class="bento-item" data-lightbox="product-archive" data-title="Product: ${cleanName}">
-                                <img src="${relativePath}" alt="${cleanName}" loading="lazy">
+                                <img src="${relativePath}" alt="${cleanName}" loading="lazy" decoding="async">
                                 <div class="bento-overlay">
-                                    <span class="bento-tag">Series Item 0${index + 1}</span>
-                                    <h3 class="bento-title">${cleanName}</h3>
+                                    <h3 style="font-size: 1.2rem;">${cleanName}</h3>
                                 </div>
                             </a>
                         `;
                     }).join('');
                 })
-                .catch(err => {
-                    console.error("Error loading products:", err);
-                    gridContainer.innerHTML = `<p class="pa-empty">Unable to load product images dynamically.</p>`;
-                });
+                .catch(err => console.error("Error loading products:", err));
         });
     </script>
 </body>

@@ -5,8 +5,8 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const toggle = document.querySelector(".mobile-toggle");
-    const nav = document.querySelector(".nav-links");
+    const toggle = document.querySelector(".hamburger") || document.querySelector(".mobile-toggle");
+    const nav = document.querySelector(".nav-links") || document.querySelector(".pa-nav") || document.querySelector(".nav-menu");
     const header = document.getElementById("header");
 
     if (!nav) return;
@@ -16,46 +16,29 @@ document.addEventListener("DOMContentLoaded", () => {
     ====================================================== */
 
     if (toggle) {
-
         toggle.addEventListener("click", () => {
-
-            nav.classList.toggle("active");
-
-            toggle.classList.toggle("active");
-
-            document.body.classList.toggle("menu-open");
-
-            toggle.innerHTML =
-                nav.classList.contains("active")
-                ? "✕"
-                : "☰";
-
+            const isActive = nav.classList.toggle("active");
+            toggle.classList.toggle("active", isActive);
+            document.body.classList.toggle("menu-open", isActive);
+            toggle.setAttribute("aria-expanded", isActive);
         });
-
     }
 
     /* ======================================================
        CLOSE WHEN CLICKING A LINK
     ====================================================== */
 
-    document.querySelectorAll(".nav-links a").forEach(link => {
+    const navLinksSelector = ".nav-links a, .pa-nav a, .nav-menu a";
 
+    document.querySelectorAll(navLinksSelector).forEach(link => {
         link.addEventListener("click", () => {
-
             nav.classList.remove("active");
-
             document.body.classList.remove("menu-open");
-
             if (toggle) {
-
                 toggle.classList.remove("active");
-
-                toggle.innerHTML = "☰";
-
+                toggle.setAttribute("aria-expanded", "false");
             }
-
         });
-
     });
 
     /* ======================================================
@@ -63,30 +46,20 @@ document.addEventListener("DOMContentLoaded", () => {
     ====================================================== */
 
     document.addEventListener("click", (e) => {
-
         if (window.innerWidth > 900) return;
-
         if (!nav.classList.contains("active")) return;
 
         const clickedInsideNav = nav.contains(e.target);
         const clickedToggle = toggle && toggle.contains(e.target);
 
         if (!clickedInsideNav && !clickedToggle) {
-
             nav.classList.remove("active");
-
             document.body.classList.remove("menu-open");
-
             if (toggle) {
-
                 toggle.classList.remove("active");
-
-                toggle.innerHTML = "☰";
-
+                toggle.setAttribute("aria-expanded", "false");
             }
-
         }
-
     });
 
     /* ======================================================
@@ -94,40 +67,27 @@ document.addEventListener("DOMContentLoaded", () => {
     ====================================================== */
 
     document.addEventListener("keydown", (e) => {
-
         if (e.key !== "Escape") return;
 
         nav.classList.remove("active");
-
         document.body.classList.remove("menu-open");
-
         if (toggle) {
-
             toggle.classList.remove("active");
-
-            toggle.innerHTML = "☰";
-
+            toggle.setAttribute("aria-expanded", "false");
         }
-
     });
 
     /* ======================================================
        ACTIVE PAGE
     ====================================================== */
 
-    const currentPage =
-        window.location.pathname.split("/").pop() || "index.html";
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
 
-    document.querySelectorAll(".nav-links a").forEach(link => {
-
+    document.querySelectorAll(navLinksSelector).forEach(link => {
         const href = link.getAttribute("href");
-
-        if (href === currentPage) {
-
+        if (href === currentPage || (currentPage === "" && href === "index.html")) {
             link.classList.add("active");
-
         }
-
     });
 
     /* ======================================================
@@ -135,19 +95,13 @@ document.addEventListener("DOMContentLoaded", () => {
     ====================================================== */
 
     function updateHeader() {
-
         if (!header) return;
 
         if (window.scrollY > 80) {
-
             header.classList.add("scrolled");
-
         } else {
-
             header.classList.remove("scrolled");
-
         }
-
     }
 
     updateHeader();

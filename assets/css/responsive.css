@@ -2,6 +2,11 @@
    GLOBAL MOBILE HAMBURGER MENU
 ========================================================== */
 
+/* Prevent body scrolling when the mobile menu drawer is open */
+body.menu-open {
+    overflow: hidden;
+}
+
 /* Hamburger Button */
 .hamburger {
     display: none;

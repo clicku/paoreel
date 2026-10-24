@@ -5,36 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Portraits — Paoreel Studios</title>
-  <meta
-    name="description"
-    content="Discover the portrait photography archive of Paoreel Studios."
-  >
-   <!-- ==========================================================
-         FAVICON
-    ========================================================== -->
+  <meta name="description" content="Discover the portrait photography archive of Paoreel Studios.">
 
-    <link rel="icon"
-          href="assets/images/favicon.ico"
-          sizes="any">
+  <!-- Favicons -->
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-192.png">
 
-    <link rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="assets/images/favicon-32.png">
-
-    <link rel="apple-touch-icon"
-          href="assets/images/apple-touch-icon.png">
-
-    <link rel="icon"
-          type="image/png"
-          sizes="192x192"
-          href="assets/images/favicon-192.png">
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css"
-  >
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/layout.css">
   <link rel="stylesheet" href="assets/css/about.css">
@@ -45,17 +25,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 
   <style>
-    /* ======================================
-       PAOREEL — PORTRAIT ARCHIVE
-       Dark editorial design
-       ====================================== */
-
     .portrait-archive {
       --pa-bg: #111110;
       --pa-panel: #191918;
@@ -68,7 +40,6 @@
       color: var(--pa-text);
       font-family: "DM Sans", sans-serif;
       min-height: 100vh;
-      /* overflow: clip; */
     }
 
     .portrait-archive *,
@@ -77,17 +48,7 @@
       box-sizing: border-box;
     }
 
-    .portrait-archive a {
-      color: inherit;
-    }
-
-    .portrait-archive a:focus-visible,
-    .portrait-archive button:focus-visible {
-      outline: 2px solid var(--pa-accent);
-      outline-offset: 5px;
-    }
-
-    /* Header */
+    .portrait-archive a { color: inherit; }
 
     .pa-header {
       position: relative;
@@ -107,19 +68,12 @@
       gap: 32px;
     }
 
-    .pa-logo {
-      flex-shrink: 0;
-    }
-
     .pa-logo img {
       display: block;
       width: auto;
       max-width: 150px;
       max-height: 48px;
       object-fit: contain;
-
-      /* Remove this filter if your logo already has a light version. 
-      filter: brightness(0) invert(1);*/
     }
 
     .pa-nav {
@@ -144,31 +98,6 @@
       transition: color .25s ease;
     }
 
-    .pa-nav a::after {
-      content: "";
-      position: absolute;
-      bottom: 5px;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: var(--pa-accent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform .3s ease;
-    }
-
-    .pa-nav a:hover,
-    .pa-nav a[aria-current="page"] {
-      color: #fff;
-    }
-
-    .pa-nav a:hover::after,
-    .pa-nav a[aria-current="page"]::after {
-      transform: scaleX(1);
-    }
-
-    /* Intro */
-
     .pa-main {
       width: min(1600px, 100%);
       margin: auto;
@@ -177,8 +106,7 @@
 
     .pa-intro {
       position: relative;
-      padding: clamp(88px, 13vw, 180px) 0
-               clamp(70px, 10vw, 130px);
+      padding: clamp(60px, 10vw, 180px) 0 clamp(40px, 8vw, 130px);
     }
 
     .pa-overline {
@@ -190,33 +118,26 @@
       font-weight: 600;
       letter-spacing: .23em;
       text-transform: uppercase;
-      margin: 0 0 30px;
-    }
-
-    .pa-overline::before {
-      content: "";
-      width: 32px;
-      height: 1px;
-      background: var(--pa-accent);
+      margin: 0 0 20px;
     }
 
     .pa-title {
       max-width: 1100px;
       margin: 0;
       font-family: "Playfair Display", Georgia, serif;
-      font-size: clamp(64px, 12vw, 172px);
+      font-size: clamp(42px, 9vw, 140px);
       font-weight: 500;
-      line-height: .86;
-      letter-spacing: -.075em;
+      line-height: .92;
+      letter-spacing: -.05em;
+      word-break: break-word;
     }
 
     .pa-title span {
       display: block;
       color: var(--pa-accent);
       font-style: italic;
-      font-weight: 500;
-      margin-left: clamp(0px, 10vw, 145px);
-      margin-top: 15px;
+      margin-left: clamp(0px, 6vw, 145px);
+      margin-top: 10px;
     }
 
     .pa-intro-bottom {
@@ -224,7 +145,7 @@
       justify-content: space-between;
       align-items: flex-end;
       gap: 40px;
-      margin-top: clamp(55px, 8vw, 105px);
+      margin-top: clamp(40px, 6vw, 105px);
     }
 
     .pa-description {
@@ -232,36 +153,10 @@
       margin: 0;
       color: #aaa9a2;
       font-size: 13px;
-      line-height: 2;
+      line-height: 1.8;
     }
 
-    .pa-intro-meta {
-      flex-shrink: 0;
-      text-align: right;
-    }
-
-    .pa-intro-meta span {
-      display: block;
-      color: var(--pa-muted);
-      font-size: 9px;
-      letter-spacing: .15em;
-      line-height: 2;
-      text-transform: uppercase;
-    }
-
-    .pa-intro-meta strong {
-      display: block;
-      margin-top: 5px;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .1em;
-    }
-
-    /* Gallery heading */
-
-    .pa-gallery {
-      padding-bottom: clamp(90px, 12vw, 160px);
-    }
+    .pa-gallery { padding-bottom: clamp(60px, 10vw, 160px); }
 
     .pa-gallery-bar {
       display: flex;
@@ -269,90 +164,23 @@
       justify-content: space-between;
       gap: 20px;
       border-top: 1px solid var(--pa-line);
-      padding: 23px 0;
-      margin-bottom: 35px;
+      padding: 20px 0;
+      margin-bottom: 30px;
     }
-
-    .pa-gallery-label {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin: 0;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-
-    .pa-gallery-label span {
-      color: var(--pa-accent);
-      font-size: 11px;
-    }
-
-    .pa-gallery-count {
-      margin: 0;
-      color: var(--pa-muted);
-      font-size: 10px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      text-align: right;
-    }
-
-    /* Asymmetrical gallery */
 
     #portrait-archive-grid {
       display: grid;
       grid-template-columns: repeat(12, minmax(0, 1fr));
       align-items: start;
       column-gap: clamp(12px, 2.2vw, 32px);
-      row-gap: clamp(38px, 7vw, 100px);
+      row-gap: clamp(28px, 5vw, 100px);
     }
 
     #portrait-archive-grid .grid-item {
-      min-width: 0;
       grid-column: span 4;
       opacity: 0;
       animation: pa-reveal .8s ease forwards;
       animation-delay: var(--pa-delay, 0ms);
-    }
-
-    /* Alternating sizes create a more editorial rhythm. */
-
-    #portrait-archive-grid .grid-item:nth-child(6n + 1) {
-      grid-column: 1 / span 5;
-    }
-
-    #portrait-archive-grid .grid-item:nth-child(6n + 2) {
-      grid-column: 7 / span 6;
-      margin-top: clamp(45px, 8vw, 115px);
-    }
-
-    #portrait-archive-grid .grid-item:nth-child(6n + 3) {
-      grid-column: 2 / span 4;
-      margin-top: clamp(0px, 2vw, 30px);
-    }
-
-    #portrait-archive-grid .grid-item:nth-child(6n + 4) {
-      grid-column: 7 / span 5;
-      margin-top: clamp(30px, 5vw, 75px);
-    }
-
-    #portrait-archive-grid .grid-item:nth-child(6n + 5) {
-      grid-column: 1 / span 6;
-    }
-
-    #portrait-archive-grid .grid-item:nth-child(6n) {
-      grid-column: 8 / span 5;
-      margin-top: clamp(30px, 5vw, 75px);
-    }
-
-    #portrait-archive-grid .grid-item a {
-      position: relative;
-      display: block;
-      overflow: hidden;
-      background: #252522;
-      text-decoration: none;
-      cursor: pointer;
     }
 
     #portrait-archive-grid .grid-item img {
@@ -361,305 +189,25 @@
       height: auto;
       aspect-ratio: 4 / 5;
       object-fit: cover;
-      filter: saturate(.82);
-      transition:
-        transform 900ms cubic-bezier(.2, .65, .3, 1),
-        filter 600ms ease;
-    }
-
-    #portrait-archive-grid .grid-item:nth-child(3n) img {
-      aspect-ratio: 4 / 5.3;
-    }
-
-    #portrait-archive-grid .grid-item a::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        180deg,
-        transparent 55%,
-        rgba(0, 0, 0, .2)
-      );
-      opacity: .35;
-      transition: opacity .5s ease;
-      pointer-events: none;
-    }
-
-    #portrait-archive-grid .grid-item a:hover img {
-      transform: scale(1.035);
-      filter: saturate(1);
-    }
-
-    #portrait-archive-grid .grid-item a:hover::after {
-      opacity: .8;
     }
 
     @keyframes pa-reveal {
-      from {
-        opacity: 0;
-        transform: translateY(28px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .pa-empty {
-      grid-column: 1 / -1;
-      padding: 80px 20px;
-      color: var(--pa-muted);
-      text-align: center;
-      font-size: 13px;
-      line-height: 2;
-    }
-
-    /* Closing statement */
-
-    .pa-closing {
-      border-top: 1px solid var(--pa-line);
-      padding: clamp(65px, 10vw, 130px) 0;
-      text-align: center;
-    }
-
-    .pa-closing p {
-      margin: 0 0 22px;
-      color: var(--pa-muted);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-    }
-
-    .pa-closing h2 {
-      margin: 0;
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: clamp(36px, 6vw, 76px);
-      font-weight: 500;
-      letter-spacing: -.045em;
-      line-height: 1.15;
-    }
-
-    .pa-closing h2 em {
-      color: var(--pa-accent);
-      font-weight: 500;
-    }
-
-    /* Footer */
-
-    .pa-footer {
-      border-top: 1px solid var(--pa-line);
-      background: #0c0c0b;
-    }
-
-    .pa-footer-inner {
-      width: min(1600px, 100%);
-      min-height: 100px;
-      margin: auto;
-      padding: 25px 6%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-    }
-
-    .pa-footer p {
-      margin: 0;
-      color: #a09f99;
-      font-size: 9px;
-      letter-spacing: .12em;
-      line-height: 1.8;
-      text-transform: uppercase;
-    }
-
-    .pa-footer-brand {
-      color: var(--pa-text) !important;
-      font-weight: 600;
-    }
-
-   
-
-    /* Tablet */
-
+    /* Tablet and Mobile adjustments */
     @media (max-width: 900px) {
-      .pa-navbar {
-        min-height: 78px;
-      }
-
-      .pa-intro {
-        padding-top: 100px;
-      }
-
-      .pa-title {
-        font-size: clamp(68px, 12vw, 110px);
-      }
-
-      #portrait-archive-grid {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-        column-gap: 18px;
-        row-gap: 48px;
-      }
-
-      #portrait-archive-grid .grid-item:nth-child(n) {
-        grid-column: span 3;
-        margin-top: 0;
-      }
-
-      #portrait-archive-grid .grid-item:nth-child(4n + 2),
-      #portrait-archive-grid .grid-item:nth-child(4n + 4) {
-        margin-top: 48px;
-      }
+      .pa-navbar { min-height: 70px; padding: 0 4%; }
+      #portrait-archive-grid .grid-item { grid-column: span 6 !important; margin-top: 0 !important; }
     }
-
-    /* Mobile */
 
     @media (max-width: 600px) {
-      .pa-navbar {
-        min-height: 70px;
-        padding: 0 5%;
-        gap: 14px;
-      }
-
-      .pa-logo img {
-        max-width: 100px;
-        max-height: 38px;
-      }
-
-      .pa-nav {
-        gap: clamp(10px, 3vw, 16px);
-      }
-
-      .pa-nav a {
-        font-size: 8px;
-        letter-spacing: .04em;
-      }
-
-      .pa-nav a::after {
-        bottom: 4px;
-      }
-
-      .pa-main {
-        padding: 0 5%;
-      }
-
-      .pa-intro {
-        padding: 85px 0 65px;
-      }
-
-      .pa-overline {
-        font-size: 9px;
-        margin-bottom: 26px;
-      }
-
-      .pa-title {
-        font-size: clamp(56px, 13.2vw, 82px);
-        line-height: .92;
-      }
-
-      .pa-title span {
-        margin-left: 0;
-        margin-top: 10px;
-      }
-
-      .pa-intro-bottom {
-        margin-top: 45px;
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 22px;
-      }
-
-      .pa-description {
-        max-width: 340px;
-        font-size: 12px;
-      }
-
-      .pa-intro-meta {
-        text-align: left;
-      }
-
-      .pa-intro-meta span,
-      .pa-intro-meta strong {
-        display: inline;
-      }
-
-      .pa-intro-meta strong {
-        margin-left: 10px;
-      }
-
-      .pa-gallery-bar {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 12px;
-        margin-bottom: 24px;
-      }
-
-      .pa-gallery-count {
-        text-align: left;
-      }
-
-      #portrait-archive-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        column-gap: 12px;
-        row-gap: 28px;
-      }
-
-      #portrait-archive-grid .grid-item:nth-child(n) {
-        grid-column: span 1;
-        margin-top: 0;
-      }
-
-      #portrait-archive-grid .grid-item:nth-child(4n + 2),
-      #portrait-archive-grid .grid-item:nth-child(4n + 4) {
-        margin-top: 28px;
-      }
-
-      #portrait-archive-grid .grid-item img {
-        aspect-ratio: 3 / 4;
-      }
-
-      .pa-closing {
-        padding: 70px 0;
-      }
-
-      .pa-footer-inner {
-        min-height: 95px;
-        padding: 22px 5%;
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 8px;
-      }
-    }
-  
-@media (max-width: 600px) {
-  .portrait-archive .lightbox {
-    padding: 50px 40px 80px;
-  }
-
-  .portrait-archive .lightbox .lightbox-image {
-    max-width: 100%;
-    max-height: 75vh;
-  }
-
-  .portrait-archive .lightbox .lightbox-prev {
-    left: 0;
-  }
-
-  .portrait-archive .lightbox .lightbox-next {
-    right: 0;
-  }
-}
-
-    @media (prefers-reduced-motion: reduce) {
-      #portrait-archive-grid .grid-item {
-        opacity: 1;
-        animation: none;
-      }
-
-      #portrait-archive-grid .grid-item img,
-      #portrait-archive-grid .grid-item a::after {
-        transition: none;
-      }
+      .pa-main { padding: 0 4%; }
+      .pa-intro-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
+      #portrait-archive-grid { grid-template-columns: repeat(2, 1fr); column-gap: 10px; row-gap: 20px; }
+      #portrait-archive-grid .grid-item { grid-column: span 1 !important; }
+      .pa-title span { margin-left: 0; }
     }
   </style>
 </head>
@@ -670,171 +218,73 @@
     <!-- Navigation -->
     <header class="pa-header">
       <nav class="pa-navbar" aria-label="Main navigation">
-
-        <a class="pa-logo" href="/index.html" aria-label="Paoreel Studios home">
-          <img
-            src="/assets/images/logo.png"
-            alt="Paoreel Studios"
-          >
+        <a class="pa-logo" href="index.html" aria-label="Paoreel Studios home">
+          <img src="assets/images/logo.png" alt="Paoreel Studios">
         </a>
-
-        <ul class="pa-nav">
-          <li><a href="/index.html">Paoreel</a></li>
-          <li><a href="portraits.html" class="active">Portraits</a></li>
-          <li><a href="/portfolio.html">Portfolio</a></li>
-          <li><a href="/about.html">About</a></li>
-          <li><a href="/contact.html">Contact</a></li>
+        <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        <ul class="pa-nav nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="portraits.html" aria-current="page">Portraits</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
-
       </nav>
     </header>
 
     <main class="pa-main">
-
-      <!-- Editorial introduction -->
       <section class="pa-intro">
         <p class="pa-overline">The Art of Being Seen</p>
-
-        <h1 class="pa-title">
-          Beyond
-          <span>the ordinary.</span>
-        </h1>
-
+        <h1 class="pa-title">Beyond <span>the ordinary.</span></h1>
         <div class="pa-intro-bottom">
           <p class="pa-description">
-            A portrait is more than a photograph.
-            It is a fleeting expression, an unspoken story,
-            a moment of truth preserved in time.
+            A portrait is more than a photograph. It is a fleeting expression, an unspoken story, a moment of truth preserved in time.
           </p>
-
           <div class="pa-intro-meta">
             <span>Paoreel Studios</span>
-            <strong>Portrait Archive / 01</strong>
+            <strong>Portrait Archive</strong>
           </div>
         </div>
       </section>
 
-      <!-- Gallery -->
-      <section class="pa-gallery" aria-labelledby="pa-gallery-title">
-
+      <section class="pa-gallery">
         <div class="pa-gallery-bar">
-          <h2 class="pa-gallery-label" id="pa-gallery-title">
-            <span>01 /</span>
-            Portrait Collections
-          </h2>
-
-          <p class="pa-gallery-count" id="portrait-gallery-count">
-            Discovering the archive
-          </p>
+          <h2 class="pa-gallery-label"><span>01 /</span> Portrait Collections</h2>
+          <p class="pa-gallery-count" id="portrait-gallery-count">Discovering the archive</p>
         </div>
-
-        <div
-          class="grid"
-          id="portrait-archive-grid"
-          aria-label="Portrait photography gallery"
-        ></div>
-
+        <div class="grid" id="portrait-archive-grid"></div>
       </section>
 
-      <!-- Closing statement -->
       <section class="pa-closing">
         <p>Every face. Every story.</p>
-        <h2>
-          Moments that<br>
-          <em>stay with you.</em>
-        </h2>
+        <h2>Moments that<br><em>stay with you.</em></h2>
       </section>
-
     </main>
 
-    <!-- Footer -->
     <footer class="pa-footer">
       <div class="pa-footer-inner">
         <p class="pa-footer-brand">Paoreel Studios</p>
-        <p>
-          © <span id="pa-year">2026</span>
-          All rights reserved.
-        </p>
+        <p>© <span id="pa-year">2026</span> All rights reserved.</p>
       </div>
     </footer>
-  
-
   </div>
 
-  <!-- Existing scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
-  <script src="https://unpkg.com/lenis@1.3.13/dist/lenis.min.js"></script>
-  <script src="assets/js/main.js"></script>
-  
-<!-- 1. Load the centralized watermark and protection script -->
-<script src="assets/js/watermark.js"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/watermark.js"></script>
 
-<!-- 2. Dynamic Portrait Archive Loader -->
-<script>
-    // 1. Keep existing Lightbox2 configuration
-    if (typeof lightbox !== "undefined") {
-      lightbox.option({
-        resizeDuration: 150,
-        fadeDuration: 150,
-        wrapAround: true,
-        disableScrolling: true
-      });
-    }
-
-    // 2. Ultra-Lightweight & Robust Lightbox Watermark Manager (Zero lag, handles scrolling & swiping)
-    document.addEventListener("DOMContentLoaded", () => {
-      function stampWatermark() {
-        const lbContainer = document.querySelector('.lb-container');
-        if (!lbContainer) return;
-
-        if (window.getComputedStyle(lbContainer).position === 'static') {
-          lbContainer.style.position = 'relative';
-        }
-
-        // Purge any existing watermarks to prevent duplication
-        lbContainer.querySelectorAll('.lightbox-watermark').forEach(el => el.remove());
-
-        const watermark = document.createElement('div');
-        watermark.className = 'lightbox-watermark';
-        watermark.innerHTML = '© Paoreel Studios — All Rights Reserved';
-        watermark.style.cssText = `
-          position: absolute;
-          bottom: 25px;
-          right: 30px;
-          color: rgba(255, 255, 255, 0.85);
-          font-family: 'Playfair Display', serif;
-          font-size: 0.85rem;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          pointer-events: none;
-          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85);
-          z-index: 9999;
-        `;
-        lbContainer.appendChild(watermark);
-      }
-
-      // Continuously monitors only when Lightbox is open (consumes 0% CPU when closed)
-      setInterval(() => {
-        const lightboxEl = document.querySelector('.lightbox');
-        if (lightboxEl && window.getComputedStyle(lightboxEl).display !== 'none') {
-          const lbContainer = lightboxEl.querySelector('.lb-container');
-          if (lbContainer && !lbContainer.querySelector('.lightbox-watermark')) {
-            stampWatermark();
-          }
-        }
-      }, 100);
-    });
-
-    // 3. Dynamic Portrait Archive Loader (Fetching from GitHub API)
+  <script>
     document.addEventListener("DOMContentLoaded", () => {
       const grid = document.getElementById("portrait-archive-grid");
       const count = document.getElementById("portrait-gallery-count");
       const year = document.getElementById("pa-year");
 
-      if (year) {
-        year.textContent = new Date().getFullYear();
-      }
+      if (year) year.textContent = new Date().getFullYear();
 
       const owner = "clicku";
       const repo = "paoreel";
@@ -842,68 +292,31 @@
       const folderPath = "assets/images/portraits";
 
       fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folderPath}?ref=${branch}`)
-        .then(response => {
-          if (!response.ok) throw new Error("Could not fetch folder contents from GitHub API");
-          return response.json();
-        })
+        .then(response => response.json())
         .then(files => {
-          const imageFiles = files.filter(file => 
-            file.type === "file" && /\.(webp|jpg|jpeg|png)$/i.test(file.name)
-          );
+          if (!Array.isArray(files)) return;
+          const imageFiles = files.filter(file => file.type === "file" && /\.(webp|jpg|jpeg|png)$/i.test(file.name));
 
-          const loadedCount = imageFiles.length;
-          if (count) {
-            count.textContent = `${loadedCount} ${loadedCount === 1 ? "portrait" : "portraits"}`;
-          }
-
-          if (loadedCount === 0) {
-            if (grid) {
-              grid.innerHTML = `
-                <p class="pa-empty">
-                  No portraits found in this folder.<br>
-                  Upload images via Pages CMS to see them here.
-                </p>
-              `;
-            }
-            return;
-          }
+          if (count) count.textContent = `${imageFiles.length} portraits`;
 
           if (grid) {
             grid.innerHTML = imageFiles.map((file, index) => {
               const delay = Math.min(index * 30, 300);
               const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
-              // Use root-relative paths to prevent loading spirals
-              const relativePath = `/${folderPath}/${file.name}`;
+              const relativePath = `${folderPath}/${file.name}`;
 
               return `
                 <div class="grid-item" style="--pa-delay: ${delay}ms;">
-                  <a href="${relativePath}" 
-                     data-lightbox="portrait-archive" 
-                     data-title="Portrait: ${cleanName}"
-                     aria-label="View portrait ${index + 1}">
-                    <img src="${relativePath}" 
-                         alt="Portrait photography - ${cleanName}" 
-                         decoding="async" 
-                         loading="${index < 4 ? 'eager' : 'lazy'}">
+                  <a href="${relativePath}" data-lightbox="portrait-archive" data-title="Portrait: ${cleanName}">
+                    <img src="${relativePath}" alt="Portrait - ${cleanName}" decoding="async" loading="lazy">
                   </a>
                 </div>
               `;
             }).join('');
           }
-
-          console.log(`Dynamic portrait archive loaded successfully. Total: ${loadedCount}`);
         })
-        .catch(err => {
-          console.error("Error loading GitHub folder contents:", err);
-          if (grid) {
-            grid.innerHTML = `
-              <p class="pa-empty">
-                Unable to load portrait images dynamically.
-              </p>
-            `;
-          }
-        });
+        .catch(err => console.error("Error loading portrait archive:", err));
     });
-</script>
+  </script>
 </body>
 </html>
