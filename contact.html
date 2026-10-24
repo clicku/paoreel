@@ -5,29 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Contact — Paoreel Studios</title>
-  <meta
-    name="description"
-    content="Get in touch with Paoreel Studios for portrait, commercial, product, and food photography inquiries."
-  >
+  <meta name="description" content="Get in touch with Paoreel Studios for portrait, commercial, product, and food photography inquiries.">
   <meta name="theme-color" content="#111110">
-  <!-- Favicon -->
-    <link rel="icon" href="assets/images/favicon.ico" sizes="any">
 
-    <!-- PNG Fallback -->
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <!-- Favicons -->
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-192.png">
 
-    <!-- Apple -->
-    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-
-    <!-- Android -->
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-192.png">
+  <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet"  href="assets/css/layout.css">
-  <link rel="stylesheet"  href="assets/css/contact.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/contact.css">
   
+  <style>
+    /* Mobile-specific input optimization to prevent iOS zoom */
+    @media (max-width: 768px) {
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="date"],
+      select,
+      textarea {
+        font-size: 16px !important;
+      }
+      .form-submit {
+        min-height: 48px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -36,19 +49,14 @@
   <header class="contact-header">
     <nav class="modern-nav">
       <a class="logo" href="index.html" aria-label="Paoreel Studios home">
-        <img
-          src="assets/images/logo.png"
-          alt="Paoreel Studios"
-          onerror="this.style.display='none'; this.nextElementSibling.hidden=false;"
-        >
+        <img src="assets/images/logo.png" alt="Paoreel Studios" onerror="this.style.display='none'; this.nextElementSibling.hidden=false;">
         <span class="logo-text" hidden>Paoreel.</span>
       </a>
-      <!-- Hamburger Button -->
-  <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-  </button>
+      <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="portfolio.html">Portfolio</a></li>
@@ -59,235 +67,122 @@
   </header>
 
   <main>
-
     <!-- Hero -->
     <section class="page-container contact-hero">
       <p class="eyebrow">Let's Create Something Meaningful</p>
-
-      <h1 class="hero-title">
-        Start a
-        <em>conversation.</em>
-      </h1>
+      <h1 class="hero-title">Start a <em>conversation.</em></h1>
 
       <div class="hero-bottom">
         <p class="hero-description">
-          Every great photograph begins with an idea.
-          Tell us what you have in mind, and let's create
-          something thoughtful, personal, and lasting.
+          Every great photograph begins with an idea. Tell us what you have in mind, and let's create something thoughtful, personal, and lasting.
         </p>
-
-        <p class="hero-note">
-          Paoreel Studios<br>
-          Photography &amp; Visual Stories
-        </p>
+        <p class="hero-note">Paoreel Studios<br>Photography &amp; Visual Stories</p>
       </div>
     </section>
 
-    <!-- Contact and inquiry form -->
+    <!-- Contact section -->
     <section class="page-container contact-section">
-
       <div class="contact-information">
         <p class="section-number">01 / Get in touch</p>
-
-        <h2 class="section-title">
-          We'd love to<br>
-          hear your <em>story.</em>
-        </h2>
-
+        <h2 class="section-title">We'd love to<br>hear your <em>story.</em></h2>
         <p class="contact-copy">
-          Planning a portrait session, a commercial campaign,
-          a product shoot, or a food photography project?
-          Share a few details and we'll take it from there.
+          Planning a portrait session, a commercial campaign, a product shoot, or a food photography project? Share a few details and we'll take it from there.
         </p>
 
         <div class="contact-details">
-
           <div class="contact-detail">
             <span class="detail-label">Email inquiries</span>
-            <p class="detail-value">
-              
-                pao@paoreel.com
-              
-            </p>
+            <p class="detail-value"><a id="contact-email-link" href="mailto:pao@paoreel.com">pao@paoreel.com</a></p>
           </div>
 
           <div class="contact-detail">
             <span class="detail-label">Photography services</span>
-            <p class="detail-value">
-              Portraits · Products · Commercial · Food
-            </p>
+            <p class="detail-value">Portraits · Products · Commercial · Food</p>
           </div>
 
           <div class="contact-detail">
             <span class="detail-label">Booking inquiries</span>
-            <p class="detail-value">
-              Please include your preferred date, location,
-              and the type of photography you need.
-            </p>
+            <p class="detail-value">Please include your preferred date, location, and the type of photography you need.</p>
           </div>
-
         </div>
 
         <p class="response-note">
-          Every project is different. The more you can tell us
-          about your idea, the better we can understand your needs.
+          Every project is different. The more you can tell us about your idea, the better we can understand your needs.
         </p>
       </div>
 
       <div class="form-panel">
         <h2 class="form-heading">Tell us about your project</h2>
-
         <p class="form-intro">
-          Tell us about your photography project. Your inquiry will be
-          submitted through our contact service, and we'll get back
-          to you as soon as possible.
+          Tell us about your photography project. Your inquiry will be submitted through our contact service, and we'll get back to you as soon as possible.
         </p>
 
         <form id="inquiry-form">
-
           <div class="form-grid">
-
             <div class="form-field">
               <label for="name">Your name *</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                maxlength="100"
-                placeholder="Full name"
-                autocomplete="name"
-                required
-              >
+              <input type="text" id="name" name="name" maxlength="100" placeholder="Full name" autocomplete="name" required>
             </div>
 
             <div class="form-field">
               <label for="email">Your email *</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                maxlength="200"
-                placeholder="you@example.com"
-                autocomplete="email"
-                required
-              >
+              <input type="email" id="email" name="email" maxlength="200" placeholder="you@example.com" autocomplete="email" required>
             </div>
 
             <div class="form-field">
               <label for="phone">Cellphone number *</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                maxlength="30"
-                placeholder="0912 345 6789"
-                autocomplete="tel"
-                required
-              >
+              <input type="tel" id="phone" name="phone" maxlength="30" placeholder="0912 345 6789" autocomplete="tel" required>
             </div>
 
             <div class="form-field">
               <label for="viber">Viber contact (optional)</label>
-              <input
-                type="text"
-                id="viber"
-                name="viber"
-                maxlength="50"
-                placeholder="Mobile number or username"
-              >
+              <input type="text" id="viber" name="viber" maxlength="50" placeholder="Mobile number or username">
             </div>
 
             <div class="form-field">
               <label for="facebook">FB page (optional)</label>
-              <input
-                type="text"
-                id="facebook"
-                name="facebook"
-                maxlength="150"
-                placeholder="facebook.com/yourpage"
-              >
+              <input type="text" id="facebook" name="facebook" maxlength="150" placeholder="facebook.com/yourpage">
             </div>
 
             <div class="form-field">
               <label for="service">Type of photography *</label>
               <select id="service" name="service" required>
-                <option value="" disabled selected>
-                  Select a service
-                </option>
-                <option value="Portrait Photography">
-                  Portrait Photography
-                </option>
-                <option value="Product Photography">
-                  Product Photography
-                </option>
-                <option value="Commercial Photography">
-                  Commercial Photography
-                </option>
-                <option value="Food Photography">
-                  Food Photography
-                </option>
-                <option value="Event Photography">
-                  Event Photography
-                </option>
-                <option value="Other Photography Inquiry">
-                  Other Inquiry
-                </option>
+                <option value="" disabled selected>Select a service</option>
+                <option value="Portrait Photography">Portrait Photography</option>
+                <option value="Product Photography">Product Photography</option>
+                <option value="Commercial Photography">Commercial Photography</option>
+                <option value="Food Photography">Food Photography</option>
+                <option value="Event Photography">Event Photography</option>
+                <option value="Other Photography Inquiry">Other Inquiry</option>
               </select>
             </div>
 
             <div class="form-field">
               <label for="date">Preferred date (Calendar)</label>
-              <input
-                type="date"
-                id="date"
-                name="date"
-              >
+              <input type="date" id="date" name="date">
             </div>
 
             <div class="form-field">
               <label for="budget">Estimated budget</label>
               <select id="budget" name="budget">
-                <option value="Not sure yet" selected>
-                  Not sure yet
-                </option>
-                <option value="Under PHP 5,000">
-                  Under ₱5,000
-                </option>
-                <option value="PHP 5,000–10,000">
-                  ₱5,000–₱10,000
-                </option>
-                <option value="PHP 10,000–25,000">
-                  ₱10,000–₱25,000
-                </option>
-                <option value="PHP 25,000 and above">
-                  ₱25,000 and above
-                </option>
+                <option value="Not sure yet" selected>Not sure yet</option>
+                <option value="Under PHP 5,000">Under ₱5,000</option>
+                <option value="PHP 5,000–10,000">₱5,000–₱10,000</option>
+                <option value="PHP 10,000–25,000">₱10,000–₱25,000</option>
+                <option value="PHP 25,000 and above">₱25,000 and above</option>
               </select>
             </div>
 
             <div class="form-field full-width">
               <label for="message">Tell us about your project *</label>
-              <textarea
-                id="message"
-                name="message"
-                maxlength="5000"
-                placeholder="Describe your idea, location, number of subjects or products, and any special requirements..."
-                required
-              ></textarea>
+              <textarea id="message" name="message" maxlength="5000" placeholder="Describe your idea, location, number of subjects or products, and any special requirements..." required></textarea>
             </div>
-
           </div>
 
-          <!-- Honeypot: normal visitors should leave this empty -->
-          <div class="honeypot" aria-hidden="true">
+          <!-- Honeypot -->
+          <div class="honeypot" aria-hidden="true" style="display:none;">
             <label for="website">Leave this field empty</label>
-            <input
-              type="text"
-              id="website"
-              name="website"
-              tabindex="-1"
-              autocomplete="off"
-            >
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
           </div>
 
           <button class="form-submit" type="submit" id="submit-button">
@@ -296,121 +191,76 @@
           </button>
 
           <p class="form-disclaimer">
-            Please do not include passwords or sensitive personal
-            information. If your inquiry is urgent, contact us by email.
+            Please do not include passwords or sensitive personal information. If your inquiry is urgent, contact us by email.
           </p>
 
-          <p
-            class="form-status"
-            id="form-status"
-            role="status"
-            aria-live="polite"
-          ></p>
-
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
-
     </section>
 
     <!-- Services -->
     <section class="page-container services-section">
-
       <div class="services-heading">
         <div>
           <p class="section-number">02 / What we do</p>
-          <h2 class="section-title">
-            Made for your<br>
-            <em>vision.</em>
-          </h2>
+          <h2 class="section-title">Made for your<br><em>vision.</em></h2>
         </div>
-
-        <p>
-          Thoughtful photography for people, brands, products,
-          and the stories behind them.
-        </p>
+        <p>Thoughtful photography for people, brands, products, and the stories behind them.</p>
       </div>
 
       <div class="services-grid">
-
         <article class="service-card">
           <span class="service-index">01 / PEOPLE</span>
           <h3>Portraits</h3>
-          <p>
-            Personal portraits, creative sessions,
-            and professional headshots.
-          </p>
+          <p>Personal portraits, creative sessions, and professional headshots.</p>
         </article>
 
         <article class="service-card">
           <span class="service-index">02 / PRODUCTS</span>
           <h3>Products</h3>
-          <p>
-            Refined product imagery for online stores,
-            catalogs, and campaigns.
-          </p>
+          <p>Refined product imagery for online stores, catalogs, and campaigns.</p>
         </article>
 
         <article class="service-card">
           <span class="service-index">03 / BRANDS</span>
           <h3>Commercial</h3>
-          <p>
-            Visual content that communicates a brand's
-            character and message.
-          </p>
+          <p>Visual content that communicates a brand's character and message.</p>
         </article>
 
         <article class="service-card">
           <span class="service-index">04 / FOOD</span>
           <h3>Food</h3>
-          <p>
-            Appetizing imagery for restaurants, menus,
-            and food brands.
-          </p>
+          <p>Appetizing imagery for restaurants, menus, and food brands.</p>
         </article>
-
       </div>
     </section>
-
   </main>
 
   <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-inner">
       <p class="footer-brand">Paoreel Studios</p>
-      <p>
-        © <span id="current-year"></span>
-        All rights reserved.
-      </p>
+      <p>© <span id="current-year"></span> All rights reserved.</p>
       <p>Every face. Every product. Every story.</p>
     </div>
   </footer>
 
+  <script src="assets/js/navigation.js"></script>
   <script>
-    /*
-     * CONFIGURATION
-     *
-     * 1. Replace CONTACT_EMAIL with your receiving Gmail address.
-     * 2. Replace APPS_SCRIPT_URL with your deployed Apps Script /exec URL.
-     */
-
     const CONTACT_EMAIL = "pao@paoreel.com";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw43Gwld358DGVM3cvcXu7jp_9mvKsvlRTCBD7oZGPVjYJ_Tpf94wzvobCu3NGaWP3t/exec";
 
-    const APPS_SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbw43Gwld358DGVM3cvcXu7jp_9mvKsvlRTCBD7oZGPVjYJ_Tpf94wzvobCu3NGaWP3t/exec";
-
-    // Rate limiting configuration
     let lastSubmissionTime = 0;
-    const COOLDOWN_PERIOD_MS = 60000; // 60 seconds cooldown
+    const COOLDOWN_PERIOD_MS = 60000;
 
-    // Footer year.
-    document.getElementById("current-year").textContent =
-      new Date().getFullYear();
+    document.getElementById("current-year").textContent = new Date().getFullYear();
 
-    // Visible contact email.
     const emailLink = document.getElementById("contact-email-link");
-
-    emailLink.href = `mailto:${CONTACT_EMAIL}`;
-    emailLink.textContent = CONTACT_EMAIL;
+    if (emailLink) {
+      emailLink.href = `mailto:${CONTACT_EMAIL}`;
+      emailLink.textContent = CONTACT_EMAIL;
+    }
 
     const form = document.getElementById("inquiry-form");
     const status = document.getElementById("form-status");
@@ -420,39 +270,22 @@
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      if (!form.reportValidity()) {
-        return;
-      }
+      if (!form.reportValidity()) return;
 
-      // Check client-side rate limiting cooldown
       const now = Date.now();
       const timeElapsed = now - lastSubmissionTime;
       if (timeElapsed < COOLDOWN_PERIOD_MS) {
         const secondsRemaining = Math.ceil((COOLDOWN_PERIOD_MS - timeElapsed) / 1000);
-        showStatus(
-          `Please wait ${secondsRemaining} seconds before submitting another inquiry.`,
-          "error"
-        );
+        showStatus(`Please wait ${secondsRemaining} seconds before submitting another inquiry.`, "error");
         return;
       }
 
-      // Prevent accidental use before configuration.
-      if (
-        !CONTACT_EMAIL ||
-        !APPS_SCRIPT_URL.startsWith(
-          "https://script.google.com/macros/s/"
-        ) ||
-        !APPS_SCRIPT_URL.endsWith("/exec")
-      ) {
-        showStatus(
-          "The contact form is not configured yet. Please email us directly.",
-          "error"
-        );
+      if (!CONTACT_EMAIL || !APPS_SCRIPT_URL.startsWith("https://script.google.com/macros/s/") || !APPS_SCRIPT_URL.endsWith("/exec")) {
+        showStatus("The contact form is not configured yet. Please email us directly.", "error");
         return;
       }
 
       const data = new FormData(form);
-
       const name = String(data.get("name") || "").trim();
       const email = String(data.get("email") || "").trim();
       const phone = String(data.get("phone") || "").trim();
@@ -460,40 +293,18 @@
       const message = String(data.get("message") || "").trim();
 
       if (!name || !email || !phone || !service || !message) {
-        showStatus(
-          "Please complete all required fields.",
-          "error"
-        );
+        showStatus("Please complete all required fields.", "error");
         return;
       }
 
-      // Enhanced Email Format Validation
       const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
-      
       if (!emailRegex.test(email) || email.length > 200) {
-        showStatus(
-          "Please enter a valid, properly formatted email address.",
-          "error"
-        );
-        return;
-      }
-
-      if (
-        name.length > 100 ||
-        email.length > 200 ||
-        phone.length > 30 ||
-        message.length > 5000
-      ) {
-        showStatus(
-          "One or more fields exceed the permitted length.",
-          "error"
-        );
+        showStatus("Please enter a valid, properly formatted email address.", "error");
         return;
       }
 
       submitButton.disabled = true;
       submitLabel.textContent = "Submitting...";
-
       showStatus("Submitting your inquiry...", "");
 
       try {
@@ -503,27 +314,12 @@
           body: new URLSearchParams(data)
         });
 
-        // Record successful submission time for rate limiting
         lastSubmissionTime = Date.now();
-
-        showStatus(
-          "Your request was submitted by your browser, but delivery " +
-          "could not be confirmed. If you do not hear back, please " +
-          "email us directly.",
-          "success"
-        );
-
+        showStatus("Your inquiry was sent! We will reach out to you as soon as possible.", "success");
         form.reset();
-
       } catch (error) {
         console.error("Contact form error:", error);
-
-        showStatus(
-          "We couldn't submit your inquiry. Please check your " +
-          "connection and try again, or email us directly.",
-          "error"
-        );
-
+        showStatus("We couldn't submit your inquiry. Please check your connection and try again.", "error");
       } finally {
         submitButton.disabled = false;
         submitLabel.textContent = "Send inquiry";
@@ -533,12 +329,8 @@
     function showStatus(message, type) {
       status.textContent = message;
       status.className = "form-status";
-
-      if (type) {
-        status.classList.add(type);
-      }
+      if (type) status.classList.add(type);
     }
   </script>
-
 </body>
 </html>

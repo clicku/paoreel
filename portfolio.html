@@ -2,37 +2,23 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Portfolio | Paoreel Studios</title>
 
     <!-- Google Fonts -->
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap"
-          rel="stylesheet">
     <!-- Favicon -->
     <link rel="icon" href="assets/images/favicon.ico" sizes="any">
-
-    <!-- PNG Fallback -->
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
-
-    <!-- Apple -->
     <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-
-    <!-- Android -->
     <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-192.png">
-    <!-- CSS -->
 
+    <!-- CSS -->
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/layout.css">
@@ -42,364 +28,97 @@
     <link rel="stylesheet" href="assets/css/lightbox.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
-
 </head>
 
 <body>
 
 <header>
-
     <nav class="navbar">
-
         <a href="index.html" class="logo">
-
-            <img
-                src="assets/images/logo.webp"
-                alt="Paoreel Studios">
-
+            <img src="assets/images/logo.webp" alt="Paoreel Studios">
         </a>
 
+        <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
         <ul class="nav-links">
-
             <li><a href="about.html">About</a></li>
-
             <li><a href="portfolio.html" class="active">Portfolio</a></li>
-
             <li><a href="contact.html">Contact</a></li>
-
         </ul>
-
     </nav>
-
 </header>
 
 <section class="portfolio-hero">
-
     <div class="portfolio-hero-image">
-
-        <img
-            src="assets/images/portfolio-hero.webp"
-            alt="Portfolio Hero">
-
+        <img src="assets/images/portfolio-hero.webp" alt="Portfolio Hero" fetchpriority="high">
     </div>
 
     <div class="portfolio-overlay"></div>
 
     <div class="container">
-
         <div class="portfolio-content">
-
             <span>SELECTED WORKS</span>
-
-            <h1>
-
-                Photography
-                that elevates
-                every brand.
-
-            </h1>
-
-            <p>
-
-                A curated collection of food, commercial product,
-                and portrait photography created with cinematic
-                lighting and meticulous attention to detail.
-
-            </p>
-
+            <h1>Photography that elevates every brand.</h1>
+            <p>A curated collection of food, commercial product, and portrait photography created with cinematic lighting and meticulous attention to detail.</p>
         </div>
-
     </div>
-
 </section>
 
-<!-- ==========================================================
-     FEATURED CATEGORIES
-========================================================== -->
-
+<!-- CATEGORIES -->
 <section class="portfolio-categories">
-
     <div class="container">
-
         <div class="section-title">
-
             <span>EXPLORE</span>
-
-            <h2>
-
-                Selected Categories
-
-            </h2>
-
+            <h2>Selected Categories</h2>
         </div>
 
         <div class="category-grid">
-
             <a href="food.html" class="category-card">
-
-                <img
-                    src="assets/images/category-food.webp"
-                    alt="Food & Beverage">
-
+                <img src="assets/images/category-food.webp" alt="Food & Beverage" loading="lazy" decoding="async">
                 <div class="category-overlay">
-
                     <h3>Food & Beverage</h3>
-
                     <span>View Collection →</span>
-
                 </div>
-
             </a>
 
             <a href="products.html" class="category-card">
-
-                <img
-                    src="assets/images/category-product.webp"
-                    alt="Product Photography">
-
+                <img src="assets/images/category-product.webp" alt="Product Photography" loading="lazy" decoding="async">
                 <div class="category-overlay">
-
                     <h3>Product</h3>
-
                     <span>View Collection →</span>
-
                 </div>
-
             </a>
 
             <a href="portraits.html" class="category-card">
-
-                <img
-                    src="assets/images/category-portrait.webp"
-                    alt="Portrait Photography">
-
+                <img src="assets/images/category-portrait.webp" alt="Portrait Photography" loading="lazy" decoding="async">
                 <div class="category-overlay">
-
                     <h3>Portrait</h3>
-
                     <span>View Collection →</span>
-
                 </div>
-
             </a>
-
         </div>
-
     </div>
-
 </section>
 
-<!-- ==========================================================
-     SELECTED WORKS (DYNAMIC GALLERY)
-========================================================== -->
-
+<!-- SELECTED WORKS -->
 <section class="selected-works">
-
     <div class="container">
-
         <div class="section-title">
-
             <span>GALLERY</span>
-
             <h2>Selected Works</h2>
-
         </div>
 
-        <!-- Dynamic Grid Container -->
         <div class="works-grid" id="dynamic-works-grid">
-            <!-- Dynamically populated via JavaScript from data/portfolio.json -->
+            <!-- Dynamically populated -->
         </div>
-
     </div>
-
 </section>
 
-<!-- ==========================================================
-     PORTFOLIO CTA
-========================================================== -->
-
+<!-- PORTFOLIO CTA -->
 <section class="portfolio-cta">
-
     <div class="container">
-
-        <span>LET'S WORK TOGETHER</span>
-
-        <h2>
-
-            Ready to create
-            visuals that elevate
-            your brand?
-
-        </h2>
-
-        <p>
-
-            Whether you're launching a new menu, introducing a product,
-            or building a personal brand, let's create imagery that
-            leaves a lasting impression.
-
-        </p>
-
-        <a
-            href="contact.html"
-            class="btn-primary">
-
-            Start Your Project
-
-        </a>
-
-    </div>
-
-</section>
-
-<!-- ==========================================================
-     LIGHTBOX
-========================================================== -->
-
-<div class="lightbox">
-
-    <span class="lightbox-close">
-        &times;
-    </span>
-
-    <button class="lightbox-prev">
-        &#10094;
-    </button>
-
-    <!-- Image & Watermark Container -->
-    <div class="lightbox-image-container" style="position: relative; display: inline-block; max-width: 90vw; max-height: 85vh;">
-        <img
-            class="lightbox-image"
-            src=""
-            alt=""
-            style="display: block; max-width: 100%; max-height: 85vh; object-fit: contain;">
-        
-        <div class="lightbox-watermark" style="position: absolute; bottom: 20px; right: 25px; color: rgba(255, 255, 255, 0.75); font-family: 'Playfair Display', serif; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; pointer-events: none; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85); z-index: 5;">
-            Paoreel Studios
-        </div>
-    </div>
-
-    <button class="lightbox-next">
-        &#10095;
-    </button>
-
-    <div class="lightbox-info">
-        <div class="lightbox-counter">
-            1 / 1
-        </div>
-        <div class="lightbox-caption"></div>
-    </div>
-
-</div>
-</div>
-
-<!-- GSAP & Libraries -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://unpkg.com/lenis@1.3.13/dist/lenis.min.js"></script>
-
-<script src="assets/js/lightbox.js"></script>
-<script src="assets/js/loader.js"></script>
-<script src="assets/js/navigation.js"></script>
-
-<script src="assets/js/portfolio.js"></script>
-<!-- Global -->
-<script src="assets/js/main.js"></script>
-<script src="assets/js/watermark.js"></script>
-
-<!-- Dynamic Portfolio Loader Script with Error Logging -->
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        console.log("[Portfolio Debug] DOMContentLoaded fired. Fetching data/portfolio.json...");
-        
-        fetch('data/portfolio.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("[Portfolio Debug] JSON data successfully loaded:", data);
-                
-                const grid = document.getElementById('dynamic-works-grid');
-                if (!grid) {
-                    console.error("[Portfolio Error] Element #dynamic-works-grid not found in DOM!");
-                    return;
-                }
-                
-                if (!data.works) {
-                    console.error("[Portfolio Error] 'works' array missing in JSON data!", data);
-                    return;
-                }
-
-                console.log(`[Portfolio Debug] Rendering ${data.works.length} works into grid...`);
-
-                // Render dynamic items with inline watermark overlay and image error tracking
-                grid.innerHTML = data.works.map((item, index) => {
-                    return `
-                        <div class="work-item ${item.large ? 'large' : ''}" style="opacity: 0; transform: translateY(30px); position: relative; overflow: hidden;">
-                            <img
-                                src="${item.image}"
-                                loading="lazy"
-                                alt="${item.alt || item.caption || 'Portfolio Image'}"
-                                data-caption="${item.caption || ''}"
-                                style="width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer;"
-                                onerror="console.error('[Portfolio Error] Image failed to load:', '${item.image}')">
-                            <div class="watermark-overlay" style="position: absolute; bottom: 18px; right: 22px; pointer-events: none; opacity: 0.65; z-index: 2;">
-                                <span style="font-family: 'Playfair Display', serif; font-size: 0.8rem; letter-spacing: 0.15em; color: #ffffff; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">Paoreel Studios</span>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-
-                console.log("[Portfolio Debug] Grid HTML populated. Initializing GSAP and checking watermarks...");
-
-                setTimeout(() => {
-                    // Check if an external watermark function exists
-                    if (typeof window.initWatermarks === 'function') {
-                        console.log("[Portfolio Debug] Calling window.initWatermarks()");
-                        window.initWatermarks();
-                    } else if (typeof applyWatermark === 'function') {
-                        console.log("[Portfolio Debug] Calling applyWatermark()");
-                        applyWatermark();
-                    } else {
-                        console.log("[Portfolio Debug] External watermark function not found; relying on inline watermark HTML overlay.");
-                    }
-
-                    // Initialize GSAP animations
-                    if (typeof gsap !== 'undefined' && window.ScrollTrigger) {
-                        console.log("[Portfolio Debug] Initializing GSAP ScrollTrigger animations.");
-                        gsap.utils.toArray(".work-item").forEach((item, index) => {
-                            gsap.to(item, {
-                                scrollTrigger: {
-                                    trigger: item,
-                                    start: "top 85%"
-                                },
-                                opacity: 1,
-                                y: 0,
-                                duration: 1,
-                                delay: index * 0.08,
-                                ease: "power3.out"
-                            });
-                        });
-                        ScrollTrigger.refresh();
-                    } else {
-                        console.warn("[Portfolio Warning] GSAP or ScrollTrigger not available. Forcing elements visible.");
-                        document.querySelectorAll('.work-item').forEach(el => {
-                            el.style.opacity = '1';
-                            el.style.transform = 'translateY(0)';
-                        });
-                    }
-                }, 100);
-            })
-            .catch(err => {
-                console.error("[Portfolio Critical Error] Failed to fetch or process portfolio.json:", err);
-            });
-    });
-</script>
-</body>
-
-</html>
+        <span>LET'S WORK TOG
