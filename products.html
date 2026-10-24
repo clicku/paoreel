@@ -222,49 +222,55 @@
             });
         }
 
-        // Persistent Lightbox Watermark Injector
-        document.addEventListener("DOMContentLoaded", () => {
-            function stampWatermark() {
-                const lbContainer = document.querySelector('.lb-container');
-                if (!lbContainer) return;
+       // Persistent & Responsive Lightbox Watermark Injector
+document.addEventListener("DOMContentLoaded", () => {
+    function stampWatermark() {
+        const lbContainer = document.querySelector('.lb-container');
+        if (!lbContainer) return;
 
-                if (window.getComputedStyle(lbContainer).position === 'static') {
-                    lbContainer.style.position = 'relative';
-                }
+        if (window.getComputedStyle(lbContainer).position === 'static') {
+            lbContainer.style.position = 'relative';
+        }
 
-                // Remove duplicates if any exist
-                lbContainer.querySelectorAll('.lightbox-watermark').forEach(el => el.remove());
+        // Remove duplicates if any exist
+        lbContainer.querySelectorAll('.lightbox-watermark').forEach(el => el.remove());
 
-                const watermark = document.createElement('div');
-                watermark.className = 'lightbox-watermark';
-                watermark.innerText = 'Paoreel Studios — All Rights Reserved';
-                watermark.style.cssText = `
-                    position: absolute;
-                    bottom: 20px;
-                    right: 25px;
-                    color: rgba(255, 255, 255, 0.85);
-                    font-family: 'Playfair Display', serif;
-                    font-size: 0.85rem;
-                    letter-spacing: 0.15em;
-                    text-transform: uppercase;
-                    pointer-events: none;
-                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85);
-                    z-index: 9999;
-                `;
-                lbContainer.appendChild(watermark);
+        const watermark = document.createElement('div');
+        watermark.className = 'lightbox-watermark';
+        watermark.innerText = 'Paoreel Studios — All Rights Reserved';
+        watermark.style.cssText = `
+            position: absolute;
+            bottom: 16px;
+            right: 20px;
+            max-width: calc(100% - 40px);
+            width: fit-content;
+            color: rgba(255, 255, 255, 0.85);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(0.6rem, 2vw, 0.85rem);
+            line-height: 1.2;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            pointer-events: none;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+        `;
+        lbContainer.appendChild(watermark);
+    }
+
+    // Check every 100ms when lightbox is displayed to ensure watermark is attached
+    setInterval(() => {
+        const lightboxEl = document.querySelector('.lightbox');
+        if (lightboxEl && window.getComputedStyle(lightboxEl).display !== 'none') {
+            const lbContainer = lightboxEl.querySelector('.lb-container');
+            if (lbContainer && !lbContainer.querySelector('.lightbox-watermark')) {
+                stampWatermark();
             }
-
-            // Check every 100ms when lightbox is displayed to ensure watermark is attached
-            setInterval(() => {
-                const lightboxEl = document.querySelector('.lightbox');
-                if (lightboxEl && window.getComputedStyle(lightboxEl).display !== 'none') {
-                    const lbContainer = lightboxEl.querySelector('.lb-container');
-                    if (lbContainer && !lbContainer.querySelector('.lightbox-watermark')) {
-                        stampWatermark();
-                    }
-                }
-            }, 100);
-        });
+        }
+    }, 100);
+});
 
         // Dynamic Product Gallery Loader
         document.addEventListener('DOMContentLoaded', () => {
