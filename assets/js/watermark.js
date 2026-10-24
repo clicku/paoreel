@@ -22,7 +22,7 @@ function getWatermarkedImageUrl(imgSrc, callback) {
             ctx.textBaseline = "bottom";
             ctx.textAlign = "right";
             
-            const text = "© Paoreel Studios — All Rights Reserved";
+            const text = "";
             const rightMargin = fontSize * 1.5;
             const bottomMargin = fontSize * 1.8;
             

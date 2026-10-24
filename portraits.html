@@ -680,6 +680,7 @@
 
         <ul class="pa-nav">
           <li><a href="/index.html">Paoreel</a></li>
+          <li><a href="portraits.html" class="active">Portraits</a></li>
           <li><a href="/portfolio.html">Portfolio</a></li>
           <li><a href="/about.html">About</a></li>
           <li><a href="/contact.html">Contact</a></li>
@@ -771,16 +772,61 @@
 
 <!-- 2. Dynamic Portrait Archive Loader -->
 <script>
-    // Keep existing Lightbox2 configuration
+    // 1. Keep existing Lightbox2 configuration
     if (typeof lightbox !== "undefined") {
       lightbox.option({
-        resizeDuration: 200,
-        fadeDuration: 200,
+        resizeDuration: 150,
+        fadeDuration: 150,
         wrapAround: true,
         disableScrolling: true
       });
     }
 
+    // 2. Ultra-Lightweight & Robust Lightbox Watermark Manager (Zero lag, handles scrolling & swiping)
+    document.addEventListener("DOMContentLoaded", () => {
+      function stampWatermark() {
+        const lbContainer = document.querySelector('.lb-container');
+        if (!lbContainer) return;
+
+        if (window.getComputedStyle(lbContainer).position === 'static') {
+          lbContainer.style.position = 'relative';
+        }
+
+        // Purge any existing watermarks to prevent duplication
+        lbContainer.querySelectorAll('.lightbox-watermark').forEach(el => el.remove());
+
+        const watermark = document.createElement('div');
+        watermark.className = 'lightbox-watermark';
+        watermark.innerHTML = '© Paoreel Studios — All Rights Reserved';
+        watermark.style.cssText = `
+          position: absolute;
+          bottom: 25px;
+          right: 30px;
+          color: rgba(255, 255, 255, 0.85);
+          font-family: 'Playfair Display', serif;
+          font-size: 0.85rem;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          pointer-events: none;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85);
+          z-index: 9999;
+        `;
+        lbContainer.appendChild(watermark);
+      }
+
+      // Continuously monitors only when Lightbox is open (consumes 0% CPU when closed)
+      setInterval(() => {
+        const lightboxEl = document.querySelector('.lightbox');
+        if (lightboxEl && window.getComputedStyle(lightboxEl).display !== 'none') {
+          const lbContainer = lightboxEl.querySelector('.lb-container');
+          if (lbContainer && !lbContainer.querySelector('.lightbox-watermark')) {
+            stampWatermark();
+          }
+        }
+      }, 100);
+    });
+
+    // 3. Dynamic Portrait Archive Loader (Fetching from GitHub API)
     document.addEventListener("DOMContentLoaded", () => {
       const grid = document.getElementById("portrait-archive-grid");
       const count = document.getElementById("portrait-gallery-count");
@@ -790,10 +836,9 @@
         year.textContent = new Date().getFullYear();
       }
 
-      // Automatically fetch the list of files directly from your GitHub repository folder
       const owner = "clicku";
       const repo = "paoreel";
-      const branch = "main";
+      const branch = "v2-redesign";
       const folderPath = "assets/images/portraits";
 
       fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folderPath}?ref=${branch}`)
@@ -802,7 +847,6 @@
           return response.json();
         })
         .then(files => {
-          // Filter for image files only (.webp, .jpg, .png)
           const imageFiles = files.filter(file => 
             file.type === "file" && /\.(webp|jpg|jpeg|png)$/i.test(file.name)
           );
@@ -824,19 +868,20 @@
             return;
           }
 
-          // Build the grid dynamically using whatever filenames exist in the folder
           if (grid) {
             grid.innerHTML = imageFiles.map((file, index) => {
-              const delay = Math.min(index * 45, 500);
+              const delay = Math.min(index * 30, 300);
               const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+              // Use root-relative paths to prevent loading spirals
+              const relativePath = `/${folderPath}/${file.name}`;
 
               return `
                 <div class="grid-item" style="--pa-delay: ${delay}ms;">
-                  <a href="${file.download_url}" 
+                  <a href="${relativePath}" 
                      data-lightbox="portrait-archive" 
-                     data-title="Portrait: ${cleanName} — © Paoreel Studios"
+                     data-title="Portrait: ${cleanName}"
                      aria-label="View portrait ${index + 1}">
-                    <img src="${file.download_url}" 
+                    <img src="${relativePath}" 
                          alt="Portrait photography - ${cleanName}" 
                          decoding="async" 
                          loading="${index < 4 ? 'eager' : 'lazy'}">
