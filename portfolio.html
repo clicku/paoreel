@@ -28,6 +28,62 @@
     <link rel="stylesheet" href="assets/css/lightbox.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <!-- Mobile Category Section Optimization Styles -->
+    <style>
+        @media (max-width: 900px) {
+            .portfolio-categories .category-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 4%;
+            }
+
+            .portfolio-categories .category-card {
+                position: relative;
+                display: block;
+                height: 280px;
+                border-radius: 8px;
+                overflow: hidden;
+                text-decoration: none;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            }
+
+            .portfolio-categories .category-card img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            /* Make overlays permanently visible and readable on touch devices */
+            .portfolio-categories .category-overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(180deg, transparent 35%, rgba(0, 0, 0, 0.85) 100%);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 24px;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            .portfolio-categories .category-overlay h3 {
+                font-size: 1.5rem;
+                color: #ffffff;
+                margin-bottom: 6px;
+                font-family: 'Playfair Display', serif;
+            }
+
+            .portfolio-categories .category-overlay span {
+                font-size: 0.85rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: #c8b99c;
+            }
+        }
+    </style>
 </head>
 
 <body>
