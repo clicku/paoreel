@@ -279,6 +279,66 @@
   <script src="assets/js/watermark.js"></script>
 
   <script>
+    // Configure Lightbox2 options
+    if (typeof lightbox !== "undefined") {
+      lightbox.option({
+        resizeDuration: 150,
+        fadeDuration: 150,
+        wrapAround: true,
+        disableScrolling: true
+      });
+    }
+
+    // Responsive Mobile-Compatible Lightbox Watermark Manager
+    document.addEventListener("DOMContentLoaded", () => {
+      function stampWatermark() {
+        const lbContainer = document.querySelector('.lb-container');
+        if (!lbContainer) return;
+
+        if (window.getComputedStyle(lbContainer).position === 'static') {
+          lbContainer.style.position = 'relative';
+        }
+
+        // Clear existing watermark instance to avoid duplication
+        lbContainer.querySelectorAll('.lightbox-watermark').forEach(el => el.remove());
+
+        const watermark = document.createElement('div');
+        watermark.className = 'lightbox-watermark';
+        watermark.innerText = 'Paoreel Studios — All Rights Reserved';
+        watermark.style.cssText = `
+          position: absolute;
+          bottom: 12px;
+          right: 14px;
+          max-width: calc(100% - 28px);
+          width: fit-content;
+          color: rgba(255, 255, 255, 0.88);
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(0.6rem, 2.5vw, 0.85rem);
+          line-height: 1.2;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          pointer-events: none;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+          z-index: 9999;
+        `;
+        lbContainer.appendChild(watermark);
+      }
+
+      // Continuously monitors lightbox open state for mobile renders
+      setInterval(() => {
+        const lightboxEl = document.querySelector('.lightbox');
+        if (lightboxEl && window.getComputedStyle(lightboxEl).display !== 'none') {
+          const lbContainer = lightboxEl.querySelector('.lb-container');
+          if (lbContainer && !lbContainer.querySelector('.lightbox-watermark')) {
+            stampWatermark();
+          }
+        }
+      }, 100);
+    });
+
     document.addEventListener("DOMContentLoaded", () => {
       const grid = document.getElementById("portrait-archive-grid");
       const count = document.getElementById("portrait-gallery-count");
