@@ -311,7 +311,7 @@
 <script src="assets/js/portfolio.js"></script>
 <!-- Global -->
 <script src="assets/js/main.js"></script>
-
+<script src="assets/js/watermark.js"></script>
 <!-- Dynamic Portfolio Loader Script -->
 <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -321,15 +321,18 @@
                 const grid = document.getElementById('dynamic-works-grid');
                 if (!grid || !data.works) return;
 
-                // 1. Render the dynamic grid items with starting opacity 0 for GSAP
+                // 1. Render dynamic items with cursor pointer and watermark overlay
                 grid.innerHTML = data.works.map(item => `
-                    <div class="work-item ${item.large ? 'large' : ''}" style="opacity: 0; transform: translateY(30px);">
+                    <div class="work-item ${item.large ? 'large' : ''}" style="opacity: 0; transform: translateY(30px); position: relative; overflow: hidden;">
                         <img
                             src="${item.image}"
                             loading="lazy"
                             alt="${item.alt || item.caption || 'Portfolio Image'}"
                             data-caption="${item.caption || ''}"
-                            style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                            style="width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer;">
+                        <div class="image-watermark" style="position: absolute; bottom: 18px; right: 22px; color: rgba(255, 255, 255, 0.65); font-family: 'Playfair Display', serif; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; pointer-events: none; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7); z-index: 2;">
+                            Paoreel Studios
+                        </div>
                     </div>
                 `).join('');
 
@@ -362,7 +365,6 @@
             .catch(err => console.error("Error loading portfolio items:", err));
     });
 </script>
-<script src="assets/js/watermark.js"></script>
 </body>
 
 </html>

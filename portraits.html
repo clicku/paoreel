@@ -769,57 +769,95 @@
 <!-- 1. Load the centralized watermark and protection script -->
 <script src="assets/js/watermark.js"></script>
 
-<!-- Dynamic Portfolio Loader Script -->
+<!-- 2. Dynamic Portrait Archive Loader -->
 <script>
+    // Keep existing Lightbox2 configuration
+    if (typeof lightbox !== "undefined") {
+      lightbox.option({
+        resizeDuration: 200,
+        fadeDuration: 200,
+        wrapAround: true,
+        disableScrolling: true
+      });
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
-        fetch('data/portfolio.json')
-            .then(response => response.json())
-            .then(data => {
-                const grid = document.getElementById('dynamic-works-grid');
-                if (!grid || !data.works) return;
+      const grid = document.getElementById("portrait-archive-grid");
+      const count = document.getElementById("portrait-gallery-count");
+      const year = document.getElementById("pa-year");
 
-                // 1. Render dynamic items with cursor pointer and watermark overlay
-                grid.innerHTML = data.works.map(item => `
-                    <div class="work-item ${item.large ? 'large' : ''}" style="opacity: 0; transform: translateY(30px); position: relative; overflow: hidden;">
-                        <img
-                            src="${item.image}"
-                            loading="lazy"
-                            alt="${item.alt || item.caption || 'Portfolio Image'}"
-                            data-caption="${item.caption || ''}"
-                            style="width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer;">
-                        <div class="image-watermark" style="position: absolute; bottom: 18px; right: 22px; color: rgba(255, 255, 255, 0.65); font-family: 'Playfair Display', serif; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; pointer-events: none; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7); z-index: 2;">
-                            Paoreel Studios
-                        </div>
-                    </div>
-                `).join('');
+      if (year) {
+        year.textContent = new Date().getFullYear();
+      }
 
-                // 2. Tell GSAP and ScrollTrigger to animate the newly inserted items
-                setTimeout(() => {
-                    if (typeof gsap !== 'undefined' && window.ScrollTrigger) {
-                        gsap.utils.toArray(".work-item").forEach((item, index) => {
-                            gsap.to(item, {
-                                scrollTrigger: {
-                                    trigger: item,
-                                    start: "top 85%"
-                                },
-                                opacity: 1,
-                                y: 0,
-                                duration: 1,
-                                delay: index * 0.08,
-                                ease: "power3.out"
-                            });
-                        });
-                        ScrollTrigger.refresh();
-                    } else {
-                        // Fallback if GSAP is missing
-                        document.querySelectorAll('.work-item').forEach(el => {
-                            el.style.opacity = '1';
-                            el.style.transform = 'translateY(0)';
-                        });
-                    }
-                }, 100);
-            })
-            .catch(err => console.error("Error loading portfolio items:", err));
+      // Automatically fetch the list of files directly from your GitHub repository folder
+      const owner = "clicku";
+      const repo = "paoreel";
+      const branch = "main";
+      const folderPath = "assets/images/portraits";
+
+      fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folderPath}?ref=${branch}`)
+        .then(response => {
+          if (!response.ok) throw new Error("Could not fetch folder contents from GitHub API");
+          return response.json();
+        })
+        .then(files => {
+          // Filter for image files only (.webp, .jpg, .png)
+          const imageFiles = files.filter(file => 
+            file.type === "file" && /\.(webp|jpg|jpeg|png)$/i.test(file.name)
+          );
+
+          const loadedCount = imageFiles.length;
+          if (count) {
+            count.textContent = `${loadedCount} ${loadedCount === 1 ? "portrait" : "portraits"}`;
+          }
+
+          if (loadedCount === 0) {
+            if (grid) {
+              grid.innerHTML = `
+                <p class="pa-empty">
+                  No portraits found in this folder.<br>
+                  Upload images via Pages CMS to see them here.
+                </p>
+              `;
+            }
+            return;
+          }
+
+          // Build the grid dynamically using whatever filenames exist in the folder
+          if (grid) {
+            grid.innerHTML = imageFiles.map((file, index) => {
+              const delay = Math.min(index * 45, 500);
+              const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+
+              return `
+                <div class="grid-item" style="--pa-delay: ${delay}ms;">
+                  <a href="${file.download_url}" 
+                     data-lightbox="portrait-archive" 
+                     data-title="Portrait: ${cleanName} — © Paoreel Studios"
+                     aria-label="View portrait ${index + 1}">
+                    <img src="${file.download_url}" 
+                         alt="Portrait photography - ${cleanName}" 
+                         decoding="async" 
+                         loading="${index < 4 ? 'eager' : 'lazy'}">
+                  </a>
+                </div>
+              `;
+            }).join('');
+          }
+
+          console.log(`Dynamic portrait archive loaded successfully. Total: ${loadedCount}`);
+        })
+        .catch(err => {
+          console.error("Error loading GitHub folder contents:", err);
+          if (grid) {
+            grid.innerHTML = `
+              <p class="pa-empty">
+                Unable to load portrait images dynamically.
+              </p>
+            `;
+          }
+        });
     });
 </script>
 </body>
